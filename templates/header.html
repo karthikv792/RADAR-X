@@ -9,3 +9,33 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script type= "text/javascript" src="{{ url_for('static',filename='js/responseVoice.js') }}"></script>
+    <script type= "text/javascript" src= "{{ url_for('static',filename='js/gridstack.js') }}"></script>
+    <script type= "text/javascript" src= "{{ url_for('static',filename='js/gridstack.jQueryUI.js') }}"></script>
+    <style type="text/css">
+        .grid-stack-item-content {
+            color: #00050f;
+            text-align: center;
+            background-color: #b2c1e0;
+        }
+        .loader, .exploader {
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            z-index: 9999;
+            background: url('{{ url_for("static",filename="images/page-loader.gif") }}') 50% 50% no-repeat rgb(249,249,249);
+        }
+        .loader {
+            position: static;
+            height: 100%;
+        }
+        .exploader {
+            position: relative;
+            height: 30%;
+        }
+    </style>
+
+</head>
+<body>
+<div class="loader" style="display:none;"></div>
+<div class="page_content">
