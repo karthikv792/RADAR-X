@@ -1,0 +1,5 @@
+Domain=RADAR
+Problem=BYENG
+Preprocessing=0.00719
+Fluents=271
+Operators=295
