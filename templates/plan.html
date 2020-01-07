@@ -1,8 +1,170 @@
-<div class="panel panel-primary">
-        <div class="panel-heading">
+<div class="card card-primary">
+        <div class="card-header">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#planInProgressModal">
                 <div class="glyphicon glyphicon-info-sign"></div>
             </button>
             Plan in Progress
         </div>
+        <div class="card-body">
+          <div class='col-md-9'>
+              <select class="form-control" id="actionToAdd">
+              {% for act in actions %}
+                      <option>{{act}}</option>
+              {% endfor %}
+              </select>
+          </div>
+          <button type="button" class="col-md-3 btn btn-primary addAction">Add</button>
+
+          <br>
+          <br>
+          <div class="col-md-3" style="padding:5px;">
+              <button type="button" class="col-md-12 btn btn-secondary validatePlan"><img src="{{ url_for('static',filename='images/validate.png') }}" height="35" alt="validate"><br>Validate</button>
+          </div>
+          <div class="col-md-3" style="padding:5px;">
+              <button type="button" class="col-md-12 btn btn-secondary fixPlan"><img src="{{ url_for('static',filename='images/fix.png') }}" height="35" alt="fix"><br>Fix</button>
+          </div>
+          <div class="col-md-3" style="padding:5px;">
+              <button type="button" class="col-md-12 btn btn-secondary suggestPlan"><img src="{{ url_for('static',filename='images/suggest.png') }}" height="35" alt="suggest"><br>Suggest</button>
+          </div>
+          <div class="col-md-3" style="padding:5px;">
+              <button type="button" class="col-md-12 btn btn-secondary undoChange"><img src="{{ url_for('static',filename='images/undo.png') }}" height="35" alt="undo"><br>Undo</button>
+          </div>
+          <!-- IF ELSE HERE -->
+          {% if canAskForExplanations > 0 %}
+              <div class="col-md-6" style="padding:5px;">
+                  <button type="button" class="col-md-12 btn btn-secondary alternativePlan">Alternative<br>Plan</button>
+              </div>
+              <div class="col-md-6" style="padding:5px;">
+                  <button type="button" class="col-md-12 btn btn-secondary explainPlan" data-toggle="modal" data-target="#ExplanationsModal">Explain<br>this plan?</button>
+              </div>
+          {% endif %}
+    </div>
 </div>
+<br>
+<div class="grid-stack"></div>
+<script type="text/javascript">
+    $.extend(
+    {
+        redirectPost: function(location, args)
+        {
+            var form = $('<form></form>');
+            form.attr("method", "post");
+            form.attr("action", location);
+
+            $.each( args, function( key, value ) {
+                var field = $('<input></input>');
+
+                field.attr("type", "hidden");
+                field.attr("name", key);
+                field.attr("value", value);
+
+                form.append(field);
+            });
+            $(form).appendTo('body').submit();
+        }
+    });
+
+    $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+
+    $(function () {
+        $('.addAction').click(function() {
+            var action = $('#actionToAdd').val();
+            console.log(action);
+            updateData(action);
+        });
+
+        $('[data-toggle="tooltip"]').tooltip();
+
+        getGridStackData = function() {
+            var res = _.map( $('.grid-stack > .grid-stack-item:visible'), function(el) {
+                el = $(el)
+                var node = el.data('_gridstack_node');
+                return {
+                    name : node.el[0]['innerText'],
+                    x : node.x,
+                    y : node.y,
+                    width : node.width,
+                    height: node.height
+                };
+            });
+            return res;
+        }
+
+
+
+        // thanks to http://stackoverflow.com/a/22885503
+        var waitForFinalEvent=function(){var b={};return function(c,d,a){a||(a="I am a banana!");b[a]&&clearTimeout(b[a]);b[a]=setTimeout(c,d)}}();
+        var fullDateString = new Date();
+        function isBreakpoint(alias) {
+            return $('.device-' + alias).is(':visible');
+        }
+        var options = {
+            float: false
+        };
+        $('.grid-stack').gridstack(options);
+        function resizeGrid() {
+            var grid = $('.grid-stack').data('gridstack');
+            if (isBreakpoint('xs')) {
+                $('#grid-size').text('One column mode');
+            } else if (isBreakpoint('sm')) {
+                grid.setGridWidth(3);
+                $('#grid-size').text(3);
+            } else if (isBreakpoint('md')) {
+                grid.setGridWidth(6);
+                $('#grid-size').text(6);
+            } else if (isBreakpoint('lg')) {
+                grid.setGridWidth(12);
+                $('#grid-size').text(12);
+            }
+        };
+        $(window).resize(function () {
+            waitForFinalEvent(function() {
+                resizeGrid();
+            }, 300, fullDateString.getTime());
+        });
+        // call backend to get serialized data
+        serializedData = [
+            {% set count = 1 %}
+            {% for key, value in plan.items() %}
+                {y: {{ key }}, x: 0, width: 12, height: 1, name:'{{ value }}'},
+                {% set count = count + 1 %}
+            {% endfor %}
+        ];
+
+        function updateData(action) {
+            serializedData.push({y:0, x:0, width:12, height: 1, name:action});
+            loadGrid();
+            resizeGrid();
+        };
+
+        grid = $('.grid-stack').data('gridstack');
+        loadGrid = function () {
+            grid.removeAll();
+            remove_icon = "glyphicon glyphicon-remove-circle"
+            var items = GridStackUI.Utils.sort(this.serializedData);
+            _.each(items, function (node, i) {
+                if (node.name.includes(';--')) {
+                    action_name = node.name.substr(0, node.name.indexOf(';'));
+                    grid.addWidget($('<div><div class="grid-stack-item-content" id="myWidget'+ node.y + '" style="background-color:#fffde7;border-radius: 6px;border: 1px solid black;border-color:#fbc02d;padding-top:10px;"><div class="' + remove_icon + ' fa-remove' + node.y + '"  style="color:#fbc02d;"></div><br><span>' + action_name + '</span></div>'),
+                    node.x, node.y, node.width, node.height);
+                } else if  (node.name.includes(';')) {
+                    action_name = node.name.substr(0, node.name.indexOf(';'));
+                    reason = node.name.substr(node.name.indexOf(';'), node.name.length);
+                    grid.addWidget($('<div><div class="grid-stack-item-content" id="myWidget'+ node.y + '" style="background-color:#ffab91;border-radius: 6px;border: 1px solid black;border-color:#d84315;padding-top:10px;"><div class="' + remove_icon + ' fa-remove' + node.y + '" style="color:#d84315;"></div>&nbsp;<div class="glyphicon glyphicon-exclamation-sign" style="color:#ff4444;" href="#" data-toggle="tooltip" data-placement="right" title="' + reason + '"></div><br><span>' + action_name + '</span></div>'),
+                    node.x, node.y, node.width, node.height);
+                } else {
+                    grid.addWidget($('<div><div class="grid-stack-item-content" id="myWidget'+ node.y + '" style="background-color:#b2dfdb;border-radius: 6px;border: 1px solid black;border-color:#00695c;padding-top:10px;"><div class="' + remove_icon + ' fa-remove' + node.y + '" style="color:#00695c;"></div><br><span>' + node.name + '</span></div>'),
+                    node.x, node.y, node.width, node.height);
+                }
+                $('.fa-remove' + node.y).click( remove_w = function(myElement){
+                    grid.removeWidget($(this).parent().parent());
+                });
+            });
+            return false;
+        };
+
+        loadGrid();
+        resizeGrid();
+
+    });
+</script>
