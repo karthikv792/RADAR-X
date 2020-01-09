@@ -1,33 +1,35 @@
 <div class="card card-primary">
         <div class="card-header">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#planInProgressModal">
-                <div class="glyphicon glyphicon-info-sign"></div>
+                <i class="fas fa-info-circle"></i>
             </button>
             Plan in Progress
         </div>
         <div class="card-body">
           <div class='col-md-9'>
+              <div class="form-group">
               <select class="form-control" id="actionToAdd">
               {% for act in actions %}
                       <option>{{act}}</option>
               {% endfor %}
               </select>
+              </div>
           </div>
           <button type="button" class="col-md-3 btn btn-primary addAction">Add</button>
 
           <br>
           <br>
-          <div class="col-md-3" style="padding:5px;">
-              <button type="button" class="col-md-12 btn btn-secondary validatePlan"><img src="{{ url_for('static',filename='images/validate.png') }}" height="35" alt="validate"><br>Validate</button>
+          <div class="col-md-3" style="padding:2px;">
+              <button type="button" class="col-md-12 btn btn-secondary validatePlan"><i class="fas fa-check-double"></i><br>Validate</button>
           </div>
-          <div class="col-md-3" style="padding:5px;">
-              <button type="button" class="col-md-12 btn btn-secondary fixPlan"><img src="{{ url_for('static',filename='images/fix.png') }}" height="35" alt="fix"><br>Fix</button>
+          <div class="col-md-3" style="padding:2px;">
+              <button type="button" class="col-md-12 btn btn-secondary fixPlan"><i class="fas fa-tools"></i><br>Fix</button>
           </div>
-          <div class="col-md-3" style="padding:5px;">
-              <button type="button" class="col-md-12 btn btn-secondary suggestPlan"><img src="{{ url_for('static',filename='images/suggest.png') }}" height="35" alt="suggest"><br>Suggest</button>
+          <div class="col-md-3" style="padding:2px;">
+              <button type="button" class="col-md-12 btn btn-secondary suggestPlan"><i class="fas fa-user-cog"></i><br>Suggest</button>
           </div>
-          <div class="col-md-3" style="padding:5px;">
-              <button type="button" class="col-md-12 btn btn-secondary undoChange"><img src="{{ url_for('static',filename='images/undo.png') }}" height="35" alt="undo"><br>Undo</button>
+          <div class="col-md-3" style="padding:2px;">
+              <button type="button" class="col-md-12 btn btn-secondary undoChange"><i class="fas fa-undo"></i><br>Undo</button>
           </div>
           <!-- IF ELSE HERE -->
           {% if canAskForExplanations > 0 %}
@@ -88,7 +90,7 @@
                 };
             });
             return res;
-        }
+        };
 
 
 
@@ -132,7 +134,7 @@
         ];
 
         function updateData(action) {
-            serializedData.push({y:0, x:0, width:12, height: 1, name:action});
+            serializedData.push({y:0, x:0, width:8, height: 1, name:action});
             loadGrid();
             resizeGrid();
         };

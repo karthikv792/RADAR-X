@@ -18,6 +18,7 @@ def index(exp=0, s=speech.getSpeechText('INTRO'),gs='Extinguish Big Fire at BYEN
         pass
     else:
         o = planner.getOrderedObservations()
+        print(o)
         lm = planner.getLandmarks()
     resc = planner.getImpResources()
     return render_template('index.html', plan=o, actions=a,goals=g, canAskForExplanations=exp, script=s)
