@@ -1,36 +1,38 @@
-<div class="card card-primary">
-        <div class="card-header">
+<div class="card border-secondary border-10">
+        <div class="card-header text-white bg-primary">
+           Plan in Progress
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#planInProgressModal">
                 <i class="fas fa-info-circle"></i>
             </button>
-            Plan in Progress
+
         </div>
         <div class="card-body">
-          <div class='col-md-9'>
-              <div class="form-group">
-              <select class="form-control" id="actionToAdd">
+          <div class='row'>
+              <div class="col-md-9">
+              <select class="form-control " id="actionToAdd">
               {% for act in actions %}
                       <option>{{act}}</option>
               {% endfor %}
               </select>
               </div>
+              <button type="button" class="col-md-2 btn btn-primary addAction">Add</button>
           </div>
-          <button type="button" class="col-md-3 btn btn-primary addAction">Add</button>
-
-          <br>
-          <br>
-          <div class="col-md-3" style="padding:2px;">
-              <button type="button" class="col-md-12 btn btn-secondary validatePlan"><i class="fas fa-check-double"></i><br>Validate</button>
+            <br>
+          <div class="btn-group col-md-12">
+          <div class="col-md-3" style="padding:5px;">
+              <button type="button" class="col-md-12 btn btn-secondary validatePlan"><span style="font-size: x-large"><i class="fas fa-check-double" alt="validate"></i></span><br>Validate</button>
           </div>
-          <div class="col-md-3" style="padding:2px;">
-              <button type="button" class="col-md-12 btn btn-secondary fixPlan"><i class="fas fa-tools"></i><br>Fix</button>
+          <div class="col-md-3" style="padding:5px;">
+              <button type="button" class="col-md-12 btn btn-secondary fixPlan"><span style="font-size: x-large"><i class="fas fa-tools" alt="fix"></i></span><br>Fix</button>
           </div>
-          <div class="col-md-3" style="padding:2px;">
-              <button type="button" class="col-md-12 btn btn-secondary suggestPlan"><i class="fas fa-user-cog"></i><br>Suggest</button>
+          <div class="col-md-3" style="padding:5px;">
+              <button type="button" class="col-md-12 btn btn-secondary suggestPlan"><span style="font-size: x-large"><i class="fas fa-user-cog" alt="suggest"></i></span><br>Suggest</button>
           </div>
-          <div class="col-md-3" style="padding:2px;">
-              <button type="button" class="col-md-12 btn btn-secondary undoChange"><i class="fas fa-undo"></i><br>Undo</button>
+          <div class="col-md-3" style="padding:5px;">
+              <button type="button" class="col-md-12 btn btn-secondary undoChange"><span style="font-size: x-large"><i class="fas fa-undo" alt="undo"></i></span><br>Undo</button>
           </div>
+              </div>
+            <div class="btn-group col-md-12">
           <!-- IF ELSE HERE -->
           {% if canAskForExplanations > 0 %}
               <div class="col-md-6" style="padding:5px;">
@@ -40,8 +42,12 @@
                   <button type="button" class="col-md-12 btn btn-secondary explainPlan" data-toggle="modal" data-target="#ExplanationsModal">Explain<br>this plan?</button>
               </div>
           {% endif %}
+            </div>
+        Enter Foil
+
     </div>
 </div>
+
 <br>
 <div class="grid-stack"></div>
 <script type="text/javascript">
@@ -93,7 +99,68 @@
         };
 
 
+        $('.validatePlan').click(function() {
+            res = getGridStackData();
+            $('.page_content').fadeOut();
+            $('.loader').fadeIn();
+            //$.redirectPost('validate', JSON.stringify({'plan': res}));
+            $.redirectPost('validate', {'plan': JSON.stringify(res)});
+        });
 
+        $('.suggestPlan').click(function() {
+            res = getGridStackData();
+            $('.page_content').fadeOut();
+            $('.loader').fadeIn();
+            $.redirectPost('suggest', {'plan': JSON.stringify(res)});
+        });
+
+        $('.alternativePlan').click(function() {
+            res = getGridStackData();
+            $('.page_content').fadeOut();
+            $('.loader').fadeIn();
+            $.redirectPost('generateAlternative', {'plan': JSON.stringify(res)});
+        });
+
+        /*
+        $(".updateTheGoal").click( function() {
+            console.log( 'The commander ordered the goal to be updated' );
+            var goal = $("#goalToAchieve option:selected");
+            $('.page_content').fadeOut();
+            $('.loader').fadeIn();
+            $.redirectPost('updateGoals', {'option': goal});
+        });
+        */
+
+        $('.fixPlan').click(function() {
+            res = getGridStackData();
+            $('.page_content').fadeOut();
+            $('.loader').fadeIn();
+            $.redirectPost('fix', {'plan': JSON.stringify(res)});
+        });
+
+        $('.explainPlan').click(function() {
+            res = getGridStackData();
+            $.getJSON($SCRIPT_ROOT + '/getPlanExplanation', {
+                'plan' : JSON.stringify(res)
+            }, function(data) {
+                e = '<form>'
+                for (var i in data) {
+                    val = data[i];
+                    e = e + '<input type="checkbox" name="' + val + '-reject">' + val + '</input><br>';
+                    e = e + '<input type="hidden" name="' + val + '"></input>';
+                }
+                e = e + '</form>'
+                $('.exploader').fadeOut();
+                $('#generatedExplanations').html(e);
+            });
+        });
+
+        $('.undoChange').click(function() {
+            res = getGridStackData();
+            $('.page_content').fadeOut();
+            $('.loader').fadeIn();
+            $.redirectPost('undo', {'plan': JSON.stringify(res)});
+        });
         // thanks to http://stackoverflow.com/a/22885503
         var waitForFinalEvent=function(){var b={};return function(c,d,a){a||(a="I am a banana!");b[a]&&clearTimeout(b[a]);b[a]=setTimeout(c,d)}}();
         var fullDateString = new Date();
@@ -134,7 +201,7 @@
         ];
 
         function updateData(action) {
-            serializedData.push({y:0, x:0, width:8, height: 1, name:action});
+            serializedData.push({y:0, x:0, width:12, height: 1, name:action});
             loadGrid();
             resizeGrid();
         };
@@ -142,20 +209,20 @@
         grid = $('.grid-stack').data('gridstack');
         loadGrid = function () {
             grid.removeAll();
-            remove_icon = "glyphicon glyphicon-remove-circle"
+            remove_icon = "far fa-trash-alt"
             var items = GridStackUI.Utils.sort(this.serializedData);
             _.each(items, function (node, i) {
                 if (node.name.includes(';--')) {
                     action_name = node.name.substr(0, node.name.indexOf(';'));
-                    grid.addWidget($('<div><div class="grid-stack-item-content" id="myWidget'+ node.y + '" style="background-color:#fffde7;border-radius: 6px;border: 1px solid black;border-color:#fbc02d;padding-top:10px;"><div class="' + remove_icon + ' fa-remove' + node.y + '"  style="color:#fbc02d;"></div><br><span>' + action_name + '</span></div>'),
+                    grid.addWidget($('<div><div class="grid-stack-item-content" id="myWidget'+ node.y + '" style="background-color:#fffde7;border-radius: 6px;border: 1px solid black;border-color:#fbc02d;padding-top:5px;"><div class="' + remove_icon + ' fa-remove' + node.y + '"  style="color:#fbc02d;cursor:pointer"></div><br><span>' + action_name + '</span></div>'),
                     node.x, node.y, node.width, node.height);
                 } else if  (node.name.includes(';')) {
                     action_name = node.name.substr(0, node.name.indexOf(';'));
                     reason = node.name.substr(node.name.indexOf(';'), node.name.length);
-                    grid.addWidget($('<div><div class="grid-stack-item-content" id="myWidget'+ node.y + '" style="background-color:#ffab91;border-radius: 6px;border: 1px solid black;border-color:#d84315;padding-top:10px;"><div class="' + remove_icon + ' fa-remove' + node.y + '" style="color:#d84315;"></div>&nbsp;<div class="glyphicon glyphicon-exclamation-sign" style="color:#ff4444;" href="#" data-toggle="tooltip" data-placement="right" title="' + reason + '"></div><br><span>' + action_name + '</span></div>'),
+                    grid.addWidget($('<div><div class="grid-stack-item-content" id="myWidget'+ node.y + '" style="background-color:#ffab91;border-radius: 6px;border: 1px solid black;border-color:#d84315;padding-top:5px;"><div class="' + remove_icon + ' fa-remove' + node.y + '" style="color:#d84315;cursor:pointer"></div>&nbsp;<div class="fas fa-exclamation-triangle" style="color:#ff4444;" href="#" data-toggle="tooltip" data-placement="right" title="' + reason + '"></div><br><span>' + action_name + '</span></div>'),
                     node.x, node.y, node.width, node.height);
                 } else {
-                    grid.addWidget($('<div><div class="grid-stack-item-content" id="myWidget'+ node.y + '" style="background-color:#b2dfdb;border-radius: 6px;border: 1px solid black;border-color:#00695c;padding-top:10px;"><div class="' + remove_icon + ' fa-remove' + node.y + '" style="color:#00695c;"></div><br><span>' + node.name + '</span></div>'),
+                    grid.addWidget($('<div><div class="grid-stack-item-content" id="myWidget'+ node.y + '" style="background-color:#b2dfdb;border-radius: 6px;border: 1px solid black;border-color:#00695c;padding-top:5px;"><div class="' + remove_icon + ' fa-remove' + node.y + '" style="color:#00695c;cursor:pointer"></div><br><span style="padding-bottom: 5px">' + node.name + '</span></div>'),
                     node.x, node.y, node.width, node.height);
                 }
                 $('.fa-remove' + node.y).click( remove_w = function(myElement){

@@ -4,6 +4,7 @@ import subprocess
 from shutil import copy as copyf
 from copy import deepcopy
 from model_parser.parser_new import parse_model
+from model_parser.writer_new import ModelWriter
 from model_parser.constants import *
 from problemFileMaker import problemFileMaker
 class Planner():
@@ -43,6 +44,7 @@ class Planner():
 
         self.probMaker = problemFileMaker()
         self.observations = ''
+        self.parsed_model = None
 
     def deletePrFiles(self):
         try:
@@ -175,6 +177,119 @@ class Planner():
             count += 1
 
         return observations
+
+    def writeObservations(self,actions,tillEndOfPresentPlan=False):
+        if tillEndOfPresentPlan:
+            acts = deepcopy( actions )
+            for i in range(len(acts.keys())-1, 0, -1):
+                if ';--' not in acts[i]:
+                    break
+            actions = {}
+            for j in range(0,i+1):
+                actions[j] = acts[j]
+
+        # Write plan to file in sas_plan style
+        s = ''
+        for k in sorted(actions):
+            s += actions[k].strip() + '\n'
+
+        f = open(self.obs, 'w')
+        f.write(s)
+        f.close()
+
+    def updateDomainFile(self, fname, changes, remove=False):
+        if not changes:
+            return
+        act_updates = {}
+        for c in changes:
+            act, pre = c.split('-has-precondition-')
+            act_updates[ act ] = pre.split('?')[0].split()[0]
+        print( "Updating ...\nfile: {0}\nremove: {1}\nchanges: {2}".format(fname, remove, act_updates) )
+        print("Updating done")
+        model = parse_model(fname,self.problem)
+        for act in list(model[DOMAIN].keys()):
+            try:
+                prec = act_updates[act]
+                if remove:
+                    for precs in model[DOMAIN][act][POS_PREC]:
+                        if prec in precs:
+                            model[DOMAIN][act][POS_PREC].remove(precs)
+            except:
+                continue
+        writer = ModelWriter(model)
+        writer.write_files(fname.split('.pddl')[0]+'_modify.pddl','problem.pddl')
+        if remove:
+            self.domain = fname.split('.pddl')[0]+'_modify.pddl'
+        else:
+            self.human_domain = fname.split('.pddl')[0]+'_modify.pddl'
+
+    def getSuggestedPlan(self,actions,tillEndOfPresentPlan=False):
+        self.writeObservations(actions)
+        # If actions are blank, use the present pr_domain and pr_problem files to
+        # plan. If not, generate new files with the known actions to be explained.
+        if actions:
+            # Save the present domain
+            copyf(self.pr_domain, self.val_pr_domain)
+            copyf(self.pr_problem, self.val_pr_problem)
+            try:
+                print('\n=====\n{0}\n======\n'.format(self.observations))
+                cmd = self.CALL_PR2 + ' -d ' + self.val_pr_domain + ' -i ' + self.val_pr_problem +' -o ' + self.obs
+                os.system(cmd)
+                print("PR2 DONE")
+            except:
+                raise Exception('[ERROR] In Call to PR2!')
+        self.plan()
+        # Write plan to observation file
+        plan_actions = {}
+        f = open(self.sas_plan, 'r')
+        i = 0
+        acts = [x.strip('() \n') for x in actions.values()]
+        for l in f:
+            if '(general cost)' not in l:
+                if 'EXPLAIN_OBS_' in l.upper():
+                    a = l.upper().replace('EXPLAIN_OBS_','').strip()
+                    plan_actions[i] = re.sub('_[0-9]', '', a)
+                    i += 1
+                    '''
+                    for a in acts:
+                        if a.upper() in l.upper():
+                            plan_actions[i] = '(' + a.upper().strip() + ' )'
+                            i += 1
+                            break
+                    '''
+                else:
+                    plan_actions[i] = l.upper().strip() + ';--'
+                    i += 1
+        f.close()
+        self.writeObservations(plan_actions, tillEndOfPresentPlan)
+
+    def getValidatedPlan(self, actions):
+        self.writeObservations(actions)
+        try:
+            cmd = self.CALL_VAL + self.val_pr_domain + ' ' + self.val_pr_problem + ' ' + self.obs
+            proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
+            (out, err) = proc.communicate()
+        except:
+            print('[ERROR] Failed to execute VAL on given plan')
+        if out:
+            out=out.decode()
+            if 'Plan failed to execute' in out:
+                print(out.split("Plan Repair Advice:\n"))
+                faults = out.split("Plan Repair Advice:\n")[1].strip()
+                if ')' in faults:
+                    action_name = faults.split(') ')[0].strip().upper() +")"
+                    reason = faults.split('\n\n')[0].strip().replace('\n', " : ")
+                f = open(self.obs, 'w')
+                for k in sorted(actions):
+                    print (actions[k].strip('\n( )').lower(), action_name.strip('\n( )').lower())
+                    if actions[k].strip('\n( )').lower() in action_name.strip('\n( )').lower():
+                        f.write(actions[k].strip() + ';' + reason + '\n')
+                    else:
+                        f.write(actions[k].strip() + '\n')
+                f.close()
+
+
+
     def definePlanningProblem(self, gs):
         '''
         Creates the problem.pddl file
@@ -202,3 +317,5 @@ class Planner():
 
         f = open(self.problem, 'w')
         f.write(tempProblem)
+        f.close()
+        self.parsed_model = parse_model(self.domain,self.problem)

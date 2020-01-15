@@ -1,6 +1,17 @@
 {% include 'header.html' %}
-<div class='col-md-5 well' style="min-height: 100%;">
+<div class='col well' style="min-height: 100%; margin-left: 10px;margin-top: 10px">
     {% include 'plan.html' %}
 </div>
 <textarea id='speakText' style="display:none;">{{ script }}</textarea>
+<div class='col-md-7'>
+    <div class='col-md-12' style="padding-top:10px;">
+        <div class="card">
+            {% include 'goal.html' %}
+        </div>
+    </div>
+    <div class='col-md-12'>
+        {% include 'resource.html' %}
+    </div>
+</div>
+{% include 'helpModals.html' %}
 {% include 'footer.html' %}

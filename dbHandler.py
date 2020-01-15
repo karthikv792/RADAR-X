@@ -72,13 +72,13 @@ class dbHandler:
         for i in range(len(data)):
             mutable_data[i].append( data[i][0] )
             for j in range(1, len(data[i] )):
-                s = '<div class="glyphicon glyphicon-{0}" style="color:{1};cursor:pointer" onclick="updateResource(\'{2}\', \'{3}\', \'{4}\', {5})"></div>'
+                s = '<div class="{0}" style="color:{1};cursor:pointer" onclick="updateResource(\'{2}\', \'{3}\', \'{4}\', {5})"></div>'
                 if data[i][j] == 1:
                     mutable_data[i].append( s.format(
-                        'ok', '#00C851', tableName, data[i][0], tableDesc[j][0], 1) )
+                        'fas fa-check', '#00C851', tableName, data[i][0], tableDesc[j][0], 1) )
                 else:
                     mutable_data[i].append( s.format(
-                        'remove', '#ff4444', tableName, data[i][0], tableDesc[j][0], 0) )
+                        'fas fa-times', '#ff4444', tableName, data[i][0], tableDesc[j][0], 0) )
         return mutable_data
 
     def updateResourcesInTable(self, resourceName, tableName, rowId, presentState):

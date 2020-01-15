@@ -15,7 +15,7 @@
 (:init
 (fire_at byeng)
 
-(=(total-cost) 0.0)
+(=(total-cost) 0)
 
 (not_needed_search_casualties lake )
 (not_needed_attend_casualties lake )

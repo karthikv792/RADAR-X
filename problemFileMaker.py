@@ -46,7 +46,7 @@ class problemFileMaker:
             else:
                 s += '(' + predicate[0] + ')\n'
 
-        s += '\n(=(total-cost) 0.0)\n\n'
+        s += '\n(=(total-cost) 0)\n\n'
 
         s += self.addNotNeeded()
         return s

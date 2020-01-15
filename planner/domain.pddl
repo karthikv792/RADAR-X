@@ -3,7 +3,9 @@
 (:requirements :typing :strips :equality :action-costs )
 
 ;; TYPES
-(:types		police fire transport medic - agents
+(:types
+            agents location - object
+            police fire transport medic - agents
 			hospital policestation firestation pois - location
 )
 
@@ -41,21 +43,21 @@
 	     		(needed_search_casualties ?at - location)
 	     		(needed_attend_casualties ?at - location)
 	     		(needed_address_media)
-			    (not_needed_barricade ?at - location)
+			(not_needed_barricade ?at - location)
 	     		(not_needed_active_local_alert ?a - agents)
 	     		(not_needed_diverted_traffic ?from - location ?to - location)
 	     		(not_needed_search_casualties ?at - location)
 	     		(not_needed_attend_casualties ?at - location)
 	     		(not_needed_address_media)
-			    (has_police_car_number ?from - location)
-			    (has_small_engines_number ?from - location)
-			    (has_big_engines_number ?from - location)
-			    (has_ladders_number ?from - location)
-			    (has_helicopters_number ?from - location)
-			    (has_rescuers_number ?from - location)
-			    (has_ambulances_number ?from - location)
-			    (has_policemen_number ?from - location)
-			    (has_bulldozers_number ?from - location)
+			(has_police_car_number ?from - location)
+			(has_small_engines_number ?from - location)
+			(has_big_engines_number ?from - location)
+			(has_ladders_number ?from - location)
+			(has_helicopters_number ?from - location)
+			(has_rescuers_number ?from - location)
+			(has_ambulances_number ?from - location)
+			(has_policemen_number ?from - location)
+			(has_bulldozers_number ?from - location)
 )
 
 
@@ -136,7 +138,7 @@
  					(deployed_engines ?to)
  					(deployed_small_engines ?to)
  					(needed_barricade ?to)
-					(not (not_needed_barricade ?to))
+					(not(not_needed_barricade ?to))
 					(not (has_small_engines_number ?from))
  					(increase (total-cost) (duration_deploy_small_engines))
  				)
@@ -153,7 +155,7 @@
  					(deployed_engines ?to)
  					(deployed_big_engines ?to)
  					(needed_barricade ?to)
-					(not (not_needed_barricade ?to))
+					(not(not_needed_barricade ?to))
 					(not (has_big_engines_number ?from))
  					(increase (total-cost) (duration_deploy_big_engines))
  				)
@@ -245,7 +247,7 @@
 
 (:action contact_media
 	:parameters	(?a - agents) 
- 	:precondition 	(and	
+ 	:precondition 	(and
 				)
  	:effect		(and	
  					(media_contacted ?a)
@@ -349,7 +351,7 @@
  					(needed_address_media)
 					(not (not_needed_address_media))
  					(needed_search_casualties ?at)
-					(not (not_needed_search_casualties ?at))
+					(not(not_needed_search_casualties ?at))
  					(increase (total-cost) (duration_extinguish_small_fire))
  				)
 )
@@ -364,7 +366,7 @@
  					(extinguished_fire ?at)
  					(not (fire_at ?at))
  					(needed_search_casualties ?at)
-					(not (not_needed_search_casualties ?at))
+					(not(not_needed_search_casualties ?at))
  					(increase (total-cost) (duration_extinguish_big_fire))
  				)
 )
@@ -375,7 +377,7 @@
  	:effect		(and	
  					(barricaded ?at)
  					(needed_active_local_alert ?a)
-					(not (not_needed_active_local_alert ?a))
+					(not(not_needed_active_local_alert ?a))
  					(not (needed_barricade ?at))
 					(not_needed_barricade ?at)
  					(increase (total-cost) (duration_barricade))
@@ -395,7 +397,7 @@
  					(needed_attend_casualties ?at)
 					(not (not_needed_attend_casualties ?at))
  					(needed_address_media)
-					(not (not_needed_address_media))
+					(not(not_needed_address_media))
  					(increase (total-cost) (duration_search_casualties))
  				)
 )
@@ -411,7 +413,7 @@
  					(not (needed_attend_casualties ?at))
 					(not_needed_attend_casualties ?at)
  					(needed_address_media)
-					(not (not_needed_address_media))
+					(not(not_needed_address_media))
  					(increase (total-cost) (duration_attend_casualties))
  				)
 )

@@ -1,0 +1,111 @@
+<div class="card" style="padding-top: 10px;">
+    <div class="card-header bg-primary text-white">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ResourcesModal">
+                <i class="fas fa-info-circle"></i>
+            </button>
+        Fire Station's Resources
+    </div>
+    <table id="fireStationResources" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Fire Station</th>
+                <th>Small Engine</th>
+                <th>Big Engine</th>
+                <th>Ladders</th>
+                <th>Bulldozers</th>
+                <th>Helicopters</th>
+                <th>Rescuers</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+<div class="card" style="padding-top: 10px;">
+    <div class="card-header bg-primary text-white">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ResourcesModal">
+                <i class="fas fa-info-circle"></i>
+            </button>
+        Hospital's Resources
+    </div>
+    <table id="hospitalResources" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Hospital</th>
+                <th>Ambulance Availability</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+<div class="card" style="padding-top: 10px;">
+    <div class="card-header bg-primary text-white">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ResourcesModal">
+                <i class="fas fa-info-circle"></i>
+            </button>
+        Police Stations's Resources
+    </div>
+    <table id="policeStationResources" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Police Station</th>
+                <th>Police Cars</th>
+                <th>Policemen</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+<script>
+    $('#fireStationResources').DataTable({
+        "paging": false,
+        "scrollX": false,
+        "searching": false,
+        "bInfo" : false,
+        "ajax": 'readFireStationResources',
+        "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+            var r = "{{resources}}".split('&#39;');
+            console.log(r);
+            for (var i=1; i<r.length; i=i+2) {
+                if ( aData[0] == r[i] ) {
+                    $('td', nRow).css('background-color', '#fff9c4');
+                }
+            }
+        }
+    });
+    $('#hospitalResources').DataTable({
+        "paging": false,
+        "scrollX": false,
+        "searching": false,
+        "bInfo" : false,
+        "ajax": 'readHospitalResources',
+        "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+            var r = "{{resources}}".split('&#39;');
+            console.log(r);
+            for (var i=1; i<r.length; i=i+2) {
+                if ( aData[0] == r[i] ) {
+                    $('td', nRow).css('background-color', '#fff9c4');
+                }
+            }
+        }
+    });
+    $('#policeStationResources').DataTable({
+        "paging": false,
+        "scrollX": false,
+        "searching": false,
+        "bInfo" : false,
+        "ajax": 'readPoliceStationResources',
+        "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+            var r = "{{resources}}".split('&#39;');
+            console.log(r);
+            for (var i=1; i<r.length; i=i+2) {
+                if ( aData[0] == r[i] ) {
+                    $('td', nRow).css('background-color', '#fff9c4');
+                }
+            }
+        }
+    });
+    updateResource = function(tableName, rowId, resourceName, presentState){
+        $('.content').fadeOut();
+        $('.loader').fadeIn();
+        $.redirectPost('updateResources', {'tableName': tableName, 'rowId': rowId, 'resourceName': resourceName, 'presentState': presentState});
+    };
+</script>
