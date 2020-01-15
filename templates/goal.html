@@ -1,0 +1,34 @@
+<div class="card-header bg-primary text-white">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#GoalsModal">
+        <i class="fas fa-info-circle"></i>
+    </button>
+    Goals
+</div>
+<div class="card-body">
+    Select a goal:
+    <select class="form-control" id="goalToAchieve">
+     {% for goal in goals %}
+         <option>{{goal}}</option>
+     {% endfor %}
+    </select>
+    <br>
+    <button type="button" class="btn btn-block btn-primary updateTheGoal">Update Goal</button>
+    <br>
+    {% for lm in landmarks%}
+        <span class="badge badge-warning" style="display:inline-table">{{lm}}</span>
+    {% endfor %}
+</div>
+
+<script>
+    $(function () {
+        $(".updateTheGoal").click(
+            function () {
+                var goal = $("#goalToAchieve option:selected").html();
+                console.log(goal)
+                $('.page_content').fadeOut();
+                $('.loader').fadeIn();
+                $(.redirectPost('updateGoals',{'option':goal}));
+
+            });
+    });
+</script>
