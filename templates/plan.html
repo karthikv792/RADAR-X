@@ -32,18 +32,22 @@
               <button type="button" class="col-md-12 btn btn-secondary undoChange"><span style="font-size: x-large"><i class="fas fa-undo" alt="undo"></i></span><br>Undo</button>
           </div>
               </div>
+
+
             <div class="btn-group col-md-12">
+                            <div class="col-md-6" style="padding:5px;">
+      <button type="button" class="col-md-12 btn btn-secondary foilForPlan" >Add Foil</button>
+            </div>
           <!-- IF ELSE HERE -->
           {% if canAskForExplanations > 0 %}
-              <div class="col-md-6" style="padding:5px;">
+              <div class="col-md-3" style="padding:5px;">
                   <button type="button" class="col-md-12 btn btn-secondary alternativePlan">Alternative<br>Plan</button>
               </div>
-              <div class="col-md-6" style="padding:5px;">
+              <div class="col-md-3" style="padding:5px;">
                   <button type="button" class="col-md-12 btn btn-secondary explainPlan" data-toggle="modal" data-target="#ExplanationsModal">Explain<br>this plan?</button>
               </div>
           {% endif %}
             </div>
-        Enter Foil
 
     </div>
 </div>
@@ -98,7 +102,12 @@
             return res;
         };
 
-
+        $('.foilForPlan').click(function () {
+            res = getGridStackData();
+            $('.page_content').fadeOut();
+            $('.loader').fadeIn();
+            $.redirectPost('foil', {'plan': JSON.stringify(res)});
+        });
         $('.validatePlan').click(function() {
             res = getGridStackData();
             $('.page_content').fadeOut();
@@ -207,7 +216,7 @@
         };
 
         grid = $('.grid-stack').data('gridstack');
-        loadGrid = function () {
+        function loadGrid() {
             grid.removeAll();
             remove_icon = "far fa-trash-alt"
             var items = GridStackUI.Utils.sort(this.serializedData);

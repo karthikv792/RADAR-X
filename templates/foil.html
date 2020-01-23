@@ -1,0 +1,83 @@
+{% include 'header.html' %}
+<div class="grid-stack col-md-12" id="container-stack">
+        <div class="row">
+<div class="card col-md-4"><div class="card-header text-white bg-info">
+    PRESENT PLAN </div>
+  <div class="card-body">
+  <div class="grid-stack" id="presentPlan"></div>
+      </div>
+</div>
+<div class="card col-md-4"><div class="card-header text-white bg-info ">
+    YOUR FOIL</div>
+    <div class="card-body">
+        <div class="grid-stack" id="userfoil"></div></div>
+</div>
+<div class="card col-md-4"><div class="card-header text-white bg-info">
+    ALL ACTIONS</div>
+    <div class="card-body">
+  <div class="grid-stack" id="allactions"></div>
+    </div>
+</div>
+    </div>
+</div>
+<script>
+    $(function (){
+        serializedData = [
+            {% set count = 0 %}
+            {% for value in prePlan %}
+                {y: {{ count }}, x: 0, width: 12, height: 1, name:'{{ value }}'},
+                {% set count = count + 1 %}
+            {% endfor %}
+        ];
+        $('.grid-stack-item-content').draggable({
+        revert: 'invalid',
+        handle: '.grid-stack-item-content',
+        scroll: false,
+        appendTo: 'body',
+      });
+        var options = {
+            acceptWidgets: true
+        }
+        $('#userfoil').gridstack(options);
+        $('#presentPlan').gridstack();
+        grid1 = $('#presentPlan').data('gridstack');
+        function loadGrid1() {
+            grid1.removeAll();
+            var items = GridStackUI.Utils.sort(this.serializedData);
+            _.each(items, function (node, i) {
+                grid1.addWidget($('<div><div class="grid-stack-item-content" id="myWidget'+ node.y + '" style="background-color:#b2dfdb;border-radius: 6px;border: 1px solid black;border-color:#00695c;padding-top:5px;"><br><span style="padding-bottom: 5px">' + node.name + '</span></div>'),
+                node.x, node.y, node.width, node.height);
+            });
+            return false;
+        };
+        loadGrid1();
+        action = [
+            {% set count = 0 %}
+            {% for value in actions %}
+                {y: {{ count }}, x: 0, width: 12, height: 1, name:'{{ value }}'},
+                {% set count = count + 1 %}
+            {% endfor %}
+            ]
+        $('#allactions').gridstack(options);
+        grid2 = $('#allactions').data('gridstack');
+        function loadGrid2() {
+            grid2.removeAll();
+            var items = GridStackUI.Utils.sort(this.action);
+            _.each(items, function (node,i) {
+                grid2.addWidget($('<div><div class="grid-stack-item-content" id="myWidget'+ node.y + '" style="background-color:#b2dfdb;border-radius: 6px;border: 1px solid black;border-color:#00695c;padding-top:5px;"><br><span style="padding-bottom: 5px">' + node.name + '</span></div>'),
+                node.x, node.y, node.width, node.height);
+            });
+            return false;
+        };
+        loadGrid2();
+
+        grid3 = $('#userfoil').data('gridstack');
+            _.each(items, function (node,i) {
+                grid3.addWidget($('<div><div class="grid-stack-item-content" id="myWidget'+ node.y + '" style="background-color:#b2dfdb;border-radius: 6px;border: 1px solid black;border-color:#00695c;padding-top:5px;"><br><span style="padding-bottom: 5px">' + node.name + '</span></div>'),
+                node.x, node.y, node.width, node.height);
+            });
+
+    });
+
+
+</script>

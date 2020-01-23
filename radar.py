@@ -34,7 +34,6 @@ def getPresentPlan(request):
     """
     seq = {}
     plan = json.loads(dict(request.form)['plan'])
-    print(plan)
     for act in plan:
         # We assume that only one action occurs at a time
         # TODO: Update code if we want to allow options for
@@ -60,6 +59,14 @@ def updateGoals():
 def getOptimalPlan():
     planner.getSuggestedPlan({})
     return index(s=speech.getSpeechText('OPTIMAL_PLAN'))
+
+
+@app.route("/foil",methods=['GET','POST'])
+def foil():
+    plan = getPresentPlan(request)
+    acts = [x.strip('() \n') for x in plan.values()]
+    a = planner.getActionNames()
+    return render_template('foil.html',prePlan=acts,actions=a)
 
 @app.route("/validate", methods=['GET', 'POST'])
 def validate():
@@ -112,5 +119,7 @@ def readPoliceStationResource():
     data = dbCaller.getPoliceStationData()
     data = dbCaller.getUIReadyData( data, 'police_stations' )
     return jsonify( {"data" : data} )
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5080)

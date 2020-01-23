@@ -9,7 +9,6 @@ class dbHandler:
     def __init__(self):
         self.db = MySQLdb.connect( 'localhost','root','yochan','radar' )
         self.db.autocommit(True)
-        self.cursor = self.db.cursor()
         self.tableKeys = {'fire_stations_actual': 'fire_station', 'hospitals': 'hospital', 'police_stations': 'police_station'}
 
     def initializeDatabase(self):
@@ -20,54 +19,86 @@ class dbHandler:
             print ("[ERROR] Initializing RADAR Database")
 
     def getObjects(self):
-        self.cursor.execute( 'select * from object_type' )
-        return self.cursor.fetchall()
+        cursor = self.db.cursor()
+        cursor.execute( 'select * from object_type' )
+        a = cursor.fetchall()
+        cursor.close()
+        return a
 
     def getTasks(self):
-        self.cursor.execute( 'select * from tasks' )
-        return self.cursor.fetchall()
+        cursor = self.db.cursor()
+        cursor.execute( 'select * from tasks' )
+        a = cursor.fetchall()
+        cursor.close()
+        return a
 
     def getFireStationsData(self):
-        self.cursor.execute( 'select * from fire_stations_actual' )
-        s = self.cursor.fetchall()
+        cursor = self.db.cursor()
+        cursor.execute( 'select * from fire_stations_actual' )
+        s = cursor.fetchall()
+        cursor.close()
         return s
 
     def getFireStationPredicates(self):
-        self.cursor.execute( 'select * from predicates_for_fireStation' )
-        s = self.cursor.fetchall()
+        cursor = self.db.cursor()
+        cursor.execute( 'select * from predicates_for_fireStation' )
+        s = cursor.fetchall()
+        cursor.close()
         return s
 
     def getHospitalData(self):
-        self.cursor.execute( 'select * from hospitals' )
-        return self.cursor.fetchall()
+        cursor = self.db.cursor()
+        cursor.execute( 'select * from hospitals' )
+        a = cursor.fetchall()
+        cursor.close()
+        return a
 
     def getHospitalPredicates(self):
-        self.cursor.execute( 'select * from predicates_for_hospital' )
-        return self.cursor.fetchall()
+        cursor = self.db.cursor()
+        cursor.execute( 'select * from predicates_for_hospital' )
+        a = cursor.fetchall()
+        cursor.close()
+        return a
 
     def getPoliceStationData(self):
-        self.cursor.execute( 'select * from police_stations' )
-        return self.cursor.fetchall()
+        cursor = self.db.cursor()
+        cursor.execute( 'select * from police_stations' )
+        a = cursor.fetchall()
+        cursor.close()
+        return a
 
     def getPoliceStationPredicates(self):
-        self.cursor.execute( 'select * from predicates_for_policeStation' )
-        return self.cursor.fetchall()
+        cursor = self.db.cursor()
+        cursor.execute( 'select * from predicates_for_policeStation' )
+        a = cursor.fetchall()
+        cursor.close()
+        return a
 
     def getActionDurations(self):
-        self.cursor.execute( 'select * from durations' )
-        return self.cursor.fetchall()
+        cursor = self.db.cursor()
+        cursor.execute( 'select * from durations' )
+        a = cursor.fetchall()
+        cursor.close()
+        return a
 
     def getSubGoalPredicates(self):
-        self.cursor.execute( 'select * from subgoals' )
-        return self.cursor.fetchall()
+        cursor = self.db.cursor()
+        cursor.execute( 'select * from subgoals' )
+        a = cursor.fetchall()
+        cursor.close()
+        return a
 
     def getCustomCursor(self, rowsToGet, tableName, conditions='1=1' ):
-        self.cursor.execute( 'select {0} from {1} where {2}'.format(rowsToGet, tableName, conditions) )
-        return self.cursor.fetchall()
+        cursor = self.db.cursor()
+        cursor.execute( 'select {0} from {1} where {2}'.format(rowsToGet, tableName, conditions) )
+        a = cursor.fetchall()
+        cursor.close()
+        return a
 
     def getUIReadyData(self, data, tableName):
-        self.cursor.execute( 'describe {0}'.format(tableName) )
-        tableDesc = self.cursor.fetchall()
+        cursor = self.db.cursor()
+        cursor.execute( 'describe {0}'.format(tableName) )
+        tableDesc = cursor.fetchall()
         mutable_data = [ [] for i in range( len(data) ) ]
         for i in range(len(data)):
             mutable_data[i].append( data[i][0] )
@@ -79,12 +110,15 @@ class dbHandler:
                 else:
                     mutable_data[i].append( s.format(
                         'fas fa-times', '#ff4444', tableName, data[i][0], tableDesc[j][0], 0) )
+        cursor.close()
         return mutable_data
 
     def updateResourcesInTable(self, resourceName, tableName, rowId, presentState):
+        cursor = self.db.cursor()
         updatedState = 1
         if presentState == '1':
             updatedState = 0
         sql_cmd = 'update {0} set {1} = {2} where {3} like "{4}"'.format(tableName, resourceName, updatedState, self.tableKeys[ tableName ], rowId)
         print(sql_cmd)
-        self.cursor.execute(sql_cmd)
+        cursor.execute(sql_cmd)
+        cursor.close()

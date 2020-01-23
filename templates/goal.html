@@ -27,8 +27,7 @@
                 console.log(goal)
                 $('.page_content').fadeOut();
                 $('.loader').fadeIn();
-                $(.redirectPost('updateGoals',{'option':goal}));
-
+                $.redirectPost('updateGoals',{'option':goal});
             });
     });
 </script>
