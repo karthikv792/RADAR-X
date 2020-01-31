@@ -1,12 +1,16 @@
 from flask import Flask, render_template, request, jsonify
 import json
+import requests
+import urllib
 from planner import Planner
 from speak import Speak
 from dbHandler import dbHandler
+import speech_recognition as sr
 app = Flask(__name__)
 planner = Planner()
 speech = Speak()
 dbCaller = dbHandler()
+recognizer = sr.Recognizer()
 
 #dbCaller.initializeDatabase()
 
@@ -68,6 +72,32 @@ def foil():
     a = planner.getActionNames()
     return render_template('foil.html',prePlan=acts,actions=a)
 
+@app.route("/foilrec",methods=['GET','POST'])
+def foilrec():
+    if request.files:
+        url = request.files['audio']
+
+    # url=url[5:]
+    # print(url)
+    # rawWav = requests.get(url,verify=False)
+    try:
+        wavFile = sr.AudioFile(url)
+        with wavFile as source:
+            recognizer.adjust_for_ambient_noise(source)
+            audio = recognizer.record(source)
+        print(recognizer.recognize_google(audio))
+    except:
+        print("HELLO")
+        # urllib.request.urlretrieve(url,'static/audio/recog.wav')
+        # file = sr.AudioFile('static/audio/recog.wav')
+        # with file as source:
+        #     recognizer.adjust_for_ambient_noise(source)
+        #     audio = recognizer.record(source)
+        # print(recognizer.recognize_google(audio))
+    return request.url
+
+
+
 @app.route("/validate", methods=['GET', 'POST'])
 def validate():
     planner.savePlan()
@@ -122,4 +152,4 @@ def readPoliceStationResource():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5080)
+    app.run(host='0.0.0.0', port=5080, ssl_context=('cert.pem','key.pem'))

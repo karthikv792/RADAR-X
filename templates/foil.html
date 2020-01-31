@@ -1,5 +1,30 @@
 {% include 'header.html' %}
 <div class="grid-stack col-md-12" id="container-stack">
+    <div class="row justify-content-center">
+        <div class="card col-md-4">
+            <div class="card-header bg-info text-white">
+                Foil through Speech
+            </div>
+            <div class="card-body">
+                <div class="btn-group col-md-12">
+                    <button class="btn btn-secondary col-md-6" id="startbtn" >Start</button>
+                <button class="btn btn-secondary col-md-6" id="stopbtn">Stop</button>
+                </div>
+
+            </div>
+        </div>
+        <div class="card col-md-4">
+            <div class="card-header bg-info text-white">
+                TEXT
+            </div>
+            <div class="card-body">
+                <div class="btn-group col-md-12" id="output">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
         <div class="row">
 <div class="card col-md-4"><div class="card-header text-white bg-info">
     PRESENT PLAN </div>
@@ -20,8 +45,101 @@
 </div>
     </div>
 </div>
+<style>
+
+</style>
+<!-- $.extend(
+        {
+            exportWAV: function(location, args)
+            {
+                var form=$('<form></form>');
+                form.attr("method","post");
+                form.attr("action",location);
+                $.each( args, function( key, value ) {
+                var field = $('<input></input>');
+
+                field.attr("type", "hidden");
+                field.attr("name", key);
+                field.attr("value", value);
+
+                form.append(field);
+            });
+            $(form).appendTo('body').submit();
+            }
+        }
+    );  -->
 <script>
+
     $(function (){
+        //Thanks to https://github.com/mattdiamond/Recorderjs for the library
+        var audio_context;
+        function startUserMedia(stream){
+            var input = audio_context.createMediaStreamSource(stream);
+            console.log('Media Stream Initialized');
+            recorder = new Recorder(input);
+            console.log('Recorder Initialized');
+        }
+        var recognition = new webkitSpeechRecognition();
+      recognition.continuous = true;
+
+    var output = document.getElementById('output');
+    recognition.onresult = function(event) {
+      output.textContent = event.results[0][0].transcript;
+      console.log(event.results[0][0].transcript);
+    };
+        // Deal with prefixed APIs
+        try {
+      // webkit shim
+      window.AudioContext = window.AudioContext || window.webkitAudioContext;
+      navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
+      window.URL = window.URL || window.webkitURL;
+
+
+
+      audio_context = new AudioContext;
+    } catch (e) {
+      alert('No web audio support in this browser!');
+    }
+    navigator.getUserMedia({audio: true},startUserMedia,function(e) {
+      console.log('No live audio input: ' + e);
+    });
+    $('#startbtn').click(function () {
+    //     recorder.record();
+        recognition.start();
+        $('#startbtn').attr("disabled",true);
+         $('#stopbtn').attr("disabled",false);
+
+     });
+     $('#stopbtn').click(function () {
+    //     recorder.stop();
+         recognition.stop()
+         $('#stopbtn').attr("disabled",true);
+        $('#startbtn').attr("disabled",false);
+    //     downloadfile();
+    //     recorder.clear();
+     });
+
+    // function downloadfile(){
+    //   recorder.exportWAV(
+    //     function(blob) {
+    //   var url = URL.createObjectURL(blob);
+    //   console.log(url);
+    //   var au = document.createElement('audio');
+    //   au.controls = true;
+    //   au.src = url;
+    //   var form = $('<form></form>');
+    //     form.attr("method", "post");
+    //     form.attr("action", "foilrec");
+    //         var field = $('<input></input>');
+    //         field.attr("type", "hidden");
+    //         form.append(field);
+    //         form.append('audio',blob)
+    //         $(form).appendTo('body').submit();
+    // });
+
+    };
+
+
         serializedData = [
             {% set count = 0 %}
             {% for value in prePlan %}
@@ -29,17 +147,15 @@
                 {% set count = count + 1 %}
             {% endfor %}
         ];
-        $('.grid-stack-item-content').draggable({
-        revert: 'invalid',
-        handle: '.grid-stack-item-content',
-        scroll: false,
-        appendTo: 'body',
-      });
+
         var options = {
-            acceptWidgets: true
+            draggable: {
+            			cursor: 'move',
+            			cancel: '.na-icon'
+                		}
         }
         $('#userfoil').gridstack(options);
-        $('#presentPlan').gridstack();
+        $('#presentPlan').gridstack(options);
         grid1 = $('#presentPlan').data('gridstack');
         function loadGrid1() {
             grid1.removeAll();
@@ -72,10 +188,15 @@
         loadGrid2();
 
         grid3 = $('#userfoil').data('gridstack');
-            _.each(items, function (node,i) {
-                grid3.addWidget($('<div><div class="grid-stack-item-content" id="myWidget'+ node.y + '" style="background-color:#b2dfdb;border-radius: 6px;border: 1px solid black;border-color:#00695c;padding-top:5px;"><br><span style="padding-bottom: 5px">' + node.name + '</span></div>'),
-                node.x, node.y, node.width, node.height);
-            });
+        function addWidget(widget){
+            grid3.addWidget(widget)
+        };
+        $('#userfoil').droppable({
+        drop: function( event, ui ) {
+				  addWidget(ui.draggable);
+               }
+        });
+
 
     });
 
