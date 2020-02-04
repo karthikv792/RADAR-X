@@ -7,7 +7,9 @@
             </div>
             <div class="card-body">
                 <div class="btn-group col-md-12">
-                    <button class="btn btn-secondary col-md-6" id="startbtn" >Start</button>
+                    <button class="btn btn-secondary col-md-6" id="startbtn" >
+                        Start
+                    </button>
                 <button class="btn btn-secondary col-md-6" id="stopbtn">Stop</button>
                 </div>
 
@@ -16,6 +18,7 @@
         <div class="card col-md-4">
             <div class="card-header bg-info text-white">
                 TEXT
+                <form id="myform"></form>
             </div>
             <div class="card-body">
                 <div class="btn-group col-md-12" id="output">
@@ -104,100 +107,142 @@
       console.log('No live audio input: ' + e);
     });
     $('#startbtn').click(function () {
-    //     recorder.record();
-        recognition.start();
+         recorder.record();
+       // recognition.start();
         $('#startbtn').attr("disabled",true);
          $('#stopbtn').attr("disabled",false);
 
      });
      $('#stopbtn').click(function () {
-    //     recorder.stop();
-         recognition.stop()
+         recorder.stop();
+         //recognition.stop();
          $('#stopbtn').attr("disabled",true);
         $('#startbtn').attr("disabled",false);
-    //     downloadfile();
-    //     recorder.clear();
+         downloadfile();
+         recorder.clear();
      });
-
-    // function downloadfile(){
-    //   recorder.exportWAV(
-    //     function(blob) {
-    //   var url = URL.createObjectURL(blob);
-    //   console.log(url);
-    //   var au = document.createElement('audio');
-    //   au.controls = true;
-    //   au.src = url;
-    //   var form = $('<form></form>');
-    //     form.attr("method", "post");
-    //     form.attr("action", "foilrec");
-    //         var field = $('<input></input>');
-    //         field.attr("type", "hidden");
-    //         form.append(field);
-    //         form.append('audio',blob)
-    //         $(form).appendTo('body').submit();
+var recordingfile = null;
+    function downloadfile(){
+      recorder.exportWAV(
+        function(blob) {
+      // var url = URL.createObjectURL(blob);
+      // console.log(url);
+      // var au = document.createElement('audio');
+      // au.controls = true;
+      // au.src = url;
+      // var form = $('<form></form>');
+      //   form.attr("method", "post");
+      //   form.attr("action", "foilrec");
+      //       var field = $('<input></input>');
+      //       field.attr("type", "hidden");
+      //       form.append(field);
+      //       form.append('audio',blob)
+      //       $(form).appendTo('body').submit();
+      //       const SpeechToTextV1 = require('ibm-watson/speech-to-text/v1');
+      //       const { IamAuthenticator } = require('ibm-watson/auth');
+      //       const fs = require('fs');
+      //       const speechToText = new SpeechToTextV1({
+      //         authenticator: new IamAuthenticator({
+      //           apikey: 'XP05-H02OVkI-xiVFDImibL9wIMtv7wPTrexaa48zsJG',
+      //         }),
+      //         url: 'wss://api.us-south.speech-to-text.watson.cloud.ibm.com/instances/bb483480-b7e2-419c-9640-c48b7c000351/v1/recognize',
+      //       });
+      //       var params = {
+      //                         objectMode: true,
+      //                         contentType: 'audio/flac',
+      //                         model: 'en-US_BroadbandModel',
+      //                       };
+      //
+      //       var IBM_access_token = 'XP05-H02OVkI-xiVFDImibL9wIMtv7wPTrexaa48zsJG'
+      //   var ws_url = 'wss://api.us-south.speech-to-text.watson.cloud.ibm.com/instances/bb483480-b7e2-419c-9640-c48b7c000351/v1/recognize'
+      //   var wsURI = ws_url+'/v1/recognize'+ '?access_token=' + IBM_access_token + '&model=en-US_BroadbandModel';
+      //   var websocket = new WebSocket(wsURI);
+      //     websocket.onopen = function(evt) { onOpen(evt) };
+      //       websocket.onmessage = function(evt) { onMessage(evt) };
+            //websocket.send(blob);
+            //websocket.send(JSON.stringify({action: 'stop'}));
+           // recordingfile = blob;
+                    var xhr = new XMLHttpRequest();
+            xhr.onload = function(e) {
+                if (this.readyState === 4) {
+                    console.log("Server returned: ", e.target.responseText);
+                }
+            };
+            var fd = new FormData();
+            fd.append("audio_data", blob,'1');
+            xhr.open("POST", "/foilrec", true);
+            xhr.send(fd);
+                        });
+    };
+    // $("#myform").submit(function(){
+    //     var formData = new FormData($(this)[0]);
+    //     if(recordingfile){
+    //         var recording = new Blob([recordingfile],{type:"audio/wav"});
+    //         formData.append("recording", recording);
+    //     }
     // });
 
-    };
 
 
-        serializedData = [
-            {% set count = 0 %}
-            {% for value in prePlan %}
-                {y: {{ count }}, x: 0, width: 12, height: 1, name:'{{ value }}'},
-                {% set count = count + 1 %}
-            {% endfor %}
-        ];
 
-        var options = {
-            draggable: {
-            			cursor: 'move',
-            			cancel: '.na-icon'
-                		}
-        }
-        $('#userfoil').gridstack(options);
-        $('#presentPlan').gridstack(options);
-        grid1 = $('#presentPlan').data('gridstack');
-        function loadGrid1() {
-            grid1.removeAll();
-            var items = GridStackUI.Utils.sort(this.serializedData);
-            _.each(items, function (node, i) {
-                grid1.addWidget($('<div><div class="grid-stack-item-content" id="myWidget'+ node.y + '" style="background-color:#b2dfdb;border-radius: 6px;border: 1px solid black;border-color:#00695c;padding-top:5px;"><br><span style="padding-bottom: 5px">' + node.name + '</span></div>'),
-                node.x, node.y, node.width, node.height);
-            });
-            return false;
-        };
-        loadGrid1();
-        action = [
-            {% set count = 0 %}
-            {% for value in actions %}
-                {y: {{ count }}, x: 0, width: 12, height: 1, name:'{{ value }}'},
-                {% set count = count + 1 %}
-            {% endfor %}
-            ]
-        $('#allactions').gridstack(options);
-        grid2 = $('#allactions').data('gridstack');
-        function loadGrid2() {
-            grid2.removeAll();
-            var items = GridStackUI.Utils.sort(this.action);
-            _.each(items, function (node,i) {
-                grid2.addWidget($('<div><div class="grid-stack-item-content" id="myWidget'+ node.y + '" style="background-color:#b2dfdb;border-radius: 6px;border: 1px solid black;border-color:#00695c;padding-top:5px;"><br><span style="padding-bottom: 5px">' + node.name + '</span></div>'),
-                node.x, node.y, node.width, node.height);
-            });
-            return false;
-        };
-        loadGrid2();
-
-        grid3 = $('#userfoil').data('gridstack');
-        function addWidget(widget){
-            grid3.addWidget(widget)
-        };
-        $('#userfoil').droppable({
-        drop: function( event, ui ) {
-				  addWidget(ui.draggable);
-               }
-        });
-
-
+    //     serializedData = [
+    //         {% set count = 0 %}
+    //         {% for value in prePlan %}
+    //             {y: {{ count }}, x: 0, width: 12, height: 1, name:'{{ value }}'},
+    //             {% set count = count + 1 %}
+    //         {% endfor %}
+    //     ];
+    //
+    //     var options = {
+    //         draggable: {
+    //         			cursor: 'move',
+    //         			cancel: '.na-icon'
+    //             		}
+    //     }
+    //     $('#userfoil').gridstack(options);
+    //     $('#presentPlan').gridstack(options);
+    //     grid1 = $('#presentPlan').data('gridstack');
+    //     function loadGrid1() {
+    //         grid1.removeAll();
+    //         var items = GridStackUI.Utils.sort(this.serializedData);
+    //         _.each(items, function (node, i) {
+    //             grid1.addWidget($('<div><div class="grid-stack-item-content" id="myWidget'+ node.y + '" style="background-color:#b2dfdb;border-radius: 6px;border: 1px solid black;border-color:#00695c;padding-top:5px;"><br><span style="padding-bottom: 5px">' + node.name + '</span></div>'),
+    //             node.x, node.y, node.width, node.height);
+    //         });
+    //         return false;
+    //     };
+    //     loadGrid1();
+    //     action = [
+    //         {% set count = 0 %}
+    //         {% for value in actions %}
+    //             {y: {{ count }}, x: 0, width: 12, height: 1, name:'{{ value }}'},
+    //             {% set count = count + 1 %}
+    //         {% endfor %}
+    //         ]
+    //     $('#allactions').gridstack(options);
+    //     grid2 = $('#allactions').data('gridstack');
+    //     function loadGrid2() {
+    //         grid2.removeAll();
+    //         var items = GridStackUI.Utils.sort(this.action);
+    //         _.each(items, function (node,i) {
+    //             grid2.addWidget($('<div><div class="grid-stack-item-content" id="myWidget'+ node.y + '" style="background-color:#b2dfdb;border-radius: 6px;border: 1px solid black;border-color:#00695c;padding-top:5px;"><br><span style="padding-bottom: 5px">' + node.name + '</span></div>'),
+    //             node.x, node.y, node.width, node.height);
+    //         });
+    //         return false;
+    //     };
+    //     loadGrid2();
+    //
+    //     grid3 = $('#userfoil').data('gridstack');
+    //     function addWidget(widget){
+    //         grid3.addWidget(widget)
+    //     };
+    //     $('#userfoil').droppable({
+    //     drop: function( event, ui ) {
+	// 			  addWidget(ui.draggable);
+    //            }
+    //     });
+    //
+    //
     });
 
 
