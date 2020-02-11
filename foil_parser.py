@@ -3,7 +3,7 @@ def extract_actions():
     with open('pr-domain.pddl') as f:
         for line in f:
             if (line.strip().startswith(("(:action"))):
-                print(line.strip()[len("(:action "):])
+                # print(line.strip()[len("(:action "):])
                 actions.add(line.strip()[len("(:action "):])
     return actions
 
