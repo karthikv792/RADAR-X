@@ -51,6 +51,8 @@ def clean_user_foil(user_foil, vocab):
         user_foil = user_foil.replace("brickyard", "byeng")
     if "scottsdale" in user_foil:
         user_foil = user_foil.replace("scottsdale", "scotts")
+    if "medical" in user_foil:
+        user_foil = user_foil.replace("medical", "medi")
     words = user_foil.split(" ")
     word_list = []
     word_list.append(words[0])
