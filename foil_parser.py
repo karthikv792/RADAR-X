@@ -43,6 +43,7 @@ def extract_vocab(actions):
     return vocab
 
 def clean_user_foil(user_foil, vocab):
+    user_foil = user_foil.lower()
     if "phoenix" in user_foil:
         user_foil = user_foil.replace("phoenix", "phx")
     if "brickyard" in user_foil:
