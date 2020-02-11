@@ -3,7 +3,7 @@ def extract_actions():
     with open('pr-domain.pddl') as f:
         for line in f:
             if (line.strip().startswith(("(:action"))):
-                # print(line.strip()[len("(:action "):])
+                print(line.strip()[len("(:action "):])
                 actions.add(line.strip()[len("(:action "):])
     return actions
 
@@ -44,11 +44,13 @@ def extract_vocab(actions):
 
 def clean_user_foil(user_foil, vocab):
     user_foil = user_foil.lower()
+    user_foil = user_foil.replace('\'', "")
     if "phoenix" in user_foil:
         user_foil = user_foil.replace("phoenix", "phx")
     if "brickyard" in user_foil:
         user_foil = user_foil.replace("brickyard", "byeng")
-
+    if "scottsdale" in user_foil:
+        user_foil = user_foil.replace("scottsdale", "scotts")
     words = user_foil.split(" ")
     word_list = []
     word_list.append(words[0])
