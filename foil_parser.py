@@ -1,3 +1,5 @@
+import requests
+
 def extract_actions():
     actions = set()
     with open('pr-domain.pddl') as f:
@@ -40,6 +42,7 @@ def extract_vocab(actions):
     vocab.add('helicopter')
     vocab.add('men')
     vocab.add('bulldozer')
+
     return vocab
 
 def clean_user_foil(user_foil, vocab):
@@ -54,6 +57,16 @@ def clean_user_foil(user_foil, vocab):
     if "medical" in user_foil:
         user_foil = user_foil.replace("medical", "medi")
     words = user_foil.split(" ")
+
+    additional_vocab = get_additional_vocab()
+    for i in range(0, len(words)):
+        if words[i] not in vocab and words[i] not in additional_vocab:
+            similar_sounding_word_list = get_similar_sounding_words(words[i])
+            for similar_word in similar_sounding_word_list:
+                if similar_word in vocab:
+                    print("replacing ", words[i], "with ", similar_word)
+                    words[i] = similar_word
+
     word_list = []
     word_list.append(words[0])
     for i in range(1, len(words)):
@@ -96,3 +109,19 @@ def get_actions(user_foil, current_plan):
             user_suggested_actions.append(action)
 
     return current_plan_actions, user_suggested_actions
+
+def get_similar_sounding_words(word):
+    similar_sounding_word_list = []
+    url = "https://api.datamuse.com/words?sl=" + word + "&max=300"
+    response = requests.get(url)
+    for word_dict in response.json():
+        similar_sounding_word_list.append(word_dict['word'])
+    return similar_sounding_word_list
+
+def get_additional_vocab():
+    # adding additional words for the similar sounding words logic
+    additional_vocab = set()
+    additional_vocab.add("why")
+    additional_vocab.add("and")
+    additional_vocab.add("not")
+    return additional_vocab
