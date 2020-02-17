@@ -1,6 +1,6 @@
 from foil_parser import get_actions, clean_user_foil, extract_vocab, extract_actions
 
-user_foil = "why actress media transport cheap instead of reply small engines fire chief scottsdale fire lake and address media medi chief"
+user_foil = "why address media transport chief deploy bulldozers firechief adminfire byeng instead of deploy small engines fire chief scottsdale fire lake and block road transportchief lake marketplace"
 # user_foil = clean_user_foil(user_foil, vocab)
 # user_foil = " ".join(user_foil)
 why, why_not = get_actions(user_foil, current_plan=set())
@@ -57,4 +57,28 @@ print("Why Not ", why_not)
 #     matches = pattern.finditer(user_foil)
 #     for match in matches:
 #         print(pattern," ", action)
+
+def update_costs_for_foil(why, why_not):
+    domain_new = open("pr-domain-new.pddl", "w")
+    new_cost = 10
+    with open("pr-domain.pddl", "r") as domain:
+            action_found = False
+            for line in domain:
+                for action in why_not:
+                    if action in line:
+                        action_found = True
+                        break
+
+                if action_found == True and "total-cost" in line:
+                    words = line.split(" ")
+                    new_line = words[0] + " " + words[1]
+                    domain_new.write(new_line + " " + str(new_cost)+")\n")
+                    action_found = False
+                else:
+                    domain_new.write(line)
+
+    domain_new.close()
+
+
+
 
