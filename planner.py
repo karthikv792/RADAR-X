@@ -3,10 +3,11 @@ import re
 import subprocess
 from shutil import copy as copyf
 from copy import deepcopy
+from problemFileMaker import problemFileMaker
 from model_parser.parser_new import parse_model
 from model_parser.writer_new import ModelWriter
 from model_parser.constants import *
-from problemFileMaker import problemFileMaker
+
 class Planner():
     CALL_FAST_DOWNWARD = 'planner/FAST-DOWNWARD/fast-downward.py '
     CALL_VAL = 'planner/VAL/validate -v '
@@ -44,14 +45,16 @@ class Planner():
 
         self.probMaker = problemFileMaker()
         self.observations = ''
-        self.parsed_model = None
+        self.ungrounded_actions = []
+        self.consts = []
 
-    def deletePrFiles(self):
+    def plan(self):
         try:
-            os.remove(self.pr_domain)
-            os.remove(self.pr_problem)
+            cmd = self.CALL_FAST_DOWNWARD + self.pr_domain + ' ' + self.pr_problem + ' --search "astar(lmcut())"';
+            os.system(cmd)
+            print ('FAST-DOWNWARD called...')
         except:
-            print ("[WARNING] Problem deleting pr-domain and pr-problem files.  Probably they already don't exist!")
+            raise Exception('[ERROR] Running FAST-DOWNWARD!')
 
     def getLandmarks(self):
         try:
@@ -66,119 +69,9 @@ class Planner():
             if 'explained' not in l.lower():
                 lm.append( l.split('Atom ')[1] )
         return lm
-    def getActionNames(self):
-        self.deletePrFiles()
-        try:
-            cmd = self.CALL_PR2 + ' -d ' + self.domain + ' -i ' + self.problem +' -o ' + 'planner/blank_obs.dat'
-            os.system(cmd)
-        except:
-            raise Exception('[ERROR] Call to PR2 failed!')
 
-        if not os.path.isfile( self.pr_domain ) or not os.path.isfile( self.pr_problem ):
-            print ("[ERROR] Goal cannot be reached from initial state")
-            return []
+    def writeObservations(self, actions, tillEndOfPresentPlan=False):
 
-        try:
-            cmd = 'cat {0} | grep -v "EXPLAIN" > pr-problem.pddl.tmp && mv pr-problem.pddl.tmp {0}'.format(self.pr_problem)
-            os.system(cmd)
-            cmd = 'cat {0} | grep -v "EXPLAIN" > pr-domain.pddl.tmp && mv pr-domain.pddl.tmp {0}'.format(self.pr_domain)
-            os.system(cmd)
-        except:
-            raise Exception('[ERROR] Removing "EXPLAIN" from pr-domain and pr-problem files.')
-
-        actionNames = []
-        pr_model = parse_model(self.pr_domain,self.pr_problem)
-        return list(pr_model[DOMAIN].keys())
-
-        # f = open(self.pr_domain)
-        # for l in f:
-        #     if '(:action ' in l:
-        #         actionNames.append('(' + l.split('(:action ')[1].strip() +')')
-        # return actionNames
-
-    def plan(self):
-        try:
-            cmd = self.CALL_FAST_DOWNWARD + self.pr_domain + ' ' + self.pr_problem + ' --search "astar(lmcut())"';
-            os.system(cmd)
-            print ('FAST-DOWNWARD called...')
-        except:
-            raise Exception('[ERROR] Running FAST-DOWNWARD!')
-
-    def getImpResources(self):
-        try:
-            f = open(self.sas_plan, 'r')
-        except:
-            # If no plan exists for the present state
-            self.plan()
-            f = open(self.sas_plan, 'r')
-
-        # Write plan to observation file
-        resources = []
-        for l in f:
-            for r in self.resource_list:
-                if (r in l.lower()) and (not r in resources):
-                    resources.append(r)
-        return resources
-
-    def getExplanations(self):
-
-        cmd = "cd planner/mmp_explanations/src && ./Problem.py -m ../../../{0} -n ../../../{1} -d ../domain/radar_domain_template.pddl -f ../../mock_problem.pddl".format(self.domain, self.human_domain)
-        try:
-            os.system(cmd)
-        except:
-            print ("[ERROR] while generating explanations for the present plan")
-
-        try:
-            f = open( self.exp_file, 'r' )
-        except:
-            print ("[WARNING] No explanations were generated.  Probably there is no model difference")
-            return {1:"None"}
-        reason = {}
-        i = 1
-        for l in f:
-            s = l.strip()
-            if not s:
-                continue
-            s = l.split('Explanation >> ')[1].strip()
-            reason[i] = s
-            i += 1
-        return reason
-
-    def getExcuses(self):
-        cmd = "cd planner/mmp/src && ./Problem.py -m ../domain/radar_domain.pddl -n ../domain/radar_domain.pddl -d ../domain/radar_domain_template.pddl -q ../domain/complete_initial_state_problem_template.pddl -f ../domain/complete_initial_state_problem.pddl -t ../../mock_problem.pddl"
-        try:
-            os.system(cmd)
-        except:
-            print ("[ERROR] Error while generation explanations for changing initial state to make it feisable")
-
-        f = open( self.exc_file, "r" )
-        reason = ''
-        for l in f:
-            s = l.strip()
-            if not s:
-                continue
-            s = l.split('Explanation >> has-initial-state-')[1].replace("has_", "Get ").replace("_number@", " ")
-            reason = reason + s + ' '
-        plan_actions = { '1' : 'INVALID_INITIAL_STATE ;{0}'.format(reason.replace('\n',' ')) }
-        return plan_actions
-    def savePlan(self):
-        copyf(self.obs, self.saveduiPlan)
-
-    def loadPlan(self):
-        print( "[LOG] Copying {0} to {1}".format(self.saveduiPlan, self.obs) )
-        copyf(self.saveduiPlan, self.obs)
-
-    def getOrderedObservations(self):
-        observations = {}
-        f = open(self.obs)
-        count = 1
-        for l in f:
-            observations[ count ] = l.strip()
-            count += 1
-
-        return observations
-
-    def writeObservations(self,actions,tillEndOfPresentPlan=False):
         if tillEndOfPresentPlan:
             acts = deepcopy( actions )
             for i in range(len(acts.keys())-1, 0, -1):
@@ -197,34 +90,88 @@ class Planner():
         f.write(s)
         f.close()
 
+
+
+    def reconcileModels(self, changes):
+        print( changes )
+        changeHumanModel = []
+        changeRobotModel = []
+        for key in list(changes.keys()):
+            if '-reject' in key:
+                act = key.split('-reject')[0]
+                changeRobotModel.append( act )
+                changes.pop( key, None )
+                changes.pop( act, None )
+
+        for key in list(changes.keys()):
+            changeHumanModel.append( key )
+
+        self.updateDomainFile(self.domain.split('.pddl')[0]+'_human.pddl', changeHumanModel)
+        self.updateDomainFile(self.domain, changeRobotModel, True)
+
     def updateDomainFile(self, fname, changes, remove=False):
         if not changes:
             return
+
         act_updates = {}
         for c in changes:
             act, pre = c.split('-has-precondition-')
-            act_updates[ act ] = pre.split('?')[0].split()[0]
+            act_updates[ act ] = pre
+
         print( "Updating ...\nfile: {0}\nremove: {1}\nchanges: {2}".format(fname, remove, act_updates) )
         print("Updating done")
-        model = parse_model(fname,self.problem)
-        for act in list(model[DOMAIN].keys()):
-            try:
-                prec = act_updates[act]
-                if remove:
-                    for precs in model[DOMAIN][act][POS_PREC]:
-                        if prec in precs:
-                            model[DOMAIN][act][POS_PREC].remove(precs)
-            except:
-                continue
-        writer = ModelWriter(model)
-        writer.write_files(fname.split('.pddl')[0]+'_modify.pddl','problem.pddl')
+        f = open(fname, 'r')
+        s = ""
+        removePredicate = False
+        for l in f:
+            if removePredicate:
+                if prec in l:
+                    removePredicate = False
+                    continue
+            if '(:action ' in l:
+                act_name = l.split(':action ')[1].strip()
+                try:
+                    prec = act_updates[ act_name ]
+                    if remove:
+                        s += l
+                        removePredicate = True
+                    else:
+                        s += l
+                        s += prec + "\n"
+                except:
+                    s += l
+                    continue
+            else:
+                s += l
+        f.close()
+        f = open(fname.split('.pddl')[0]+'_modify.pddl', 'w')
+        f.write( s )
+        f.close()
+        print( "Updated '{0}'!".format(fname.split('.pddl')[0]+'_modify.pddl') )
+        if remove:
+            self.domain = fname.split('.pddl')[0]+'_modify.pddl'
+        else:
+            self.human_domain = fname.split('.pddl')[0]+'_modify.pddl'
+        # model = parse_model(fname,self.problem)
+        # for act in list(model[DOMAIN].keys()):
+        #     try:
+        #         prec = act_updates[act]
+        #         if remove:
+        #             for precs in model[DOMAIN][act][POS_PREC]:
+        #                 if prec in precs:
+        #                     model[DOMAIN][act][POS_PREC].remove(precs)
+        #     except:
+        #         continue
+        # writer = ModelWriter(model)
+        # writer.write_files(fname.split('.pddl')[0]+'_modify.pddl','problem.pddl')
         if remove:
             self.domain = fname.split('.pddl')[0]+'_modify.pddl'
         else:
             self.human_domain = fname.split('.pddl')[0]+'_modify.pddl'
 
-    def getSuggestedPlan(self,actions,tillEndOfPresentPlan=False):
+    def getSuggestedPlan(self, actions, tillEndOfPresentPlan=False):
         self.writeObservations(actions)
+
         # If actions are blank, use the present pr_domain and pr_problem files to
         # plan. If not, generate new files with the known actions to be explained.
         if actions:
@@ -238,7 +185,9 @@ class Planner():
                 print("PR2 DONE")
             except:
                 raise Exception('[ERROR] In Call to PR2!')
+
         self.plan()
+
         # Write plan to observation file
         plan_actions = {}
         f = open(self.sas_plan, 'r')
@@ -289,6 +238,116 @@ class Planner():
                 f.close()
 
 
+    def getExplanations(self):
+
+        cmd = "cd planner/mmp_explanations/src && ./Problem.py -m ../../../{0} -n ../../../{1} -d ../domain/radar_domain_template.pddl -f ../../mock_problem.pddl".format(self.domain, self.human_domain)
+        try:
+            os.system(cmd)
+        except:
+            print ("[ERROR] while generating explanations for the present plan")
+
+        try:
+            f = open( self.exp_file, 'r' )
+        except:
+            print ("[WARNING] No explanations were generated.  Probably there is no model difference")
+            return {1:"None"}
+        reason = {}
+        i = 1
+        for l in f:
+            s = l.strip()
+            if not s:
+                continue
+            s = l.split('Explanation >> ')[1].strip()
+            reason[i] = s
+            i += 1
+        return reason
+
+    def getExcuses(self):
+        cmd = "cd planner/mmp/src && ./Problem.py -m ../domain/radar_domain.pddl -n ../domain/radar_domain.pddl -d ../domain/radar_domain_template.pddl -q ../domain/complete_initial_state_problem_template.pddl -f ../domain/complete_initial_state_problem.pddl -t ../../mock_problem.pddl"
+        try:
+            os.system(cmd)
+        except:
+            print ("[ERROR] Error while generation explanations for changing initial state to make it feisable")
+
+        f = open( self.exc_file, "r" )
+        reason = ''
+        for l in f:
+            s = l.strip()
+            if not s:
+                continue
+            s = l.split('Explanation >> has-initial-state-')[1].replace("has_", "Get ").replace("_number@", " ")
+            reason = reason + s + ' '
+        plan_actions = { '1' : 'INVALID_INITIAL_STATE ;{0}'.format(reason.replace('\n',' ')) }
+        return plan_actions
+
+    def deletePrFiles(self):
+        try:
+            os.remove(self.pr_domain)
+            os.remove(self.pr_problem)
+        except:
+            print ("[WARNING] Problem deleting pr-domain and pr-problem files.  Probably they already don't exist!")
+
+    def getActionNames(self):
+        self.deletePrFiles()
+        try:
+            cmd = self.CALL_PR2 + ' -d ' + self.domain + ' -i ' + self.problem +' -o ' + 'planner/blank_obs.dat'
+            os.system(cmd)
+        except:
+            raise Exception('[ERROR] Call to PR2 failed!')
+
+        if not os.path.isfile( self.pr_domain ) or not os.path.isfile( self.pr_problem ):
+            print ("[ERROR] Goal cannot be reached from initial state")
+            return []
+
+        try:
+            cmd = 'cat {0} | grep -v "EXPLAIN" > pr-problem.pddl.tmp && mv pr-problem.pddl.tmp {0}'.format(self.pr_problem)
+            os.system(cmd)
+            cmd = 'cat {0} | grep -v "EXPLAIN" > pr-domain.pddl.tmp && mv pr-domain.pddl.tmp {0}'.format(self.pr_domain)
+            os.system(cmd)
+        except:
+            raise Exception('[ERROR] Removing "EXPLAIN" from pr-domain and pr-problem files.')
+        pr_model = parse_model(self.pr_domain, self.pr_problem)
+        return list(pr_model[DOMAIN].keys())
+        # actionNames = []
+        # f = open(self.pr_domain)
+        # for l in f:
+        #     if '(:action ' in l:
+        #         actionNames.append('(' + l.split('(:action ')[1].strip() +')')
+        # return actionNames
+
+    def savePlan(self):
+        copyf(self.obs, self.saveduiPlan)
+
+    def loadPlan(self):
+        print( "[LOG] Copying {0} to {1}".format(self.saveduiPlan, self.obs) )
+        copyf(self.saveduiPlan, self.obs)
+
+    def getImpResources(self):
+        try:
+            f = open(self.sas_plan, 'r')
+        except:
+            # If no plan exists for the present state
+            self.plan()
+            f = open(self.sas_plan, 'r')
+
+        # Write plan to observation file
+        resources = []
+        for l in f:
+            for r in self.resource_list:
+                if (r in l.lower()) and (not r in resources):
+                    resources.append(r)
+        return resources
+
+    def getOrderedObservations(self):
+        observations = {}
+        f = open(self.obs)
+        count = 1
+        for l in f:
+            observations[ count ] = l.strip()
+            count += 1
+        f.close()
+
+        return observations
 
     def definePlanningProblem(self, gs):
         '''
@@ -318,4 +377,15 @@ class Planner():
         f = open(self.problem, 'w')
         f.write(tempProblem)
         f.close()
-        self.parsed_model = parse_model(self.domain,self.problem)
+        self.parsed_model = parse_model('planner/domain1.pddl', self.problem)
+        words = []
+        for action in list(self.parsed_model[DOMAIN].keys()):
+            for sub_word in action.split('_'):
+                words.append(sub_word)
+        self.ungrounded_actions = list(set(words))
+        constants = []
+        for i in self.parsed_model[CONSTANTS]:
+            for word in i:
+                constants.append(word)
+        self.consts = list(set(constants))
+        print(self.ungrounded_actions+self.consts)

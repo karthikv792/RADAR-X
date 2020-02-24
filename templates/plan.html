@@ -20,30 +20,37 @@
             <br>
           <div class="btn-group col-md-12">
           <div class="col-md-3" style="padding:5px;">
-              <button type="button" class="col-md-12 btn btn-secondary validatePlan"><span style="font-size: x-large"><i class="fas fa-check-double" alt="validate"></i></span><br>Validate</button>
+              <button type="button" class="col-md-12 btn btn-light border-dark validatePlan"><img src="https://img.icons8.com/color/48/000000/approval--v1.png" height="35" alt="validate"><br>Validate</button>
+              <!--<button type="button" class="col-md-12 btn btn-secondary validatePlan"><span style="font-size: x-large"><i class="fas fa-check-double" alt="validate"></i></span><br>Validate</button>-->
           </div>
           <div class="col-md-3" style="padding:5px;">
-              <button type="button" class="col-md-12 btn btn-secondary fixPlan"><span style="font-size: x-large"><i class="fas fa-tools" alt="fix"></i></span><br>Fix</button>
+              <button type="button" class="col-md-12 btn btn-light border-dark fixPlan"><img src="https://img.icons8.com/color/48/000000/maintenance.png" height="35" alt="fix"><br>Fix</button>
+              <!--<button type="button" class="col-md-12 btn btn-secondary fixPlan"><span style="font-size: x-large"><i class="fas fa-tools" alt="fix"></i></span><br>Fix</button>-->
           </div>
           <div class="col-md-3" style="padding:5px;">
-              <button type="button" class="col-md-12 btn btn-secondary suggestPlan"><span style="font-size: x-large"><i class="fas fa-user-cog" alt="suggest"></i></span><br>Suggest</button>
+              <button type="button" class="col-md-12 btn btn-light border-dark suggestPlan"><img src="https://img.icons8.com/color/48/000000/add-user-group-woman-man.png" height="35" alt="suggest"><br>Suggest</button>
+              <!--<button type="button" class="col-md-12 btn btn-secondary suggestPlan"><span style="font-size: x-large"><i class="fas fa-user-cog" alt="suggest"></i></span><br>Suggest</button>-->
           </div>
           <div class="col-md-3" style="padding:5px;">
-              <button type="button" class="col-md-12 btn btn-secondary undoChange"><span style="font-size: x-large"><i class="fas fa-undo" alt="undo"></i></span><br>Undo</button>
+              <button type="button" class="col-md-12 btn btn-light border-dark undoChange"><img src="https://img.icons8.com/color/48/000000/undo.png" height="35" alt="undo"><br>Undo</button>
+              <!--<button type="button" class="col-md-12 btn btn-secondary undoChange"><span style="font-size: x-large"><i class="fas fa-undo" alt="undo"></i></span><br>Undo</button>-->
           </div>
               </div>
             <div class="btn-group col-md-12">
+                <div class="col-md-3" style="padding:5px;">
+              <button type="button" class="col-md-12 btn btn-light border-dark foil"><img src="https://img.icons8.com/color/48/000000/ask-question.png" height="35" alt="foil"><br>Add Foil</button>
+                </div>
           <!-- IF ELSE HERE -->
           {% if canAskForExplanations > 0 %}
-              <div class="col-md-6" style="padding:5px;">
+              <div class="col-md-4" style="padding:5px;">
                   <button type="button" class="col-md-12 btn btn-secondary alternativePlan">Alternative<br>Plan</button>
               </div>
-              <div class="col-md-6" style="padding:5px;">
+              <div class="col-md-4" style="padding:5px;">
                   <button type="button" class="col-md-12 btn btn-secondary explainPlan" data-toggle="modal" data-target="#ExplanationsModal">Explain<br>this plan?</button>
               </div>
           {% endif %}
             </div>
-        Enter Foil
+
 
     </div>
 </div>
@@ -98,6 +105,12 @@
             return res;
         };
 
+        $('.foil').click(function () {
+            res = getGridStackData();
+            $('.page_content').fadeOut();
+            $('.loader').fadeIn();
+            $.redirectPost('foil', {'plan': JSON.stringify(res)});
+        });
 
         $('.validatePlan').click(function() {
             res = getGridStackData();

@@ -78,6 +78,13 @@ def updateResources():
     dbCaller.updateResourcesInTable( d['resourceName'], d['tableName'], d['rowId'], d['presentState'])
     return index(s=speech.getSpeechText('RESOURCE_UPDATED'))
 
+@app.route("/foil",methods=['GET','POST'])
+def foil():
+    planner.loadPlan()
+    acts = planner.getOrderedObservations()
+    a = planner.getActionNames()
+    return render_template('foil.html',plan=acts,actions=a)
+
 @app.route("/suggest", methods=['GET', 'POST'])
 def suggest():
     planner.savePlan()
