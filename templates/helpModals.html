@@ -7,21 +7,21 @@
       <div class="modal-body">
         This tab provides information regarding the "Plan in Progress" panel.  This panel lets you add an actions form the list of grounded actions in the domain.  You can select an action name and use the "Add" button for this purpose.
         <br><br>
-        We understand once a human starts building a plan, it easy to loose track if it makes sense in the long run.  Thus we provide the "Validate" functionality that can report actions that are not feisable in the context of the plan made so far.  Lack of preconditions or ordering of actions are often the problem.
+        We understand once a human starts building a plan, it easy to loose track if it makes sense in the long run.  Thus we provide the "Validate" functionality that can report actions that are not feasible in the context of the plan made so far.  Lack of preconditions or ordering of actions are often the problem.
         <br><br>
-        Lastly, if the human feels that it might be doing a sub-optimal plan and wants the planning assitant to generate a plan, he can use the "Suggest" button.
+        Lastly, if the human feels that it might be doing a sub-optimal plan and wants the planning assistant to generate a plan, he can use the "Suggest" button.
         <br><br>
-        The action names is the grid are movable to ease the rearragment of actions.  To do this click on an action and move it to the desired place with the mouse button pressed.
+        The action names is the grid are movable to ease the rearrangement of actions.  To do this click on an action and move it to the desired place with the mouse button pressed.
         <br><br>
         <!--
         <div class="col-md-12">
             <div class="col-md-offset-3 col-md-6">
         -->
-                <div class="card">
+                <div class="card col-md-12">
                     <div class="card-header bg-info">Key</div>
-                    <div class="far fa-trash-alt"></div> - Delete action
+                  <div><i class="far fa-trash-alt"></i> <span>- Delete action</span></div>
                     <br>
-                    <div class="fas fa-exclamation-triangle" style="color:#ff4444"></div> - This action has a warning associate with it.
+                  <div><i class="fas fa-exclamation-triangle" style="color:#ff4444"></i> <span>- This action has a warning associate with it.</span></div>
                     <div style="background-color:#f9fbe7;border-radius: 6px;border: 1px solid black;border-color:#9e9d24;text-align:center;vertical-align:middle;">Suggested Action</div>
                     <div style="background-color:#ffcdd2;border-radius: 6px;border: 1px solid black;border-color:#b71c1c;text-align:center;vertical-align:middle;">Invalid Action</div>
                     <div style="background-color:#64ffda;border-radius: 6px;border: 1px solid black;border-color:#00695c;text-align:center;vertical-align:middle;">Added or Valid action</div>
@@ -45,7 +45,7 @@
         <h5 class="modal-title" id="GoalsModalLabel">Goals Panel</h5>
       </div>
       <div class="modal-body">
-        Select the goal you are adressing at present.  You can select another goal from the drop down and choose to update the planning problem you want assistance for.
+        Select the goal you are addressing at present.  You can select another goal from the drop down and choose to update the planning problem you want assistance for.
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -66,11 +66,11 @@
         <div class="card card-default">
             <div class="card-header bg-info">Key</div>
             <br>
-            <div class="fas fa-check" style="color:#00C851"></div> - Resource is available
+          <div><i class="fas fa-check" style="color:#00C851"></i> - Resource is available</div>
             <br>
-            <div class="fas fa-times" style="color:#ff4444"></div> - Resource is unavailable
+          <div><i class="fas fa-times" style="color:#ff4444"></i> - Resource is unavailable</div>
         </div>
-        You can click on the <div class="fas fa-check" style="color:#00C851"></div> and <div class="fas fa-times" style="color:#ff4444"></div> to change the status of the resource in the actual environment.
+        You can click on the <i class="fas fa-check" style="color:#00C851"></i> and <i class="fas fa-times" style="color:#ff4444"></i> to change the status of the resource in the actual environment.
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -100,8 +100,108 @@
   </div>
 </div>
 
+<div class="modal fade" id="FoilModal" tabindex="-1" role="dialog" aria-labelledby="ResourcesModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document" style="width: 90%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="FoilsModalLabel">Foil Panel</h5>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+        <div class="col-md-4">
+            PRESENT PLAN
+          <div class="grid-stack" id="presentPlan"></div>
+        </div>
+        <div class="col-md-4">
+            YOUR PLAN
+          <div class="grid-stack" id="userplan"></div>
+        </div>
+        <div class="col-md-4">
+            ALL ACTIONS
+          <div class="grid-stack" id="allactions"></div>
+        </div>
+        </div>
+        <br>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="updateModels btn btn-secondary">Update models</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
     $(function () {
+       serializedData = [
+            {% set count = 1 %}
+            {% for key, value in plan.items() %}
+                {y: {{ key }}, x: 0, width: 12, height: 1, name:'{{ value }}'},
+                {% set count = count + 1 %}
+            {% endfor %}
+        ];
+       // thanks to http://stackoverflow.com/a/22885503
+        var waitForFinalEvent=function(){var b={};return function(c,d,a){a||(a="I am a banana!");b[a]&&clearTimeout(b[a]);b[a]=setTimeout(c,d)}}();
+        var fullDateString = new Date();
+        function isBreakpoint(alias) {
+            return $('.device-' + alias).is(':visible');
+        }
+        var options = {
+            float: false
+        };
+        $('#allactions').gridstack(options);
+      $('#presentPlan').gridstack();
+      $('#userplan').gridstack();
+
+      function resizeGrid() {
+          var grid = $('#allactions').data('gridstack');
+            if (isBreakpoint('xs')) {
+                $('#grid-size').text('One column mode');
+            } else if (isBreakpoint('sm')) {
+                grid.setGridWidth(3);
+                $('#grid-size').text(3);
+            } else if (isBreakpoint('md')) {
+                grid.setGridWidth(6);
+                $('#grid-size').text(6);
+            } else if (isBreakpoint('lg')) {
+                grid.setGridWidth(12);
+                $('#grid-size').text(12);
+            }
+        };
+        $(window).resize(function () {
+            waitForFinalEvent(function() {
+                resizeGrid();
+            }, 300, fullDateString.getTime());
+        });
+
+      grid = $('#presentPlan').data('gridstack');
+        function loadGrid() {
+            grid.removeAll();
+            remove_icon = "far fa-trash-alt"
+            var items = GridStackUI.Utils.sort(this.serializedData);
+            _.each(items, function (node, i) {
+                if (node.name.includes(';--')) {
+                    action_name = node.name.substr(0, node.name.indexOf(';'));
+                    grid.addWidget($('<div><div class="grid-stack-item-content" id="myWidget'+ node.y + '" style="background-color:#fffde7;border-radius: 6px;border: 1px solid black;border-color:#fbc02d;padding-top:5px;"><div class="' + remove_icon + ' fa-remove' + node.y + '"  style="color:#fbc02d;cursor:pointer"></div><br><span>' + action_name + '</span></div>'),
+                    node.x, node.y, node.width, node.height);
+                } else if  (node.name.includes(';')) {
+                    action_name = node.name.substr(0, node.name.indexOf(';'));
+                    reason = node.name.substr(node.name.indexOf(';'), node.name.length);
+                    grid.addWidget($('<div><div class="grid-stack-item-content" id="myWidget'+ node.y + '" style="background-color:#ffab91;border-radius: 6px;border: 1px solid black;border-color:#d84315;padding-top:5px;"><div class="' + remove_icon + ' fa-remove' + node.y + '" style="color:#d84315;cursor:pointer"></div>&nbsp;<div class="fas fa-exclamation-triangle" style="color:#ff4444;" href="#" data-toggle="tooltip" data-placement="right" title="' + reason + '"></div><br><span>' + action_name + '</span></div>'),
+                    node.x, node.y, node.width, node.height);
+                } else {
+                    grid.addWidget($('<div><div class="grid-stack-item-content" id="myWidget'+ node.y + '" style="background-color:#b2dfdb;border-radius: 6px;border: 1px solid black;border-color:#00695c;padding-top:5px;"><div class="' + remove_icon + ' fa-remove' + node.y + '" style="color:#00695c;cursor:pointer"></div><br><span style="padding-bottom: 5px">' + node.name + '</span></div>'),
+                    node.x, node.y, node.width, node.height);
+                }
+                $('.fa-remove' + node.y).click( remove_w = function(myElement){
+                    grid.removeWidget($(this).parent().parent());
+                });
+            });
+            return false;
+        };
+        loadGrid()
+
+
         $('.updateModels').click(function() {
             $('.page_content').fadeOut();
             $('.loader').fadeIn();
@@ -110,4 +210,7 @@
             $('form').appendTo('body').submit();
          });
     });
+
+
+
 </script>
