@@ -3,10 +3,13 @@ import json
 from planner import Planner
 from speak import Speak
 from dbHandler import dbHandler
+from foil_parser import get_actions
+import speech_recognition as sr
 app = Flask(__name__)
 planner = Planner()
 speech = Speak()
 dbCaller = dbHandler()
+recognizer = sr.Recognizer()
 
 #dbCaller.initializeDatabase()
 
@@ -84,6 +87,41 @@ def foil():
     acts = planner.getOrderedObservations()
     a = planner.getActionNames()
     return render_template('foil.html',plan=acts,actions=a)
+
+@app.route("/foilrec",methods=['GET','POST'])
+def foilrec():
+    acts = planner.getOrderedObservations()
+    action_list = [i for i in acts.values()]
+    actions = []
+    for i in action_list:
+        actions.append((re.sub('[(){}<>]', '', i)).replace(' ', ''))
+    print(action_list)
+    with open('service-account-file.json') as file:
+        GOOGLE_CREDENTIALS = file.read()
+    url = request.files['audio_data']
+    phrase_list= planner.ungrounded_actions+planner.consts
+    wavFile = sr.AudioFile(url)
+    with wavFile as source:
+        #recognizer.adjust_for_ambient_noise(source)
+        audio = recognizer.record(source)
+    text = recognizer.recognize_google_cloud(audio, credentials_json=GOOGLE_CREDENTIALS,preferred_phrases=phrase_list)
+    with open('nlp_foils.txt','a') as nlp:
+        nlp.write(text+'\n')
+    why, why_not = get_actions(text,actions)
+    actions1 = {}
+    actions1['text1'] = text
+    actions1['why_action'] = why
+    actions1['whynot_action'] = why_not
+    return actions1
+# @app.route("/dummy",methods=['GET','POST'])
+# def dummy():
+#     actions1 = {'text1':'asdf','why_action':['a','b'],'whynot_action':['c','d']}
+#     return actions1
+
+@app.route("/validateFoil",methods=['GET','POST'])
+def validateFoil():
+    planner.validateFoil(getPresentPlan(request))
+    return 'ab'
 
 @app.route("/suggest", methods=['GET', 'POST'])
 def suggest():
