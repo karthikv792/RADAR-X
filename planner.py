@@ -30,6 +30,7 @@ class Planner():
 
         # Observation files
         self.obs = obs
+        self.foil_obs = 'planner/foil_obs.dat'
         self.saveduiPlan = 'planner/saved_obs.dat'
 
         # Explanation files
@@ -89,6 +90,26 @@ class Planner():
         f = open(self.obs, 'w')
         f.write(s)
         f.close()
+
+    def writeFoilObservations(self, actions, tillEndOfPresentPlan=False):
+        if tillEndOfPresentPlan:
+            acts = deepcopy( actions )
+            for i in range(len(acts.keys())-1, 0, -1):
+                if ';--' not in acts[i]:
+                    break
+            actions = {}
+            for j in range(0,i+1):
+                actions[j] = acts[j]
+
+        # Write plan to file in sas_plan style
+        s = ''
+        for k in sorted(actions):
+            s += actions[k].strip() + '\n'
+
+        f = open(self.foil_obs, 'w')
+        f.write(s)
+        f.close()
+
 
 
 
@@ -179,7 +200,7 @@ class Planner():
             copyf(self.pr_domain, self.val_pr_domain)
             copyf(self.pr_problem, self.val_pr_problem)
             try:
-                print('\n=====\n{0}\n======\n'.format(self.observations))
+                print('\n=====\n{0}\n======\n'.format(self.obs))
                 cmd = self.CALL_PR2 + ' -d ' + self.val_pr_domain + ' -i ' + self.val_pr_problem +' -o ' + self.obs
                 os.system(cmd)
                 print("PR2 DONE")
@@ -236,6 +257,20 @@ class Planner():
                     else:
                         f.write(actions[k].strip() + '\n')
                 f.close()
+
+    def validateFoil(self,actions):
+        self.writeFoilObservations(actions)
+        if actions:
+            # Save the present domain
+            copyf(self.pr_domain, self.val_pr_domain)
+            copyf(self.pr_problem, self.val_pr_problem)
+            try:
+                print('\n=====\n{0}\n======\n'.format(self.observations))
+                cmd = self.CALL_PR2 + ' -d ' + self.val_pr_domain + ' -i ' + self.val_pr_problem +' -o ' + self.obs
+                os.system(cmd)
+                print("PR2 DONE")
+            except:
+                raise Exception('[ERROR] In Call to PR2!')
 
 
     def getExplanations(self):
@@ -345,7 +380,6 @@ class Planner():
         for l in f:
             observations[ count ] = l.strip()
             count += 1
-        f.close()
 
         return observations
 
