@@ -11,7 +11,7 @@ speech = Speak()
 dbCaller = dbHandler()
 recognizer = sr.Recognizer()
 
-#dbCaller.initializeDatabase()
+dbCaller.initializeDatabase()
 
 @app.route("/")
 def index(exp=0, s=speech.getSpeechText('INTRO'),gs='Extinguish Big Fire at BYENG'):

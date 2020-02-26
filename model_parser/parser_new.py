@@ -158,5 +158,5 @@ def store_hierarchy(reader):
 
 
 if __name__ == '__main__':
-    model = parse_model('domain.pddl','problem.pddl')
+    model = parse_model('pr-domain.pddl','pr-problem.pddl')
     print(model.keys())

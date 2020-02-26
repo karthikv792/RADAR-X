@@ -20,7 +20,7 @@
             <br>
           <div class="btn-group col-md-12 ">
           <div class="col-md-3" style="padding:5px;">
-              <button type="button" class="col-md-12 btn btn-light border-dark validatePlan"><img src="https://img.icons8.com/color/48/000000/approval--v1.png" height="35" alt="validate"><br>Validate</button>
+              <button type="button" class="col-md-12 btn btn-light border-dark validatePlan"><img src="https://img.icons8.com/color/48/000000/task-completed.png" height="35" alt="validate"><br>Validate</button>
               <!--<button type="button" class="col-md-12 btn btn-secondary validatePlan"><span style="font-size: x-large"><i class="fas fa-check-double" alt="validate"></i></span><br>Validate</button>-->
           </div>
           <div class="col-md-3" style="padding:5px;">
@@ -222,7 +222,7 @@
         grid = $('.grid-stack').data('gridstack');
         loadGrid = function () {
             grid.removeAll();
-            remove_icon = "far fa-trash-alt"
+            remove_icon = "far fa-trash-alt";
             var items = GridStackUI.Utils.sort(this.serializedData);
             _.each(items, function (node, i) {
                 if (node.name.includes(';--')) {
@@ -240,6 +240,13 @@
                 }
                 $('.fa-remove' + node.y).click( remove_w = function(myElement){
                     grid.removeWidget($(this).parent().parent());
+                    for (var i in serializedData){
+                        if (node===serializedData[i]){
+                            serializedData.splice(i,1);
+                            console.log("TRUE");
+                        }
+                    };
+
                 });
             });
             return false;

@@ -18,13 +18,14 @@
         </div>
         <button type="button" class="col-md-3 btn btn-primary addAction">Add</button>
         </div>
+
         <br>
-        <div class="col-md-6 btn-group">
+        <div class="col-md-12 btn-group">
         <div class="col-md-3 m-2">
-            <button type="button" class="col-md-12 btn btn-light border-dark validateFoil"><img src="https://img.icons8.com/color/48/000000/approval--v1.png" height="35" alt="validate"><br>Validate</button>
+            <button type="button" class="col-md-12 btn btn-light border-dark validateFoil"><img src="https://img.icons8.com/color/48/000000/task-completed.png" height="35" alt="validate"><br>Validate</button>
         </div>
         <div class="col-md-3 m-2">
-            <button type="button" class="col-md-12 btn btn-light border-dark nextBest"><img src="https://img.icons8.com/color/48/000000/split.png" height="35"><br>Validate</button>
+            <button type="button" class="col-md-12 btn btn-light border-dark nextBest"><img src="https://img.icons8.com/color/48/000000/task-completed.png" height="35"><br>Plan Completion</button>
         </div>
         </div>
 
@@ -164,7 +165,7 @@
                     {
                         item.name==foil_text.whynot_action[i];
                     }
-                    return (item.name==foil_text.why_action[i])
+                    return (item.name==foil_text.why_action[i]);
                 });
                 if (index!=-1)
                 {
@@ -292,6 +293,12 @@
                 }
                 $('.fa-remove' + node.y).click( remove_w = function(myElement){
                     grid.removeWidget($(this).parent().parent());
+                    for (var i in serializedData){
+                        if (node===serializedData[i]){
+                            serializedData.splice(i,1);
+                            console.log("TRUE");
+                        }
+                    };
                 });
             });
             return false;
