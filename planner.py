@@ -423,3 +423,8 @@ class Planner():
                 constants.append(word)
         self.consts = list(set(constants))
         print(self.ungrounded_actions+self.consts)
+
+    # def soft_compile(self,actions):
+    #     pr_parsed = parse_model(self.pr_domain,self.pr_problem)
+    #
+

@@ -3149,51 +3149,46 @@ end_operator
 begin_operator
 deploy_big_engines firechief mesafire byeng
 0
-4
-0 17 -1 1
+3
+0 17 0 1
 0 59 5 0
 0 65 -1 0
-0 179 -1 1
 4
 end_operator
 begin_operator
 deploy_big_engines firechief mesafire lake
 0
-4
-0 17 -1 1
+3
+0 17 0 1
 0 59 5 1
 0 66 -1 0
-0 180 -1 1
 4
 end_operator
 begin_operator
 deploy_big_engines firechief mesafire marketplace
 0
-4
-0 17 -1 1
+3
+0 17 0 1
 0 59 5 2
 0 67 -1 0
-0 181 -1 1
 4
 end_operator
 begin_operator
 deploy_big_engines firechief mesafire mill
 0
-4
-0 17 -1 1
+3
+0 17 0 1
 0 59 5 3
 0 68 -1 0
-0 182 -1 1
 4
 end_operator
 begin_operator
 deploy_big_engines firechief mesafire rural
 0
-4
-0 17 -1 1
+3
+0 17 0 1
 0 59 5 4
 0 69 -1 0
-0 183 -1 1
 4
 end_operator
 begin_operator
@@ -3760,7 +3755,7 @@ begin_operator
 deploy_rescuers firechief adminfire byeng
 0
 3
-0 9 -1 1
+0 9 0 1
 0 85 -1 0
 0 136 0 1
 3
@@ -3769,7 +3764,7 @@ begin_operator
 deploy_rescuers firechief adminfire lake
 0
 3
-0 9 -1 1
+0 9 0 1
 0 86 -1 0
 0 136 0 1
 3
@@ -3778,7 +3773,7 @@ begin_operator
 deploy_rescuers firechief adminfire marketplace
 0
 3
-0 9 -1 1
+0 9 0 1
 0 87 -1 0
 0 136 0 1
 3
@@ -3787,7 +3782,7 @@ begin_operator
 deploy_rescuers firechief adminfire mill
 0
 3
-0 9 -1 1
+0 9 0 1
 0 88 -1 0
 0 136 0 1
 3
@@ -3796,7 +3791,7 @@ begin_operator
 deploy_rescuers firechief adminfire rural
 0
 3
-0 9 -1 1
+0 9 0 1
 0 89 -1 0
 0 136 0 1
 3
@@ -3805,7 +3800,7 @@ begin_operator
 deploy_rescuers firechief mesafire byeng
 0
 3
-0 17 -1 1
+0 17 0 1
 0 85 -1 0
 0 137 0 1
 3
@@ -3814,7 +3809,7 @@ begin_operator
 deploy_rescuers firechief mesafire lake
 0
 3
-0 17 -1 1
+0 17 0 1
 0 86 -1 0
 0 137 0 1
 3
@@ -3823,7 +3818,7 @@ begin_operator
 deploy_rescuers firechief mesafire marketplace
 0
 3
-0 17 -1 1
+0 17 0 1
 0 87 -1 0
 0 137 0 1
 3
@@ -3832,7 +3827,7 @@ begin_operator
 deploy_rescuers firechief mesafire mill
 0
 3
-0 17 -1 1
+0 17 0 1
 0 88 -1 0
 0 137 0 1
 3
@@ -3841,7 +3836,7 @@ begin_operator
 deploy_rescuers firechief mesafire rural
 0
 3
-0 17 -1 1
+0 17 0 1
 0 89 -1 0
 0 137 0 1
 3
@@ -3850,7 +3845,7 @@ begin_operator
 deploy_rescuers firechief phxfire byeng
 0
 3
-0 19 -1 1
+0 19 0 1
 0 85 -1 0
 0 138 0 1
 3
@@ -3859,7 +3854,7 @@ begin_operator
 deploy_rescuers firechief phxfire lake
 0
 3
-0 19 -1 1
+0 19 0 1
 0 86 -1 0
 0 138 0 1
 3
@@ -3868,7 +3863,7 @@ begin_operator
 deploy_rescuers firechief phxfire marketplace
 0
 3
-0 19 -1 1
+0 19 0 1
 0 87 -1 0
 0 138 0 1
 3
@@ -3877,7 +3872,7 @@ begin_operator
 deploy_rescuers firechief phxfire mill
 0
 3
-0 19 -1 1
+0 19 0 1
 0 88 -1 0
 0 138 0 1
 3
@@ -3886,7 +3881,7 @@ begin_operator
 deploy_rescuers firechief phxfire rural
 0
 3
-0 19 -1 1
+0 19 0 1
 0 89 -1 0
 0 138 0 1
 3
@@ -3895,7 +3890,7 @@ begin_operator
 deploy_rescuers firechief scottsfire byeng
 0
 3
-0 21 -1 1
+0 21 0 1
 0 85 -1 0
 0 139 0 1
 3
@@ -3904,7 +3899,7 @@ begin_operator
 deploy_rescuers firechief scottsfire lake
 0
 3
-0 21 -1 1
+0 21 0 1
 0 86 -1 0
 0 139 0 1
 3
@@ -3913,7 +3908,7 @@ begin_operator
 deploy_rescuers firechief scottsfire marketplace
 0
 3
-0 21 -1 1
+0 21 0 1
 0 87 -1 0
 0 139 0 1
 3
@@ -3922,7 +3917,7 @@ begin_operator
 deploy_rescuers firechief scottsfire mill
 0
 3
-0 21 -1 1
+0 21 0 1
 0 88 -1 0
 0 139 0 1
 3
@@ -3931,7 +3926,7 @@ begin_operator
 deploy_rescuers firechief scottsfire rural
 0
 3
-0 21 -1 1
+0 21 0 1
 0 89 -1 0
 0 139 0 1
 3
@@ -3940,7 +3935,7 @@ begin_operator
 deploy_small_engines firechief adminfire byeng
 0
 4
-0 9 0 1
+0 9 -1 1
 0 65 -1 0
 0 90 -1 0
 0 140 0 1
@@ -3950,7 +3945,7 @@ begin_operator
 deploy_small_engines firechief adminfire lake
 0
 4
-0 9 0 1
+0 9 -1 1
 0 66 -1 0
 0 91 -1 0
 0 140 0 1
@@ -3960,7 +3955,7 @@ begin_operator
 deploy_small_engines firechief adminfire marketplace
 0
 4
-0 9 0 1
+0 9 -1 1
 0 67 -1 0
 0 92 -1 0
 0 140 0 1
@@ -3970,7 +3965,7 @@ begin_operator
 deploy_small_engines firechief adminfire mill
 0
 4
-0 9 0 1
+0 9 -1 1
 0 68 -1 0
 0 93 -1 0
 0 140 0 1
@@ -3980,7 +3975,7 @@ begin_operator
 deploy_small_engines firechief adminfire rural
 0
 4
-0 9 0 1
+0 9 -1 1
 0 69 -1 0
 0 94 -1 0
 0 140 0 1
@@ -3990,7 +3985,7 @@ begin_operator
 deploy_small_engines firechief scottsfire byeng
 0
 4
-0 21 0 1
+0 21 -1 1
 0 65 -1 0
 0 90 -1 0
 0 141 0 1
@@ -4000,7 +3995,7 @@ begin_operator
 deploy_small_engines firechief scottsfire lake
 0
 4
-0 21 0 1
+0 21 -1 1
 0 66 -1 0
 0 91 -1 0
 0 141 0 1
@@ -4010,7 +4005,7 @@ begin_operator
 deploy_small_engines firechief scottsfire marketplace
 0
 4
-0 21 0 1
+0 21 -1 1
 0 67 -1 0
 0 92 -1 0
 0 141 0 1
@@ -4020,7 +4015,7 @@ begin_operator
 deploy_small_engines firechief scottsfire mill
 0
 4
-0 21 0 1
+0 21 -1 1
 0 68 -1 0
 0 93 -1 0
 0 141 0 1
@@ -4030,7 +4025,7 @@ begin_operator
 deploy_small_engines firechief scottsfire rural
 0
 4
-0 21 0 1
+0 21 -1 1
 0 69 -1 0
 0 94 -1 0
 0 141 0 1

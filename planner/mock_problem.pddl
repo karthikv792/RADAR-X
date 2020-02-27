@@ -66,6 +66,7 @@
 (has_ladders_number mesafire)
 (has_rescuers_number mesafire)
 (has_small_engines_number scottsfire)
+(has_big_engines_number scottsfire)
 (has_ladders_number scottsfire)
 (has_bulldozers_number scottsfire)
 (has_rescuers_number scottsfire)

@@ -4,11 +4,10 @@ from tarski import model
 from tarski.fstrips.problem import create_fstrips_problem
 from tarski.io.fstrips import print_init, print_goal, print_formula, print_atom
 from tarski.fstrips import language
-from tarski.syntax import land, top,VariableBinding
+from tarski.syntax import land, top, CompoundTerm, Constant
 from tarski.io.fstrips import FstripsWriter
 from tarski.errors import UndefinedSort
 #TODO: Add Conditional Effects
-#TODO: Add increase effects
 
 class ModelWriter(object):
     def __init__(self, model):
@@ -39,6 +38,11 @@ class ModelWriter(object):
                     self.fstrips_problem.language.interval(obj[0],parent,parent.lower_bound,parent.upper_bound)
                     continue
                 self.fstrips_problem.language.sort(obj[0],obj[1])
+
+
+
+
+
     def create_predicates(self):
         predicates = self.model_dict[PREDICATES]
         for predicate in predicates:
@@ -113,15 +117,22 @@ class ModelWriter(object):
             else:
                 return []
         elif len(fluent_list)<=1:
-            fluent = fluent_list[0]
-            variables = fluent[1]
-            var = [self.variable_map[variable.replace('?','')] for variable in variables]
+            if flag!=FUNCTIONAL:
+                fluent = fluent_list[0]
+                variables = fluent[1]
+                var = [self.variable_map[variable.replace('?','')] for variable in variables]
             if flag==POS_PREC:
                 return self.predicate_map[fluent[0]](*var)
             elif flag==ADDS:
                 return [fs.AddEffect(self.predicate_map[fluent[0]](*var))]
             elif flag==DELS:
                 return [fs.DelEffect(self.predicate_map[fluent[0]](*var))]
+            elif flag==FUNCTIONAL:
+                # print(self.functions[fluent_list[0][0][0]])
+                term = CompoundTerm(self.functions[fluent_list[0][0][0]],tuple())
+                term2 = Constant(fluent_list[0][1][0],self.fstrips_problem.language.get_sort(fluent_list[0][1][1]))
+                return [fs.IncreaseEffect(term,term2)]
+
         else:
             and_fluent_list=[]
             if flag==POS_PREC:
@@ -165,9 +176,10 @@ class ModelWriter(object):
                 precond = self.get_conjunctions(self.model_dict[DOMAIN][act][POS_PREC],POS_PREC)
                 add_effects = self.get_conjunctions(self.model_dict[DOMAIN][act].get(ADDS,set()),ADDS)
                 delete_effects = self.get_conjunctions(self.model_dict[DOMAIN][act].get(DELS,set()),DELS)
+                func_effects = self.get_conjunctions(self.model_dict[DOMAIN][act].get(FUNCTIONAL,set()),FUNCTIONAL)
             else:
                 pars=[]
-            self.fstrips_problem.action(act,pars,precond,add_effects+delete_effects)
+            self.fstrips_problem.action(act,pars,precond,add_effects+delete_effects+func_effects)
 
     def write_files(self, domain_file, problem_file):
         curr_writer = FstripsWriter(self.fstrips_problem)

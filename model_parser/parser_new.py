@@ -6,7 +6,7 @@ from tarski.syntax import CompoundFormula, formulas, Tautology, Atom
 from tarski.syntax.terms import CompoundTerm, Constant
 from tarski.syntax.sorts import Interval
 from tarski.fstrips import AddEffect, DelEffect
-from tarski.fstrips.fstrips import FunctionalEffect
+from tarski.fstrips.fstrips import FunctionalEffect, IncreaseEffect
 from .constants import *
 
 #TODO: Parse metric
@@ -63,7 +63,7 @@ def store_init(reader):
     init_dict[PREDICATES] = []
     for i in range(len(inits)):
         if not isinstance(inits[i],Atom):
-            init_dict[FUNCTIONS].append([inits[i][0].symbol.symbol,[inits[i][1].symbol,inits[i][1].sort.name]])
+            init_dict[FUNCTIONS].append([inits[i][0].symbol.symbol,[inits[i][1].symbol]])
         else:
             if len(inits[i].subterms) == 0:
                 init_dict[PREDICATES].append([inits[i].symbol.symbol, []])
@@ -125,7 +125,6 @@ def store_actions(reader):
                             elif(type(eff.rhs) is Constant):
                                 action_model[act.name][FUNCTIONAL].append([[eff.lhs.symbol.symbol, eff.lhs.sort.name],[eff.rhs.symbol, eff.rhs.sort.name]])
 
-
                 else:
                     if isinstance(eff, AddEffect):
                         if len(eff.atom.subterms) == 0:
@@ -137,6 +136,7 @@ def store_actions(reader):
                             action_model[act.name][DELS].append([eff.atom.symbol.symbol, []])
                         else:
                             action_model[act.name][DELS].append([eff.atom.symbol.symbol, [subt.symbol for subt in eff.atom.subterms]])
+
 
     return action_model
 def store_hierarchy(reader):
@@ -158,5 +158,4 @@ def store_hierarchy(reader):
 
 
 if __name__ == '__main__':
-    model = parse_model('pr-domain.pddl','pr-problem.pddl')
-    print(model.keys())
+    parse_model('pr-domain.pddl','pr-problem.pddl')
