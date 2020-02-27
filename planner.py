@@ -424,7 +424,18 @@ class Planner():
         self.consts = list(set(constants))
         print(self.ungrounded_actions+self.consts)
 
-    # def soft_compile(self,actions):
-    #     pr_parsed = parse_model(self.pr_domain,self.pr_problem)
-    #
-
+    def soft_compile(self,actions):
+        pr_model = parse_model('pr-domain.pddl','pr-problem.pddl')
+        for i in range(len(actions)):
+            action=actions[i]
+            if action in list(pr_model[DOMAIN].keys()):
+                temp = deepcopy(pr_model[DOMAIN][action])
+                pr_model[DOMAIN][action][FUNCTIONAL][0][1][0]*=24
+                action_name = action + '_WITH_OBS'
+                if i!=0:
+                    prev_action=actions[i-1]
+                    print(pr_model[DOMAIN][prev_action][ADDS])
+                    temp[POS_PREC].append(pr_model[DOMAIN][prev_action][ADDS][0])
+                pr_model[DOMAIN][action_name] = temp
+        pr_write = ModelWriter(pr_model)
+        pr_write.write_files('write_pr_domain.pddl','write_pr_problem.pddl')
