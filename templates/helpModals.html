@@ -44,7 +44,7 @@
 </div>
 
 <div class="modal fade" id="GoalsModal" tabindex="-1" role="dialog" aria-labelledby="GoalsModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl" role="document">
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="GoalsModalLabel">Goals Panel</h5>
@@ -90,7 +90,7 @@
 
 <!-- Updates using script in plan.html -->
 <div class="modal fade" id="ExplanationsModal" tabindex="-1" role="dialog" aria-labelledby="ResourcesModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl" role="document">
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="ExplanationsModalLabel">Explanations Panel</h5>
@@ -98,7 +98,7 @@
       <div class="modal-body">
         This shows the explanations between your model of the domain and the updated actual model of the domain.
         <br>
-        <div class="exploader"></div>
+        <div class="exploader"> <img src="{{ url_for('static',filename='images/page-loader.gif') }}"> </div>
         <div id="generatedExplanations"></div>
       </div>
       <div class="modal-footer">

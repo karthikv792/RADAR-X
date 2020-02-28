@@ -302,7 +302,7 @@ class Planner():
         try:
             os.system(cmd)
         except:
-            print ("[ERROR] Error while generation explanations for changing initial state to make it feisable")
+            print ("[ERROR] Error while generation explanations for changing initial state to make it feasible")
 
         f = open( self.exc_file, "r" )
         reason = ''
@@ -424,18 +424,79 @@ class Planner():
         self.consts = list(set(constants))
         print(self.ungrounded_actions+self.consts)
 
+
+    def getClosestPlan(self,actions,tillEndOfPresentPlan=False):
+        # present_actions = self.getOrderedObservations()
+        # p_actions = [(re.sub('[(){}<>]', '', i)).replace(' ', '') for i in list(present_actions.values())]
+        foil_actions = [(re.sub('[(){}<>]', '', i.split('\n')[1])).replace(' ', '') for i in list(actions.values())]
+        # diff_actions = list(set(p_actions)-set(foil_actions))
+        # print(diff_actions)
+        try:
+            self.soft_compile(foil_actions)
+        except:
+            print("[ERROR] While compiling actions into a planning problem ")
+        try:
+            cmd = self.CALL_FAST_DOWNWARD + 'write_pr_domain.pddl' + ' ' + 'write_pr_problem.pddl' + ' --search "astar(lmcut())"';
+            os.system(cmd)
+            print ('FAST-DOWNWARD called...')
+        except:
+            raise Exception('[ERROR] Running FAST-DOWNWARD!')
+        plan_actions = {}
+        f = open(self.sas_plan, 'r')
+        i = 0
+        acts = [x.strip('() \n') for x in actions.values()]
+        for l in f:
+            if '(general cost)' not in l:
+                if 'EXPLAIN_OBS_' in l.upper():
+                    a = l.upper().replace('EXPLAIN_OBS_', '').strip()
+                    plan_actions[i] = re.sub('_[0-9]', '', a)
+                    i += 1
+                    '''
+                    for a in acts:
+                        if a.upper() in l.upper():
+                            plan_actions[i] = '(' + a.upper().strip() + ' )'
+                            i += 1
+                            break
+                    '''
+                else:
+                    plan_actions[i] = l.upper().strip() + ';--'
+                    i += 1
+        f.close()
+        self.writeObservations(plan_actions, tillEndOfPresentPlan)
+
     def soft_compile(self,actions):
-        pr_model = parse_model('pr-domain.pddl','pr-problem.pddl')
+        pr_model = parse_model(self.pr_domain,self.pr_problem)
+        condition_met = ['conds_met', []]
+        obs_met = ['obs_met', []]
+        obs = {}
+        obs[PARARMETERS] = []
+        obs[POS_PREC] = [obs_met]
+        obs[ADDS] = [condition_met]
+        obs[DELS] = []
+        obs[FUNCTIONAL] = [[['total-cost', 'number'], [0, 'Integer']]]
+        obs[COND_ADDS] = []
+        obs[COND_DELS] = []
+        without_obs = deepcopy(obs)
+        without_obs[POS_PREC] = []
+        without_obs[FUNCTIONAL] = [[['total-cost', 'number'], [24, 'Integer']]]
+        pr_model[DOMAIN]['WITH_OBSERVE'] = obs
+        pr_model[DOMAIN]['WITHOUT_OBSERVE'] = without_obs
+        pr_model[PREDICATES].append(condition_met)
+        pr_model[PREDICATES].append(obs_met)
+        pr_model[INSTANCE][GOAL].append(condition_met)
         for i in range(len(actions)):
-            action=actions[i]
+            action = actions[i]
             if action in list(pr_model[DOMAIN].keys()):
                 temp = deepcopy(pr_model[DOMAIN][action])
-                pr_model[DOMAIN][action][FUNCTIONAL][0][1][0]*=24
                 action_name = action + '_WITH_OBS'
-                if i!=0:
-                    prev_action=actions[i-1]
+                if i != 0:
+                    prev_action = actions[i - 1]
                     print(pr_model[DOMAIN][prev_action][ADDS])
-                    temp[POS_PREC].append(pr_model[DOMAIN][prev_action][ADDS][0])
+                    if pr_model[DOMAIN][prev_action][ADDS][0] not in temp[POS_PREC]:
+                        temp[POS_PREC].append(pr_model[DOMAIN][prev_action][ADDS][0])
+                if i == len(actions) - 1:
+                    temp[ADDS].append(obs_met)
                 pr_model[DOMAIN][action_name] = temp
+                pr_model[DOMAIN][action][FUNCTIONAL][0][1][0] *= 24
         pr_write = ModelWriter(pr_model)
         pr_write.write_files('write_pr_domain.pddl','write_pr_problem.pddl')

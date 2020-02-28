@@ -93,10 +93,12 @@
 :parameters (?a - fire ?from - firestation ?to - pois)
 :precondition
 (and
+( alerted ?from )
 ( has_small_engines_number ?from )
 )
 :effect
 (and
+( needed_barricade ?to )
 ( deployed_small_engines ?to )
 ( deployed_engines ?to )
 ( increase (total-cost) (duration_deploy_small_engines) )
@@ -227,7 +229,6 @@
 :parameters (?a - fire ?from - firestation ?to - pois)
 :precondition
 (and
-( alerted ?from )
 ( has_rescuers_number ?from )
 )
 :effect
@@ -439,7 +440,6 @@
 :precondition
 (and
 ( has_big_engines_number ?from )
-( alerted ?from )
 )
 :effect
 (and

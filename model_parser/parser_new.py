@@ -9,7 +9,6 @@ from tarski.fstrips import AddEffect, DelEffect
 from tarski.fstrips.fstrips import FunctionalEffect, IncreaseEffect
 from .constants import *
 
-#TODO: Parse metric
 #TODO: Reduce extra ANDS
 
 

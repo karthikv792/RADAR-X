@@ -4,7 +4,7 @@ from tarski import model
 from tarski.fstrips.problem import create_fstrips_problem
 from tarski.io.fstrips import print_init, print_goal, print_formula, print_atom
 from tarski.fstrips import language
-from tarski.syntax import land, top, CompoundTerm, Constant
+from tarski.syntax import land, top, CompoundTerm, Constant, CompoundFormula,Connective
 from tarski.io.fstrips import FstripsWriter
 from tarski.errors import UndefinedSort
 #TODO: Add Conditional Effects
@@ -16,6 +16,7 @@ class ModelWriter(object):
         self.functions = {}
         self.variable_map={}
         self.fstrips_problem = create_fstrips_problem(language(), "instance1","test_domain")
+        self.fstrips_problem.metric_ = ('minimize', '(total-cost)')
         self.populate_fstrips_problem()
 
     def populate_fstrips_problem(self):
@@ -38,10 +39,6 @@ class ModelWriter(object):
                     self.fstrips_problem.language.interval(obj[0],parent,parent.lower_bound,parent.upper_bound)
                     continue
                 self.fstrips_problem.language.sort(obj[0],obj[1])
-
-
-
-
 
     def create_predicates(self):
         predicates = self.model_dict[PREDICATES]
@@ -99,7 +96,7 @@ class ModelWriter(object):
             try:
                 for subgoal in fluent_list:
                     temp_model.add(self.predicate_map[subgoal[0]], *subgoal[1])
-                return land(*temp_model.as_atoms())
+                return CompoundFormula(Connective.And,temp_model.as_atoms())
             except AssertionError as exc:
                 raise Exception("Message:", exc, " Original fluent set", fluent_list)
 

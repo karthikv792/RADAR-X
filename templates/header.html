@@ -35,25 +35,25 @@
             text-align: center;
             background-color: #b2c1e0;
         }
-        .loader, .exploader {
-            left: 0px;
-            top: 0px;
-            width: 100%;
-            z-index: 9999;
-            background: url('{{ url_for("static",filename="images/page-loader.gif") }}') 50% 50% no-repeat rgb(249,249,249);
-        }
-        .loader {
-            position: static;
-            height: 100%;
-        }
-        .exploader {
-            position: relative;
-            height: 30%;
-        }
+            .loader {
+                left: 0px;
+                top: 0px;
+                width: 100%;
+                z-index: 9999;
+                background: url('{{ url_for("static",filename="images/page-loader.gif") }}') 50% 50% no-repeat rgb(249,249,249);
+            }
+            .loader {
+                position: static;
+                height: 100%;
+            }
+            .exploader {
+                position: relative;
+                height: 30%;
+            }
 
     </style>
 
 </head>
 <body style="font-family: 'Poppins', sans-serif;">
 <div class="loader" style="display:none;"></div>
-<div class="page_content row" style="display: flex;align-items: auto">
+<div class="page_content row m-2">

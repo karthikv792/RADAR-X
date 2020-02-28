@@ -21,12 +21,16 @@
 
         <br>
         <div class="col-md-12 btn-group">
+        <!--<div class="col-md-3 m-2">
+            <button type="button" class="col-md-12 btn btn-light border-dark validateFoil"><img src="https://img.icons8.com/color/48/000000/approval--v1.png" height="35" alt="validate"><br>Validate</button>
+        </div>-->
         <div class="col-md-3 m-2">
-            <button type="button" class="col-md-12 btn btn-light border-dark validateFoil"><img src="https://img.icons8.com/color/48/000000/task-completed.png" height="35" alt="validate"><br>Validate</button>
+            <button type="button" class="col-md-12 btn btn-light border-dark closestPlan"><img src="https://img.icons8.com/color/48/000000/search.png" height="35"><br>Plan Completion</button>
         </div>
         <div class="col-md-3 m-2">
-            <button type="button" class="col-md-12 btn btn-light border-dark nextBest"><img src="https://img.icons8.com/color/48/000000/task-completed.png" height="35"><br>Plan Completion</button>
-        </div>
+              <button type="button" class="col-md-12 btn btn-light border-dark undoChange"><img src="https://img.icons8.com/color/48/000000/undo.png" height="35" alt="undo"><br>Undo</button>
+              <!--<button type="button" class="col-md-12 btn btn-secondary undoChange"><span style="font-size: x-large"><i class="fas fa-undo" alt="undo"></i></span><br>Undo</button>-->
+          </div>
         </div>
 
     </div>
@@ -120,6 +124,22 @@
       //$.redirectPost('validate', JSON.stringify({'plan': res}));
       $.redirectPost('validateFoil', {'plan': JSON.stringify(res)});
     });
+
+    $('.closestPlan').click(function () {
+        res = getGridStackData();
+        $('.page_content').fadeOut();
+        $('.loader').fadeIn();
+        $.redirectPost('closestPlan', {'plan': JSON.stringify(res)});
+    });
+
+        $('.undoChange').click(function() {
+            res = getGridStackData();
+            $('.page_content').fadeOut();
+            $('.loader').fadeIn();
+            $.redirectPost('undoFoil', {'plan': JSON.stringify(res)});
+        });
+
+
         $('#startbtn').click(function () {
          recorder.record();
        // recognition.start();
@@ -167,25 +187,13 @@
                     }
                     return (item.name==foil_text.why_action[i]);
                 });
-                if (index!=-1)
+                if (index==-1)
                 {
-                    loadGrid();
-                    resizeGrid();
+                    serializedData.push({y:0, x:0, width:12, height: 1, name:foil_text.why_action[i]})
                 }
             }
-        }
-        else if(foil_text.whynot_action.length>foil_text.why_action.length){
-            var i;
-            for (i = 0; i < foil_text.why_action.length; i++) {
-                var index = serializedData.find(function (item,i){
-                    if(item.name==foil_text.why_action[i])
-                    {
-                        item.name==foil_text.whynot_action[i];
-                    }
-                    return (item.name==foil_text.why_action[i])
-                });
-            }
-
+            loadGrid();
+            resizeGrid();
         }
         /*
         var xhr = new XMLHttpRequest();

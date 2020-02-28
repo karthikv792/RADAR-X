@@ -1,3 +1,4 @@
+import re
 from flask import Flask, render_template, request, jsonify
 import json
 from planner import Planner
@@ -11,7 +12,7 @@ speech = Speak()
 dbCaller = dbHandler()
 recognizer = sr.Recognizer()
 
-dbCaller.initializeDatabase()
+# dbCaller.initializeDatabase()
 
 @app.route("/")
 def index(exp=0, s=speech.getSpeechText('INTRO'),gs='Extinguish Big Fire at BYENG'):
@@ -83,7 +84,6 @@ def updateResources():
 
 @app.route("/foil",methods=['GET','POST'])
 def foil():
-    planner.loadPlan()
     acts = planner.getOrderedObservations()
     a = planner.getActionNames()
     return render_template('foil.html',plan=acts,actions=a)
@@ -113,15 +113,17 @@ def foilrec():
     actions1['why_action'] = why
     actions1['whynot_action'] = why_not
     return actions1
-# @app.route("/dummy",methods=['GET','POST'])
-# def dummy():
-#     actions1 = {'text1':'asdf','why_action':['a','b'],'whynot_action':['c','d']}
-#     return actions1
+
 
 @app.route("/validateFoil",methods=['GET','POST'])
 def validateFoil():
     planner.validateFoil(getPresentPlan(request))
-    return 'ab'
+    return foil()
+
+@app.route("/closestPlan",methods=['GET','POST'])
+def closestPlan():
+    planner.getClosestPlan(getPresentPlan(request))
+    return foil()
 
 @app.route("/suggest", methods=['GET', 'POST'])
 def suggest():
@@ -139,6 +141,12 @@ def fix():
 def undo():
     planner.loadPlan()
     return index(s="")
+
+@app.route("/undoFoil", methods=['GET', 'POST'])
+def undoFoil():
+    planner.loadPlan()
+    return foil()
+
 
 @app.route("/readFireStationResources", methods=['GET', 'POST'])
 def readFireStationResource():
