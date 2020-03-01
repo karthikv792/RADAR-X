@@ -24,10 +24,13 @@
         <!--<div class="col-md-3 m-2">
             <button type="button" class="col-md-12 btn btn-light border-dark validateFoil"><img src="https://img.icons8.com/color/48/000000/approval--v1.png" height="35" alt="validate"><br>Validate</button>
         </div>-->
-        <div class="col-md-3 m-2">
-            <button type="button" class="col-md-12 btn btn-light border-dark closestPlan"><img src="https://img.icons8.com/color/48/000000/search.png" height="35"><br>Plan Completion</button>
+        <div class="col-md-4 m-2">
+                  <button type="button" class="col-md-12 btn btn-light border-dark  explainFoil" data-toggle="modal" data-target="#FoilExplanationsModal"><img src="https://img.icons8.com/color/48/000000/consultation.png" height="35"><br>Foil Explanation</button>
         </div>
-        <div class="col-md-3 m-2">
+        <div class="col-md-4 m-2">
+            <button type="button" class="col-md-12 btn btn-light border-dark closestPlan"><img src="https://img.icons8.com/color/48/000000/search.png" height="35"><br>Foil Completion</button>
+        </div>
+        <div class="col-md-4 m-2">
               <button type="button" class="col-md-12 btn btn-light border-dark undoChange"><img src="https://img.icons8.com/color/48/000000/undo.png" height="35" alt="undo"><br>Undo</button>
               <!--<button type="button" class="col-md-12 btn btn-secondary undoChange"><span style="font-size: x-large"><i class="fas fa-undo" alt="undo"></i></span><br>Undo</button>-->
           </div>
@@ -74,6 +77,25 @@
     </div>
 </div>
 {% include 'footer.html' %}
+<div class="modal fade" id="FoilExplanationsModal" tabindex="-1" role="dialog" aria-labelledby="ResourcesModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ExplanationsModalLabel">Explanations Panel</h5>
+      </div>
+      <div class="modal-body">
+        This shows the explanations between your model of the domain and the updated actual model of the domain.
+        <br>
+        <div class="exploader"> <img src="{{ url_for('static',filename='images/page-loader.gif') }}"> </div>
+        <div id="generatedExplanations"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="updateModels btn btn-secondary">Update models</button>
+      </div>
+    </div>
+  </div>
+</div>
 <script type="text/javascript">
     $.extend(
 {
@@ -139,6 +161,24 @@
             $.redirectPost('undoFoil', {'plan': JSON.stringify(res)});
         });
 
+        $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+
+        $('.explainFoil').click(function() {
+            res = getGridStackData();
+            $.getJSON($SCRIPT_ROOT + '/getFoilExplanation', {
+                'plan' : JSON.stringify(res)
+            }, function(data) {
+                e = '<form>'
+                for (var i in data) {
+                    val = data[i];
+                    e = e + '<input type="checkbox" name="' + val + '-reject">' + val + '</input><br>';
+                    e = e + '<input type="hidden" name="' + val + '"></input>';
+                }
+                e = e + '</form>'
+                $('.exploader').fadeOut();
+                $('#generatedExplanations').html(e);
+            });
+        });
 
         $('#startbtn').click(function () {
          recorder.record();

@@ -1,5 +1,5 @@
 Domain=RADAR
 Problem=BYENG
-Preprocessing=0.0108
+Preprocessing=0.00819
 Fluents=272
 Operators=300

@@ -36,6 +36,7 @@ class Planner():
         # Explanation files
         self.exc_file = 'planner/mmp/src/exp.dat'
         self.exp_file = 'planner/mmp_explanations/src/exp.dat'
+        self.foil_exp_file = 'planner/mmp_foil_explanations/src/exp.dat'
 
         # Generating Landmarks
         self.landmark_code = 'planner/FD/src/fast-downward.py'
@@ -500,3 +501,28 @@ class Planner():
                 pr_model[DOMAIN][action][FUNCTIONAL][0][1][0] *= 24
         pr_write = ModelWriter(pr_model)
         pr_write.write_files('write_pr_domain.pddl','write_pr_problem.pddl')
+
+    def getFoilExplanations(self,actions):
+        self.writeFoilObservations(actions)
+        cmd = "cd planner/mmp_foil_explanations/src && ./Problem.py -m ../../../{0} -n ../../../{1} -d ../domain/radar_domain_template.pddl -f ../../mock_problem.pddl -pf ../../foil_obs.dat ".format(self.domain, self.human_domain)
+        try:
+            os.system(cmd)
+        except:
+            print("[ERROR] while generating explanations for the present plan")
+
+        try:
+            f = open(self.foil_exp_file, 'r')
+        except:
+            print("[WARNING] No explanations were generated.  Probably there is no model difference")
+            return {1: "None"}
+        reason = {}
+        i = 1
+        for l in f:
+            s = l.strip()
+            if not s:
+                continue
+            s = l.split('Explanation >> ')[1].strip()
+            reason[i] = s
+            i += 1
+        return reason
+

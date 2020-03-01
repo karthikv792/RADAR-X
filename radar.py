@@ -37,9 +37,12 @@ def getPresentPlan(request):
     ]
     """
     seq = {}
-    plan = json.loads(dict(request.form)['plan'])
-    print(plan)
+    try:
+        plan = json.loads(dict(request.form)['plan'])
+    except:
+        plan = json.loads(request.args['plan'])
     for act in plan:
+        print(act)
         # We assume that only one action occurs at a time
         # TODO: Update code if we want to allow options for
         # two simultaneous actions (choices)
@@ -74,6 +77,12 @@ def validate():
 @app.route("/getPlanExplanation", methods=['GET', 'POST'])
 def getExplanationForPlan():
     exp = planner.getExplanations()
+    return jsonify(exp)
+
+@app.route("/getFoilExplanation", methods=['GET', 'POST'])
+def getExplanationForFoil():
+    print(request.args['plan'])
+    exp = planner.getFoilExplanations(getPresentPlan(request))
     return jsonify(exp)
 
 @app.route("/updateResources", methods=['GET','POST'])
@@ -118,7 +127,7 @@ def foilrec():
 @app.route("/validateFoil",methods=['GET','POST'])
 def validateFoil():
     planner.validateFoil(getPresentPlan(request))
-    return foil()
+    return 'ab'
 
 @app.route("/closestPlan",methods=['GET','POST'])
 def closestPlan():
@@ -166,4 +175,4 @@ def readPoliceStationResource():
     data = dbCaller.getUIReadyData( data, 'police_stations' )
     return jsonify( {"data" : data} )
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5080)
+    app.run(host='0.0.0.0', port=5081)
