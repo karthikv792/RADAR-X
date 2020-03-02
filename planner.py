@@ -467,38 +467,36 @@ class Planner():
 
     def soft_compile(self,actions):
         pr_model = parse_model(self.pr_domain,self.pr_problem)
-        condition_met = ['conds_met', []]
-        obs_met = ['obs_met', []]
         obs = {}
         obs[PARARMETERS] = []
-        obs[POS_PREC] = [obs_met]
-        obs[ADDS] = [condition_met]
+        obs[POS_PREC] = []
+        obs[ADDS] = []
         obs[DELS] = []
         obs[FUNCTIONAL] = [[['total-cost', 'number'], [0, 'Integer']]]
         obs[COND_ADDS] = []
         obs[COND_DELS] = []
         without_obs = deepcopy(obs)
-        without_obs[POS_PREC] = []
         without_obs[FUNCTIONAL] = [[['total-cost', 'number'], [24, 'Integer']]]
-        pr_model[DOMAIN]['WITH_OBSERVE'] = obs
-        pr_model[DOMAIN]['WITHOUT_OBSERVE'] = without_obs
-        pr_model[PREDICATES].append(condition_met)
-        pr_model[PREDICATES].append(obs_met)
-        pr_model[INSTANCE][GOAL].append(condition_met)
         for i in range(len(actions)):
             action = actions[i]
             if action in list(pr_model[DOMAIN].keys()):
-                temp = deepcopy(pr_model[DOMAIN][action])
-                action_name = action + '_WITH_OBS'
+                temp_obs = deepcopy(obs)
+                temp_without_obs = deepcopy(without_obs)
+                action_with_obs = action + '_WITH_OBS'
+                action_without_obs = action + '_WITHOUT_OBS'
+                predicate = [(action + '_MET').lower(), []]
+                pr_model[PREDICATES].append(predicate)
+                pr_model[INSTANCE][GOAL].append(predicate)
+                temp_obs[ADDS].append(predicate)
+                temp_obs[POS_PREC] = pr_model[DOMAIN][action][ADDS]
+                temp_without_obs[ADDS].append(predicate)
                 if i != 0:
                     prev_action = actions[i - 1]
-                    print(pr_model[DOMAIN][prev_action][ADDS])
-                    if pr_model[DOMAIN][prev_action][ADDS][0] not in temp[POS_PREC]:
-                        temp[POS_PREC].append(pr_model[DOMAIN][prev_action][ADDS][0])
-                if i == len(actions) - 1:
-                    temp[ADDS].append(obs_met)
-                pr_model[DOMAIN][action_name] = temp
-                pr_model[DOMAIN][action][FUNCTIONAL][0][1][0] *= 24
+                    for i in pr_model[DOMAIN][prev_action][ADDS]:
+                        if i not in temp_obs[POS_PREC]:
+                            temp_obs[POS_PREC].append(i)
+                pr_model[DOMAIN][action_with_obs] = temp_obs
+                pr_model[DOMAIN][action_without_obs] = temp_without_obs
         pr_write = ModelWriter(pr_model)
         pr_write.write_files('write_pr_domain.pddl','write_pr_problem.pddl')
 

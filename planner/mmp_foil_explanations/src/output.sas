@@ -4685,7 +4685,7 @@ begin_operator
 deploy_small_engines_firechief_adminfire_byeng 
 0
 5
-0 9 -1 1
+0 9 0 1
 0 69 -1 0
 0 94 -1 0
 0 155 0 1
@@ -4696,7 +4696,7 @@ begin_operator
 deploy_small_engines_firechief_adminfire_lake 
 0
 5
-0 9 -1 1
+0 9 0 1
 0 70 -1 0
 0 95 -1 0
 0 155 0 1
@@ -4707,7 +4707,7 @@ begin_operator
 deploy_small_engines_firechief_adminfire_marketplace 
 0
 5
-0 9 -1 1
+0 9 0 1
 0 71 -1 0
 0 96 -1 0
 0 155 0 1
@@ -4718,7 +4718,7 @@ begin_operator
 deploy_small_engines_firechief_adminfire_mill 
 0
 5
-0 9 -1 1
+0 9 0 1
 0 72 -1 0
 0 97 -1 0
 0 155 0 1
@@ -4729,7 +4729,7 @@ begin_operator
 deploy_small_engines_firechief_adminfire_rural 
 0
 5
-0 9 -1 1
+0 9 0 1
 0 73 -1 0
 0 98 -1 0
 0 155 0 1
@@ -4740,7 +4740,7 @@ begin_operator
 deploy_small_engines_firechief_scottsfire_byeng 
 0
 5
-0 21 -1 1
+0 21 0 1
 0 69 -1 0
 0 94 -1 0
 0 156 0 1
@@ -4751,7 +4751,7 @@ begin_operator
 deploy_small_engines_firechief_scottsfire_lake 
 0
 5
-0 21 -1 1
+0 21 0 1
 0 70 -1 0
 0 95 -1 0
 0 156 0 1
@@ -4762,7 +4762,7 @@ begin_operator
 deploy_small_engines_firechief_scottsfire_marketplace 
 0
 5
-0 21 -1 1
+0 21 0 1
 0 71 -1 0
 0 96 -1 0
 0 156 0 1
@@ -4773,7 +4773,7 @@ begin_operator
 deploy_small_engines_firechief_scottsfire_mill 
 0
 5
-0 21 -1 1
+0 21 0 1
 0 72 -1 0
 0 97 -1 0
 0 156 0 1
@@ -4784,7 +4784,7 @@ begin_operator
 deploy_small_engines_firechief_scottsfire_rural 
 0
 5
-0 21 -1 1
+0 21 0 1
 0 73 -1 0
 0 98 -1 0
 0 156 0 1

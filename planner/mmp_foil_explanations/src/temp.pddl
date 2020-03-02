@@ -93,6 +93,7 @@
 :parameters (?a - fire ?from - firestation ?to - pois)
 :precondition
 (and
+( alerted ?from )
 ( has_small_engines_number ?from )
 )
 :effect
@@ -372,8 +373,8 @@
 (and
 ( deployed_rescuers ?at )
 ( deployed_bulldozers ?at )
-( deployed_helicopters ?at )
 ( extinguished_fire ?at )
+( deployed_helicopters ?at )
 )
 :effect
 (and

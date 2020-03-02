@@ -205,7 +205,7 @@
                     foil_text = JSON.parse(e.target.responseText);
                     $('#transcript').text(foil_text.text1);
                     //$('#P_action').text(foil_text.why_action);
-                    $('#Q_action').text("Your Action: \n"foil_text.whynot_action);
+                    $('#Q_action').text("Your Action: \n"+foil_text.whynot_action);
                     console.log("Server returned: ", foil_text);
                 }
             };
@@ -226,7 +226,7 @@
                 var index = serializedData.findIndex(e => e.name===temp1);
                 if (index!=-1)
                 {
-                  serializedData[index].name = temp2];
+                  serializedData[index].name = temp2;
                 }
 
                 if (index==-1)

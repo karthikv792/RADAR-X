@@ -91,10 +91,10 @@ def updateResources():
     return index(s=speech.getSpeechText('RESOURCE_UPDATED'))
 
 @app.route("/foil",methods=['GET','POST'])
-def foil():
+def foil(s=speech.getSpeechText('ADD_FOIL')):
     acts = planner.getOrderedObservations()
     a = planner.getActionNames()
-    return render_template('foil.html',plan=acts,actions=a)
+    return render_template('foil.html',plan=acts,actions=a,script=s)
 
 @app.route("/foilrec",methods=['GET','POST'])
 def foilrec():
@@ -131,7 +131,7 @@ def validateFoil():
 @app.route("/closestPlan",methods=['GET','POST'])
 def closestPlan():
     planner.getClosestPlan(getPresentPlan(request))
-    return foil()
+    return foil(s=speech.getSpeechText('NEAREST_PLAN'))
 
 @app.route("/suggest", methods=['GET', 'POST'])
 def suggest():
