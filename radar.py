@@ -81,7 +81,6 @@ def getExplanationForPlan():
 
 @app.route("/getFoilExplanation", methods=['GET', 'POST'])
 def getExplanationForFoil():
-    print(request.args['plan'])
     exp = planner.getFoilExplanations(getPresentPlan(request))
     return jsonify(exp)
 

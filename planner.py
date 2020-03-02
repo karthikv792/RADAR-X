@@ -448,8 +448,8 @@ class Planner():
         acts = [x.strip('() \n') for x in actions.values()]
         for l in f:
             if '(general cost)' not in l:
-                if 'EXPLAIN_OBS_' in l.upper():
-                    a = l.upper().replace('EXPLAIN_OBS_', '').strip()
+                if '_WITH_OBS' in l.upper():
+                    a = l.upper().replace('_WITH_OBS', '').strip()
                     plan_actions[i] = re.sub('_[0-9]', '', a)
                     i += 1
                     '''
@@ -525,4 +525,3 @@ class Planner():
             reason[i] = s
             i += 1
         return reason
-

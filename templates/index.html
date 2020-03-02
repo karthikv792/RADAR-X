@@ -13,5 +13,8 @@
         {% include 'resource.html' %}
     </div>
 </div>
+<script>
+responsiveVoice.speak(document.getElementById("speakText").textContent);
+</script>
 {% include 'helpModals.html' %}
 {% include 'footer.html' %}
