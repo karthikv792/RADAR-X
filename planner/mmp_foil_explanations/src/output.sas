@@ -4,7 +4,7 @@ end_version
 begin_metric
 1
 end_metric
-287
+277
 begin_variable
 var0
 -1
@@ -449,9 +449,10 @@ end_variable
 begin_variable
 var63
 -1
-2
+3
 Atom deployed_big_engines_rural()
-NegatedAtom deployed_big_engines_rural()
+Atom has_big_engines_number_mesafire()
+<none of those>
 end_variable
 begin_variable
 var64
@@ -884,1135 +885,1061 @@ begin_variable
 var125
 -1
 2
-Atom explained_alert_firechief_adminfire_1()
-NegatedAtom explained_alert_firechief_adminfire_1()
-end_variable
-begin_variable
-var126
--1
-2
-Atom explained_alert_firechief_adminfire_2()
-NegatedAtom explained_alert_firechief_adminfire_2()
-end_variable
-begin_variable
-var127
--1
-2
-Atom explained_alert_firechief_adminfire_3()
-NegatedAtom explained_alert_firechief_adminfire_3()
-end_variable
-begin_variable
-var128
--1
-2
-Atom explained_alert_firechief_mesafire_1()
-NegatedAtom explained_alert_firechief_mesafire_1()
-end_variable
-begin_variable
-var129
--1
-2
-Atom explained_contact_media_firechief_1()
-NegatedAtom explained_contact_media_firechief_1()
-end_variable
-begin_variable
-var130
--1
-3
-Atom explained_deploy_big_engines_firechief_mesafire_byeng_1()
-Atom has_big_engines_number_mesafire()
-<none of those>
-end_variable
-begin_variable
-var131
--1
-3
-Atom explained_deploy_bulldozers_firechief_adminfire_byeng_1()
-Atom has_bulldozers_number_adminfire()
-<none of those>
-end_variable
-begin_variable
-var132
--1
-3
-Atom explained_deploy_helicopters_firechief_adminfire_byeng_1()
-Atom has_helicopters_number_adminfire()
-<none of those>
-end_variable
-begin_variable
-var133
--1
-3
-Atom explained_deploy_rescuers_firechief_adminfire_byeng_1()
-Atom has_rescuers_number_adminfire()
-<none of those>
-end_variable
-begin_variable
-var134
--1
-2
-Atom explained_extinguish_big_fire_firechief_byeng_1()
-NegatedAtom explained_extinguish_big_fire_firechief_byeng_1()
-end_variable
-begin_variable
-var135
--1
-2
 Atom explained_full_obs_sequence()
 NegatedAtom explained_full_obs_sequence()
 end_variable
 begin_variable
-var136
+var126
 -1
 2
 Atom explained_search_casualties_firechief_byeng_1()
 NegatedAtom explained_search_casualties_firechief_byeng_1()
 end_variable
 begin_variable
-var137
+var127
+-1
+2
+Atom explained_send_social_media_byeng_byeng_1()
+NegatedAtom explained_send_social_media_byeng_byeng_1()
+end_variable
+begin_variable
+var128
 -1
 2
 Atom extinguished_fire_byeng()
 NegatedAtom extinguished_fire_byeng()
 end_variable
 begin_variable
-var138
+var129
 -1
 2
 Atom fire_at_byeng()
 Atom needed_search_casualties_byeng()
 end_variable
 begin_variable
-var139
+var130
 -1
 2
 Atom has_ambulances_number_joseph()
 NegatedAtom has_ambulances_number_joseph()
 end_variable
 begin_variable
-var140
+var131
 -1
 2
 Atom has_ambulances_number_lukes()
 NegatedAtom has_ambulances_number_lukes()
 end_variable
 begin_variable
-var141
+var132
 -1
 2
-Atom has_big_engines_number_scottsfire()
-NegatedAtom has_big_engines_number_scottsfire()
+Atom has_bulldozers_number_adminfire()
+NegatedAtom has_bulldozers_number_adminfire()
 end_variable
 begin_variable
-var142
+var133
 -1
 2
 Atom has_bulldozers_number_phxfire()
 NegatedAtom has_bulldozers_number_phxfire()
 end_variable
 begin_variable
-var143
+var134
 -1
 2
 Atom has_bulldozers_number_scottsfire()
 NegatedAtom has_bulldozers_number_scottsfire()
 end_variable
 begin_variable
-var144
+var135
+-1
+2
+Atom has_helicopters_number_adminfire()
+NegatedAtom has_helicopters_number_adminfire()
+end_variable
+begin_variable
+var136
 -1
 2
 Atom has_helicopters_number_phxfire()
 NegatedAtom has_helicopters_number_phxfire()
 end_variable
 begin_variable
-var145
+var137
 -1
 2
 Atom has_ladders_number_adminfire()
 NegatedAtom has_ladders_number_adminfire()
 end_variable
 begin_variable
-var146
+var138
 -1
 2
 Atom has_ladders_number_mesafire()
 NegatedAtom has_ladders_number_mesafire()
 end_variable
 begin_variable
-var147
+var139
 -1
 2
 Atom has_ladders_number_phxfire()
 NegatedAtom has_ladders_number_phxfire()
 end_variable
 begin_variable
-var148
+var140
 -1
 2
 Atom has_ladders_number_scottsfire()
 NegatedAtom has_ladders_number_scottsfire()
 end_variable
 begin_variable
-var149
+var141
 -1
 2
 Atom has_police_car_number_apachestation()
 NegatedAtom has_police_car_number_apachestation()
 end_variable
 begin_variable
-var150
+var142
 -1
 2
 Atom has_police_car_number_courtstation()
 NegatedAtom has_police_car_number_courtstation()
 end_variable
 begin_variable
-var151
+var143
 -1
 2
 Atom has_police_car_number_substation()
 NegatedAtom has_police_car_number_substation()
 end_variable
 begin_variable
-var152
+var144
+-1
+2
+Atom has_rescuers_number_adminfire()
+NegatedAtom has_rescuers_number_adminfire()
+end_variable
+begin_variable
+var145
 -1
 2
 Atom has_rescuers_number_mesafire()
 NegatedAtom has_rescuers_number_mesafire()
 end_variable
 begin_variable
-var153
+var146
 -1
 2
 Atom has_rescuers_number_phxfire()
 NegatedAtom has_rescuers_number_phxfire()
 end_variable
 begin_variable
-var154
+var147
 -1
 2
 Atom has_rescuers_number_scottsfire()
 NegatedAtom has_rescuers_number_scottsfire()
 end_variable
 begin_variable
-var155
+var148
 -1
 2
 Atom has_small_engines_number_adminfire()
 NegatedAtom has_small_engines_number_adminfire()
 end_variable
 begin_variable
-var156
+var149
 -1
 2
 Atom has_small_engines_number_scottsfire()
 NegatedAtom has_small_engines_number_scottsfire()
 end_variable
 begin_variable
-var157
+var150
 -1
 2
 Atom media_contacted_firechief()
 NegatedAtom media_contacted_firechief()
 end_variable
 begin_variable
-var158
+var151
 -1
 2
 Atom media_contacted_medichief()
 NegatedAtom media_contacted_medichief()
 end_variable
 begin_variable
-var159
+var152
 -1
 2
 Atom media_contacted_policechief()
 NegatedAtom media_contacted_policechief()
 end_variable
 begin_variable
-var160
+var153
 -1
 2
 Atom media_contacted_transportchief()
 NegatedAtom media_contacted_transportchief()
 end_variable
 begin_variable
-var161
+var154
 -1
 2
 Atom needed_active_local_alert_firechief()
 NegatedAtom needed_active_local_alert_firechief()
 end_variable
 begin_variable
-var162
+var155
 -1
 2
 Atom needed_active_local_alert_transportchief()
 NegatedAtom needed_active_local_alert_transportchief()
 end_variable
 begin_variable
-var163
+var156
 -1
 2
 Atom needed_address_media()
 NegatedAtom needed_address_media()
 end_variable
 begin_variable
-var164
+var157
 -1
 2
 Atom needed_attend_casualties_byeng()
 NegatedAtom needed_attend_casualties_byeng()
 end_variable
 begin_variable
-var165
+var158
 -1
 2
 Atom needed_diverted_traffic_byeng_byeng()
 NegatedAtom needed_diverted_traffic_byeng_byeng()
 end_variable
 begin_variable
-var166
+var159
 -1
 2
 Atom needed_diverted_traffic_byeng_lake()
 NegatedAtom needed_diverted_traffic_byeng_lake()
 end_variable
 begin_variable
-var167
+var160
 -1
 2
 Atom needed_diverted_traffic_byeng_marketplace()
 NegatedAtom needed_diverted_traffic_byeng_marketplace()
 end_variable
 begin_variable
-var168
+var161
 -1
 2
 Atom needed_diverted_traffic_byeng_mill()
 NegatedAtom needed_diverted_traffic_byeng_mill()
 end_variable
 begin_variable
-var169
+var162
 -1
 2
 Atom needed_diverted_traffic_byeng_rural()
 NegatedAtom needed_diverted_traffic_byeng_rural()
 end_variable
 begin_variable
-var170
+var163
 -1
 2
 Atom needed_diverted_traffic_lake_byeng()
 NegatedAtom needed_diverted_traffic_lake_byeng()
 end_variable
 begin_variable
-var171
+var164
 -1
 2
 Atom needed_diverted_traffic_lake_lake()
 NegatedAtom needed_diverted_traffic_lake_lake()
 end_variable
 begin_variable
-var172
+var165
 -1
 2
 Atom needed_diverted_traffic_lake_marketplace()
 NegatedAtom needed_diverted_traffic_lake_marketplace()
 end_variable
 begin_variable
-var173
+var166
 -1
 2
 Atom needed_diverted_traffic_lake_mill()
 NegatedAtom needed_diverted_traffic_lake_mill()
 end_variable
 begin_variable
-var174
+var167
 -1
 2
 Atom needed_diverted_traffic_lake_rural()
 NegatedAtom needed_diverted_traffic_lake_rural()
 end_variable
 begin_variable
-var175
+var168
 -1
 2
 Atom needed_diverted_traffic_marketplace_byeng()
 NegatedAtom needed_diverted_traffic_marketplace_byeng()
 end_variable
 begin_variable
-var176
+var169
 -1
 2
 Atom needed_diverted_traffic_marketplace_lake()
 NegatedAtom needed_diverted_traffic_marketplace_lake()
 end_variable
 begin_variable
-var177
+var170
 -1
 2
 Atom needed_diverted_traffic_marketplace_marketplace()
 NegatedAtom needed_diverted_traffic_marketplace_marketplace()
 end_variable
 begin_variable
-var178
+var171
 -1
 2
 Atom needed_diverted_traffic_marketplace_mill()
 NegatedAtom needed_diverted_traffic_marketplace_mill()
 end_variable
 begin_variable
-var179
+var172
 -1
 2
 Atom needed_diverted_traffic_marketplace_rural()
 NegatedAtom needed_diverted_traffic_marketplace_rural()
 end_variable
 begin_variable
-var180
+var173
 -1
 2
 Atom needed_diverted_traffic_mill_byeng()
 NegatedAtom needed_diverted_traffic_mill_byeng()
 end_variable
 begin_variable
-var181
+var174
 -1
 2
 Atom needed_diverted_traffic_mill_lake()
 NegatedAtom needed_diverted_traffic_mill_lake()
 end_variable
 begin_variable
-var182
+var175
 -1
 2
 Atom needed_diverted_traffic_mill_marketplace()
 NegatedAtom needed_diverted_traffic_mill_marketplace()
 end_variable
 begin_variable
-var183
+var176
 -1
 2
 Atom needed_diverted_traffic_mill_mill()
 NegatedAtom needed_diverted_traffic_mill_mill()
 end_variable
 begin_variable
-var184
+var177
 -1
 2
 Atom needed_diverted_traffic_mill_rural()
 NegatedAtom needed_diverted_traffic_mill_rural()
 end_variable
 begin_variable
-var185
+var178
 -1
 2
 Atom needed_diverted_traffic_rural_byeng()
 NegatedAtom needed_diverted_traffic_rural_byeng()
 end_variable
 begin_variable
-var186
+var179
 -1
 2
 Atom needed_diverted_traffic_rural_lake()
 NegatedAtom needed_diverted_traffic_rural_lake()
 end_variable
 begin_variable
-var187
+var180
 -1
 2
 Atom needed_diverted_traffic_rural_marketplace()
 NegatedAtom needed_diverted_traffic_rural_marketplace()
 end_variable
 begin_variable
-var188
+var181
 -1
 2
 Atom needed_diverted_traffic_rural_mill()
 NegatedAtom needed_diverted_traffic_rural_mill()
 end_variable
 begin_variable
-var189
+var182
 -1
 2
 Atom needed_diverted_traffic_rural_rural()
 NegatedAtom needed_diverted_traffic_rural_rural()
 end_variable
 begin_variable
-var190
+var183
+-1
+2
+Atom no_social_media()
+NegatedAtom no_social_media()
+end_variable
+begin_variable
+var184
 -1
 2
 Atom not_explained_address_media_firechief_1()
 NegatedAtom not_explained_address_media_firechief_1()
 end_variable
 begin_variable
-var191
--1
-2
-Atom not_explained_alert_firechief_adminfire_1()
-NegatedAtom not_explained_alert_firechief_adminfire_1()
-end_variable
-begin_variable
-var192
--1
-2
-Atom not_explained_alert_firechief_adminfire_2()
-NegatedAtom not_explained_alert_firechief_adminfire_2()
-end_variable
-begin_variable
-var193
--1
-2
-Atom not_explained_alert_firechief_adminfire_3()
-NegatedAtom not_explained_alert_firechief_adminfire_3()
-end_variable
-begin_variable
-var194
--1
-2
-Atom not_explained_alert_firechief_mesafire_1()
-NegatedAtom not_explained_alert_firechief_mesafire_1()
-end_variable
-begin_variable
-var195
--1
-2
-Atom not_explained_contact_media_firechief_1()
-NegatedAtom not_explained_contact_media_firechief_1()
-end_variable
-begin_variable
-var196
--1
-2
-Atom not_explained_deploy_big_engines_firechief_mesafire_byeng_1()
-NegatedAtom not_explained_deploy_big_engines_firechief_mesafire_byeng_1()
-end_variable
-begin_variable
-var197
--1
-2
-Atom not_explained_deploy_bulldozers_firechief_adminfire_byeng_1()
-NegatedAtom not_explained_deploy_bulldozers_firechief_adminfire_byeng_1()
-end_variable
-begin_variable
-var198
--1
-2
-Atom not_explained_deploy_helicopters_firechief_adminfire_byeng_1()
-NegatedAtom not_explained_deploy_helicopters_firechief_adminfire_byeng_1()
-end_variable
-begin_variable
-var199
--1
-2
-Atom not_explained_deploy_rescuers_firechief_adminfire_byeng_1()
-NegatedAtom not_explained_deploy_rescuers_firechief_adminfire_byeng_1()
-end_variable
-begin_variable
-var200
--1
-2
-Atom not_explained_extinguish_big_fire_firechief_byeng_1()
-NegatedAtom not_explained_extinguish_big_fire_firechief_byeng_1()
-end_variable
-begin_variable
-var201
+var185
 -1
 2
 Atom not_explained_full_obs_sequence()
 NegatedAtom not_explained_full_obs_sequence()
 end_variable
 begin_variable
-var202
+var186
 -1
 2
 Atom not_explained_search_casualties_firechief_byeng_1()
 NegatedAtom not_explained_search_casualties_firechief_byeng_1()
 end_variable
 begin_variable
-var203
+var187
+-1
+2
+Atom not_explained_send_social_media_byeng_byeng_1()
+NegatedAtom not_explained_send_social_media_byeng_byeng_1()
+end_variable
+begin_variable
+var188
 -1
 2
 Atom not_needed_active_local_alert_firechief()
 NegatedAtom not_needed_active_local_alert_firechief()
 end_variable
 begin_variable
-var204
+var189
 -1
 2
 Atom not_needed_active_local_alert_transportchief()
 NegatedAtom not_needed_active_local_alert_transportchief()
 end_variable
 begin_variable
-var205
+var190
 -1
 2
 Atom not_needed_address_media()
 NegatedAtom not_needed_address_media()
 end_variable
 begin_variable
-var206
+var191
 -1
 2
 Atom not_needed_attend_casualties_byeng()
 NegatedAtom not_needed_attend_casualties_byeng()
 end_variable
 begin_variable
-var207
+var192
 -1
 2
 Atom not_needed_barricade_byeng()
 NegatedAtom not_needed_barricade_byeng()
 end_variable
 begin_variable
-var208
+var193
 -1
 2
 Atom not_needed_barricade_lake()
 NegatedAtom not_needed_barricade_lake()
 end_variable
 begin_variable
-var209
+var194
 -1
 2
 Atom not_needed_barricade_marketplace()
 NegatedAtom not_needed_barricade_marketplace()
 end_variable
 begin_variable
-var210
+var195
 -1
 2
 Atom not_needed_barricade_mill()
 NegatedAtom not_needed_barricade_mill()
 end_variable
 begin_variable
-var211
+var196
 -1
 2
 Atom not_needed_barricade_rural()
 NegatedAtom not_needed_barricade_rural()
 end_variable
 begin_variable
-var212
+var197
 -1
 2
 Atom not_needed_diverted_traffic_byeng_byeng()
 NegatedAtom not_needed_diverted_traffic_byeng_byeng()
 end_variable
 begin_variable
-var213
+var198
 -1
 2
 Atom not_needed_diverted_traffic_byeng_lake()
 NegatedAtom not_needed_diverted_traffic_byeng_lake()
 end_variable
 begin_variable
-var214
+var199
 -1
 2
 Atom not_needed_diverted_traffic_byeng_marketplace()
 NegatedAtom not_needed_diverted_traffic_byeng_marketplace()
 end_variable
 begin_variable
-var215
+var200
 -1
 2
 Atom not_needed_diverted_traffic_byeng_mill()
 NegatedAtom not_needed_diverted_traffic_byeng_mill()
 end_variable
 begin_variable
-var216
+var201
 -1
 2
 Atom not_needed_diverted_traffic_byeng_rural()
 NegatedAtom not_needed_diverted_traffic_byeng_rural()
 end_variable
 begin_variable
-var217
+var202
 -1
 2
 Atom not_needed_diverted_traffic_lake_byeng()
 NegatedAtom not_needed_diverted_traffic_lake_byeng()
 end_variable
 begin_variable
-var218
+var203
 -1
 2
 Atom not_needed_diverted_traffic_lake_lake()
 NegatedAtom not_needed_diverted_traffic_lake_lake()
 end_variable
 begin_variable
-var219
+var204
 -1
 2
 Atom not_needed_diverted_traffic_lake_marketplace()
 NegatedAtom not_needed_diverted_traffic_lake_marketplace()
 end_variable
 begin_variable
-var220
+var205
 -1
 2
 Atom not_needed_diverted_traffic_lake_mill()
 NegatedAtom not_needed_diverted_traffic_lake_mill()
 end_variable
 begin_variable
-var221
+var206
 -1
 2
 Atom not_needed_diverted_traffic_lake_rural()
 NegatedAtom not_needed_diverted_traffic_lake_rural()
 end_variable
 begin_variable
-var222
+var207
 -1
 2
 Atom not_needed_diverted_traffic_marketplace_byeng()
 NegatedAtom not_needed_diverted_traffic_marketplace_byeng()
 end_variable
 begin_variable
-var223
+var208
 -1
 2
 Atom not_needed_diverted_traffic_marketplace_lake()
 NegatedAtom not_needed_diverted_traffic_marketplace_lake()
 end_variable
 begin_variable
-var224
+var209
 -1
 2
 Atom not_needed_diverted_traffic_marketplace_marketplace()
 NegatedAtom not_needed_diverted_traffic_marketplace_marketplace()
 end_variable
 begin_variable
-var225
+var210
 -1
 2
 Atom not_needed_diverted_traffic_marketplace_mill()
 NegatedAtom not_needed_diverted_traffic_marketplace_mill()
 end_variable
 begin_variable
-var226
+var211
 -1
 2
 Atom not_needed_diverted_traffic_marketplace_rural()
 NegatedAtom not_needed_diverted_traffic_marketplace_rural()
 end_variable
 begin_variable
-var227
+var212
 -1
 2
 Atom not_needed_diverted_traffic_mill_byeng()
 NegatedAtom not_needed_diverted_traffic_mill_byeng()
 end_variable
 begin_variable
-var228
+var213
 -1
 2
 Atom not_needed_diverted_traffic_mill_lake()
 NegatedAtom not_needed_diverted_traffic_mill_lake()
 end_variable
 begin_variable
-var229
+var214
 -1
 2
 Atom not_needed_diverted_traffic_mill_marketplace()
 NegatedAtom not_needed_diverted_traffic_mill_marketplace()
 end_variable
 begin_variable
-var230
+var215
 -1
 2
 Atom not_needed_diverted_traffic_mill_mill()
 NegatedAtom not_needed_diverted_traffic_mill_mill()
 end_variable
 begin_variable
-var231
+var216
 -1
 2
 Atom not_needed_diverted_traffic_mill_rural()
 NegatedAtom not_needed_diverted_traffic_mill_rural()
 end_variable
 begin_variable
-var232
+var217
 -1
 2
 Atom not_needed_diverted_traffic_rural_byeng()
 NegatedAtom not_needed_diverted_traffic_rural_byeng()
 end_variable
 begin_variable
-var233
+var218
 -1
 2
 Atom not_needed_diverted_traffic_rural_lake()
 NegatedAtom not_needed_diverted_traffic_rural_lake()
 end_variable
 begin_variable
-var234
+var219
 -1
 2
 Atom not_needed_diverted_traffic_rural_marketplace()
 NegatedAtom not_needed_diverted_traffic_rural_marketplace()
 end_variable
 begin_variable
-var235
+var220
 -1
 2
 Atom not_needed_diverted_traffic_rural_mill()
 NegatedAtom not_needed_diverted_traffic_rural_mill()
 end_variable
 begin_variable
-var236
+var221
 -1
 2
 Atom not_needed_diverted_traffic_rural_rural()
 NegatedAtom not_needed_diverted_traffic_rural_rural()
 end_variable
 begin_variable
-var237
+var222
 -1
 2
 Atom not_needed_search_casualties_byeng()
 NegatedAtom not_needed_search_casualties_byeng()
 end_variable
 begin_variable
-var238
+var223
 -1
 2
 Atom positioned_policemen_byeng()
 NegatedAtom positioned_policemen_byeng()
 end_variable
 begin_variable
-var239
+var224
 -1
 2
 Atom positioned_policemen_lake()
 NegatedAtom positioned_policemen_lake()
 end_variable
 begin_variable
-var240
+var225
 -1
 2
 Atom positioned_policemen_marketplace()
 NegatedAtom positioned_policemen_marketplace()
 end_variable
 begin_variable
-var241
+var226
 -1
 2
 Atom positioned_policemen_mill()
 NegatedAtom positioned_policemen_mill()
 end_variable
 begin_variable
-var242
+var227
 -1
 2
 Atom positioned_policemen_rural()
 NegatedAtom positioned_policemen_rural()
 end_variable
 begin_variable
-var243
+var228
 -1
 2
 Atom prepared_evacuation_adminfire()
 NegatedAtom prepared_evacuation_adminfire()
 end_variable
 begin_variable
-var244
+var229
 -1
 2
 Atom prepared_evacuation_apachestation()
 NegatedAtom prepared_evacuation_apachestation()
 end_variable
 begin_variable
-var245
+var230
 -1
 2
 Atom prepared_evacuation_byeng()
 NegatedAtom prepared_evacuation_byeng()
 end_variable
 begin_variable
-var246
+var231
 -1
 2
 Atom prepared_evacuation_courtstation()
 NegatedAtom prepared_evacuation_courtstation()
 end_variable
 begin_variable
-var247
+var232
 -1
 2
 Atom prepared_evacuation_joseph()
 NegatedAtom prepared_evacuation_joseph()
 end_variable
 begin_variable
-var248
+var233
 -1
 2
 Atom prepared_evacuation_lake()
 NegatedAtom prepared_evacuation_lake()
 end_variable
 begin_variable
-var249
+var234
 -1
 2
 Atom prepared_evacuation_lukes()
 NegatedAtom prepared_evacuation_lukes()
 end_variable
 begin_variable
-var250
+var235
 -1
 2
 Atom prepared_evacuation_marketplace()
 NegatedAtom prepared_evacuation_marketplace()
 end_variable
 begin_variable
-var251
+var236
 -1
 2
 Atom prepared_evacuation_mesafire()
 NegatedAtom prepared_evacuation_mesafire()
 end_variable
 begin_variable
-var252
+var237
 -1
 2
 Atom prepared_evacuation_mill()
 NegatedAtom prepared_evacuation_mill()
 end_variable
 begin_variable
-var253
+var238
 -1
 2
 Atom prepared_evacuation_phxfire()
 NegatedAtom prepared_evacuation_phxfire()
 end_variable
 begin_variable
-var254
+var239
 -1
 2
 Atom prepared_evacuation_rural()
 NegatedAtom prepared_evacuation_rural()
 end_variable
 begin_variable
-var255
+var240
 -1
 2
 Atom prepared_evacuation_scottsfire()
 NegatedAtom prepared_evacuation_scottsfire()
 end_variable
 begin_variable
-var256
+var241
 -1
 2
 Atom prepared_evacuation_substation()
 NegatedAtom prepared_evacuation_substation()
 end_variable
 begin_variable
-var257
+var242
 -1
 2
 Atom searched_byeng()
 NegatedAtom searched_byeng()
 end_variable
 begin_variable
-var258
+var243
+-1
+2
+Atom sent_social_media_byeng()
+NegatedAtom sent_social_media_byeng()
+end_variable
+begin_variable
+var244
+-1
+2
+Atom sent_social_media_lake()
+NegatedAtom sent_social_media_lake()
+end_variable
+begin_variable
+var245
+-1
+2
+Atom sent_social_media_marketplace()
+NegatedAtom sent_social_media_marketplace()
+end_variable
+begin_variable
+var246
+-1
+2
+Atom sent_social_media_mill()
+NegatedAtom sent_social_media_mill()
+end_variable
+begin_variable
+var247
+-1
+2
+Atom sent_social_media_rural()
+NegatedAtom sent_social_media_rural()
+end_variable
+begin_variable
+var248
 -1
 2
 Atom traffic_diverted_byeng_byeng()
 NegatedAtom traffic_diverted_byeng_byeng()
 end_variable
 begin_variable
-var259
+var249
 -1
 2
 Atom traffic_diverted_byeng_lake()
 NegatedAtom traffic_diverted_byeng_lake()
 end_variable
 begin_variable
-var260
+var250
 -1
 2
 Atom traffic_diverted_byeng_marketplace()
 NegatedAtom traffic_diverted_byeng_marketplace()
 end_variable
 begin_variable
-var261
+var251
 -1
 2
 Atom traffic_diverted_byeng_mill()
 NegatedAtom traffic_diverted_byeng_mill()
 end_variable
 begin_variable
-var262
+var252
 -1
 2
 Atom traffic_diverted_byeng_rural()
 NegatedAtom traffic_diverted_byeng_rural()
 end_variable
 begin_variable
-var263
+var253
 -1
 2
 Atom traffic_diverted_lake_byeng()
 NegatedAtom traffic_diverted_lake_byeng()
 end_variable
 begin_variable
-var264
+var254
 -1
 2
 Atom traffic_diverted_lake_lake()
 NegatedAtom traffic_diverted_lake_lake()
 end_variable
 begin_variable
-var265
+var255
 -1
 2
 Atom traffic_diverted_lake_marketplace()
 NegatedAtom traffic_diverted_lake_marketplace()
 end_variable
 begin_variable
-var266
+var256
 -1
 2
 Atom traffic_diverted_lake_mill()
 NegatedAtom traffic_diverted_lake_mill()
 end_variable
 begin_variable
-var267
+var257
 -1
 2
 Atom traffic_diverted_lake_rural()
 NegatedAtom traffic_diverted_lake_rural()
 end_variable
 begin_variable
-var268
+var258
 -1
 2
 Atom traffic_diverted_marketplace_byeng()
 NegatedAtom traffic_diverted_marketplace_byeng()
 end_variable
 begin_variable
-var269
+var259
 -1
 2
 Atom traffic_diverted_marketplace_lake()
 NegatedAtom traffic_diverted_marketplace_lake()
 end_variable
 begin_variable
-var270
+var260
 -1
 2
 Atom traffic_diverted_marketplace_marketplace()
 NegatedAtom traffic_diverted_marketplace_marketplace()
 end_variable
 begin_variable
-var271
+var261
 -1
 2
 Atom traffic_diverted_marketplace_mill()
 NegatedAtom traffic_diverted_marketplace_mill()
 end_variable
 begin_variable
-var272
+var262
 -1
 2
 Atom traffic_diverted_marketplace_rural()
 NegatedAtom traffic_diverted_marketplace_rural()
 end_variable
 begin_variable
-var273
+var263
 -1
 2
 Atom traffic_diverted_mill_byeng()
 NegatedAtom traffic_diverted_mill_byeng()
 end_variable
 begin_variable
-var274
+var264
 -1
 2
 Atom traffic_diverted_mill_lake()
 NegatedAtom traffic_diverted_mill_lake()
 end_variable
 begin_variable
-var275
+var265
 -1
 2
 Atom traffic_diverted_mill_marketplace()
 NegatedAtom traffic_diverted_mill_marketplace()
 end_variable
 begin_variable
-var276
+var266
 -1
 2
 Atom traffic_diverted_mill_mill()
 NegatedAtom traffic_diverted_mill_mill()
 end_variable
 begin_variable
-var277
+var267
 -1
 2
 Atom traffic_diverted_mill_rural()
 NegatedAtom traffic_diverted_mill_rural()
 end_variable
 begin_variable
-var278
+var268
 -1
 2
 Atom traffic_diverted_rural_byeng()
 NegatedAtom traffic_diverted_rural_byeng()
 end_variable
 begin_variable
-var279
+var269
 -1
 2
 Atom traffic_diverted_rural_lake()
 NegatedAtom traffic_diverted_rural_lake()
 end_variable
 begin_variable
-var280
+var270
 -1
 2
 Atom traffic_diverted_rural_marketplace()
 NegatedAtom traffic_diverted_rural_marketplace()
 end_variable
 begin_variable
-var281
+var271
 -1
 2
 Atom traffic_diverted_rural_mill()
 NegatedAtom traffic_diverted_rural_mill()
 end_variable
 begin_variable
-var282
+var272
 -1
 2
 Atom traffic_diverted_rural_rural()
 NegatedAtom traffic_diverted_rural_rural()
 end_variable
 begin_variable
-var283
+var273
 -1
 2
 Atom updated_firechief()
 NegatedAtom updated_firechief()
 end_variable
 begin_variable
-var284
+var274
 -1
 2
 Atom updated_medichief()
 NegatedAtom updated_medichief()
 end_variable
 begin_variable
-var285
+var275
 -1
 2
 Atom updated_policechief()
 NegatedAtom updated_policechief()
 end_variable
 begin_variable
-var286
+var276
 -1
 2
 Atom updated_transportchief()
@@ -2021,38 +1948,38 @@ end_variable
 7
 begin_mutex_group
 2
-130 0
-130 1
+59 0
+63 1
 end_mutex_group
 begin_mutex_group
 2
-131 0
-131 1
+60 0
+63 1
 end_mutex_group
 begin_mutex_group
 2
-132 0
-132 1
+61 0
+63 1
 end_mutex_group
 begin_mutex_group
 2
-133 0
-133 1
+62 0
+63 1
 end_mutex_group
 begin_mutex_group
 2
-134 0
-138 0
+63 0
+63 1
 end_mutex_group
 begin_mutex_group
 2
-137 0
-138 0
+128 0
+129 0
 end_mutex_group
 begin_mutex_group
 2
-138 0
-138 1
+129 0
+129 1
 end_mutex_group
 begin_state
 1
@@ -2184,15 +2111,8 @@ begin_state
 1
 1
 1
-1
-1
-1
-1
-1
-1
-1
-1
-1
+0
+0
 0
 0
 0
@@ -2254,14 +2174,6 @@ begin_state
 0
 0
 0
-0
-0
-0
-0
-0
-0
-0
-0
 1
 1
 1
@@ -2293,6 +2205,11 @@ begin_state
 0
 0
 0
+1
+1
+1
+1
+1
 1
 1
 1
@@ -2346,303 +2263,72 @@ end_state
 begin_goal
 3
 8 0
-135 0
-137 0
+125 0
+128 0
 end_goal
-366
+301
 begin_operator
 address_media_firechief 
-3
-157 0
-191 0
-201 0
+4
+150 0
+183 0
+185 0
+186 0
 3
 0 8 -1 0
-0 163 0 1
-0 205 -1 0
+0 156 0 1
+0 190 -1 0
 2
 end_operator
 begin_operator
 address_media_firechief 
-3
-157 0
-192 0
-201 0
-3
-0 8 -1 0
-0 163 0 1
-0 205 -1 0
-2
-end_operator
-begin_operator
-address_media_firechief 
-3
-157 0
-193 0
-201 0
+4
+150 0
+183 0
+185 0
+187 0
 3
 0 8 -1 0
-0 163 0 1
-0 205 -1 0
-2
-end_operator
-begin_operator
-address_media_firechief 
-3
-157 0
-194 0
-201 0
-3
-0 8 -1 0
-0 163 0 1
-0 205 -1 0
-2
-end_operator
-begin_operator
-address_media_firechief 
-3
-157 0
-195 0
-201 0
-3
-0 8 -1 0
-0 163 0 1
-0 205 -1 0
-2
-end_operator
-begin_operator
-address_media_firechief 
-3
-157 0
-196 0
-201 0
-3
-0 8 -1 0
-0 163 0 1
-0 205 -1 0
-2
-end_operator
-begin_operator
-address_media_firechief 
-3
-157 0
-197 0
-201 0
-3
-0 8 -1 0
-0 163 0 1
-0 205 -1 0
-2
-end_operator
-begin_operator
-address_media_firechief 
-3
-157 0
-198 0
-201 0
-3
-0 8 -1 0
-0 163 0 1
-0 205 -1 0
-2
-end_operator
-begin_operator
-address_media_firechief 
-3
-157 0
-199 0
-201 0
-3
-0 8 -1 0
-0 163 0 1
-0 205 -1 0
-2
-end_operator
-begin_operator
-address_media_firechief 
-3
-157 0
-200 0
-201 0
-3
-0 8 -1 0
-0 163 0 1
-0 205 -1 0
-2
-end_operator
-begin_operator
-address_media_firechief 
-3
-157 0
-201 0
-202 0
-3
-0 8 -1 0
-0 163 0 1
-0 205 -1 0
+0 156 0 1
+0 190 -1 0
 2
 end_operator
 begin_operator
 address_media_medichief 
-1
-158 0
+2
+151 0
+183 0
 3
 0 8 -1 0
-0 163 0 1
-0 205 -1 0
+0 156 0 1
+0 190 -1 0
 2
 end_operator
 begin_operator
 address_media_policechief 
-1
-159 0
+2
+152 0
+183 0
 3
 0 8 -1 0
-0 163 0 1
-0 205 -1 0
+0 156 0 1
+0 190 -1 0
 2
 end_operator
 begin_operator
 address_media_transportchief 
-1
-160 0
+2
+153 0
+183 0
 3
 0 8 -1 0
-0 163 0 1
-0 205 -1 0
+0 156 0 1
+0 190 -1 0
 2
 end_operator
 begin_operator
 alert_firechief_adminfire 
-2
-191 0
-201 0
-1
-0 9 -1 0
-1
-end_operator
-begin_operator
-alert_firechief_adminfire 
-2
-191 0
-201 0
-1
-0 9 -1 0
-1
-end_operator
-begin_operator
-alert_firechief_adminfire 
-2
-192 0
-201 0
-1
-0 9 -1 0
-1
-end_operator
-begin_operator
-alert_firechief_adminfire 
-2
-194 0
-201 0
-1
-0 9 -1 0
-1
-end_operator
-begin_operator
-alert_firechief_adminfire 
-2
-194 0
-201 0
-1
-0 9 -1 0
-1
-end_operator
-begin_operator
-alert_firechief_adminfire 
-2
-195 0
-201 0
-1
-0 9 -1 0
-1
-end_operator
-begin_operator
-alert_firechief_adminfire 
-2
-195 0
-201 0
-1
-0 9 -1 0
-1
-end_operator
-begin_operator
-alert_firechief_adminfire 
-2
-195 0
-201 0
-1
-0 9 -1 0
-1
-end_operator
-begin_operator
-alert_firechief_adminfire 
-2
-196 0
-201 0
-1
-0 9 -1 0
-1
-end_operator
-begin_operator
-alert_firechief_adminfire 
-2
-196 0
-201 0
-1
-0 9 -1 0
-1
-end_operator
-begin_operator
-alert_firechief_adminfire 
-2
-197 0
-201 0
-1
-0 9 -1 0
-1
-end_operator
-begin_operator
-alert_firechief_adminfire 
-2
-197 0
-201 0
-1
-0 9 -1 0
-1
-end_operator
-begin_operator
-alert_firechief_adminfire 
-2
-198 0
-201 0
-1
-0 9 -1 0
-1
-end_operator
-begin_operator
-alert_firechief_adminfire 
-2
-200 0
-201 0
-1
-0 9 -1 0
-1
-end_operator
-begin_operator
-alert_firechief_adminfire 
-2
-200 0
-201 0
+0
 1
 0 9 -1 0
 1
@@ -2698,18 +2384,7 @@ alert_firechief_marketplace
 end_operator
 begin_operator
 alert_firechief_mesafire 
-2
-191 0
-201 0
-1
-0 17 -1 0
-1
-end_operator
-begin_operator
-alert_firechief_mesafire 
-2
-195 0
-201 0
+0
 1
 0 17 -1 0
 1
@@ -3047,12 +2722,13 @@ begin_operator
 attend_casualties_medichief_byeng 
 1
 54 0
-5
+6
 0 23 -1 0
-0 163 -1 0
-0 164 0 1
-0 205 -1 1
-0 206 -1 0
+0 156 -1 0
+0 157 0 1
+0 183 -1 1
+0 190 -1 1
+0 191 -1 0
 3
 end_operator
 begin_operator
@@ -3061,9 +2737,9 @@ barricade_firechief_byeng
 69 0
 4
 0 24 -1 0
-0 161 -1 0
-0 203 -1 1
-0 207 -1 0
+0 154 -1 0
+0 188 -1 1
+0 192 -1 0
 1
 end_operator
 begin_operator
@@ -3072,9 +2748,9 @@ barricade_firechief_lake
 70 0
 4
 0 25 -1 0
-0 161 -1 0
-0 203 -1 1
-0 208 -1 0
+0 154 -1 0
+0 188 -1 1
+0 193 -1 0
 1
 end_operator
 begin_operator
@@ -3083,9 +2759,9 @@ barricade_firechief_marketplace
 71 0
 4
 0 26 -1 0
-0 161 -1 0
-0 203 -1 1
-0 209 -1 0
+0 154 -1 0
+0 188 -1 1
+0 194 -1 0
 1
 end_operator
 begin_operator
@@ -3094,9 +2770,9 @@ barricade_firechief_mill
 72 0
 4
 0 27 -1 0
-0 161 -1 0
-0 203 -1 1
-0 210 -1 0
+0 154 -1 0
+0 188 -1 1
+0 195 -1 0
 1
 end_operator
 begin_operator
@@ -3105,9 +2781,9 @@ barricade_firechief_rural
 73 0
 4
 0 28 -1 0
-0 161 -1 0
-0 203 -1 1
-0 211 -1 0
+0 154 -1 0
+0 188 -1 1
+0 196 -1 0
 1
 end_operator
 begin_operator
@@ -3115,13 +2791,13 @@ block_road_transportchief_byeng_byeng
 3
 7 0
 84 0
-238 0
+223 0
 5
 0 29 -1 0
-0 162 -1 0
-0 165 -1 0
-0 204 -1 1
-0 212 -1 1
+0 155 -1 0
+0 158 -1 0
+0 189 -1 1
+0 197 -1 1
 2
 end_operator
 begin_operator
@@ -3130,14 +2806,14 @@ block_road_transportchief_byeng_lake
 7 0
 84 0
 85 0
-238 0
-239 0
+223 0
+224 0
 5
 0 30 -1 0
-0 162 -1 0
-0 166 -1 0
-0 204 -1 1
-0 213 -1 1
+0 155 -1 0
+0 159 -1 0
+0 189 -1 1
+0 198 -1 1
 2
 end_operator
 begin_operator
@@ -3146,14 +2822,14 @@ block_road_transportchief_byeng_marketplace
 7 0
 84 0
 86 0
-238 0
-240 0
+223 0
+225 0
 5
 0 31 -1 0
-0 162 -1 0
-0 167 -1 0
-0 204 -1 1
-0 214 -1 1
+0 155 -1 0
+0 160 -1 0
+0 189 -1 1
+0 199 -1 1
 2
 end_operator
 begin_operator
@@ -3162,14 +2838,14 @@ block_road_transportchief_byeng_mill
 7 0
 84 0
 87 0
-238 0
-241 0
+223 0
+226 0
 5
 0 32 -1 0
-0 162 -1 0
-0 168 -1 0
-0 204 -1 1
-0 215 -1 1
+0 155 -1 0
+0 161 -1 0
+0 189 -1 1
+0 200 -1 1
 2
 end_operator
 begin_operator
@@ -3178,14 +2854,14 @@ block_road_transportchief_byeng_rural
 7 0
 84 0
 88 0
-238 0
-242 0
+223 0
+227 0
 5
 0 33 -1 0
+0 155 -1 0
 0 162 -1 0
-0 169 -1 0
-0 204 -1 1
-0 216 -1 1
+0 189 -1 1
+0 201 -1 1
 2
 end_operator
 begin_operator
@@ -3194,14 +2870,14 @@ block_road_transportchief_lake_byeng
 7 0
 84 0
 85 0
-238 0
-239 0
+223 0
+224 0
 5
 0 34 -1 0
-0 162 -1 0
-0 170 -1 0
-0 204 -1 1
-0 217 -1 1
+0 155 -1 0
+0 163 -1 0
+0 189 -1 1
+0 202 -1 1
 2
 end_operator
 begin_operator
@@ -3209,13 +2885,13 @@ block_road_transportchief_lake_lake
 3
 7 0
 85 0
-239 0
+224 0
 5
 0 35 -1 0
-0 162 -1 0
-0 171 -1 0
-0 204 -1 1
-0 218 -1 1
+0 155 -1 0
+0 164 -1 0
+0 189 -1 1
+0 203 -1 1
 2
 end_operator
 begin_operator
@@ -3224,14 +2900,14 @@ block_road_transportchief_lake_marketplace
 7 0
 85 0
 86 0
-239 0
-240 0
+224 0
+225 0
 5
 0 36 -1 0
-0 162 -1 0
-0 172 -1 0
+0 155 -1 0
+0 165 -1 0
+0 189 -1 1
 0 204 -1 1
-0 219 -1 1
 2
 end_operator
 begin_operator
@@ -3240,14 +2916,14 @@ block_road_transportchief_lake_mill
 7 0
 85 0
 87 0
-239 0
-241 0
+224 0
+226 0
 5
 0 37 -1 0
-0 162 -1 0
-0 173 -1 0
-0 204 -1 1
-0 220 -1 1
+0 155 -1 0
+0 166 -1 0
+0 189 -1 1
+0 205 -1 1
 2
 end_operator
 begin_operator
@@ -3256,14 +2932,14 @@ block_road_transportchief_lake_rural
 7 0
 85 0
 88 0
-239 0
-242 0
+224 0
+227 0
 5
 0 38 -1 0
-0 162 -1 0
-0 174 -1 0
-0 204 -1 1
-0 221 -1 1
+0 155 -1 0
+0 167 -1 0
+0 189 -1 1
+0 206 -1 1
 2
 end_operator
 begin_operator
@@ -3272,14 +2948,14 @@ block_road_transportchief_marketplace_byeng
 7 0
 84 0
 86 0
-238 0
-240 0
+223 0
+225 0
 5
 0 39 -1 0
-0 162 -1 0
-0 175 -1 0
-0 204 -1 1
-0 222 -1 1
+0 155 -1 0
+0 168 -1 0
+0 189 -1 1
+0 207 -1 1
 2
 end_operator
 begin_operator
@@ -3288,14 +2964,14 @@ block_road_transportchief_marketplace_lake
 7 0
 85 0
 86 0
-239 0
-240 0
+224 0
+225 0
 5
 0 40 -1 0
-0 162 -1 0
-0 176 -1 0
-0 204 -1 1
-0 223 -1 1
+0 155 -1 0
+0 169 -1 0
+0 189 -1 1
+0 208 -1 1
 2
 end_operator
 begin_operator
@@ -3303,13 +2979,13 @@ block_road_transportchief_marketplace_marketplace
 3
 7 0
 86 0
-240 0
+225 0
 5
 0 41 -1 0
-0 162 -1 0
-0 177 -1 0
-0 204 -1 1
-0 224 -1 1
+0 155 -1 0
+0 170 -1 0
+0 189 -1 1
+0 209 -1 1
 2
 end_operator
 begin_operator
@@ -3318,14 +2994,14 @@ block_road_transportchief_marketplace_mill
 7 0
 86 0
 87 0
-240 0
-241 0
+225 0
+226 0
 5
 0 42 -1 0
-0 162 -1 0
-0 178 -1 0
-0 204 -1 1
-0 225 -1 1
+0 155 -1 0
+0 171 -1 0
+0 189 -1 1
+0 210 -1 1
 2
 end_operator
 begin_operator
@@ -3334,14 +3010,14 @@ block_road_transportchief_marketplace_rural
 7 0
 86 0
 88 0
-240 0
-242 0
+225 0
+227 0
 5
 0 43 -1 0
-0 162 -1 0
-0 179 -1 0
-0 204 -1 1
-0 226 -1 1
+0 155 -1 0
+0 172 -1 0
+0 189 -1 1
+0 211 -1 1
 2
 end_operator
 begin_operator
@@ -3350,14 +3026,14 @@ block_road_transportchief_mill_byeng
 7 0
 84 0
 87 0
-238 0
-241 0
+223 0
+226 0
 5
 0 44 -1 0
-0 162 -1 0
-0 180 -1 0
-0 204 -1 1
-0 227 -1 1
+0 155 -1 0
+0 173 -1 0
+0 189 -1 1
+0 212 -1 1
 2
 end_operator
 begin_operator
@@ -3366,14 +3042,14 @@ block_road_transportchief_mill_lake
 7 0
 85 0
 87 0
-239 0
-241 0
+224 0
+226 0
 5
 0 45 -1 0
-0 162 -1 0
-0 181 -1 0
-0 204 -1 1
-0 228 -1 1
+0 155 -1 0
+0 174 -1 0
+0 189 -1 1
+0 213 -1 1
 2
 end_operator
 begin_operator
@@ -3382,14 +3058,14 @@ block_road_transportchief_mill_marketplace
 7 0
 86 0
 87 0
-240 0
-241 0
+225 0
+226 0
 5
 0 46 -1 0
-0 162 -1 0
-0 182 -1 0
-0 204 -1 1
-0 229 -1 1
+0 155 -1 0
+0 175 -1 0
+0 189 -1 1
+0 214 -1 1
 2
 end_operator
 begin_operator
@@ -3397,13 +3073,13 @@ block_road_transportchief_mill_mill
 3
 7 0
 87 0
-241 0
+226 0
 5
 0 47 -1 0
-0 162 -1 0
-0 183 -1 0
-0 204 -1 1
-0 230 -1 1
+0 155 -1 0
+0 176 -1 0
+0 189 -1 1
+0 215 -1 1
 2
 end_operator
 begin_operator
@@ -3412,14 +3088,14 @@ block_road_transportchief_mill_rural
 7 0
 87 0
 88 0
-241 0
-242 0
+226 0
+227 0
 5
 0 48 -1 0
-0 162 -1 0
-0 184 -1 0
-0 204 -1 1
-0 231 -1 1
+0 155 -1 0
+0 177 -1 0
+0 189 -1 1
+0 216 -1 1
 2
 end_operator
 begin_operator
@@ -3428,14 +3104,14 @@ block_road_transportchief_rural_byeng
 7 0
 84 0
 88 0
-238 0
-242 0
+223 0
+227 0
 5
 0 49 -1 0
-0 162 -1 0
-0 185 -1 0
-0 204 -1 1
-0 232 -1 1
+0 155 -1 0
+0 178 -1 0
+0 189 -1 1
+0 217 -1 1
 2
 end_operator
 begin_operator
@@ -3444,14 +3120,14 @@ block_road_transportchief_rural_lake
 7 0
 85 0
 88 0
-239 0
-242 0
+224 0
+227 0
 5
 0 50 -1 0
-0 162 -1 0
-0 186 -1 0
-0 204 -1 1
-0 233 -1 1
+0 155 -1 0
+0 179 -1 0
+0 189 -1 1
+0 218 -1 1
 2
 end_operator
 begin_operator
@@ -3460,14 +3136,14 @@ block_road_transportchief_rural_marketplace
 7 0
 86 0
 88 0
-240 0
-242 0
+225 0
+227 0
 5
 0 51 -1 0
-0 162 -1 0
-0 187 -1 0
-0 204 -1 1
-0 234 -1 1
+0 155 -1 0
+0 180 -1 0
+0 189 -1 1
+0 219 -1 1
 2
 end_operator
 begin_operator
@@ -3476,14 +3152,14 @@ block_road_transportchief_rural_mill
 7 0
 87 0
 88 0
-241 0
-242 0
+226 0
+227 0
 5
 0 52 -1 0
-0 162 -1 0
-0 188 -1 0
-0 204 -1 1
-0 235 -1 1
+0 155 -1 0
+0 181 -1 0
+0 189 -1 1
+0 220 -1 1
 2
 end_operator
 begin_operator
@@ -3491,34 +3167,41 @@ block_road_transportchief_rural_rural
 3
 7 0
 88 0
-242 0
+227 0
 5
 0 53 -1 0
-0 162 -1 0
-0 189 -1 0
-0 204 -1 1
-0 236 -1 1
+0 155 -1 0
+0 182 -1 0
+0 189 -1 1
+0 221 -1 1
 2
+end_operator
+begin_operator
+contact_media_firechief 
+0
+1
+0 150 -1 0
+1
 end_operator
 begin_operator
 contact_media_medichief 
 0
 1
-0 158 -1 0
+0 151 -1 0
 1
 end_operator
 begin_operator
 contact_media_policechief 
 0
 1
-0 159 -1 0
+0 152 -1 0
 1
 end_operator
 begin_operator
 contact_media_transportchief 
 0
 1
-0 160 -1 0
+0 153 -1 0
 1
 end_operator
 begin_operator
@@ -3527,7 +3210,7 @@ deploy_ambulances_policechief_joseph_byeng
 3
 0 13 0 1
 0 54 -1 0
-0 139 0 1
+0 130 0 1
 2
 end_operator
 begin_operator
@@ -3536,7 +3219,7 @@ deploy_ambulances_policechief_joseph_lake
 3
 0 13 0 1
 0 55 -1 0
-0 139 0 1
+0 130 0 1
 2
 end_operator
 begin_operator
@@ -3545,7 +3228,7 @@ deploy_ambulances_policechief_joseph_marketplace
 3
 0 13 0 1
 0 56 -1 0
-0 139 0 1
+0 130 0 1
 2
 end_operator
 begin_operator
@@ -3554,7 +3237,7 @@ deploy_ambulances_policechief_joseph_mill
 3
 0 13 0 1
 0 57 -1 0
-0 139 0 1
+0 130 0 1
 2
 end_operator
 begin_operator
@@ -3563,7 +3246,7 @@ deploy_ambulances_policechief_joseph_rural
 3
 0 13 0 1
 0 58 -1 0
-0 139 0 1
+0 130 0 1
 2
 end_operator
 begin_operator
@@ -3572,7 +3255,7 @@ deploy_ambulances_policechief_lukes_byeng
 3
 0 15 0 1
 0 54 -1 0
-0 140 0 1
+0 131 0 1
 2
 end_operator
 begin_operator
@@ -3581,7 +3264,7 @@ deploy_ambulances_policechief_lukes_lake
 3
 0 15 0 1
 0 55 -1 0
-0 140 0 1
+0 131 0 1
 2
 end_operator
 begin_operator
@@ -3590,7 +3273,7 @@ deploy_ambulances_policechief_lukes_marketplace
 3
 0 15 0 1
 0 56 -1 0
-0 140 0 1
+0 131 0 1
 2
 end_operator
 begin_operator
@@ -3599,7 +3282,7 @@ deploy_ambulances_policechief_lukes_mill
 3
 0 15 0 1
 0 57 -1 0
-0 140 0 1
+0 131 0 1
 2
 end_operator
 begin_operator
@@ -3608,43 +3291,17 @@ deploy_ambulances_policechief_lukes_rural
 3
 0 15 0 1
 0 58 -1 0
-0 140 0 1
+0 131 0 1
 2
 end_operator
 begin_operator
 deploy_big_engines_firechief_mesafire_byeng 
-2
-191 0
-201 0
+0
 4
 0 17 -1 1
 0 59 -1 0
+0 63 1 2
 0 69 -1 0
-0 130 1 2
-4
-end_operator
-begin_operator
-deploy_big_engines_firechief_mesafire_byeng 
-2
-194 0
-201 0
-4
-0 17 -1 1
-0 59 -1 0
-0 69 -1 0
-0 130 1 2
-4
-end_operator
-begin_operator
-deploy_big_engines_firechief_mesafire_byeng 
-2
-195 0
-201 0
-4
-0 17 -1 1
-0 59 -1 0
-0 69 -1 0
-0 130 1 2
 4
 end_operator
 begin_operator
@@ -3653,8 +3310,8 @@ deploy_big_engines_firechief_mesafire_lake
 4
 0 17 -1 1
 0 60 -1 0
+0 63 1 2
 0 70 -1 0
-0 130 1 2
 4
 end_operator
 begin_operator
@@ -3663,8 +3320,8 @@ deploy_big_engines_firechief_mesafire_marketplace
 4
 0 17 -1 1
 0 61 -1 0
+0 63 1 2
 0 71 -1 0
-0 130 1 2
 4
 end_operator
 begin_operator
@@ -3673,123 +3330,26 @@ deploy_big_engines_firechief_mesafire_mill
 4
 0 17 -1 1
 0 62 -1 0
+0 63 1 2
 0 72 -1 0
-0 130 1 2
 4
 end_operator
 begin_operator
 deploy_big_engines_firechief_mesafire_rural 
 0
-4
+3
 0 17 -1 1
-0 63 -1 0
+0 63 1 0
 0 73 -1 0
-0 130 1 2
-4
-end_operator
-begin_operator
-deploy_big_engines_firechief_scottsfire_byeng 
-0
-4
-0 21 -1 1
-0 59 -1 0
-0 69 -1 0
-0 141 0 1
-4
-end_operator
-begin_operator
-deploy_big_engines_firechief_scottsfire_lake 
-0
-4
-0 21 -1 1
-0 60 -1 0
-0 70 -1 0
-0 141 0 1
-4
-end_operator
-begin_operator
-deploy_big_engines_firechief_scottsfire_marketplace 
-0
-4
-0 21 -1 1
-0 61 -1 0
-0 71 -1 0
-0 141 0 1
-4
-end_operator
-begin_operator
-deploy_big_engines_firechief_scottsfire_mill 
-0
-4
-0 21 -1 1
-0 62 -1 0
-0 72 -1 0
-0 141 0 1
-4
-end_operator
-begin_operator
-deploy_big_engines_firechief_scottsfire_rural 
-0
-4
-0 21 -1 1
-0 63 -1 0
-0 73 -1 0
-0 141 0 1
 4
 end_operator
 begin_operator
 deploy_bulldozers_firechief_adminfire_byeng 
-2
-191 0
-201 0
+0
 3
 0 9 0 1
 0 64 -1 0
-0 131 1 2
-3
-end_operator
-begin_operator
-deploy_bulldozers_firechief_adminfire_byeng 
-2
-194 0
-201 0
-3
-0 9 0 1
-0 64 -1 0
-0 131 1 2
-3
-end_operator
-begin_operator
-deploy_bulldozers_firechief_adminfire_byeng 
-2
-195 0
-201 0
-3
-0 9 0 1
-0 64 -1 0
-0 131 1 2
-3
-end_operator
-begin_operator
-deploy_bulldozers_firechief_adminfire_byeng 
-2
-196 0
-201 0
-3
-0 9 0 1
-0 64 -1 0
-0 131 1 2
-3
-end_operator
-begin_operator
-deploy_bulldozers_firechief_adminfire_byeng 
-2
-200 0
-201 0
-3
-0 9 0 1
-0 64 -1 0
-0 131 1 2
+0 132 0 1
 3
 end_operator
 begin_operator
@@ -3798,7 +3358,7 @@ deploy_bulldozers_firechief_adminfire_lake
 3
 0 9 0 1
 0 65 -1 0
-0 131 1 2
+0 132 0 1
 3
 end_operator
 begin_operator
@@ -3807,7 +3367,7 @@ deploy_bulldozers_firechief_adminfire_marketplace
 3
 0 9 0 1
 0 66 -1 0
-0 131 1 2
+0 132 0 1
 3
 end_operator
 begin_operator
@@ -3816,7 +3376,7 @@ deploy_bulldozers_firechief_adminfire_mill
 3
 0 9 0 1
 0 67 -1 0
-0 131 1 2
+0 132 0 1
 3
 end_operator
 begin_operator
@@ -3825,7 +3385,7 @@ deploy_bulldozers_firechief_adminfire_rural
 3
 0 9 0 1
 0 68 -1 0
-0 131 1 2
+0 132 0 1
 3
 end_operator
 begin_operator
@@ -3834,7 +3394,7 @@ deploy_bulldozers_firechief_phxfire_byeng
 3
 0 19 0 1
 0 64 -1 0
-0 142 0 1
+0 133 0 1
 3
 end_operator
 begin_operator
@@ -3843,7 +3403,7 @@ deploy_bulldozers_firechief_phxfire_lake
 3
 0 19 0 1
 0 65 -1 0
-0 142 0 1
+0 133 0 1
 3
 end_operator
 begin_operator
@@ -3852,7 +3412,7 @@ deploy_bulldozers_firechief_phxfire_marketplace
 3
 0 19 0 1
 0 66 -1 0
-0 142 0 1
+0 133 0 1
 3
 end_operator
 begin_operator
@@ -3861,7 +3421,7 @@ deploy_bulldozers_firechief_phxfire_mill
 3
 0 19 0 1
 0 67 -1 0
-0 142 0 1
+0 133 0 1
 3
 end_operator
 begin_operator
@@ -3870,7 +3430,7 @@ deploy_bulldozers_firechief_phxfire_rural
 3
 0 19 0 1
 0 68 -1 0
-0 142 0 1
+0 133 0 1
 3
 end_operator
 begin_operator
@@ -3879,7 +3439,7 @@ deploy_bulldozers_firechief_scottsfire_byeng
 3
 0 21 0 1
 0 64 -1 0
-0 143 0 1
+0 134 0 1
 3
 end_operator
 begin_operator
@@ -3888,7 +3448,7 @@ deploy_bulldozers_firechief_scottsfire_lake
 3
 0 21 0 1
 0 65 -1 0
-0 143 0 1
+0 134 0 1
 3
 end_operator
 begin_operator
@@ -3897,7 +3457,7 @@ deploy_bulldozers_firechief_scottsfire_marketplace
 3
 0 21 0 1
 0 66 -1 0
-0 143 0 1
+0 134 0 1
 3
 end_operator
 begin_operator
@@ -3906,7 +3466,7 @@ deploy_bulldozers_firechief_scottsfire_mill
 3
 0 21 0 1
 0 67 -1 0
-0 143 0 1
+0 134 0 1
 3
 end_operator
 begin_operator
@@ -3915,84 +3475,16 @@ deploy_bulldozers_firechief_scottsfire_rural
 3
 0 21 0 1
 0 68 -1 0
-0 143 0 1
+0 134 0 1
 3
 end_operator
 begin_operator
 deploy_helicopters_firechief_adminfire_byeng 
-2
-191 0
-201 0
+0
 3
 0 9 0 1
 0 74 -1 0
-0 132 1 2
-3
-end_operator
-begin_operator
-deploy_helicopters_firechief_adminfire_byeng 
-2
-192 0
-201 0
-3
-0 9 0 1
-0 74 -1 0
-0 132 1 2
-3
-end_operator
-begin_operator
-deploy_helicopters_firechief_adminfire_byeng 
-2
-194 0
-201 0
-3
-0 9 0 1
-0 74 -1 0
-0 132 1 2
-3
-end_operator
-begin_operator
-deploy_helicopters_firechief_adminfire_byeng 
-2
-195 0
-201 0
-3
-0 9 0 1
-0 74 -1 0
-0 132 1 2
-3
-end_operator
-begin_operator
-deploy_helicopters_firechief_adminfire_byeng 
-2
-196 0
-201 0
-3
-0 9 0 1
-0 74 -1 0
-0 132 1 2
-3
-end_operator
-begin_operator
-deploy_helicopters_firechief_adminfire_byeng 
-2
-197 0
-201 0
-3
-0 9 0 1
-0 74 -1 0
-0 132 1 2
-3
-end_operator
-begin_operator
-deploy_helicopters_firechief_adminfire_byeng 
-2
-200 0
-201 0
-3
-0 9 0 1
-0 74 -1 0
-0 132 1 2
+0 135 0 1
 3
 end_operator
 begin_operator
@@ -4001,7 +3493,7 @@ deploy_helicopters_firechief_adminfire_lake
 3
 0 9 0 1
 0 75 -1 0
-0 132 1 2
+0 135 0 1
 3
 end_operator
 begin_operator
@@ -4010,7 +3502,7 @@ deploy_helicopters_firechief_adminfire_marketplace
 3
 0 9 0 1
 0 76 -1 0
-0 132 1 2
+0 135 0 1
 3
 end_operator
 begin_operator
@@ -4019,7 +3511,7 @@ deploy_helicopters_firechief_adminfire_mill
 3
 0 9 0 1
 0 77 -1 0
-0 132 1 2
+0 135 0 1
 3
 end_operator
 begin_operator
@@ -4028,7 +3520,7 @@ deploy_helicopters_firechief_adminfire_rural
 3
 0 9 0 1
 0 78 -1 0
-0 132 1 2
+0 135 0 1
 3
 end_operator
 begin_operator
@@ -4037,7 +3529,7 @@ deploy_helicopters_firechief_phxfire_byeng
 3
 0 19 0 1
 0 74 -1 0
-0 144 0 1
+0 136 0 1
 3
 end_operator
 begin_operator
@@ -4046,7 +3538,7 @@ deploy_helicopters_firechief_phxfire_lake
 3
 0 19 0 1
 0 75 -1 0
-0 144 0 1
+0 136 0 1
 3
 end_operator
 begin_operator
@@ -4055,7 +3547,7 @@ deploy_helicopters_firechief_phxfire_marketplace
 3
 0 19 0 1
 0 76 -1 0
-0 144 0 1
+0 136 0 1
 3
 end_operator
 begin_operator
@@ -4064,7 +3556,7 @@ deploy_helicopters_firechief_phxfire_mill
 3
 0 19 0 1
 0 77 -1 0
-0 144 0 1
+0 136 0 1
 3
 end_operator
 begin_operator
@@ -4073,7 +3565,7 @@ deploy_helicopters_firechief_phxfire_rural
 3
 0 19 0 1
 0 78 -1 0
-0 144 0 1
+0 136 0 1
 3
 end_operator
 begin_operator
@@ -4083,7 +3575,7 @@ deploy_ladders_firechief_adminfire_byeng
 3
 0 9 0 1
 0 79 -1 0
-0 145 0 1
+0 137 0 1
 3
 end_operator
 begin_operator
@@ -4093,7 +3585,7 @@ deploy_ladders_firechief_adminfire_lake
 3
 0 9 0 1
 0 80 -1 0
-0 145 0 1
+0 137 0 1
 3
 end_operator
 begin_operator
@@ -4103,7 +3595,7 @@ deploy_ladders_firechief_adminfire_marketplace
 3
 0 9 0 1
 0 81 -1 0
-0 145 0 1
+0 137 0 1
 3
 end_operator
 begin_operator
@@ -4113,7 +3605,7 @@ deploy_ladders_firechief_adminfire_mill
 3
 0 9 0 1
 0 82 -1 0
-0 145 0 1
+0 137 0 1
 3
 end_operator
 begin_operator
@@ -4123,7 +3615,7 @@ deploy_ladders_firechief_adminfire_rural
 3
 0 9 0 1
 0 83 -1 0
-0 145 0 1
+0 137 0 1
 3
 end_operator
 begin_operator
@@ -4133,7 +3625,7 @@ deploy_ladders_firechief_mesafire_byeng
 3
 0 17 0 1
 0 79 -1 0
-0 146 0 1
+0 138 0 1
 3
 end_operator
 begin_operator
@@ -4143,7 +3635,7 @@ deploy_ladders_firechief_mesafire_lake
 3
 0 17 0 1
 0 80 -1 0
-0 146 0 1
+0 138 0 1
 3
 end_operator
 begin_operator
@@ -4153,7 +3645,7 @@ deploy_ladders_firechief_mesafire_marketplace
 3
 0 17 0 1
 0 81 -1 0
-0 146 0 1
+0 138 0 1
 3
 end_operator
 begin_operator
@@ -4163,7 +3655,7 @@ deploy_ladders_firechief_mesafire_mill
 3
 0 17 0 1
 0 82 -1 0
-0 146 0 1
+0 138 0 1
 3
 end_operator
 begin_operator
@@ -4173,7 +3665,7 @@ deploy_ladders_firechief_mesafire_rural
 3
 0 17 0 1
 0 83 -1 0
-0 146 0 1
+0 138 0 1
 3
 end_operator
 begin_operator
@@ -4183,7 +3675,7 @@ deploy_ladders_firechief_phxfire_byeng
 3
 0 19 0 1
 0 79 -1 0
-0 147 0 1
+0 139 0 1
 3
 end_operator
 begin_operator
@@ -4193,7 +3685,7 @@ deploy_ladders_firechief_phxfire_lake
 3
 0 19 0 1
 0 80 -1 0
-0 147 0 1
+0 139 0 1
 3
 end_operator
 begin_operator
@@ -4203,7 +3695,7 @@ deploy_ladders_firechief_phxfire_marketplace
 3
 0 19 0 1
 0 81 -1 0
-0 147 0 1
+0 139 0 1
 3
 end_operator
 begin_operator
@@ -4213,7 +3705,7 @@ deploy_ladders_firechief_phxfire_mill
 3
 0 19 0 1
 0 82 -1 0
-0 147 0 1
+0 139 0 1
 3
 end_operator
 begin_operator
@@ -4223,7 +3715,7 @@ deploy_ladders_firechief_phxfire_rural
 3
 0 19 0 1
 0 83 -1 0
-0 147 0 1
+0 139 0 1
 3
 end_operator
 begin_operator
@@ -4233,7 +3725,7 @@ deploy_ladders_firechief_scottsfire_byeng
 3
 0 21 0 1
 0 79 -1 0
-0 148 0 1
+0 140 0 1
 3
 end_operator
 begin_operator
@@ -4243,7 +3735,7 @@ deploy_ladders_firechief_scottsfire_lake
 3
 0 21 0 1
 0 80 -1 0
-0 148 0 1
+0 140 0 1
 3
 end_operator
 begin_operator
@@ -4253,7 +3745,7 @@ deploy_ladders_firechief_scottsfire_marketplace
 3
 0 21 0 1
 0 81 -1 0
-0 148 0 1
+0 140 0 1
 3
 end_operator
 begin_operator
@@ -4263,7 +3755,7 @@ deploy_ladders_firechief_scottsfire_mill
 3
 0 21 0 1
 0 82 -1 0
-0 148 0 1
+0 140 0 1
 3
 end_operator
 begin_operator
@@ -4273,7 +3765,7 @@ deploy_ladders_firechief_scottsfire_rural
 3
 0 21 0 1
 0 83 -1 0
-0 148 0 1
+0 140 0 1
 3
 end_operator
 begin_operator
@@ -4282,7 +3774,7 @@ deploy_police_cars_policechief_apachestation_byeng
 3
 0 10 0 1
 0 84 -1 0
-0 149 0 1
+0 141 0 1
 1
 end_operator
 begin_operator
@@ -4291,7 +3783,7 @@ deploy_police_cars_policechief_apachestation_lake
 3
 0 10 0 1
 0 85 -1 0
-0 149 0 1
+0 141 0 1
 1
 end_operator
 begin_operator
@@ -4300,7 +3792,7 @@ deploy_police_cars_policechief_apachestation_marketplace
 3
 0 10 0 1
 0 86 -1 0
-0 149 0 1
+0 141 0 1
 1
 end_operator
 begin_operator
@@ -4309,7 +3801,7 @@ deploy_police_cars_policechief_apachestation_mill
 3
 0 10 0 1
 0 87 -1 0
-0 149 0 1
+0 141 0 1
 1
 end_operator
 begin_operator
@@ -4318,7 +3810,7 @@ deploy_police_cars_policechief_apachestation_rural
 3
 0 10 0 1
 0 88 -1 0
-0 149 0 1
+0 141 0 1
 1
 end_operator
 begin_operator
@@ -4327,7 +3819,7 @@ deploy_police_cars_policechief_courtstation_byeng
 3
 0 12 0 1
 0 84 -1 0
-0 150 0 1
+0 142 0 1
 1
 end_operator
 begin_operator
@@ -4336,7 +3828,7 @@ deploy_police_cars_policechief_courtstation_lake
 3
 0 12 0 1
 0 85 -1 0
-0 150 0 1
+0 142 0 1
 1
 end_operator
 begin_operator
@@ -4345,7 +3837,7 @@ deploy_police_cars_policechief_courtstation_marketplace
 3
 0 12 0 1
 0 86 -1 0
-0 150 0 1
+0 142 0 1
 1
 end_operator
 begin_operator
@@ -4354,7 +3846,7 @@ deploy_police_cars_policechief_courtstation_mill
 3
 0 12 0 1
 0 87 -1 0
-0 150 0 1
+0 142 0 1
 1
 end_operator
 begin_operator
@@ -4363,7 +3855,7 @@ deploy_police_cars_policechief_courtstation_rural
 3
 0 12 0 1
 0 88 -1 0
-0 150 0 1
+0 142 0 1
 1
 end_operator
 begin_operator
@@ -4372,7 +3864,7 @@ deploy_police_cars_policechief_substation_byeng
 3
 0 22 0 1
 0 84 -1 0
-0 151 0 1
+0 143 0 1
 1
 end_operator
 begin_operator
@@ -4381,7 +3873,7 @@ deploy_police_cars_policechief_substation_lake
 3
 0 22 0 1
 0 85 -1 0
-0 151 0 1
+0 143 0 1
 1
 end_operator
 begin_operator
@@ -4390,7 +3882,7 @@ deploy_police_cars_policechief_substation_marketplace
 3
 0 22 0 1
 0 86 -1 0
-0 151 0 1
+0 143 0 1
 1
 end_operator
 begin_operator
@@ -4399,7 +3891,7 @@ deploy_police_cars_policechief_substation_mill
 3
 0 22 0 1
 0 87 -1 0
-0 151 0 1
+0 143 0 1
 1
 end_operator
 begin_operator
@@ -4408,106 +3900,16 @@ deploy_police_cars_policechief_substation_rural
 3
 0 22 0 1
 0 88 -1 0
-0 151 0 1
+0 143 0 1
 1
 end_operator
 begin_operator
 deploy_rescuers_firechief_adminfire_byeng 
-2
-191 0
-201 0
+0
 3
 0 9 -1 1
 0 89 -1 0
-0 133 1 2
-3
-end_operator
-begin_operator
-deploy_rescuers_firechief_adminfire_byeng 
-2
-192 0
-201 0
-3
-0 9 -1 1
-0 89 -1 0
-0 133 1 2
-3
-end_operator
-begin_operator
-deploy_rescuers_firechief_adminfire_byeng 
-2
-193 0
-201 0
-3
-0 9 -1 1
-0 89 -1 0
-0 133 1 2
-3
-end_operator
-begin_operator
-deploy_rescuers_firechief_adminfire_byeng 
-2
-194 0
-201 0
-3
-0 9 -1 1
-0 89 -1 0
-0 133 1 2
-3
-end_operator
-begin_operator
-deploy_rescuers_firechief_adminfire_byeng 
-2
-195 0
-201 0
-3
-0 9 -1 1
-0 89 -1 0
-0 133 1 2
-3
-end_operator
-begin_operator
-deploy_rescuers_firechief_adminfire_byeng 
-2
-196 0
-201 0
-3
-0 9 -1 1
-0 89 -1 0
-0 133 1 2
-3
-end_operator
-begin_operator
-deploy_rescuers_firechief_adminfire_byeng 
-2
-197 0
-201 0
-3
-0 9 -1 1
-0 89 -1 0
-0 133 1 2
-3
-end_operator
-begin_operator
-deploy_rescuers_firechief_adminfire_byeng 
-2
-198 0
-201 0
-3
-0 9 -1 1
-0 89 -1 0
-0 133 1 2
-3
-end_operator
-begin_operator
-deploy_rescuers_firechief_adminfire_byeng 
-2
-200 0
-201 0
-3
-0 9 -1 1
-0 89 -1 0
-0 133 1 2
+0 144 0 1
 3
 end_operator
 begin_operator
@@ -4516,7 +3918,7 @@ deploy_rescuers_firechief_adminfire_lake
 3
 0 9 -1 1
 0 90 -1 0
-0 133 1 2
+0 144 0 1
 3
 end_operator
 begin_operator
@@ -4525,7 +3927,7 @@ deploy_rescuers_firechief_adminfire_marketplace
 3
 0 9 -1 1
 0 91 -1 0
-0 133 1 2
+0 144 0 1
 3
 end_operator
 begin_operator
@@ -4534,7 +3936,7 @@ deploy_rescuers_firechief_adminfire_mill
 3
 0 9 -1 1
 0 92 -1 0
-0 133 1 2
+0 144 0 1
 3
 end_operator
 begin_operator
@@ -4543,7 +3945,7 @@ deploy_rescuers_firechief_adminfire_rural
 3
 0 9 -1 1
 0 93 -1 0
-0 133 1 2
+0 144 0 1
 3
 end_operator
 begin_operator
@@ -4552,7 +3954,7 @@ deploy_rescuers_firechief_mesafire_byeng
 3
 0 17 -1 1
 0 89 -1 0
-0 152 0 1
+0 145 0 1
 3
 end_operator
 begin_operator
@@ -4561,7 +3963,7 @@ deploy_rescuers_firechief_mesafire_lake
 3
 0 17 -1 1
 0 90 -1 0
-0 152 0 1
+0 145 0 1
 3
 end_operator
 begin_operator
@@ -4570,7 +3972,7 @@ deploy_rescuers_firechief_mesafire_marketplace
 3
 0 17 -1 1
 0 91 -1 0
-0 152 0 1
+0 145 0 1
 3
 end_operator
 begin_operator
@@ -4579,7 +3981,7 @@ deploy_rescuers_firechief_mesafire_mill
 3
 0 17 -1 1
 0 92 -1 0
-0 152 0 1
+0 145 0 1
 3
 end_operator
 begin_operator
@@ -4588,7 +3990,7 @@ deploy_rescuers_firechief_mesafire_rural
 3
 0 17 -1 1
 0 93 -1 0
-0 152 0 1
+0 145 0 1
 3
 end_operator
 begin_operator
@@ -4597,7 +3999,7 @@ deploy_rescuers_firechief_phxfire_byeng
 3
 0 19 -1 1
 0 89 -1 0
-0 153 0 1
+0 146 0 1
 3
 end_operator
 begin_operator
@@ -4606,7 +4008,7 @@ deploy_rescuers_firechief_phxfire_lake
 3
 0 19 -1 1
 0 90 -1 0
-0 153 0 1
+0 146 0 1
 3
 end_operator
 begin_operator
@@ -4615,7 +4017,7 @@ deploy_rescuers_firechief_phxfire_marketplace
 3
 0 19 -1 1
 0 91 -1 0
-0 153 0 1
+0 146 0 1
 3
 end_operator
 begin_operator
@@ -4624,7 +4026,7 @@ deploy_rescuers_firechief_phxfire_mill
 3
 0 19 -1 1
 0 92 -1 0
-0 153 0 1
+0 146 0 1
 3
 end_operator
 begin_operator
@@ -4633,7 +4035,7 @@ deploy_rescuers_firechief_phxfire_rural
 3
 0 19 -1 1
 0 93 -1 0
-0 153 0 1
+0 146 0 1
 3
 end_operator
 begin_operator
@@ -4642,7 +4044,7 @@ deploy_rescuers_firechief_scottsfire_byeng
 3
 0 21 -1 1
 0 89 -1 0
-0 154 0 1
+0 147 0 1
 3
 end_operator
 begin_operator
@@ -4651,7 +4053,7 @@ deploy_rescuers_firechief_scottsfire_lake
 3
 0 21 -1 1
 0 90 -1 0
-0 154 0 1
+0 147 0 1
 3
 end_operator
 begin_operator
@@ -4660,7 +4062,7 @@ deploy_rescuers_firechief_scottsfire_marketplace
 3
 0 21 -1 1
 0 91 -1 0
-0 154 0 1
+0 147 0 1
 3
 end_operator
 begin_operator
@@ -4669,7 +4071,7 @@ deploy_rescuers_firechief_scottsfire_mill
 3
 0 21 -1 1
 0 92 -1 0
-0 154 0 1
+0 147 0 1
 3
 end_operator
 begin_operator
@@ -4678,117 +4080,107 @@ deploy_rescuers_firechief_scottsfire_rural
 3
 0 21 -1 1
 0 93 -1 0
-0 154 0 1
+0 147 0 1
 3
 end_operator
 begin_operator
 deploy_small_engines_firechief_adminfire_byeng 
 0
-5
-0 9 0 1
+4
+0 9 -1 1
 0 69 -1 0
 0 94 -1 0
-0 155 0 1
-0 207 -1 1
+0 148 0 1
 2
 end_operator
 begin_operator
 deploy_small_engines_firechief_adminfire_lake 
 0
-5
-0 9 0 1
+4
+0 9 -1 1
 0 70 -1 0
 0 95 -1 0
-0 155 0 1
-0 208 -1 1
+0 148 0 1
 2
 end_operator
 begin_operator
 deploy_small_engines_firechief_adminfire_marketplace 
 0
-5
-0 9 0 1
+4
+0 9 -1 1
 0 71 -1 0
 0 96 -1 0
-0 155 0 1
-0 209 -1 1
+0 148 0 1
 2
 end_operator
 begin_operator
 deploy_small_engines_firechief_adminfire_mill 
 0
-5
-0 9 0 1
+4
+0 9 -1 1
 0 72 -1 0
 0 97 -1 0
-0 155 0 1
-0 210 -1 1
+0 148 0 1
 2
 end_operator
 begin_operator
 deploy_small_engines_firechief_adminfire_rural 
 0
-5
-0 9 0 1
+4
+0 9 -1 1
 0 73 -1 0
 0 98 -1 0
-0 155 0 1
-0 211 -1 1
+0 148 0 1
 2
 end_operator
 begin_operator
 deploy_small_engines_firechief_scottsfire_byeng 
 0
-5
-0 21 0 1
+4
+0 21 -1 1
 0 69 -1 0
 0 94 -1 0
-0 156 0 1
-0 207 -1 1
+0 149 0 1
 2
 end_operator
 begin_operator
 deploy_small_engines_firechief_scottsfire_lake 
 0
-5
-0 21 0 1
+4
+0 21 -1 1
 0 70 -1 0
 0 95 -1 0
-0 156 0 1
-0 208 -1 1
+0 149 0 1
 2
 end_operator
 begin_operator
 deploy_small_engines_firechief_scottsfire_marketplace 
 0
-5
-0 21 0 1
+4
+0 21 -1 1
 0 71 -1 0
 0 96 -1 0
-0 156 0 1
-0 209 -1 1
+0 149 0 1
 2
 end_operator
 begin_operator
 deploy_small_engines_firechief_scottsfire_mill 
 0
-5
-0 21 0 1
+4
+0 21 -1 1
 0 72 -1 0
 0 97 -1 0
-0 156 0 1
-0 210 -1 1
+0 149 0 1
 2
 end_operator
 begin_operator
 deploy_small_engines_firechief_scottsfire_rural 
 0
-5
-0 21 0 1
+4
+0 21 -1 1
 0 73 -1 0
 0 98 -1 0
-0 156 0 1
-0 211 -1 1
+0 149 0 1
 2
 end_operator
 begin_operator
@@ -4797,9 +4189,9 @@ divert_traffic_transportchief_byeng_byeng
 7 0
 29 0
 3
-0 165 -1 1
-0 212 -1 0
-0 258 -1 0
+0 158 -1 1
+0 197 -1 0
+0 248 -1 0
 1
 end_operator
 begin_operator
@@ -4808,9 +4200,9 @@ divert_traffic_transportchief_byeng_lake
 7 0
 30 0
 3
-0 166 -1 1
-0 213 -1 0
-0 259 -1 0
+0 159 -1 1
+0 198 -1 0
+0 249 -1 0
 1
 end_operator
 begin_operator
@@ -4819,9 +4211,9 @@ divert_traffic_transportchief_byeng_marketplace
 7 0
 31 0
 3
-0 167 -1 1
-0 214 -1 0
-0 260 -1 0
+0 160 -1 1
+0 199 -1 0
+0 250 -1 0
 1
 end_operator
 begin_operator
@@ -4830,9 +4222,9 @@ divert_traffic_transportchief_byeng_mill
 7 0
 32 0
 3
-0 168 -1 1
-0 215 -1 0
-0 261 -1 0
+0 161 -1 1
+0 200 -1 0
+0 251 -1 0
 1
 end_operator
 begin_operator
@@ -4841,9 +4233,9 @@ divert_traffic_transportchief_byeng_rural
 7 0
 33 0
 3
-0 169 -1 1
-0 216 -1 0
-0 262 -1 0
+0 162 -1 1
+0 201 -1 0
+0 252 -1 0
 1
 end_operator
 begin_operator
@@ -4852,9 +4244,9 @@ divert_traffic_transportchief_lake_byeng
 7 0
 34 0
 3
-0 170 -1 1
-0 217 -1 0
-0 263 -1 0
+0 163 -1 1
+0 202 -1 0
+0 253 -1 0
 1
 end_operator
 begin_operator
@@ -4863,9 +4255,9 @@ divert_traffic_transportchief_lake_lake
 7 0
 35 0
 3
-0 171 -1 1
-0 218 -1 0
-0 264 -1 0
+0 164 -1 1
+0 203 -1 0
+0 254 -1 0
 1
 end_operator
 begin_operator
@@ -4874,9 +4266,9 @@ divert_traffic_transportchief_lake_marketplace
 7 0
 36 0
 3
-0 172 -1 1
-0 219 -1 0
-0 265 -1 0
+0 165 -1 1
+0 204 -1 0
+0 255 -1 0
 1
 end_operator
 begin_operator
@@ -4885,9 +4277,9 @@ divert_traffic_transportchief_lake_mill
 7 0
 37 0
 3
-0 173 -1 1
-0 220 -1 0
-0 266 -1 0
+0 166 -1 1
+0 205 -1 0
+0 256 -1 0
 1
 end_operator
 begin_operator
@@ -4896,9 +4288,9 @@ divert_traffic_transportchief_lake_rural
 7 0
 38 0
 3
-0 174 -1 1
-0 221 -1 0
-0 267 -1 0
+0 167 -1 1
+0 206 -1 0
+0 257 -1 0
 1
 end_operator
 begin_operator
@@ -4907,9 +4299,9 @@ divert_traffic_transportchief_marketplace_byeng
 7 0
 39 0
 3
-0 175 -1 1
-0 222 -1 0
-0 268 -1 0
+0 168 -1 1
+0 207 -1 0
+0 258 -1 0
 1
 end_operator
 begin_operator
@@ -4918,9 +4310,9 @@ divert_traffic_transportchief_marketplace_lake
 7 0
 40 0
 3
-0 176 -1 1
-0 223 -1 0
-0 269 -1 0
+0 169 -1 1
+0 208 -1 0
+0 259 -1 0
 1
 end_operator
 begin_operator
@@ -4929,9 +4321,9 @@ divert_traffic_transportchief_marketplace_marketplace
 7 0
 41 0
 3
-0 177 -1 1
-0 224 -1 0
-0 270 -1 0
+0 170 -1 1
+0 209 -1 0
+0 260 -1 0
 1
 end_operator
 begin_operator
@@ -4940,9 +4332,9 @@ divert_traffic_transportchief_marketplace_mill
 7 0
 42 0
 3
-0 178 -1 1
-0 225 -1 0
-0 271 -1 0
+0 171 -1 1
+0 210 -1 0
+0 261 -1 0
 1
 end_operator
 begin_operator
@@ -4951,9 +4343,9 @@ divert_traffic_transportchief_marketplace_rural
 7 0
 43 0
 3
-0 179 -1 1
-0 226 -1 0
-0 272 -1 0
+0 172 -1 1
+0 211 -1 0
+0 262 -1 0
 1
 end_operator
 begin_operator
@@ -4962,9 +4354,9 @@ divert_traffic_transportchief_mill_byeng
 7 0
 44 0
 3
-0 180 -1 1
-0 227 -1 0
-0 273 -1 0
+0 173 -1 1
+0 212 -1 0
+0 263 -1 0
 1
 end_operator
 begin_operator
@@ -4973,9 +4365,9 @@ divert_traffic_transportchief_mill_lake
 7 0
 45 0
 3
-0 181 -1 1
-0 228 -1 0
-0 274 -1 0
+0 174 -1 1
+0 213 -1 0
+0 264 -1 0
 1
 end_operator
 begin_operator
@@ -4984,9 +4376,9 @@ divert_traffic_transportchief_mill_marketplace
 7 0
 46 0
 3
-0 182 -1 1
-0 229 -1 0
-0 275 -1 0
+0 175 -1 1
+0 214 -1 0
+0 265 -1 0
 1
 end_operator
 begin_operator
@@ -4995,9 +4387,9 @@ divert_traffic_transportchief_mill_mill
 7 0
 47 0
 3
-0 183 -1 1
-0 230 -1 0
-0 276 -1 0
+0 176 -1 1
+0 215 -1 0
+0 266 -1 0
 1
 end_operator
 begin_operator
@@ -5006,9 +4398,9 @@ divert_traffic_transportchief_mill_rural
 7 0
 48 0
 3
-0 184 -1 1
-0 231 -1 0
-0 277 -1 0
+0 177 -1 1
+0 216 -1 0
+0 267 -1 0
 1
 end_operator
 begin_operator
@@ -5017,9 +4409,9 @@ divert_traffic_transportchief_rural_byeng
 7 0
 49 0
 3
-0 185 -1 1
-0 232 -1 0
-0 278 -1 0
+0 178 -1 1
+0 217 -1 0
+0 268 -1 0
 1
 end_operator
 begin_operator
@@ -5028,9 +4420,9 @@ divert_traffic_transportchief_rural_lake
 7 0
 50 0
 3
-0 186 -1 1
-0 233 -1 0
-0 279 -1 0
+0 179 -1 1
+0 218 -1 0
+0 269 -1 0
 1
 end_operator
 begin_operator
@@ -5039,9 +4431,9 @@ divert_traffic_transportchief_rural_marketplace
 7 0
 51 0
 3
-0 187 -1 1
-0 234 -1 0
-0 280 -1 0
+0 180 -1 1
+0 219 -1 0
+0 270 -1 0
 1
 end_operator
 begin_operator
@@ -5050,9 +4442,9 @@ divert_traffic_transportchief_rural_mill
 7 0
 52 0
 3
-0 188 -1 1
-0 235 -1 0
-0 281 -1 0
+0 181 -1 1
+0 220 -1 0
+0 271 -1 0
 1
 end_operator
 begin_operator
@@ -5061,9 +4453,9 @@ divert_traffic_transportchief_rural_rural
 7 0
 53 0
 3
-0 189 -1 1
-0 236 -1 0
-0 282 -1 0
+0 182 -1 1
+0 221 -1 0
+0 272 -1 0
 1
 end_operator
 begin_operator
@@ -5071,8 +4463,8 @@ evacuate_policechief_byeng_byeng
 4
 29 0
 84 0
-238 0
-245 0
+223 0
+230 0
 1
 0 99 -1 0
 5
@@ -5082,8 +4474,8 @@ evacuate_policechief_byeng_lake
 4
 30 0
 84 0
-238 0
-245 0
+223 0
+230 0
 1
 0 100 -1 0
 5
@@ -5093,8 +4485,8 @@ evacuate_policechief_byeng_marketplace
 4
 31 0
 84 0
-238 0
-245 0
+223 0
+230 0
 1
 0 101 -1 0
 5
@@ -5104,8 +4496,8 @@ evacuate_policechief_byeng_mill
 4
 32 0
 84 0
-238 0
-245 0
+223 0
+230 0
 1
 0 102 -1 0
 5
@@ -5115,8 +4507,8 @@ evacuate_policechief_byeng_rural
 4
 33 0
 84 0
-238 0
-245 0
+223 0
+230 0
 1
 0 103 -1 0
 5
@@ -5126,8 +4518,8 @@ evacuate_policechief_lake_byeng
 4
 34 0
 85 0
-239 0
-248 0
+224 0
+233 0
 1
 0 104 -1 0
 5
@@ -5137,8 +4529,8 @@ evacuate_policechief_lake_lake
 4
 35 0
 85 0
-239 0
-248 0
+224 0
+233 0
 1
 0 105 -1 0
 5
@@ -5148,8 +4540,8 @@ evacuate_policechief_lake_marketplace
 4
 36 0
 85 0
-239 0
-248 0
+224 0
+233 0
 1
 0 106 -1 0
 5
@@ -5159,8 +4551,8 @@ evacuate_policechief_lake_mill
 4
 37 0
 85 0
-239 0
-248 0
+224 0
+233 0
 1
 0 107 -1 0
 5
@@ -5170,8 +4562,8 @@ evacuate_policechief_lake_rural
 4
 38 0
 85 0
-239 0
-248 0
+224 0
+233 0
 1
 0 108 -1 0
 5
@@ -5181,8 +4573,8 @@ evacuate_policechief_marketplace_byeng
 4
 39 0
 86 0
-240 0
-250 0
+225 0
+235 0
 1
 0 109 -1 0
 5
@@ -5192,8 +4584,8 @@ evacuate_policechief_marketplace_lake
 4
 40 0
 86 0
-240 0
-250 0
+225 0
+235 0
 1
 0 110 -1 0
 5
@@ -5203,8 +4595,8 @@ evacuate_policechief_marketplace_marketplace
 4
 41 0
 86 0
-240 0
-250 0
+225 0
+235 0
 1
 0 111 -1 0
 5
@@ -5214,8 +4606,8 @@ evacuate_policechief_marketplace_mill
 4
 42 0
 86 0
-240 0
-250 0
+225 0
+235 0
 1
 0 112 -1 0
 5
@@ -5225,8 +4617,8 @@ evacuate_policechief_marketplace_rural
 4
 43 0
 86 0
-240 0
-250 0
+225 0
+235 0
 1
 0 113 -1 0
 5
@@ -5236,8 +4628,8 @@ evacuate_policechief_mill_byeng
 4
 44 0
 87 0
-241 0
-252 0
+226 0
+237 0
 1
 0 114 -1 0
 5
@@ -5247,8 +4639,8 @@ evacuate_policechief_mill_lake
 4
 45 0
 87 0
-241 0
-252 0
+226 0
+237 0
 1
 0 115 -1 0
 5
@@ -5258,8 +4650,8 @@ evacuate_policechief_mill_marketplace
 4
 46 0
 87 0
-241 0
-252 0
+226 0
+237 0
 1
 0 116 -1 0
 5
@@ -5269,8 +4661,8 @@ evacuate_policechief_mill_mill
 4
 47 0
 87 0
-241 0
-252 0
+226 0
+237 0
 1
 0 117 -1 0
 5
@@ -5280,8 +4672,8 @@ evacuate_policechief_mill_rural
 4
 48 0
 87 0
-241 0
-252 0
+226 0
+237 0
 1
 0 118 -1 0
 5
@@ -5291,8 +4683,8 @@ evacuate_policechief_rural_byeng
 4
 49 0
 88 0
-242 0
-254 0
+227 0
+239 0
 1
 0 119 -1 0
 5
@@ -5302,8 +4694,8 @@ evacuate_policechief_rural_lake
 4
 50 0
 88 0
-242 0
-254 0
+227 0
+239 0
 1
 0 120 -1 0
 5
@@ -5313,8 +4705,8 @@ evacuate_policechief_rural_marketplace
 4
 51 0
 88 0
-242 0
-254 0
+227 0
+239 0
 1
 0 121 -1 0
 5
@@ -5324,8 +4716,8 @@ evacuate_policechief_rural_mill
 4
 52 0
 88 0
-242 0
-254 0
+227 0
+239 0
 1
 0 122 -1 0
 5
@@ -5335,214 +4727,81 @@ evacuate_policechief_rural_rural
 4
 53 0
 88 0
-242 0
-254 0
+227 0
+239 0
 1
 0 123 -1 0
 5
 end_operator
 begin_operator
 explain_obs_address_media_firechief_1 
-2
-136 0
-157 0
+3
+127 0
+150 0
+183 0
 7
 0 8 -1 0
 0 124 -1 0
-0 135 -1 0
-0 163 0 1
-0 190 -1 1
-0 201 -1 1
-0 205 -1 0
-2
-end_operator
-begin_operator
-explain_obs_alert_firechief_adminfire_1 
-1
-129 0
-3
-0 9 -1 0
 0 125 -1 0
-0 191 -1 1
-1
-end_operator
-begin_operator
-explain_obs_alert_firechief_adminfire_2 
-1
-131 0
-3
-0 9 -1 0
-0 126 -1 0
-0 192 -1 1
-1
-end_operator
-begin_operator
-explain_obs_alert_firechief_adminfire_3 
-1
-132 0
-3
-0 9 -1 0
-0 127 -1 0
-0 193 -1 1
-1
-end_operator
-begin_operator
-explain_obs_alert_firechief_mesafire_1 
-1
-125 0
-3
-0 17 -1 0
-0 128 -1 0
-0 194 -1 1
-1
-end_operator
-begin_operator
-explain_obs_contact_media_firechief_1 
-0
-3
-0 129 -1 0
-0 157 -1 0
-0 195 -1 1
-1
-end_operator
-begin_operator
-explain_obs_deploy_big_engines_firechief_mesafire_byeng_1 
-1
-128 0
-5
-0 17 -1 1
-0 59 -1 0
-0 69 -1 0
-0 130 1 0
-0 196 -1 1
-4
-end_operator
-begin_operator
-explain_obs_deploy_bulldozers_firechief_adminfire_byeng_1 
-1
-134 0
-4
-0 9 0 1
-0 64 -1 0
-0 131 1 0
-0 197 -1 1
-3
-end_operator
-begin_operator
-explain_obs_deploy_helicopters_firechief_adminfire_byeng_1 
-1
-126 0
-4
-0 9 0 1
-0 74 -1 0
-0 132 1 0
-0 198 -1 1
-3
-end_operator
-begin_operator
-explain_obs_deploy_rescuers_firechief_adminfire_byeng_1 
-1
-127 0
-4
-0 9 -1 1
-0 89 -1 0
-0 133 1 0
-0 199 -1 1
-3
-end_operator
-begin_operator
-explain_obs_extinguish_big_fire_firechief_byeng_1 
+0 156 0 1
+0 184 -1 1
+0 185 -1 1
+0 190 -1 0
 2
-59 0
-130 0
-5
-0 134 -1 0
-0 137 -1 0
-0 138 0 1
-0 200 -1 1
-0 237 -1 1
-1
 end_operator
 begin_operator
 explain_obs_search_casualties_firechief_byeng_1 
-5
+4
 64 0
 74 0
 89 0
-133 0
-137 0
+128 0
 7
-0 136 -1 0
-0 163 -1 0
-0 164 -1 0
-0 202 -1 1
-0 205 -1 1
-0 206 -1 1
-0 257 -1 0
+0 126 -1 0
+0 156 -1 0
+0 157 -1 0
+0 186 -1 1
+0 190 -1 1
+0 191 -1 1
+0 242 -1 0
 3
 end_operator
 begin_operator
+explain_obs_send_social_media_byeng_byeng_1 
+2
+126 0
+242 0
+4
+0 127 -1 0
+0 183 -1 1
+0 187 -1 1
+0 243 -1 0
+5
+end_operator
+begin_operator
 extinguish_big_fire_firechief_byeng 
-3
-59 0
-191 0
-201 0
-3
-0 137 -1 0
-0 138 0 1
-0 237 -1 1
 1
-end_operator
-begin_operator
-extinguish_big_fire_firechief_byeng 
-3
 59 0
-194 0
-201 0
 3
-0 137 -1 0
-0 138 0 1
-0 237 -1 1
-1
-end_operator
-begin_operator
-extinguish_big_fire_firechief_byeng 
-3
-59 0
-195 0
-201 0
-3
-0 137 -1 0
-0 138 0 1
-0 237 -1 1
-1
-end_operator
-begin_operator
-extinguish_big_fire_firechief_byeng 
-3
-59 0
-196 0
-201 0
-3
-0 137 -1 0
-0 138 0 1
-0 237 -1 1
+0 128 -1 0
+0 129 0 1
+0 222 -1 1
 1
 end_operator
 begin_operator
 issue_local_alert_firechief 
 1
-157 0
+150 0
 3
 0 4 -1 0
-0 161 -1 1
-0 203 -1 0
+0 154 -1 1
+0 188 -1 0
 1
 end_operator
 begin_operator
 issue_local_alert_medichief 
 1
-158 0
+151 0
 1
 0 5 -1 0
 1
@@ -5550,7 +4809,7 @@ end_operator
 begin_operator
 issue_local_alert_policechief 
 1
-159 0
+152 0
 1
 0 6 -1 0
 1
@@ -5558,11 +4817,11 @@ end_operator
 begin_operator
 issue_local_alert_transportchief 
 1
-160 0
+153 0
 3
 0 7 -1 0
-0 162 -1 1
-0 204 -1 0
+0 155 -1 1
+0 189 -1 0
 1
 end_operator
 begin_operator
@@ -5570,7 +4829,7 @@ position_policemen_policechief_apachestation_byeng
 0
 2
 0 10 0 1
-0 238 -1 0
+0 223 -1 0
 1
 end_operator
 begin_operator
@@ -5578,7 +4837,7 @@ position_policemen_policechief_apachestation_lake
 0
 2
 0 10 0 1
-0 239 -1 0
+0 224 -1 0
 1
 end_operator
 begin_operator
@@ -5586,7 +4845,7 @@ position_policemen_policechief_apachestation_marketplace
 0
 2
 0 10 0 1
-0 240 -1 0
+0 225 -1 0
 1
 end_operator
 begin_operator
@@ -5594,7 +4853,7 @@ position_policemen_policechief_apachestation_mill
 0
 2
 0 10 0 1
-0 241 -1 0
+0 226 -1 0
 1
 end_operator
 begin_operator
@@ -5602,7 +4861,7 @@ position_policemen_policechief_apachestation_rural
 0
 2
 0 10 0 1
-0 242 -1 0
+0 227 -1 0
 1
 end_operator
 begin_operator
@@ -5610,7 +4869,7 @@ position_policemen_policechief_courtstation_byeng
 0
 2
 0 12 0 1
-0 238 -1 0
+0 223 -1 0
 1
 end_operator
 begin_operator
@@ -5618,7 +4877,7 @@ position_policemen_policechief_courtstation_lake
 0
 2
 0 12 0 1
-0 239 -1 0
+0 224 -1 0
 1
 end_operator
 begin_operator
@@ -5626,7 +4885,7 @@ position_policemen_policechief_courtstation_marketplace
 0
 2
 0 12 0 1
-0 240 -1 0
+0 225 -1 0
 1
 end_operator
 begin_operator
@@ -5634,7 +4893,7 @@ position_policemen_policechief_courtstation_mill
 0
 2
 0 12 0 1
-0 241 -1 0
+0 226 -1 0
 1
 end_operator
 begin_operator
@@ -5642,7 +4901,7 @@ position_policemen_policechief_courtstation_rural
 0
 2
 0 12 0 1
-0 242 -1 0
+0 227 -1 0
 1
 end_operator
 begin_operator
@@ -5650,7 +4909,7 @@ position_policemen_policechief_substation_byeng
 0
 2
 0 22 0 1
-0 238 -1 0
+0 223 -1 0
 1
 end_operator
 begin_operator
@@ -5658,7 +4917,7 @@ position_policemen_policechief_substation_lake
 0
 2
 0 22 0 1
-0 239 -1 0
+0 224 -1 0
 1
 end_operator
 begin_operator
@@ -5666,7 +4925,7 @@ position_policemen_policechief_substation_marketplace
 0
 2
 0 22 0 1
-0 240 -1 0
+0 225 -1 0
 1
 end_operator
 begin_operator
@@ -5674,7 +4933,7 @@ position_policemen_policechief_substation_mill
 0
 2
 0 22 0 1
-0 241 -1 0
+0 226 -1 0
 1
 end_operator
 begin_operator
@@ -5682,7 +4941,7 @@ position_policemen_policechief_substation_rural
 0
 2
 0 22 0 1
-0 242 -1 0
+0 227 -1 0
 1
 end_operator
 begin_operator
@@ -5690,7 +4949,7 @@ prepare_evacuation_policechief_adminfire
 1
 6 0
 1
-0 243 -1 0
+0 228 -1 0
 1
 end_operator
 begin_operator
@@ -5698,7 +4957,7 @@ prepare_evacuation_policechief_apachestation
 1
 6 0
 1
-0 244 -1 0
+0 229 -1 0
 1
 end_operator
 begin_operator
@@ -5706,7 +4965,7 @@ prepare_evacuation_policechief_byeng
 1
 6 0
 1
-0 245 -1 0
+0 230 -1 0
 1
 end_operator
 begin_operator
@@ -5714,7 +4973,7 @@ prepare_evacuation_policechief_courtstation
 1
 6 0
 1
-0 246 -1 0
+0 231 -1 0
 1
 end_operator
 begin_operator
@@ -5722,7 +4981,7 @@ prepare_evacuation_policechief_joseph
 1
 6 0
 1
-0 247 -1 0
+0 232 -1 0
 1
 end_operator
 begin_operator
@@ -5730,7 +4989,7 @@ prepare_evacuation_policechief_lake
 1
 6 0
 1
-0 248 -1 0
+0 233 -1 0
 1
 end_operator
 begin_operator
@@ -5738,7 +4997,7 @@ prepare_evacuation_policechief_lukes
 1
 6 0
 1
-0 249 -1 0
+0 234 -1 0
 1
 end_operator
 begin_operator
@@ -5746,7 +5005,7 @@ prepare_evacuation_policechief_marketplace
 1
 6 0
 1
-0 250 -1 0
+0 235 -1 0
 1
 end_operator
 begin_operator
@@ -5754,7 +5013,7 @@ prepare_evacuation_policechief_mesafire
 1
 6 0
 1
-0 251 -1 0
+0 236 -1 0
 1
 end_operator
 begin_operator
@@ -5762,7 +5021,7 @@ prepare_evacuation_policechief_mill
 1
 6 0
 1
-0 252 -1 0
+0 237 -1 0
 1
 end_operator
 begin_operator
@@ -5770,7 +5029,7 @@ prepare_evacuation_policechief_phxfire
 1
 6 0
 1
-0 253 -1 0
+0 238 -1 0
 1
 end_operator
 begin_operator
@@ -5778,7 +5037,7 @@ prepare_evacuation_policechief_rural
 1
 6 0
 1
-0 254 -1 0
+0 239 -1 0
 1
 end_operator
 begin_operator
@@ -5786,7 +5045,7 @@ prepare_evacuation_policechief_scottsfire
 1
 6 0
 1
-0 255 -1 0
+0 240 -1 0
 1
 end_operator
 begin_operator
@@ -5794,183 +5053,60 @@ prepare_evacuation_policechief_substation
 1
 6 0
 1
-0 256 -1 0
+0 241 -1 0
 1
 end_operator
 begin_operator
-search_casualties_firechief_byeng 
-6
-64 0
-74 0
-89 0
-137 0
-191 0
-201 0
-5
-0 163 -1 0
-0 164 -1 0
-0 205 -1 1
-0 206 -1 1
-0 257 -1 0
+send_social_media_byeng_byeng 
 3
+185 0
+186 0
+242 0
+2
+0 183 -1 1
+0 243 -1 0
+5
 end_operator
 begin_operator
-search_casualties_firechief_byeng 
-6
-64 0
-74 0
-89 0
-137 0
-192 0
-201 0
+send_social_media_lake_byeng 
+1
+242 0
+2
+0 183 -1 1
+0 244 -1 0
 5
-0 163 -1 0
-0 164 -1 0
-0 205 -1 1
-0 206 -1 1
-0 257 -1 0
-3
 end_operator
 begin_operator
-search_casualties_firechief_byeng 
-6
-64 0
-74 0
-89 0
-137 0
-193 0
-201 0
+send_social_media_marketplace_byeng 
+1
+242 0
+2
+0 183 -1 1
+0 245 -1 0
 5
-0 163 -1 0
-0 164 -1 0
-0 205 -1 1
-0 206 -1 1
-0 257 -1 0
-3
 end_operator
 begin_operator
-search_casualties_firechief_byeng 
-6
-64 0
-74 0
-89 0
-137 0
-194 0
-201 0
+send_social_media_mill_byeng 
+1
+242 0
+2
+0 183 -1 1
+0 246 -1 0
 5
-0 163 -1 0
-0 164 -1 0
-0 205 -1 1
-0 206 -1 1
-0 257 -1 0
-3
 end_operator
 begin_operator
-search_casualties_firechief_byeng 
-6
-64 0
-74 0
-89 0
-137 0
-195 0
-201 0
+send_social_media_rural_byeng 
+1
+242 0
+2
+0 183 -1 1
+0 247 -1 0
 5
-0 163 -1 0
-0 164 -1 0
-0 205 -1 1
-0 206 -1 1
-0 257 -1 0
-3
-end_operator
-begin_operator
-search_casualties_firechief_byeng 
-6
-64 0
-74 0
-89 0
-137 0
-196 0
-201 0
-5
-0 163 -1 0
-0 164 -1 0
-0 205 -1 1
-0 206 -1 1
-0 257 -1 0
-3
-end_operator
-begin_operator
-search_casualties_firechief_byeng 
-6
-64 0
-74 0
-89 0
-137 0
-197 0
-201 0
-5
-0 163 -1 0
-0 164 -1 0
-0 205 -1 1
-0 206 -1 1
-0 257 -1 0
-3
-end_operator
-begin_operator
-search_casualties_firechief_byeng 
-6
-64 0
-74 0
-89 0
-137 0
-198 0
-201 0
-5
-0 163 -1 0
-0 164 -1 0
-0 205 -1 1
-0 206 -1 1
-0 257 -1 0
-3
-end_operator
-begin_operator
-search_casualties_firechief_byeng 
-6
-64 0
-74 0
-89 0
-137 0
-199 0
-201 0
-5
-0 163 -1 0
-0 164 -1 0
-0 205 -1 1
-0 206 -1 1
-0 257 -1 0
-3
-end_operator
-begin_operator
-search_casualties_firechief_byeng 
-6
-64 0
-74 0
-89 0
-137 0
-200 0
-201 0
-5
-0 163 -1 0
-0 164 -1 0
-0 205 -1 1
-0 206 -1 1
-0 257 -1 0
-3
 end_operator
 begin_operator
 set_up_helpline_firechief 
 1
-157 0
+150 0
 1
 0 0 -1 0
 1
@@ -5978,7 +5114,7 @@ end_operator
 begin_operator
 set_up_helpline_medichief 
 1
-158 0
+151 0
 1
 0 1 -1 0
 1
@@ -5986,7 +5122,7 @@ end_operator
 begin_operator
 set_up_helpline_policechief 
 1
-159 0
+152 0
 1
 0 2 -1 0
 1
@@ -5994,7 +5130,7 @@ end_operator
 begin_operator
 set_up_helpline_transportchief 
 1
-160 0
+153 0
 1
 0 3 -1 0
 1
@@ -6003,28 +5139,28 @@ begin_operator
 update_firechief 
 0
 1
-0 283 -1 0
+0 273 -1 0
 1
 end_operator
 begin_operator
 update_medichief 
 0
 1
-0 284 -1 0
+0 274 -1 0
 1
 end_operator
 begin_operator
 update_policechief 
 0
 1
-0 285 -1 0
+0 275 -1 0
 1
 end_operator
 begin_operator
 update_transportchief 
 0
 1
-0 286 -1 0
+0 276 -1 0
 1
 end_operator
 0

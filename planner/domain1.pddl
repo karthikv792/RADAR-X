@@ -58,6 +58,8 @@
 			(has_ambulances_number ?from - location)
 			(has_policemen_number ?from - location)
 			(has_bulldozers_number ?from - location)
+			(sent_social_media ?from - location)
+			(no_social_media)
 )
 
 
@@ -86,6 +88,7 @@
 	(duration_search_casualties)
 	(duration_attend_casualties)
 	(duration_address_media)
+	(duration_sent_signal)
 	(total-cost)
 )
 
@@ -402,6 +405,7 @@
  				)
 )
 
+
 (:action attend_casualties
 	:parameters	(?a - medic ?at - pois)
  	:precondition 	(and
@@ -418,6 +422,21 @@
  				)
 )
 
+(:action send_social_media
+    :parameters(?from - pois ?at - pois)
+    :precondition (and
+                  (searched ?at)
+                  (needed_address_media)
+                  )
+    :effect       (and
+                    (sent_social_media ?from)
+                    (not (needed_address_media))
+					(not_needed_address_media)
+                    (increase (total-cost) (duration_sent_signal))
+                    (not (no_social_media))
+                   )
+)
+
 (:action address_media
 	:parameters	(?a - agents)
  	:precondition 	(and
@@ -428,6 +447,7 @@
  					(addressed_media)
  					(not (needed_address_media))
 					(not_needed_address_media)
+					(no_social_media)
  					(increase (total-cost) (duration_address_media))
  				)
 )

@@ -17,6 +17,7 @@
 
 (=(total-cost) 0)
 
+(no_social_media)
 (not_needed_search_casualties lake )
 (not_needed_attend_casualties lake )
 (not_needed_diverted_traffic lake lake)
@@ -66,7 +67,6 @@
 (has_ladders_number mesafire)
 (has_rescuers_number mesafire)
 (has_small_engines_number scottsfire)
-(has_big_engines_number scottsfire)
 (has_ladders_number scottsfire)
 (has_bulldozers_number scottsfire)
 (has_rescuers_number scottsfire)
@@ -102,6 +102,7 @@
 (=(duration_extinguish_big_fire) 1)
 (=(duration_barricade) 1)
 (=(duration_search_casualties) 3)
+(=(duration_sent_signal) 5)
 (=(duration_address_media) 2)
 (=(duration_attend_casualties) 3)
 

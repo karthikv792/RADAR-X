@@ -49,6 +49,7 @@ class Planner():
         self.observations = ''
         self.ungrounded_actions = []
         self.consts = []
+        self.prob_objects = []
 
     def plan(self):
         try:
@@ -105,7 +106,17 @@ class Planner():
         # Write plan to file in sas_plan style
         s = ''
         for k in sorted(actions):
-            s += actions[k].strip() + '\n'
+            print(actions[k].strip())
+            spl = (re.sub('[(){}<>]', '', actions[k].strip())).replace(' ','').split('_')
+            print(spl)
+            string = spl[0]
+            for i in spl[1:]:
+                if (i.lower() not in self.prob_objects):
+                    string += '_' + i
+                else:
+                    string += ' ' + i
+            print(string)
+            s += string + '\n'
 
         f = open(self.foil_obs, 'w')
         f.write(s)
@@ -423,13 +434,14 @@ class Planner():
             for word in i:
                 constants.append(word)
         self.consts = list(set(constants))
-        print(self.ungrounded_actions+self.consts)
+        for i in self.parsed_model[CONSTANTS]:
+            self.prob_objects.append(i[0])
 
 
     def getClosestPlan(self,actions,tillEndOfPresentPlan=False):
         # present_actions = self.getOrderedObservations()
         # p_actions = [(re.sub('[(){}<>]', '', i)).replace(' ', '') for i in list(present_actions.values())]
-        foil_actions = [(re.sub('[(){}<>]', '', i.split('\n')[1])).replace(' ', '') for i in list(actions.values())]
+        foil_actions = [(re.sub('[(){}<>]', '', actions[i].split('\n')[1])).replace(' ', '') for i in sorted(actions.keys())]
         # diff_actions = list(set(p_actions)-set(foil_actions))
         # print(diff_actions)
         try:
@@ -448,7 +460,7 @@ class Planner():
         acts = [x.strip('() \n') for x in actions.values()]
         for l in f:
             if '(general cost)' not in l:
-                if '_WITH_OBS' in l.upper():
+                if '_WITH_OBS___' in l.upper():
                     a = l.upper().replace('_WITH_OBS', '').strip()
                     plan_actions[i] = re.sub('_[0-9]', '', a)
                     i += 1
@@ -476,7 +488,7 @@ class Planner():
         obs[COND_ADDS] = []
         obs[COND_DELS] = []
         without_obs = deepcopy(obs)
-        without_obs[FUNCTIONAL] = [[['total-cost', 'number'], [24, 'Integer']]]
+        without_obs[FUNCTIONAL] = [[['total-cost', 'number'], [20, 'Integer']]]
         for i in range(len(actions)):
             action = actions[i]
             if action in list(pr_model[DOMAIN].keys()):
@@ -488,15 +500,19 @@ class Planner():
                 pr_model[PREDICATES].append(predicate)
                 pr_model[INSTANCE][GOAL].append(predicate)
                 temp_obs[ADDS].append(predicate)
-                temp_obs[POS_PREC] = pr_model[DOMAIN][action][ADDS]
+                for j in pr_model[DOMAIN][action][ADDS]:
+                    temp_obs[POS_PREC].append(j)
                 temp_without_obs[ADDS].append(predicate)
                 if i != 0:
-                    prev_action = actions[i - 1]
+                    prev_action = actions[i - 1] + '_WITH_OBS'
                     for i in pr_model[DOMAIN][prev_action][ADDS]:
                         if i not in temp_obs[POS_PREC]:
                             temp_obs[POS_PREC].append(i)
                 pr_model[DOMAIN][action_with_obs] = temp_obs
                 pr_model[DOMAIN][action_without_obs] = temp_without_obs
+                print(temp_obs)
+                del temp_obs
+                del temp_without_obs
         pr_write = ModelWriter(pr_model)
         pr_write.write_files('write_pr_domain.pddl','write_pr_problem.pddl')
 
@@ -522,4 +538,5 @@ class Planner():
             s = l.split('Explanation >> ')[1].strip()
             reason[i] = s
             i += 1
+        print(reason)
         return reason

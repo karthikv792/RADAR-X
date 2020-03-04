@@ -218,9 +218,15 @@
 		( SEARCHED_BYENG )
 		( NEEDED_ATTEND_CASUALTIES_BYENG )
 		( NEEDED_ADDRESS_MEDIA )
+		( SENT_SOCIAL_MEDIA_LAKE )
+		( SENT_SOCIAL_MEDIA_MILL )
+		( SENT_SOCIAL_MEDIA_MARKETPLACE )
+		( SENT_SOCIAL_MEDIA_RURAL )
+		( SENT_SOCIAL_MEDIA_BYENG )
 		( ATTENDED_CASUALTIES_BYENG )
 		( ADDRESSED_MEDIA )
 		( NOT_NEEDED_ADDRESS_MEDIA )
+		( NO_SOCIAL_MEDIA )
 		( NOT_NEEDED_ATTEND_CASUALTIES_BYENG )
 		( NOT_NEEDED_ACTIVE_LOCAL_ALERT_FIRECHIEF )
 		( FIRE_AT_BYENG )
@@ -266,7 +272,6 @@
 		( HAS_LADDERS_NUMBER_SCOTTSFIRE )
 		( HAS_LADDERS_NUMBER_MESAFIRE )
 		( HAS_LADDERS_NUMBER_ADMINFIRE )
-		( HAS_BIG_ENGINES_NUMBER_SCOTTSFIRE )
 		( HAS_BIG_ENGINES_NUMBER_MESAFIRE )
 		( HAS_SMALL_ENGINES_NUMBER_SCOTTSFIRE )
 		( HAS_SMALL_ENGINES_NUMBER_ADMINFIRE )
@@ -279,6 +284,7 @@
 		:parameters ()
 		:precondition
 		(and
+			( NO_SOCIAL_MEDIA )
 			( NEEDED_ADDRESS_MEDIA )
 			( MEDIA_CONTACTED_TRANSPORTCHIEF )
 		)
@@ -294,6 +300,7 @@
 		:parameters ()
 		:precondition
 		(and
+			( NO_SOCIAL_MEDIA )
 			( NEEDED_ADDRESS_MEDIA )
 			( MEDIA_CONTACTED_MEDICHIEF )
 		)
@@ -309,6 +316,7 @@
 		:parameters ()
 		:precondition
 		(and
+			( NO_SOCIAL_MEDIA )
 			( NEEDED_ADDRESS_MEDIA )
 			( MEDIA_CONTACTED_FIRECHIEF )
 		)
@@ -324,6 +332,7 @@
 		:parameters ()
 		:precondition
 		(and
+			( NO_SOCIAL_MEDIA )
 			( NEEDED_ADDRESS_MEDIA )
 			( MEDIA_CONTACTED_POLICECHIEF )
 		)
@@ -350,6 +359,91 @@
 			( NEEDED_ADDRESS_MEDIA )
 			(not ( NEEDED_ATTEND_CASUALTIES_BYENG ))
 			(not ( NOT_NEEDED_ADDRESS_MEDIA ))
+		)
+	)
+	(:action SEND_SOCIAL_MEDIA_BYENG_BYENG
+		:parameters ()
+		:precondition
+		(and
+			( NO_SOCIAL_MEDIA )
+			( NEEDED_ADDRESS_MEDIA )
+			( SEARCHED_BYENG )
+		)
+		:effect
+		(and
+			(increase (total-cost) 5)
+			( SENT_SOCIAL_MEDIA_BYENG )
+			( NOT_NEEDED_ADDRESS_MEDIA )
+			(not ( NEEDED_ADDRESS_MEDIA ))
+			(not ( NO_SOCIAL_MEDIA ))
+		)
+	)
+	(:action SEND_SOCIAL_MEDIA_RURAL_BYENG
+		:parameters ()
+		:precondition
+		(and
+			( NO_SOCIAL_MEDIA )
+			( NEEDED_ADDRESS_MEDIA )
+			( SEARCHED_BYENG )
+		)
+		:effect
+		(and
+			(increase (total-cost) 5)
+			( SENT_SOCIAL_MEDIA_RURAL )
+			( NOT_NEEDED_ADDRESS_MEDIA )
+			(not ( NEEDED_ADDRESS_MEDIA ))
+			(not ( NO_SOCIAL_MEDIA ))
+		)
+	)
+	(:action SEND_SOCIAL_MEDIA_MARKETPLACE_BYENG
+		:parameters ()
+		:precondition
+		(and
+			( NO_SOCIAL_MEDIA )
+			( NEEDED_ADDRESS_MEDIA )
+			( SEARCHED_BYENG )
+		)
+		:effect
+		(and
+			(increase (total-cost) 5)
+			( SENT_SOCIAL_MEDIA_MARKETPLACE )
+			( NOT_NEEDED_ADDRESS_MEDIA )
+			(not ( NEEDED_ADDRESS_MEDIA ))
+			(not ( NO_SOCIAL_MEDIA ))
+		)
+	)
+	(:action SEND_SOCIAL_MEDIA_MILL_BYENG
+		:parameters ()
+		:precondition
+		(and
+			( NO_SOCIAL_MEDIA )
+			( NEEDED_ADDRESS_MEDIA )
+			( SEARCHED_BYENG )
+		)
+		:effect
+		(and
+			(increase (total-cost) 5)
+			( SENT_SOCIAL_MEDIA_MILL )
+			( NOT_NEEDED_ADDRESS_MEDIA )
+			(not ( NEEDED_ADDRESS_MEDIA ))
+			(not ( NO_SOCIAL_MEDIA ))
+		)
+	)
+	(:action SEND_SOCIAL_MEDIA_LAKE_BYENG
+		:parameters ()
+		:precondition
+		(and
+			( NO_SOCIAL_MEDIA )
+			( NEEDED_ADDRESS_MEDIA )
+			( SEARCHED_BYENG )
+		)
+		:effect
+		(and
+			(increase (total-cost) 5)
+			( SENT_SOCIAL_MEDIA_LAKE )
+			( NOT_NEEDED_ADDRESS_MEDIA )
+			(not ( NEEDED_ADDRESS_MEDIA ))
+			(not ( NO_SOCIAL_MEDIA ))
 		)
 	)
 	(:action SEARCH_CASUALTIES_FIRECHIEF_BYENG
@@ -3357,96 +3451,6 @@
 			( DEPLOYED_LADDERS_LAKE )
 			(not ( ALERTED_ADMINFIRE ))
 			(not ( HAS_LADDERS_NUMBER_ADMINFIRE ))
-		)
-	)
-	(:action DEPLOY_BIG_ENGINES_FIRECHIEF_SCOTTSFIRE_BYENG
-		:parameters ()
-		:precondition
-		(and
-			( HAS_BIG_ENGINES_NUMBER_SCOTTSFIRE )
-			( ALERTED_SCOTTSFIRE )
-		)
-		:effect
-		(and
-			(increase (total-cost) 4)
-			( DEPLOYED_ENGINES_BYENG )
-			( DEPLOYED_BIG_ENGINES_BYENG )
-			( NEEDED_BARRICADE_BYENG )
-			(not ( ALERTED_SCOTTSFIRE ))
-			(not ( NOT_NEEDED_BARRICADE_BYENG ))
-			(not ( HAS_BIG_ENGINES_NUMBER_SCOTTSFIRE ))
-		)
-	)
-	(:action DEPLOY_BIG_ENGINES_FIRECHIEF_SCOTTSFIRE_RURAL
-		:parameters ()
-		:precondition
-		(and
-			( HAS_BIG_ENGINES_NUMBER_SCOTTSFIRE )
-			( ALERTED_SCOTTSFIRE )
-		)
-		:effect
-		(and
-			(increase (total-cost) 4)
-			( DEPLOYED_ENGINES_RURAL )
-			( DEPLOYED_BIG_ENGINES_RURAL )
-			( NEEDED_BARRICADE_RURAL )
-			(not ( ALERTED_SCOTTSFIRE ))
-			(not ( NOT_NEEDED_BARRICADE_RURAL ))
-			(not ( HAS_BIG_ENGINES_NUMBER_SCOTTSFIRE ))
-		)
-	)
-	(:action DEPLOY_BIG_ENGINES_FIRECHIEF_SCOTTSFIRE_MARKETPLACE
-		:parameters ()
-		:precondition
-		(and
-			( HAS_BIG_ENGINES_NUMBER_SCOTTSFIRE )
-			( ALERTED_SCOTTSFIRE )
-		)
-		:effect
-		(and
-			(increase (total-cost) 4)
-			( DEPLOYED_ENGINES_MARKETPLACE )
-			( DEPLOYED_BIG_ENGINES_MARKETPLACE )
-			( NEEDED_BARRICADE_MARKETPLACE )
-			(not ( ALERTED_SCOTTSFIRE ))
-			(not ( NOT_NEEDED_BARRICADE_MARKETPLACE ))
-			(not ( HAS_BIG_ENGINES_NUMBER_SCOTTSFIRE ))
-		)
-	)
-	(:action DEPLOY_BIG_ENGINES_FIRECHIEF_SCOTTSFIRE_MILL
-		:parameters ()
-		:precondition
-		(and
-			( HAS_BIG_ENGINES_NUMBER_SCOTTSFIRE )
-			( ALERTED_SCOTTSFIRE )
-		)
-		:effect
-		(and
-			(increase (total-cost) 4)
-			( DEPLOYED_ENGINES_MILL )
-			( DEPLOYED_BIG_ENGINES_MILL )
-			( NEEDED_BARRICADE_MILL )
-			(not ( ALERTED_SCOTTSFIRE ))
-			(not ( NOT_NEEDED_BARRICADE_MILL ))
-			(not ( HAS_BIG_ENGINES_NUMBER_SCOTTSFIRE ))
-		)
-	)
-	(:action DEPLOY_BIG_ENGINES_FIRECHIEF_SCOTTSFIRE_LAKE
-		:parameters ()
-		:precondition
-		(and
-			( HAS_BIG_ENGINES_NUMBER_SCOTTSFIRE )
-			( ALERTED_SCOTTSFIRE )
-		)
-		:effect
-		(and
-			(increase (total-cost) 4)
-			( DEPLOYED_ENGINES_LAKE )
-			( DEPLOYED_BIG_ENGINES_LAKE )
-			( NEEDED_BARRICADE_LAKE )
-			(not ( ALERTED_SCOTTSFIRE ))
-			(not ( NOT_NEEDED_BARRICADE_LAKE ))
-			(not ( HAS_BIG_ENGINES_NUMBER_SCOTTSFIRE ))
 		)
 	)
 	(:action DEPLOY_BIG_ENGINES_FIRECHIEF_MESAFIRE_BYENG

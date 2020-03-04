@@ -56,6 +56,10 @@
 			(has_ambulances_number ?from - location)
 			(has_policemen_number ?from - location)
 			(has_bulldozers_number ?from - location)
+			(sent_social_media ?from - location)
+			(no_social_media)
+
+
 )
 
 
@@ -82,6 +86,7 @@
 	(duration_extinguish_big_fire)
 	(duration_barricade)
 	(duration_search_casualties)
+	(duration_sent_signal)
 	(duration_attend_casualties)
 	(duration_address_media)
 	(total-cost)
@@ -93,7 +98,6 @@
 :parameters (?a - fire ?from - firestation ?to - pois)
 :precondition
 (and
-( alerted ?from )
 ( has_small_engines_number ?from )
 )
 :effect
@@ -110,6 +114,7 @@
 :parameters (?a - agents)
 :precondition
 (and
+( no_social_media )
 ( media_contacted ?a )
 ( needed_address_media )
 )
@@ -177,19 +182,17 @@
 )
 )
 
-(:action deploy_ambulances
-:parameters (?a - police ?from - hospital ?to - pois)
+(:action send_social_media
+:parameters (?from - pois ?at - pois)
 :precondition
 (and
-( has_ambulances_number ?from )
-( alerted ?from )
+( searched ?at )
 )
 :effect
 (and
-( increase (total-cost) (duration_deploy_ambulances) )
-( deployed_ambulances ?to )
-(not ( has_ambulances_number ?from ))
-(not ( alerted ?from ))
+( sent_social_media ?from )
+( increase (total-cost) (duration_sent_signal) )
+(not ( no_social_media ))
 )
 )
 
@@ -201,8 +204,8 @@
 )
 :effect
 (and
-( not_needed_active_local_alert ?a )
 ( active_local_alert ?a )
+( not_needed_active_local_alert ?a )
 ( increase (total-cost) (duration_issue_local_alert) )
 (not ( needed_active_local_alert ?a ))
 )
@@ -311,8 +314,8 @@
 ( extinguished_fire ?at )
 ( needed_search_casualties ?at )
 ( increase (total-cost) (duration_extinguish_small_fire) )
-(not ( small_fire_at ?at ))
 (not ( not_needed_search_casualties ?at ))
+(not ( small_fire_at ?at ))
 (not ( not_needed_address_media ))
 (not ( fire_at ?at ))
 )
@@ -373,8 +376,8 @@
 (and
 ( deployed_rescuers ?at )
 ( deployed_bulldozers ?at )
-( extinguished_fire ?at )
 ( deployed_helicopters ?at )
+( extinguished_fire ?at )
 )
 :effect
 (and
@@ -401,6 +404,22 @@
 )
 )
 
+(:action deploy_ambulances
+:parameters (?a - police ?from - hospital ?to - pois)
+:precondition
+(and
+( has_ambulances_number ?from )
+( alerted ?from )
+)
+:effect
+(and
+( increase (total-cost) (duration_deploy_ambulances) )
+( deployed_ambulances ?to )
+(not ( has_ambulances_number ?from ))
+(not ( alerted ?from ))
+)
+)
+
 (:action attend_casualties
 :parameters (?a - medic ?at - pois)
 :precondition
@@ -414,6 +433,7 @@
 ( needed_address_media )
 ( increase (total-cost) (duration_attend_casualties) )
 ( not_needed_attend_casualties ?at )
+(not ( no_social_media ))
 (not ( not_needed_address_media ))
 (not ( needed_attend_casualties ?at ))
 )
@@ -446,7 +466,6 @@
 ( increase (total-cost) (duration_deploy_big_engines) )
 ( deployed_big_engines ?to )
 (not ( alerted ?from ))
-(not ( not_needed_barricade ?to ))
 (not ( has_big_engines_number ?from ))
 )
 )

@@ -56,6 +56,10 @@
 			(has_ambulances_number ?from - location)
 			(has_policemen_number ?from - location)
 			(has_bulldozers_number ?from - location)
+			(sent_social_media ?from - location)
+			(no_social_media)
+
+
 )
 
 
@@ -82,6 +86,7 @@
 	(duration_extinguish_big_fire)
 	(duration_barricade)
 	(duration_search_casualties)
+	(duration_sent_signal)
 	(duration_attend_casualties)
 	(duration_address_media)
 	(total-cost)

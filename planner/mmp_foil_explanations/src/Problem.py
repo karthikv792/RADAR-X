@@ -20,11 +20,12 @@ class Problem:
     def __init__(self, robotModelFile, humanModelFile, problemFile, domainTemplate, robotPlanFile = None,partial_foil=None):
 
         print "Setting up MMP..."
-
+        self.partial_foil = partial_foil
         self.domainTemplate = domainTemplate
         if not robotPlanFile:
             self.robotPlanFile   = '../domain/cache_plan.dat'
-            self.plan, self.cost = get_plan(robotModelFile, problemFile)
+            self.plan, self.cost = ([], 0)#get_plan(robotModelFile, problemFile)
+            print("plan Found")
 
             with open(self.robotPlanFile, 'w') as plan_file:
                 plan_file.write('\n'.join(['({})'.format(item) for item in self.plan]) + '\n; cost = {} (unit cost)'.format(self.cost))
@@ -59,18 +60,22 @@ class Problem:
     def isGoal(self, state):
 
         temp_domain = write_domain_file_from_state(state, self.domainTemplate)
-        feasibility_flag = validate_plan(temp_domain, 'tr-problem.pddl', self.groundedRobotPlanFile)
-        if not feasibility_flag:
-            return False
+        #feasibility_flag = validate_plan(temp_domain, 'tr-problem.pddl', self.groundedRobotPlanFile)
+        #print(feasibility_flag)
+        # if not feasibility_flag:
+        #     return False
         CALL_PR2 = 'PR2/pr2plan'
         try:
-            cmd = CALL_PR2 + ' -d ' + temp_domain + ' -i tr-problem.pddl ' + '-o ' + self.groundedRobotPlanFile
+            cmd = CALL_PR2 + ' -d ' + temp_domain + ' -i tr-problem.pddl ' + '-o ' + self.partial_foil + '> /dev/null 2>&1'
+            # cmd = CALL_PR2 + ' -d ../../domain.pddl -i ../../mock_problem.pddl -o ' + self.partial_foil + '> /dev/null 2>&1'
             os.system(cmd)
         except:
-            raise Exception('[ERROR] In Call to PR2!')
+            raise Exception('[ERROR] Call to PR2 failed')
+
         pr_domain   = '../../mmp_foil_explanations/src/pr-domain.pddl'
         pr_problem  = '../../mmp_foil_explanations/src/pr-problem.pddl'
         plan, cost  = get_plan(pr_domain,pr_problem)
+        print("plan returned",plan,cost)
         if not plan:
             return True
 
@@ -83,7 +88,7 @@ class Problem:
         # optimality_flag  = cost == self.cost
         foil_validity_flag = cost == 0
 
-        return foil_validity_flag and feasibility_flag
+        return foil_validity_flag #and feasibility_flag
 
     
     def heuristic(self, state):
@@ -136,7 +141,7 @@ def main():
 
     else:
         print "args plan",args.plan    
-        problem_instance = Problem(args.model, args.nmodel, args.problem, args.domain_template, args.plan)
+        problem_instance = Problem(args.model, args.nmodel, args.problem, args.domain_template, args.plan,args.partialfoil)
         plan             = astarSearch(problem_instance)
         
         explanation      = ''
