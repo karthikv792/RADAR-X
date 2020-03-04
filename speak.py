@@ -11,7 +11,7 @@ class Speak():
             'OPTIMAL_PLAN'      : 'This is the best plan in terms of action costs that achieves the goal.',
             'GOAL_SELECTED'     : 'Your goal was successfully selected.',
             'MODEL_UPDATED'     : 'Thank you for reviewing my explanations and providing valuable feedback.  I have updated both our models in accordance to your wishes',
-            'ADD_FOIL'          : 'Have another idea for your plan? You can start by adding actions to your foil by using the drop down list or use my latest speech interface.',
+            'ADD_FOIL'          : 'Have another idea for your plan? You can start by adding actions to your foil by using the drop down list. Or you can also use my latest speech interface.',
             'NEAREST_PLAN'      : 'Here is a plan that is the closest to your foil. Hope this satisfies you.'
         }
 

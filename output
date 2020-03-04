@@ -287,6 +287,13 @@ Atom needed_attend_casualties_byeng()
 NegatedAtom needed_attend_casualties_byeng()
 end_variable
 begin_variable
+var242
+-1
+2
+Atom sent_social_media_byeng()
+NegatedAtom sent_social_media_byeng()
+end_variable
+begin_variable
 var185
 -1
 3
@@ -302,13 +309,6 @@ Atom needed_address_media()
 NegatedAtom needed_address_media()
 end_variable
 begin_variable
-var242
--1
-2
-Atom sent_social_media_byeng()
-NegatedAtom sent_social_media_byeng()
-end_variable
-begin_variable
 var188
 -1
 2
@@ -316,18 +316,18 @@ Atom not_needed_address_media()
 NegatedAtom not_needed_address_media()
 end_variable
 begin_variable
-var241
--1
-2
-Atom send_social_media_byeng_byeng_met()
-NegatedAtom send_social_media_byeng_byeng_met()
-end_variable
-begin_variable
 var9
 -1
 2
 Atom addressed_media()
 NegatedAtom addressed_media()
+end_variable
+begin_variable
+var241
+-1
+2
+Atom send_social_media_byeng_byeng_met()
+NegatedAtom send_social_media_byeng_byeng_met()
 end_variable
 begin_variable
 var8
@@ -364,8 +364,8 @@ begin_mutex_group
 end_mutex_group
 begin_mutex_group
 2
+41 0
 40 0
-42 0
 end_mutex_group
 begin_state
 1
@@ -408,8 +408,8 @@ begin_state
 1
 1
 1
-0
 1
+0
 1
 0
 1
@@ -426,21 +426,22 @@ end_goal
 134
 begin_operator
 address_media_firechief 
-2
-3 0
-40 0
 3
-0 45 -1 0
-0 41 0 1
+3 0
+41 0
+45 0
+3
+0 44 -1 0
+0 42 0 1
 0 43 -1 0
 2
 end_operator
 begin_operator
 address_media_firechief_with_obs 
 3
-45 0
-43 0
 44 0
+43 0
+45 0
 1
 0 46 -1 0
 0
@@ -456,10 +457,10 @@ begin_operator
 address_media_medichief 
 2
 2 0
-40 0
+41 0
 3
-0 45 -1 0
-0 41 0 1
+0 44 -1 0
+0 42 0 1
 0 43 -1 0
 2
 end_operator
@@ -467,10 +468,10 @@ begin_operator
 address_media_policechief 
 2
 1 0
-40 0
+41 0
 3
-0 45 -1 0
-0 41 0 1
+0 44 -1 0
+0 42 0 1
 0 43 -1 0
 2
 end_operator
@@ -478,10 +479,10 @@ begin_operator
 address_media_transportchief 
 2
 0 0
-40 0
+41 0
 3
-0 45 -1 0
-0 41 0 1
+0 44 -1 0
+0 42 0 1
 0 43 -1 0
 2
 end_operator
@@ -658,7 +659,7 @@ attend_casualties_medichief_byeng
 1
 28 0
 3
-0 41 -1 0
+0 42 -1 0
 0 39 0 1
 0 43 -1 1
 3
@@ -1463,7 +1464,7 @@ search_casualties_firechief_byeng
 35 0
 13 0
 4
-0 41 -1 0
+0 42 -1 0
 0 39 -1 0
 0 43 -1 1
 0 38 -1 0
@@ -1473,36 +1474,39 @@ begin_operator
 send_social_media_byeng_byeng 
 1
 38 0
-4
-0 41 0 1
-0 40 0 2
+5
+0 44 -1 0
+0 42 0 1
+0 41 0 2
 0 43 -1 0
-0 42 -1 0
+0 40 -1 0
 5
 end_operator
 begin_operator
 send_social_media_byeng_byeng_with_obs 
-2
+3
+44 0
 43 0
-42 0
+40 0
 1
-0 44 -1 0
+0 45 -1 0
 0
 end_operator
 begin_operator
 send_social_media_byeng_byeng_without_obs 
 0
 1
-0 44 -1 0
+0 45 -1 0
 20
 end_operator
 begin_operator
 send_social_media_lake_byeng 
 1
 38 0
-3
-0 41 0 1
-0 40 0 2
+4
+0 44 -1 0
+0 42 0 1
+0 41 0 2
 0 43 -1 0
 5
 end_operator
@@ -1510,9 +1514,10 @@ begin_operator
 send_social_media_marketplace_byeng 
 1
 38 0
-3
-0 41 0 1
-0 40 0 2
+4
+0 44 -1 0
+0 42 0 1
+0 41 0 2
 0 43 -1 0
 5
 end_operator
@@ -1520,9 +1525,10 @@ begin_operator
 send_social_media_mill_byeng 
 1
 38 0
-3
-0 41 0 1
-0 40 0 2
+4
+0 44 -1 0
+0 42 0 1
+0 41 0 2
 0 43 -1 0
 5
 end_operator
@@ -1530,9 +1536,10 @@ begin_operator
 send_social_media_rural_byeng 
 1
 38 0
-3
+4
+0 44 -1 0
+0 42 0 1
 0 41 0 1
-0 40 0 1
 0 43 -1 0
 5
 end_operator
@@ -1572,14 +1579,19 @@ check 30
 129
 check 0
 check 0
-switch 45
+switch 44
 check 0
 switch 43
 check 0
-switch 44
+switch 45
 check 0
 check 1
 1
+check 0
+switch 40
+check 0
+check 1
+128
 check 0
 check 0
 check 0
@@ -1952,9 +1964,11 @@ check 0
 check 0
 switch 3
 check 0
+switch 42
+check 0
 switch 41
 check 0
-switch 40
+switch 45
 check 0
 check 1
 0
@@ -1964,11 +1978,13 @@ check 0
 check 0
 check 0
 check 0
+check 0
+check 0
 switch 2
 check 0
-switch 41
+switch 42
 check 0
-switch 40
+switch 41
 check 0
 check 1
 3
@@ -1980,9 +1996,9 @@ check 0
 check 0
 switch 1
 check 0
-switch 41
+switch 42
 check 0
-switch 40
+switch 41
 check 0
 check 1
 4
@@ -1994,9 +2010,9 @@ check 0
 check 0
 switch 0
 check 0
-switch 41
+switch 42
 check 0
-switch 40
+switch 41
 check 0
 check 1
 5
@@ -2006,9 +2022,9 @@ check 0
 check 0
 check 0
 check 0
-switch 41
+switch 42
 check 0
-switch 40
+switch 41
 check 0
 switch 38
 check 0
@@ -2021,15 +2037,6 @@ check 5
 check 0
 check 0
 check 0
-check 0
-check 0
-check 0
-switch 43
-check 0
-switch 42
-check 0
-check 1
-128
 check 0
 check 0
 check 0
@@ -2645,16 +2652,26 @@ begin_DTG
 13 0
 end_DTG
 begin_DTG
+0
+1
+0
+127
+3
+42 0
+41 0
+38 0
+end_DTG
+begin_DTG
 2
 1
 133
 2
-41 0
+42 0
 38 0
 2
 127
 2
-41 0
+42 0
 38 0
 0
 0
@@ -2662,30 +2679,31 @@ end_DTG
 begin_DTG
 5
 1
-0
-2
-3 0
-40 0
-1
 3
 2
 2 0
-40 0
+41 0
 1
 4
 2
 1 0
-40 0
+41 0
 1
 5
 2
 0 0
-40 0
+41 0
 1
 127
 2
-40 0
+41 0
 38 0
+1
+0
+3
+3 0
+41 0
+45 0
 2
 0
 30
@@ -2699,16 +2717,6 @@ begin_DTG
 36 0
 35 0
 13 0
-end_DTG
-begin_DTG
-0
-1
-0
-127
-3
-41 0
-40 0
-38 0
 end_DTG
 begin_DTG
 2
@@ -2726,35 +2734,71 @@ begin_DTG
 13 0
 5
 0
-0
-3
-3 0
-41 0
-40 0
-0
 3
 3
 2 0
+42 0
 41 0
-40 0
 0
 4
 3
 1 0
+42 0
 41 0
-40 0
 0
 5
 3
 0 0
+42 0
 41 0
-40 0
 0
 127
 3
+42 0
 41 0
-40 0
 38 0
+0
+0
+4
+3 0
+42 0
+41 0
+45 0
+end_DTG
+begin_DTG
+0
+5
+0
+3
+3
+2 0
+42 0
+41 0
+0
+4
+3
+1 0
+42 0
+41 0
+0
+5
+3
+0 0
+42 0
+41 0
+0
+127
+3
+42 0
+41 0
+38 0
+0
+0
+4
+3 0
+42 0
+41 0
+45 0
 end_DTG
 begin_DTG
 0
@@ -2764,36 +2808,9 @@ begin_DTG
 0
 0
 128
-2
+3
+44 0
 43 0
-42 0
-end_DTG
-begin_DTG
-0
-4
-0
-0
-3
-3 0
-41 0
-40 0
-0
-3
-3
-2 0
-41 0
-40 0
-0
-4
-3
-1 0
-41 0
-40 0
-0
-5
-3
-0 0
-41 0
 40 0
 end_DTG
 begin_DTG
@@ -2805,26 +2822,26 @@ begin_DTG
 0
 1
 3
-45 0
-43 0
 44 0
+43 0
+45 0
 end_DTG
 begin_CG
 3
-45 1
-41 1
+44 1
+42 1
 43 1
 3
-45 1
-41 1
+44 1
+42 1
 43 1
 3
-45 1
-41 1
+44 1
+42 1
 43 1
 3
-45 1
-41 1
+44 1
+42 1
 43 1
 10
 34 1
@@ -2894,7 +2911,7 @@ begin_CG
 1
 13 1
 4
-41 1
+42 1
 39 1
 43 1
 38 1
@@ -2947,7 +2964,7 @@ begin_CG
 26 5
 28 1
 3
-41 1
+42 1
 39 1
 43 1
 2
@@ -2973,46 +2990,51 @@ begin_CG
 32 5
 33 5
 4
-41 1
+42 1
 39 1
 43 1
 38 1
 4
-41 1
+42 1
 39 1
 43 1
 38 1
 4
-41 1
+42 1
 39 1
 43 1
 38 1
-4
+5
+44 5
+42 5
 41 5
-40 5
 43 5
-42 1
+40 1
 2
-41 1
+42 1
 43 1
-4
-45 4
-41 9
-43 9
-42 1
-4
-45 4
-40 5
-43 9
-42 1
 1
-44 1
+45 1
+4
+44 9
+42 9
+43 9
+40 1
+4
+44 9
+41 5
+43 9
+40 1
 2
 46 1
+45 1
+2
+46 1
+45 1
+4
+46 1
 44 1
-1
-46 1
-1
-46 1
+42 1
+43 1
 0
 end_CG

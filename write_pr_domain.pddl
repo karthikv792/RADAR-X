@@ -232,12 +232,12 @@
         (needed_attend_casualties_byeng )
         (needed_address_media )
         (sent_social_media_lake )
+        (addressed_media )
         (sent_social_media_mill )
         (sent_social_media_marketplace )
         (sent_social_media_rural )
         (sent_social_media_byeng )
         (attended_casualties_byeng )
-        (addressed_media )
         (not_needed_address_media )
         (no_social_media )
         (not_needed_attend_casualties_byeng )
@@ -326,7 +326,7 @@
 
     (:action ADDRESS_MEDIA_FIRECHIEF
      :parameters ()
-     :precondition (and (no_social_media ) (and (needed_address_media ) (media_contacted_firechief )))
+     :precondition (and (no_social_media ) (and (needed_address_media ) (and (media_contacted_firechief ) (send_social_media_byeng_byeng_met ))))
      :effect (and
         (addressed_media )
         (not_needed_address_media )
@@ -365,6 +365,7 @@
      :effect (and
         (sent_social_media_byeng )
         (not_needed_address_media )
+        (addressed_media )
         (not (needed_address_media ))
         (not (no_social_media ))
         (increase (total-cost ) 5))
@@ -377,6 +378,7 @@
      :effect (and
         (sent_social_media_rural )
         (not_needed_address_media )
+        (addressed_media )
         (not (needed_address_media ))
         (not (no_social_media ))
         (increase (total-cost ) 5))
@@ -389,6 +391,7 @@
      :effect (and
         (sent_social_media_marketplace )
         (not_needed_address_media )
+        (addressed_media )
         (not (needed_address_media ))
         (not (no_social_media ))
         (increase (total-cost ) 5))
@@ -401,6 +404,7 @@
      :effect (and
         (sent_social_media_mill )
         (not_needed_address_media )
+        (addressed_media )
         (not (needed_address_media ))
         (not (no_social_media ))
         (increase (total-cost ) 5))
@@ -413,6 +417,7 @@
      :effect (and
         (sent_social_media_lake )
         (not_needed_address_media )
+        (addressed_media )
         (not (needed_address_media ))
         (not (no_social_media ))
         (increase (total-cost ) 5))
@@ -3464,7 +3469,7 @@
 
     (:action SEND_SOCIAL_MEDIA_BYENG_BYENG_WITH_OBS
      :parameters ()
-     :precondition (and (sent_social_media_byeng ) (not_needed_address_media ))
+     :precondition (and (sent_social_media_byeng ) (and (not_needed_address_media ) (addressed_media )))
      :effect (and
         (send_social_media_byeng_byeng_met )
         (increase (total-cost ) 0))

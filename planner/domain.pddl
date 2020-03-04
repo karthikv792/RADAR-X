@@ -413,6 +413,7 @@
                     (sent_social_media ?from)
                     (not (needed_address_media))
 					(not_needed_address_media)
+					(addressed_media)
                     (increase (total-cost) (duration_sent_signal))
                     (not (no_social_media))
                    )

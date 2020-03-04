@@ -508,6 +508,8 @@ class Planner():
                     for i in pr_model[DOMAIN][prev_action][ADDS]:
                         if i not in temp_obs[POS_PREC]:
                             temp_obs[POS_PREC].append(i)
+                        if i not in pr_model[DOMAIN][action][POS_PREC]:
+                            pr_model[DOMAIN][action][POS_PREC].append(i)
                 pr_model[DOMAIN][action_with_obs] = temp_obs
                 pr_model[DOMAIN][action_without_obs] = temp_without_obs
                 print(temp_obs)

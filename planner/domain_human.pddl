@@ -385,6 +385,7 @@
                   )
     :effect       (and
                     (sent_social_media ?from)
+                     (addressed_media)
                     (increase (total-cost) (duration_sent_signal))
                    )
 )

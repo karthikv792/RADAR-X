@@ -38,6 +38,8 @@
 
     </div>
 </div>
+    <textarea id='speakText' style="display:none;">{{ script }}</textarea>
+
 <div class="grid-stack m-2" id="gs1"></div>
 </div>
 <div class='col m-2'>
@@ -97,6 +99,7 @@
   </div>
 </div>
 <script type="text/javascript">
+    responsiveVoice.speak(document.getElementById("speakText").textContent);
     $.extend(
 {
     redirectPost: function(location, args)

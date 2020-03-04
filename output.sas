@@ -2280,9 +2280,10 @@ end_goal
 302
 begin_operator
 address_media_firechief 
-2
+3
 147 0
 185 0
+241 0
 3
 0 9 -1 0
 0 153 0 1
@@ -5077,7 +5078,8 @@ begin_operator
 send_social_media_byeng_byeng 
 1
 240 0
-4
+5
+0 9 -1 0
 0 153 0 1
 0 185 0 2
 0 188 -1 0
@@ -5086,7 +5088,8 @@ send_social_media_byeng_byeng
 end_operator
 begin_operator
 send_social_media_byeng_byeng_with_obs 
-2
+3
+9 0
 188 0
 242 0
 1
@@ -5104,7 +5107,8 @@ begin_operator
 send_social_media_lake_byeng 
 1
 240 0
-4
+5
+0 9 -1 0
 0 153 0 1
 0 185 0 2
 0 188 -1 0
@@ -5115,7 +5119,8 @@ begin_operator
 send_social_media_marketplace_byeng 
 1
 240 0
-4
+5
+0 9 -1 0
 0 153 0 1
 0 185 0 2
 0 188 -1 0
@@ -5126,7 +5131,8 @@ begin_operator
 send_social_media_mill_byeng 
 1
 240 0
-4
+5
+0 9 -1 0
 0 153 0 1
 0 185 0 2
 0 188 -1 0
@@ -5137,7 +5143,8 @@ begin_operator
 send_social_media_rural_byeng 
 1
 240 0
-3
+4
+0 9 -1 0
 0 153 0 1
 0 185 0 1
 0 188 -1 0
