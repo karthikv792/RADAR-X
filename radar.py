@@ -18,6 +18,8 @@ dbCaller.initializeDatabase()
 def index(exp=0, s=speech.getSpeechText('INTRO'),gs='Extinguish Big Fire at BYENG'):
     planner.definePlanningProblem(gs)
     a = planner.getActionNames()
+    if planner.initial:
+        planner.getInitialPlan()
     g = ['Extinguish Big Fire At Byeng']#, 'Extinguish Small Fire At Byeng']
     if not a:
         # o = planner.getExcuses()
@@ -91,10 +93,15 @@ def updateResources():
     return index(s=speech.getSpeechText('RESOURCE_UPDATED'))
 
 @app.route("/foil",methods=['GET','POST'])
-def foil(s=speech.getSpeechText('ADD_FOIL')):
+def foil(s=speech.getSpeechText('ADD_FOIL'),closestplanfound=0,pres_plan={}):
     acts = planner.getOrderedObservations()
+    if not pres_plan:
+        planner.savePlan()
+        pre = acts
+    else:
+        pre = pres_plan
     a = planner.getActionNames()
-    return render_template('foil.html',plan=acts,actions=a,script=s)
+    return render_template('foil.html',plan=acts,presPlan = pre,actions=a,script=s,cpf = closestplanfound)
 
 @app.route("/foilrec",methods=['GET','POST'])
 def foilrec():
@@ -130,8 +137,12 @@ def validateFoil():
 
 @app.route("/closestPlan",methods=['GET','POST'])
 def closestPlan():
+    pres_plan = planner.getOrderedObservations()
     planner.getClosestPlan(getPresentPlan(request))
-    return foil(s=speech.getSpeechText('NEAREST_PLAN'))
+    return foil(s=speech.getSpeechText('NEAREST_PLAN'),closestplanfound=1,pres_plan=pres_plan)
+@app.route("/acceptClosestPlan",methods=['GET','POST'])
+def acceptClosestPlan():
+    return index(s=speech.getSpeechText('ACCEPT_NEAREST_PLAN'))
 
 @app.route("/suggest", methods=['GET', 'POST'])
 def suggest():

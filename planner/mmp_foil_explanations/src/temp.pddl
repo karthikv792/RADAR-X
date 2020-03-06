@@ -190,6 +190,7 @@
 )
 :effect
 (and
+( addressed_media )
 ( sent_social_media ?from )
 ( increase (total-cost) (duration_sent_signal) )
 (not ( no_social_media ))

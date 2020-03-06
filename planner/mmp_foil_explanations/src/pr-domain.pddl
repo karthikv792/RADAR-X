@@ -290,6 +290,7 @@
 		:effect
 		(and
 			(increase (total-cost) 5)
+			( ADDRESSED_MEDIA )
 			( SENT_SOCIAL_MEDIA_BYENG )
 			 ( EXPLAINED_SEND_SOCIAL_MEDIA_BYENG_BYENG_1 )
 			(not ( NO_SOCIAL_MEDIA ))
@@ -1094,6 +1095,7 @@
 		:effect
 		(and
 			(increase (total-cost) 5)
+			( ADDRESSED_MEDIA )
 			( SENT_SOCIAL_MEDIA_RURAL )
 			(not ( NO_SOCIAL_MEDIA ))
 		)
@@ -1107,6 +1109,7 @@
 		:effect
 		(and
 			(increase (total-cost) 5)
+			( ADDRESSED_MEDIA )
 			( SENT_SOCIAL_MEDIA_MARKETPLACE )
 			(not ( NO_SOCIAL_MEDIA ))
 		)
@@ -1120,6 +1123,7 @@
 		:effect
 		(and
 			(increase (total-cost) 5)
+			( ADDRESSED_MEDIA )
 			( SENT_SOCIAL_MEDIA_MILL )
 			(not ( NO_SOCIAL_MEDIA ))
 		)
@@ -1133,6 +1137,7 @@
 		:effect
 		(and
 			(increase (total-cost) 5)
+			( ADDRESSED_MEDIA )
 			( SENT_SOCIAL_MEDIA_LAKE )
 			(not ( NO_SOCIAL_MEDIA ))
 		)

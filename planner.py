@@ -46,10 +46,12 @@ class Planner():
                     'joseph', 'lukes', 'apachestation', 'courtstation', 'substation']
 
         self.probMaker = problemFileMaker()
+        self.initial = True
         self.observations = ''
         self.ungrounded_actions = []
         self.consts = []
         self.prob_objects = []
+        self.user_suggested_actions = []
 
     def plan(self):
         try:
@@ -202,6 +204,18 @@ class Planner():
         else:
             self.human_domain = fname.split('.pddl')[0]+'_modify.pddl'
 
+    def getInitialPlan(self,tillEndOfPresentPlan=False):
+        self.plan()
+        plan_actions = {}
+        f = open(self.sas_plan, 'r')
+        i = 0
+        for l in f:
+            if '(general cost)' not in l:
+                    plan_actions[i] = l.upper().strip()
+                    i += 1
+        f.close()
+        self.initial = False
+        self.writeObservations(plan_actions, tillEndOfPresentPlan)
     def getSuggestedPlan(self, actions, tillEndOfPresentPlan=False):
         self.writeObservations(actions)
 
@@ -220,6 +234,7 @@ class Planner():
                 raise Exception('[ERROR] In Call to PR2!')
 
         self.plan()
+
 
         # Write plan to observation file
         plan_actions = {}
@@ -442,6 +457,7 @@ class Planner():
         # present_actions = self.getOrderedObservations()
         # p_actions = [(re.sub('[(){}<>]', '', i)).replace(' ', '') for i in list(present_actions.values())]
         foil_actions = [(re.sub('[(){}<>]', '', actions[i].split('\n')[1])).replace(' ', '') for i in sorted(actions.keys())]
+        self.user_suggested_actions = foil_actions
         # diff_actions = list(set(p_actions)-set(foil_actions))
         # print(diff_actions)
         try:
@@ -459,21 +475,17 @@ class Planner():
         i = 0
         acts = [x.strip('() \n') for x in actions.values()]
         for l in f:
-            if '(general cost)' not in l:
-                if '_WITH_OBS___' in l.upper():
-                    a = l.upper().replace('_WITH_OBS', '').strip()
-                    plan_actions[i] = re.sub('_[0-9]', '', a)
-                    i += 1
-                    '''
-                    for a in acts:
-                        if a.upper() in l.upper():
-                            plan_actions[i] = '(' + a.upper().strip() + ' )'
-                            i += 1
-                            break
-                    '''
-                else:
-                    plan_actions[i] = l.upper().strip() + ';--'
-                    i += 1
+            action = (re.sub('[(){}<>]', '', l.upper().strip())).replace(' ', '')
+            print(action)
+            if 'general cost' not in l:
+                if 'WITH_OBS' not in l.upper():
+                    if action not in self.user_suggested_actions:
+                        plan_actions[i] = l.upper().strip()
+                        i += 1
+                    else:
+                        print(action)
+                        plan_actions[i] = l.upper().strip() + ';++'
+                        i += 1
         f.close()
         self.writeObservations(plan_actions, tillEndOfPresentPlan)
 
