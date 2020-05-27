@@ -58,13 +58,12 @@ print("Why Not ", why_not)
 #     for match in matches:
 #         print(pattern," ", action)
 
-def update_costs_for_foil(why, why_not):
+def update_costs_for_foil(actions, cost):
     domain_new = open("pr-domain-new.pddl", "w")
-    new_cost = 10
     with open("pr-domain.pddl", "r") as domain:
             action_found = False
             for line in domain:
-                for action in why_not:
+                for action in actions:
                     if action in line:
                         action_found = True
                         break
@@ -72,13 +71,13 @@ def update_costs_for_foil(why, why_not):
                 if action_found == True and "total-cost" in line:
                     words = line.split(" ")
                     new_line = words[0] + " " + words[1]
-                    domain_new.write(new_line + " " + str(new_cost)+")\n")
+                    domain_new.write(new_line + " " + str(cost)+")\n")
                     action_found = False
                 else:
                     domain_new.write(line)
 
     domain_new.close()
 
-
+update_costs_for_foil(why_not, -1000)
 
 
