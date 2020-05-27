@@ -12,4 +12,4 @@ This is the citation for the original RADAR paper
 }
 ```
 
-![RADAR home page]
+![RADAR home page](https://github.com/karthikv792/RADAR2.0/blob/master/RADAR.png)
