@@ -2,7 +2,7 @@ import requests
 
 def extract_actions():
     actions = set()
-    with open('pr-domain.pddl') as f:
+    with open('planner/pr-domain.pddl') as f:
         for line in f:
             if (line.strip().startswith(("(:action"))):
                 # print(line.strip()[len("(:action "):])
@@ -23,7 +23,7 @@ def extract_vocab(actions):
     vocab.add('medical')
     vocab.add('fire')
     vocab.add('chief')
-    vocab.add('engine')
+    # vocab.add('engine')
     vocab.add('admin')
     vocab.add('apache')
     vocab.add('sub')
@@ -33,15 +33,15 @@ def extract_vocab(actions):
     vocab.add('station')
     vocab.add('help')
     vocab.add('line')
-    vocab.add('ambulance')
+    # vocab.add('ambulance')
     vocab.add('mesa')
-    vocab.add('ladder')
-    vocab.add('car')
+    # vocab.add('ladder')
+    # vocab.add('car')
     vocab.add('market')
     vocab.add('place')
-    vocab.add('helicopter')
+    # vocab.add('helicopter')
     vocab.add('men')
-    vocab.add('bulldozer')
+    # vocab.add('bulldozer')
 
     return vocab
 
@@ -64,7 +64,7 @@ def clean_user_foil(user_foil, vocab):
             similar_sounding_word_list = get_similar_sounding_words(words[i])
             for similar_word in similar_sounding_word_list:
                 if similar_word in vocab:
-                    print("replacing ", words[i], "with ", similar_word)
+                    print("replacing", words[i], "with", similar_word)
                     words[i] = similar_word
 
     word_list = []
@@ -112,7 +112,7 @@ def get_actions(user_foil, current_plan):
 
 def get_similar_sounding_words(word):
     similar_sounding_word_list = []
-    url = "https://api.datamuse.com/words?sl=" + word + "&max=300"
+    url = "https://api.datamuse.com/words?sl=" + word + "&max=400"
     response = requests.get(url)
     for word_dict in response.json():
         similar_sounding_word_list.append(word_dict['word'])

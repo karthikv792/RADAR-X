@@ -1,5 +1,5 @@
 <div class="modal fade" id="planInProgressModal" tabindex="-1" role="dialog" aria-labelledby="planInProgressModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="planInProgressModalLabel">Plan In Progress Panel</h5>
@@ -17,14 +17,19 @@
         <div class="col-md-12">
             <div class="col-md-offset-3 col-md-6">
         -->
-                <div class="card col-md-12">
-                    <div class="card-header bg-info">Key</div>
-                  <div><i class="far fa-trash-alt"></i> <span>- Delete action</span></div>
+                <div class="card ">
+                    <div class="card-header text-white bg-info">Key</div>
+                    <div class="card-body align-items-center">
+                      <i class="far fa-trash-alt"></i> - Delete action
                     <br>
-                  <div><i class="fas fa-exclamation-triangle" style="color:#ff4444"></i> <span>- This action has a warning associate with it.</span></div>
-                    <div style="background-color:#f9fbe7;border-radius: 6px;border: 1px solid black;border-color:#9e9d24;text-align:center;vertical-align:middle;">Suggested Action</div>
-                    <div style="background-color:#ffcdd2;border-radius: 6px;border: 1px solid black;border-color:#b71c1c;text-align:center;vertical-align:middle;">Invalid Action</div>
-                    <div style="background-color:#64ffda;border-radius: 6px;border: 1px solid black;border-color:#00695c;text-align:center;vertical-align:middle;">Added or Valid action</div>
+                      <i class="fas fa-exclamation-triangle" style="color:#ff4444;"></i> - This action has a warning associate with it.
+                      <br>
+                  <div class="align-center">
+                    <div class="m-2" style="background-color:#f9fbe7;border-radius: 6px;border: 1px solid black;border-color:#9e9d24;text-align:center;vertical-align:middle;">Suggested Action</div>
+                    <div class="m-2" style="background-color:#ffcdd2;border-radius: 6px;border: 1px solid black;border-color:#b71c1c;text-align:center;vertical-align:middle;">Invalid Action</div>
+                    <div class="m-2" style="background-color:#64ffda;border-radius: 6px;border: 1px solid black;border-color:#00695c;text-align:center;vertical-align:middle;">Added or Valid action</div>
+                  </div>
+                    </div>
                 </div>
          <!--
              </div>
@@ -55,7 +60,7 @@
 </div>
 
 <div class="modal fade" id="ResourcesModal" tabindex="-1" role="dialog" aria-labelledby="ResourcesModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="ResourcesModalLabel">Resources Panel</h5>
@@ -63,15 +68,18 @@
       <div class="modal-body">
         Lists the status of resources found at the Fire Stations, Hospitals, and Police Stations.
         <br><br>
-        <div class="card card-default">
-            <div class="card-header bg-info">Key</div>
+        <div class="card card-default m-2">
+            <div class="card-header text-white bg-info">Key</div>
+            <div class="card-body">
+          <i class="fas fa-check" style="color:#00C851; "></i> - Resource is available
             <br>
-          <div><i class="fas fa-check" style="color:#00C851"></i> - Resource is available</div>
-            <br>
-          <div><i class="fas fa-times" style="color:#ff4444"></i> - Resource is unavailable</div>
+          <i class="fas fa-times" style="color:#ff4444 ;"></i> - Resource is unavailable
+
+        <br>
+          You can click on the <i class="fas fa-check" style="color:#00C851"></i> and <i class="fas fa-times" style="color:#ff4444"></i> to change the status of the resource in the actual environment.
         </div>
-        You can click on the <i class="fas fa-check" style="color:#00C851"></i> and <i class="fas fa-times" style="color:#ff4444"></i> to change the status of the resource in the actual environment.
-      </div>
+        </div>
+        </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
@@ -89,7 +97,7 @@
       <div class="modal-body">
         This shows the explanations between your model of the domain and the updated actual model of the domain.
         <br>
-        <div class="exploader"></div>
+        <div class="exploader"> <img src="{{ url_for('static',filename='images/page-loader.gif') }}"> </div>
         <div id="generatedExplanations"></div>
       </div>
       <div class="modal-footer">

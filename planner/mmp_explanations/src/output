@@ -59,27 +59,6 @@ Atom deployed_big_engines(rural)
 Atom has_big_engines_number(mesafire)
 end_variable
 begin_variable
-var137
--1
-2
-Atom has_rescuers_number(mesafire)
-NegatedAtom has_rescuers_number(mesafire)
-end_variable
-begin_variable
-var130
--1
-2
-Atom has_ladders_number(mesafire)
-NegatedAtom has_ladders_number(mesafire)
-end_variable
-begin_variable
-var17
--1
-2
-Atom alerted(mesafire)
-NegatedAtom alerted(mesafire)
-end_variable
-begin_variable
 var121
 -1
 2
@@ -155,6 +134,27 @@ var19
 2
 Atom alerted(phxfire)
 NegatedAtom alerted(phxfire)
+end_variable
+begin_variable
+var130
+-1
+2
+Atom has_ladders_number(mesafire)
+NegatedAtom has_ladders_number(mesafire)
+end_variable
+begin_variable
+var137
+-1
+2
+Atom has_rescuers_number(mesafire)
+NegatedAtom has_rescuers_number(mesafire)
+end_variable
+begin_variable
+var17
+-1
+2
+Atom alerted(mesafire)
+NegatedAtom alerted(mesafire)
 end_variable
 begin_variable
 var15
@@ -268,26 +268,16 @@ var8
 Atom addressed_media()
 NegatedAtom addressed_media()
 end_variable
-4
+2
 begin_mutex_group
 2
-11 0
-10 0
+8 0
+7 0
 end_mutex_group
 begin_mutex_group
 2
-11 0
-10 0
-end_mutex_group
-begin_mutex_group
-2
-11 0
-10 0
-end_mutex_group
-begin_mutex_group
-2
-11 0
-10 0
+8 0
+7 0
 end_mutex_group
 begin_state
 1
@@ -298,9 +288,6 @@ begin_state
 0
 5
 0
-0
-1
-0
 1
 0
 0
@@ -308,6 +295,9 @@ begin_state
 1
 0
 0
+0
+0
+1
 0
 0
 1
@@ -330,7 +320,7 @@ begin_state
 end_state
 begin_goal
 2
-11 0
+8 0
 36 0
 end_goal
 125
@@ -395,21 +385,21 @@ begin_operator
 alert firechief mesafire
 0
 1
-0 9 -1 0
+0 20 -1 0
 1
 end_operator
 begin_operator
 alert firechief phxfire
 0
 1
-0 20 -1 0
+0 17 -1 0
 1
 end_operator
 begin_operator
 alert firechief scottsfire
 0
 1
-0 15 -1 0
+0 12 -1 0
 1
 end_operator
 begin_operator
@@ -437,21 +427,21 @@ begin_operator
 alert medichief mesafire
 0
 1
-0 9 -1 0
+0 20 -1 0
 1
 end_operator
 begin_operator
 alert medichief phxfire
 0
 1
-0 20 -1 0
+0 17 -1 0
 1
 end_operator
 begin_operator
 alert medichief scottsfire
 0
 1
-0 15 -1 0
+0 12 -1 0
 1
 end_operator
 begin_operator
@@ -479,21 +469,21 @@ begin_operator
 alert policechief mesafire
 0
 1
-0 9 -1 0
+0 20 -1 0
 1
 end_operator
 begin_operator
 alert policechief phxfire
 0
 1
-0 20 -1 0
+0 17 -1 0
 1
 end_operator
 begin_operator
 alert policechief scottsfire
 0
 1
-0 15 -1 0
+0 12 -1 0
 1
 end_operator
 begin_operator
@@ -521,21 +511,21 @@ begin_operator
 alert transportchief mesafire
 0
 1
-0 9 -1 0
+0 20 -1 0
 1
 end_operator
 begin_operator
 alert transportchief phxfire
 0
 1
-0 20 -1 0
+0 17 -1 0
 1
 end_operator
 begin_operator
 alert transportchief scottsfire
 0
 1
-0 15 -1 0
+0 12 -1 0
 1
 end_operator
 begin_operator
@@ -661,7 +651,7 @@ begin_operator
 deploy_big_engines firechief mesafire byeng
 0
 2
-0 9 0 1
+0 20 -1 1
 0 6 5 0
 4
 end_operator
@@ -669,7 +659,7 @@ begin_operator
 deploy_big_engines firechief mesafire lake
 0
 2
-0 9 0 1
+0 20 -1 1
 0 6 5 1
 4
 end_operator
@@ -677,7 +667,7 @@ begin_operator
 deploy_big_engines firechief mesafire marketplace
 0
 2
-0 9 0 1
+0 20 -1 1
 0 6 5 2
 4
 end_operator
@@ -685,7 +675,7 @@ begin_operator
 deploy_big_engines firechief mesafire mill
 0
 2
-0 9 0 1
+0 20 -1 1
 0 6 5 3
 4
 end_operator
@@ -693,7 +683,7 @@ begin_operator
 deploy_big_engines firechief mesafire rural
 0
 2
-0 9 0 1
+0 20 -1 1
 0 6 5 4
 4
 end_operator
@@ -742,82 +732,82 @@ begin_operator
 deploy_bulldozers firechief phxfire byeng
 0
 3
-0 20 0 1
+0 17 0 1
 0 33 -1 0
-0 16 0 1
+0 13 0 1
 3
 end_operator
 begin_operator
 deploy_bulldozers firechief phxfire lake
 0
 2
-0 20 0 1
-0 16 0 1
+0 17 0 1
+0 13 0 1
 3
 end_operator
 begin_operator
 deploy_bulldozers firechief phxfire marketplace
 0
 2
-0 20 0 1
-0 16 0 1
+0 17 0 1
+0 13 0 1
 3
 end_operator
 begin_operator
 deploy_bulldozers firechief phxfire mill
 0
 2
-0 20 0 1
-0 16 0 1
+0 17 0 1
+0 13 0 1
 3
 end_operator
 begin_operator
 deploy_bulldozers firechief phxfire rural
 0
 2
-0 20 0 1
-0 16 0 1
+0 17 0 1
+0 13 0 1
 3
 end_operator
 begin_operator
 deploy_bulldozers firechief scottsfire byeng
 0
 3
-0 15 0 1
-0 33 -1 0
 0 12 0 1
+0 33 -1 0
+0 9 0 1
 3
 end_operator
 begin_operator
 deploy_bulldozers firechief scottsfire lake
 0
 2
-0 15 0 1
 0 12 0 1
+0 9 0 1
 3
 end_operator
 begin_operator
 deploy_bulldozers firechief scottsfire marketplace
 0
 2
-0 15 0 1
 0 12 0 1
+0 9 0 1
 3
 end_operator
 begin_operator
 deploy_bulldozers firechief scottsfire mill
 0
 2
-0 15 0 1
 0 12 0 1
+0 9 0 1
 3
 end_operator
 begin_operator
 deploy_bulldozers firechief scottsfire rural
 0
 2
-0 15 0 1
 0 12 0 1
+0 9 0 1
 3
 end_operator
 begin_operator
@@ -865,41 +855,41 @@ begin_operator
 deploy_helicopters firechief phxfire byeng
 0
 3
-0 20 0 1
-0 32 -1 0
 0 17 0 1
+0 32 -1 0
+0 14 0 1
 3
 end_operator
 begin_operator
 deploy_helicopters firechief phxfire lake
 0
 2
-0 20 0 1
 0 17 0 1
+0 14 0 1
 3
 end_operator
 begin_operator
 deploy_helicopters firechief phxfire marketplace
 0
 2
-0 20 0 1
 0 17 0 1
+0 14 0 1
 3
 end_operator
 begin_operator
 deploy_helicopters firechief phxfire mill
 0
 2
-0 20 0 1
 0 17 0 1
+0 14 0 1
 3
 end_operator
 begin_operator
 deploy_helicopters firechief phxfire rural
 0
 2
-0 20 0 1
 0 17 0 1
+0 14 0 1
 3
 end_operator
 begin_operator
@@ -952,8 +942,8 @@ deploy_ladders firechief mesafire byeng
 1
 6 0
 2
-0 9 0 1
-0 8 0 1
+0 20 0 1
+0 18 0 1
 3
 end_operator
 begin_operator
@@ -961,8 +951,8 @@ deploy_ladders firechief mesafire lake
 1
 6 1
 2
-0 9 0 1
-0 8 0 1
+0 20 0 1
+0 18 0 1
 3
 end_operator
 begin_operator
@@ -970,8 +960,8 @@ deploy_ladders firechief mesafire marketplace
 1
 6 2
 2
-0 9 0 1
-0 8 0 1
+0 20 0 1
+0 18 0 1
 3
 end_operator
 begin_operator
@@ -979,8 +969,8 @@ deploy_ladders firechief mesafire mill
 1
 6 3
 2
-0 9 0 1
-0 8 0 1
+0 20 0 1
+0 18 0 1
 3
 end_operator
 begin_operator
@@ -988,8 +978,8 @@ deploy_ladders firechief mesafire rural
 1
 6 4
 2
-0 9 0 1
-0 8 0 1
+0 20 0 1
+0 18 0 1
 3
 end_operator
 begin_operator
@@ -997,8 +987,8 @@ deploy_ladders firechief phxfire byeng
 1
 6 0
 2
-0 20 0 1
-0 18 0 1
+0 17 0 1
+0 15 0 1
 3
 end_operator
 begin_operator
@@ -1006,8 +996,8 @@ deploy_ladders firechief phxfire lake
 1
 6 1
 2
-0 20 0 1
-0 18 0 1
+0 17 0 1
+0 15 0 1
 3
 end_operator
 begin_operator
@@ -1015,8 +1005,8 @@ deploy_ladders firechief phxfire marketplace
 1
 6 2
 2
-0 20 0 1
-0 18 0 1
+0 17 0 1
+0 15 0 1
 3
 end_operator
 begin_operator
@@ -1024,8 +1014,8 @@ deploy_ladders firechief phxfire mill
 1
 6 3
 2
-0 20 0 1
-0 18 0 1
+0 17 0 1
+0 15 0 1
 3
 end_operator
 begin_operator
@@ -1033,8 +1023,8 @@ deploy_ladders firechief phxfire rural
 1
 6 4
 2
-0 20 0 1
-0 18 0 1
+0 17 0 1
+0 15 0 1
 3
 end_operator
 begin_operator
@@ -1042,8 +1032,8 @@ deploy_ladders firechief scottsfire byeng
 1
 6 0
 2
-0 15 0 1
-0 13 0 1
+0 12 0 1
+0 10 0 1
 3
 end_operator
 begin_operator
@@ -1051,8 +1041,8 @@ deploy_ladders firechief scottsfire lake
 1
 6 1
 2
-0 15 0 1
-0 13 0 1
+0 12 0 1
+0 10 0 1
 3
 end_operator
 begin_operator
@@ -1060,8 +1050,8 @@ deploy_ladders firechief scottsfire marketplace
 1
 6 2
 2
-0 15 0 1
-0 13 0 1
+0 12 0 1
+0 10 0 1
 3
 end_operator
 begin_operator
@@ -1069,8 +1059,8 @@ deploy_ladders firechief scottsfire mill
 1
 6 3
 2
-0 15 0 1
-0 13 0 1
+0 12 0 1
+0 10 0 1
 3
 end_operator
 begin_operator
@@ -1078,8 +1068,8 @@ deploy_ladders firechief scottsfire rural
 1
 6 4
 2
-0 15 0 1
-0 13 0 1
+0 12 0 1
+0 10 0 1
 3
 end_operator
 begin_operator
@@ -1127,123 +1117,123 @@ begin_operator
 deploy_rescuers firechief mesafire byeng
 0
 3
-0 9 0 1
+0 20 0 1
 0 31 -1 0
-0 7 0 1
+0 19 0 1
 3
 end_operator
 begin_operator
 deploy_rescuers firechief mesafire lake
 0
 2
-0 9 0 1
-0 7 0 1
+0 20 0 1
+0 19 0 1
 3
 end_operator
 begin_operator
 deploy_rescuers firechief mesafire marketplace
 0
 2
-0 9 0 1
-0 7 0 1
+0 20 0 1
+0 19 0 1
 3
 end_operator
 begin_operator
 deploy_rescuers firechief mesafire mill
 0
 2
-0 9 0 1
-0 7 0 1
+0 20 0 1
+0 19 0 1
 3
 end_operator
 begin_operator
 deploy_rescuers firechief mesafire rural
 0
 2
-0 9 0 1
-0 7 0 1
+0 20 0 1
+0 19 0 1
 3
 end_operator
 begin_operator
 deploy_rescuers firechief phxfire byeng
 0
 3
-0 20 0 1
+0 17 0 1
 0 31 -1 0
-0 19 0 1
+0 16 0 1
 3
 end_operator
 begin_operator
 deploy_rescuers firechief phxfire lake
 0
 2
-0 20 0 1
-0 19 0 1
+0 17 0 1
+0 16 0 1
 3
 end_operator
 begin_operator
 deploy_rescuers firechief phxfire marketplace
 0
 2
-0 20 0 1
-0 19 0 1
+0 17 0 1
+0 16 0 1
 3
 end_operator
 begin_operator
 deploy_rescuers firechief phxfire mill
 0
 2
-0 20 0 1
-0 19 0 1
+0 17 0 1
+0 16 0 1
 3
 end_operator
 begin_operator
 deploy_rescuers firechief phxfire rural
 0
 2
-0 20 0 1
-0 19 0 1
+0 17 0 1
+0 16 0 1
 3
 end_operator
 begin_operator
 deploy_rescuers firechief scottsfire byeng
 0
 3
-0 15 0 1
+0 12 0 1
 0 31 -1 0
-0 14 0 1
+0 11 0 1
 3
 end_operator
 begin_operator
 deploy_rescuers firechief scottsfire lake
 0
 2
-0 15 0 1
-0 14 0 1
+0 12 0 1
+0 11 0 1
 3
 end_operator
 begin_operator
 deploy_rescuers firechief scottsfire marketplace
 0
 2
-0 15 0 1
-0 14 0 1
+0 12 0 1
+0 11 0 1
 3
 end_operator
 begin_operator
 deploy_rescuers firechief scottsfire mill
 0
 2
-0 15 0 1
-0 14 0 1
+0 12 0 1
+0 11 0 1
 3
 end_operator
 begin_operator
 deploy_rescuers firechief scottsfire rural
 0
 2
-0 15 0 1
-0 14 0 1
+0 12 0 1
+0 11 0 1
 3
 end_operator
 begin_operator
@@ -1290,7 +1280,7 @@ begin_operator
 deploy_small_engines firechief scottsfire byeng
 0
 2
-0 15 -1 1
+0 12 -1 1
 0 4 0 1
 2
 end_operator
@@ -1298,7 +1288,7 @@ begin_operator
 deploy_small_engines firechief scottsfire lake
 0
 2
-0 15 -1 1
+0 12 -1 1
 0 4 0 1
 2
 end_operator
@@ -1306,7 +1296,7 @@ begin_operator
 deploy_small_engines firechief scottsfire marketplace
 0
 2
-0 15 -1 1
+0 12 -1 1
 0 4 0 1
 2
 end_operator
@@ -1314,7 +1304,7 @@ begin_operator
 deploy_small_engines firechief scottsfire mill
 0
 2
-0 15 -1 1
+0 12 -1 1
 0 4 0 1
 2
 end_operator
@@ -1322,7 +1312,7 @@ begin_operator
 deploy_small_engines firechief scottsfire rural
 0
 2
-0 15 -1 1
+0 12 -1 1
 0 4 0 1
 2
 end_operator
@@ -1331,8 +1321,8 @@ extinguish_big_fire firechief byeng
 1
 6 0
 2
-0 11 -1 0
-0 10 0 1
+0 8 -1 0
+0 7 0 1
 1
 end_operator
 begin_operator
@@ -1341,7 +1331,7 @@ search_casualties firechief byeng
 33 0
 32 0
 31 0
-11 0
+8 0
 2
 0 35 -1 0
 0 34 -1 0
@@ -1471,47 +1461,42 @@ check 5
 check 0
 check 0
 check 0
-switch 9
+switch 20
 check 0
 switch 6
 check 0
-switch 8
+switch 18
 check 0
 check 1
 78
 check 0
 check 0
-switch 8
+switch 18
 check 0
 check 1
 79
 check 0
 check 0
-switch 8
+switch 18
 check 0
 check 1
 80
 check 0
 check 0
-switch 8
+switch 18
 check 0
 check 1
 81
 check 0
 check 0
-switch 8
+switch 18
 check 0
 check 1
 82
 check 0
 check 0
-check 5
-43
-44
-45
-46
-47
-switch 7
+check 0
+switch 19
 check 0
 check 5
 98
@@ -1522,42 +1507,42 @@ check 5
 check 0
 check 0
 check 0
-switch 20
+switch 17
 check 0
 switch 6
 check 0
-switch 18
+switch 15
 check 0
 check 1
 83
 check 0
 check 0
-switch 18
+switch 15
 check 0
 check 1
 84
 check 0
 check 0
-switch 18
+switch 15
 check 0
 check 1
 85
 check 0
 check 0
-switch 18
+switch 15
 check 0
 check 1
 86
 check 0
 check 0
-switch 18
+switch 15
 check 0
 check 1
 87
 check 0
 check 0
 check 0
-switch 16
+switch 13
 check 0
 check 5
 53
@@ -1566,7 +1551,7 @@ check 5
 56
 57
 check 0
-switch 17
+switch 14
 check 0
 check 5
 68
@@ -1575,7 +1560,7 @@ check 5
 71
 72
 check 0
-switch 19
+switch 16
 check 0
 check 5
 103
@@ -1586,42 +1571,42 @@ check 5
 check 0
 check 0
 check 0
-switch 15
+switch 12
 check 0
 switch 6
 check 0
-switch 13
+switch 10
 check 0
 check 1
 88
 check 0
 check 0
-switch 13
+switch 10
 check 0
 check 1
 89
 check 0
 check 0
-switch 13
+switch 10
 check 0
 check 1
 90
 check 0
 check 0
-switch 13
+switch 10
 check 0
 check 1
 91
 check 0
 check 0
-switch 13
+switch 10
 check 0
 check 1
 92
 check 0
 check 0
 check 0
-switch 12
+switch 9
 check 0
 check 5
 58
@@ -1630,7 +1615,7 @@ check 5
 61
 62
 check 0
-switch 14
+switch 11
 check 0
 check 5
 108
@@ -1652,7 +1637,7 @@ check 0
 check 0
 switch 6
 check 0
-switch 10
+switch 7
 check 0
 check 1
 123
@@ -1662,14 +1647,19 @@ check 0
 check 0
 check 0
 check 0
-check 0
+check 5
+43
+44
+45
+46
+47
 switch 33
 check 0
 switch 32
 check 0
 switch 31
 check 0
-switch 11
+switch 8
 check 0
 check 1
 124
@@ -1787,125 +1777,43 @@ begin_DTG
 5
 0
 43
-1
-9 0
+0
 1
 44
-1
-9 0
+0
 2
 45
-1
-9 0
+0
 3
 46
-1
-9 0
+0
 4
 47
-1
-9 0
-end_DTG
-begin_DTG
-1
-1
-98
-1
-9 0
 0
 end_DTG
 begin_DTG
-5
 1
-78
-2
-9 0
+1
+123
+1
 6 0
-1
-79
-2
-9 0
-6 1
-1
-80
-2
-9 0
-6 2
-1
-81
-2
-9 0
-6 3
-1
-82
-2
-9 0
-6 4
 0
 end_DTG
 begin_DTG
-7
+0
 1
-98
-1
+0
+123
+2
+6 0
 7 0
-1
-43
-1
-6 5
-1
-78
-2
-6 0
-8 0
-1
-79
-2
-6 1
-8 0
-1
-80
-2
-6 2
-8 0
-1
-81
-2
-6 3
-8 0
-1
-82
-2
-6 4
-8 0
-1
-0
-7
-0
-end_DTG
-begin_DTG
-1
-1
-123
-1
-6 0
-0
-end_DTG
-begin_DTG
-0
-1
-0
-123
-2
-6 0
-10 0
 end_DTG
 begin_DTG
 1
 1
 58
 1
-15 0
+12 0
 0
 end_DTG
 begin_DTG
@@ -1913,27 +1821,27 @@ begin_DTG
 1
 88
 2
-15 0
+12 0
 6 0
 1
 89
 2
-15 0
+12 0
 6 1
 1
 90
 2
-15 0
+12 0
 6 2
 1
 91
 2
-15 0
+12 0
 6 3
 1
 92
 2
-15 0
+12 0
 6 4
 0
 end_DTG
@@ -1942,7 +1850,7 @@ begin_DTG
 1
 108
 1
-15 0
+12 0
 0
 end_DTG
 begin_DTG
@@ -1954,36 +1862,36 @@ begin_DTG
 1
 108
 1
-14 0
+11 0
 1
 58
 1
-12 0
+9 0
 1
 92
 2
 6 4
-13 0
+10 0
 1
 91
 2
 6 3
-13 0
+10 0
 1
 90
 2
 6 2
-13 0
+10 0
 1
 89
 2
 6 1
-13 0
+10 0
 1
 88
 2
 6 0
-13 0
+10 0
 1
 0
 9
@@ -1994,7 +1902,7 @@ begin_DTG
 1
 53
 1
-20 0
+17 0
 0
 end_DTG
 begin_DTG
@@ -2002,7 +1910,7 @@ begin_DTG
 1
 68
 1
-20 0
+17 0
 0
 end_DTG
 begin_DTG
@@ -2010,27 +1918,27 @@ begin_DTG
 1
 83
 2
-20 0
+17 0
 6 0
 1
 84
 2
-20 0
+17 0
 6 1
 1
 85
 2
-20 0
+17 0
 6 2
 1
 86
 2
-20 0
+17 0
 6 3
 1
 87
 2
-20 0
+17 0
 6 4
 0
 end_DTG
@@ -2039,7 +1947,7 @@ begin_DTG
 1
 103
 1
-20 0
+17 0
 0
 end_DTG
 begin_DTG
@@ -2047,43 +1955,120 @@ begin_DTG
 1
 54
 1
-16 0
+13 0
 1
 107
 1
-19 0
+16 0
 1
 72
 1
-17 0
+14 0
 1
 83
 2
 6 0
-18 0
+15 0
 1
 84
 2
 6 1
-18 0
+15 0
 1
 85
 2
 6 2
-18 0
+15 0
 1
 86
 2
 6 3
-18 0
+15 0
 1
 87
+2
+6 4
+15 0
+1
+0
+8
+0
+end_DTG
+begin_DTG
+5
+1
+78
+2
+20 0
+6 0
+1
+79
+2
+20 0
+6 1
+1
+80
+2
+20 0
+6 2
+1
+81
+2
+20 0
+6 3
+1
+82
+2
+20 0
+6 4
+0
+end_DTG
+begin_DTG
+1
+1
+98
+1
+20 0
+0
+end_DTG
+begin_DTG
+7
+1
+98
+1
+19 0
+1
+43
+1
+6 5
+1
+78
+2
+6 0
+18 0
+1
+79
+2
+6 1
+18 0
+1
+80
+2
+6 2
+18 0
+1
+81
+2
+6 3
+18 0
+1
+82
 2
 6 4
 18 0
 1
 0
-8
+7
 0
 end_DTG
 begin_DTG
@@ -2250,18 +2235,18 @@ begin_DTG
 0
 98
 2
-9 0
-7 0
-0
-103
-2
 20 0
 19 0
 0
+103
+2
+17 0
+16 0
+0
 108
 2
-15 0
-14 0
+12 0
+11 0
 end_DTG
 begin_DTG
 0
@@ -2274,8 +2259,8 @@ begin_DTG
 0
 68
 2
-20 0
 17 0
+14 0
 end_DTG
 begin_DTG
 0
@@ -2288,13 +2273,13 @@ begin_DTG
 0
 53
 2
-20 0
-16 0
+17 0
+13 0
 0
 58
 2
-15 0
 12 0
+9 0
 end_DTG
 begin_DTG
 1
@@ -2309,7 +2294,7 @@ begin_DTG
 33 0
 32 0
 31 0
-11 0
+8 0
 end_DTG
 begin_DTG
 4
@@ -2341,7 +2326,7 @@ begin_DTG
 33 0
 32 0
 31 0
-11 0
+8 0
 end_DTG
 begin_DTG
 0
@@ -2381,66 +2366,65 @@ begin_CG
 36 1
 35 1
 1
-15 5
+12 5
 1
 30 5
 10
 30 5
-9 10
-20 5
-15 5
-11 1
-10 1
+20 10
+17 5
+12 5
+8 1
+7 1
 28 5
-8 5
 18 5
-13 5
-2
-9 5
-31 1
+15 5
+10 5
 1
-9 5
-4
-6 5
-31 1
-8 5
-7 5
-1
-11 1
+8 1
 2
 35 1
 34 1
 2
-15 5
+12 5
 33 1
 1
-15 5
+12 5
 2
-15 5
+12 5
 31 1
 5
 33 1
 31 1
-12 5
-13 5
-14 5
+9 5
+10 5
+11 5
 2
-20 5
+17 5
 33 1
 2
-20 5
+17 5
 32 1
 1
-20 5
+17 5
 2
-20 5
+17 5
 31 1
 7
 33 1
 32 1
 31 1
+13 5
+14 5
+15 5
 16 5
-17 5
+1
+20 5
+2
+20 5
+31 1
+3
+31 1
 18 5
 19 5
 2

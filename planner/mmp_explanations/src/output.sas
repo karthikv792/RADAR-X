@@ -1822,7 +1822,7 @@ var258
 Atom updated(transportchief)
 NegatedAtom updated(transportchief)
 end_variable
-9
+5
 begin_mutex_group
 6
 59 0
@@ -1841,26 +1841,6 @@ begin_mutex_group
 2
 120 0
 121 0
-end_mutex_group
-begin_mutex_group
-2
-120 0
-121 0
-end_mutex_group
-begin_mutex_group
-2
-120 0
-121 0
-end_mutex_group
-begin_mutex_group
-2
-121 0
-121 1
-end_mutex_group
-begin_mutex_group
-2
-121 0
-121 1
 end_mutex_group
 begin_mutex_group
 2
@@ -3150,7 +3130,7 @@ begin_operator
 deploy_big_engines firechief mesafire byeng
 0
 3
-0 17 0 1
+0 17 -1 1
 0 59 5 0
 0 65 -1 0
 4
@@ -3159,7 +3139,7 @@ begin_operator
 deploy_big_engines firechief mesafire lake
 0
 3
-0 17 0 1
+0 17 -1 1
 0 59 5 1
 0 66 -1 0
 4
@@ -3168,7 +3148,7 @@ begin_operator
 deploy_big_engines firechief mesafire marketplace
 0
 3
-0 17 0 1
+0 17 -1 1
 0 59 5 2
 0 67 -1 0
 4
@@ -3177,7 +3157,7 @@ begin_operator
 deploy_big_engines firechief mesafire mill
 0
 3
-0 17 0 1
+0 17 -1 1
 0 59 5 3
 0 68 -1 0
 4
@@ -3186,7 +3166,7 @@ begin_operator
 deploy_big_engines firechief mesafire rural
 0
 3
-0 17 0 1
+0 17 -1 1
 0 59 5 4
 0 69 -1 0
 4

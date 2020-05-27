@@ -77,6 +77,7 @@
 (=(duration_extinguish_big_fire) 1)
 (=(duration_barricade) 1)
 (=(duration_search_casualties) 3)
+(=(duration_sent_signal) 5)
 (=(duration_address_media) 2)
 (=(duration_attend_casualties) 3)
 

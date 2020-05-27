@@ -1,26 +1,43 @@
+<<<<<<< HEAD
 from flask import Flask, render_template, request, jsonify, Response
+=======
+import re
+from flask import Flask, render_template, request, jsonify
+>>>>>>> temp
 import json
 import requests
 import urllib
 from planner import Planner
 from speak import Speak
 from dbHandler import dbHandler
+<<<<<<< HEAD
 import speech_recognition as sr
 import io
 from google.cloud import speech
 from google.cloud.speech import enums
 from google.cloud.speech import types
+=======
+from foil_parser import get_actions
+import speech_recognition as sr
+>>>>>>> temp
 app = Flask(__name__)
 planner = Planner()
 speech1 = Speak()
 dbCaller = dbHandler()
 recognizer = sr.Recognizer()
+<<<<<<< HEAD
 #dbCaller.initializeDatabase()
+=======
+
+dbCaller.initializeDatabase()
+>>>>>>> temp
 
 @app.route("/")
 def index(exp=0, s=speech1.getSpeechText('INTRO'),gs='Extinguish Big Fire at BYENG'):
     planner.definePlanningProblem(gs)
     a = planner.getActionNames()
+    if planner.initial:
+        planner.getInitialPlan()
     g = ['Extinguish Big Fire At Byeng']#, 'Extinguish Small Fire At Byeng']
     if not a:
         # o = planner.getExcuses()
@@ -40,12 +57,24 @@ def getPresentPlan(request):
     ]
     """
     seq = {}
-    plan = json.loads(dict(request.form)['plan'])
-    for act in plan:
+    pref = []
+    pref_flag = 0
+    try:
+        plan = json.loads(dict(request.form)['plan'])
+    except:
+        plan = json.loads(request.args['plan'])
+    for index, act in enumerate(plan):
+        print(act)
         # We assume that only one action occurs at a time
         # TODO: Update code if we want to allow options for
         # two simultaneous actions (choices)
-        seq[ act["y"] ] = act["name"]
+        try:
+            seq[ act["y"] ] = act["name"]
+        except TypeError:
+            pref_flag=1
+            pref.append(act)
+    if pref_flag:
+        return pref
     print ("\n======\n{0}\n======\n".format(seq))
     return seq
 
@@ -107,6 +136,11 @@ def getExplanationForPlan():
     exp = planner.getExplanations()
     return jsonify(exp)
 
+@app.route("/getFoilExplanation", methods=['GET', 'POST'])
+def getExplanationForFoil():
+    exp = planner.getFoilExplanations(getPresentPlan(request))
+    return jsonify(exp)
+
 @app.route("/updateResources", methods=['GET','POST'])
 def updateResources():
     d = dict(request.form)
@@ -114,11 +148,71 @@ def updateResources():
     return index(s=speech1.getSpeechText('RESOURCE_UPDATED'))
 
 @app.route("/foil",methods=['GET','POST'])
-def foil():
-    planner.loadPlan()
+def foil(s=speech.getSpeechText('ADD_FOIL'),closestplanfound=0,pres_plan={}):
     acts = planner.getOrderedObservations()
+    if not pres_plan:
+        planner.savePlan()
+        pre = acts
+    else:
+        pre = pres_plan
     a = planner.getActionNames()
-    return render_template('foil.html',plan=acts,actions=a)
+    return render_template('foil.html',plan=acts,presPlan = pre,actions=a,script=s,cpf = closestplanfound)
+
+@app.route("/foilrec",methods=['GET','POST'])
+def foilrec():
+    acts = planner.getOrderedObservations()
+    action_list = [i for i in acts.values()]
+    actions = []
+    for i in action_list:
+        actions.append((re.sub('[(){}<>]', '', i)).replace(' ', ''))
+    print(action_list)
+    with open('service-account-file.json') as file:
+        GOOGLE_CREDENTIALS = file.read()
+    url = request.files['audio_data']
+    phrase_list= planner.ungrounded_actions+planner.consts
+    wavFile = sr.AudioFile(url)
+    with wavFile as source:
+        #recognizer.adjust_for_ambient_noise(source)
+        audio = recognizer.record(source)
+    text = recognizer.recognize_google_cloud(audio, credentials_json=GOOGLE_CREDENTIALS,preferred_phrases=phrase_list)
+    with open('nlp_foils.txt','a') as nlp:
+        nlp.write(text+'\n')
+    why, why_not = get_actions(text,actions)
+    actions1 = {}
+    actions1['text1'] = text
+    actions1['why_action'] = why
+    actions1['whynot_action'] = why_not
+    return actions1
+
+
+@app.route("/validateFoil",methods=['GET','POST'])
+def validateFoil():
+    planner.validateFoil(getPresentPlan(request))
+    return 'ab'
+
+@app.route("/closestPlan",methods=['GET','POST'])
+def closestPlan(req=None):
+    pres_plan = planner.getOrderedObservations()
+    if not req:
+        planner.getClosestPlan(getPresentPlan(request))
+    else:
+        planner.getClosestPlan(req)
+    return foil(s=speech.getSpeechText('NEAREST_PLAN'),closestplanfound=1,pres_plan=pres_plan)
+@app.route("/getPreference",methods=['GET','POST'])
+def getPreference():
+    choice= request.args['choice'].strip('"').split(',')
+    actions = getPresentPlan(request)
+    # print(choice)
+    if choice[0] == 'aaaa':
+        e, completed = planner.getPreference(actions)
+    else:
+        e, completed = planner.getPreference(actions,pref=choice)
+    # print("COMPLETED",completed)
+    return jsonify([{"dict":e,"complete":completed}])
+    # return foil(s=speech.getSpeechText('NEAREST_PLAN'),closestplanfound=1,pres_plan=pres_plan)
+@app.route("/acceptClosestPlan",methods=['GET','POST'])
+def acceptClosestPlan():
+    return index(s=speech.getSpeechText('ACCEPT_NEAREST_PLAN'))
 
 @app.route("/suggest", methods=['GET', 'POST'])
 def suggest():
@@ -136,6 +230,12 @@ def fix():
 def undo():
     planner.loadPlan()
     return index(s="")
+
+@app.route("/undoFoil", methods=['GET', 'POST'])
+def undoFoil():
+    planner.loadPlan()
+    return foil()
+
 
 @app.route("/readFireStationResources", methods=['GET', 'POST'])
 def readFireStationResource():
@@ -157,4 +257,8 @@ def readPoliceStationResource():
 
 
 if __name__ == '__main__':
+<<<<<<< HEAD
     app.run(host='0.0.0.0', port=5080, ssl_context=('cert.pem','key.pem'))
+=======
+    app.run(host='0.0.0.0', port=5081)
+>>>>>>> temp

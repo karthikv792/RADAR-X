@@ -1,4 +1,3 @@
-(contact_media_firechief )
 (alert_firechief_adminfire )
 (alert_firechief_mesafire )
 (deploy_big_engines_firechief_mesafire_byeng )
@@ -9,5 +8,5 @@
 (alert_firechief_adminfire )
 (deploy_rescuers_firechief_adminfire_byeng )
 (search_casualties_firechief_byeng )
-(address_media_firechief )
-; cost = 24 (general cost)
+(send_social_media_byeng_byeng_with_obs )
+; cost = 26 (general cost)

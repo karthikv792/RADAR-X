@@ -1,11 +1,11 @@
 {% include 'header.html' %}
-<div class='col m-2' style="min-height: 100%; margin-left: 10px;margin-top: 10px">
+<div class='col' style="min-height: 100%; margin-left: 10px;margin-top: 10px">
     {% include 'plan.html' %}
 </div>
 <textarea id='speakText' style="display:none;">{{ script }}</textarea>
-<div class='col m-2'>
+<div class='col'>
     <div class='col-md-12' style="padding-top:10px;">
-        <div class="card">
+        <div class="card border-secondary m-2">
             {% include 'goal.html' %}
         </div>
     </div>
@@ -13,5 +13,8 @@
         {% include 'resource.html' %}
     </div>
 </div>
+<script>
+responsiveVoice.speak(document.getElementById("speakText").textContent);
+</script>
 {% include 'helpModals.html' %}
 {% include 'footer.html' %}

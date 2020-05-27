@@ -24,6 +24,7 @@ class problemFileMaker:
         pois = self.dbCaller.getCustomCursor('object_name', 'objects', 'type = 8')
         actors = self.dbCaller.getCustomCursor('object_name', 'objects', 'type in (1,2,3,4)')
         s = ""
+        s+='(no_social_media)\n'
         for i in pois:
             s += '(not_needed_search_casualties ' + i[0] + ' )\n'
             s += '(not_needed_attend_casualties ' + i[0] + ' )\n'

@@ -22,44 +22,42 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
       <script src="https://kit.fontawesome.com/d21ce2486e.js" crossorigin="anonymous"></script>
-<script type= "text/javascript" src='https://code.responsivevoice.org/responsivevoice.js'></script>
-    <script type= "text/javascript" src="{{ url_for('static',filename='js/responseVoice.js') }}"></script>
+<script src="https://code.responsivevoice.org/responsivevoice.js?key=9lgxx4ig"></script>
+    <script type= "text/javascript" src= "{{ url_for('static',filename='js/gridstack.js') }}"></script>
+    <script type= "text/javascript" src= "{{ url_for('static',filename='js/gridstack.jQueryUI.js') }}"></script>
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-      <script src="{{ url_for('static',filename='js/recorder.js') }}"></script>
-
+<script type="text/javascript" src="{{ url_for('static',filename='js/recorder.js')}}"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gridstack@0.6.0/dist/gridstack.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/gridstack@0.6.0/dist/gridstack.all.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
       <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+
       <style type="text/css">
         .grid-stack-item-content {
             color: #00050f;
             text-align: center;
             background-color: #b2c1e0;
         }
-        .loader, .exploader {
-            left: 0px;
-            top: 0px;
-            width: 100%;
-            z-index: 9999;
-            background-repeat: no-repeat;
-            background-position: 50% 50%;
-            background-image: url('{{ url_for("static",filename="images/page-loader.gif") }}');
-            background-color: rgb(249, 249, 249);
-        }
-        .loader {
-            position: static;
-            height: 100%;
-        }
-        .exploader {
-            position: relative;
-            height: 30%;
-        }
+            .loader {
+                left: 0px;
+                top: 0px;
+                width: 100%;
+                z-index: 9999;
+                background: url('{{ url_for("static",filename="images/page-loader.gif") }}') 50% 50% no-repeat rgb(249,249,249);
+            }
+            .loader {
+                position: static;
+                height: 100%;
+            }
+            .exploader {
+                position: relative;
+                height: 30%;
+            }
 
     </style>
 
 </head>
 <body style="font-family: 'Poppins', sans-serif;">
 <div class="loader" style="display:none;"></div>
-
+<div class="page_content row m-2">

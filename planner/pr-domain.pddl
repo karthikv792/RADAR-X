@@ -218,9 +218,15 @@
 		( SEARCHED_BYENG )
 		( NEEDED_ATTEND_CASUALTIES_BYENG )
 		( NEEDED_ADDRESS_MEDIA )
-		( ATTENDED_CASUALTIES_BYENG )
+		( SENT_SOCIAL_MEDIA_LAKE )
 		( ADDRESSED_MEDIA )
+		( SENT_SOCIAL_MEDIA_MILL )
+		( SENT_SOCIAL_MEDIA_MARKETPLACE )
+		( SENT_SOCIAL_MEDIA_RURAL )
+		( SENT_SOCIAL_MEDIA_BYENG )
+		( ATTENDED_CASUALTIES_BYENG )
 		( NOT_NEEDED_ADDRESS_MEDIA )
+		( NO_SOCIAL_MEDIA )
 		( NOT_NEEDED_ATTEND_CASUALTIES_BYENG )
 		( NOT_NEEDED_ACTIVE_LOCAL_ALERT_FIRECHIEF )
 		( FIRE_AT_BYENG )
@@ -278,6 +284,7 @@
 		:parameters ()
 		:precondition
 		(and
+			( NO_SOCIAL_MEDIA )
 			( NEEDED_ADDRESS_MEDIA )
 			( MEDIA_CONTACTED_TRANSPORTCHIEF )
 		)
@@ -293,6 +300,7 @@
 		:parameters ()
 		:precondition
 		(and
+			( NO_SOCIAL_MEDIA )
 			( NEEDED_ADDRESS_MEDIA )
 			( MEDIA_CONTACTED_MEDICHIEF )
 		)
@@ -308,6 +316,7 @@
 		:parameters ()
 		:precondition
 		(and
+			( NO_SOCIAL_MEDIA )
 			( NEEDED_ADDRESS_MEDIA )
 			( MEDIA_CONTACTED_FIRECHIEF )
 		)
@@ -323,6 +332,7 @@
 		:parameters ()
 		:precondition
 		(and
+			( NO_SOCIAL_MEDIA )
 			( NEEDED_ADDRESS_MEDIA )
 			( MEDIA_CONTACTED_POLICECHIEF )
 		)
@@ -349,6 +359,96 @@
 			( NEEDED_ADDRESS_MEDIA )
 			(not ( NEEDED_ATTEND_CASUALTIES_BYENG ))
 			(not ( NOT_NEEDED_ADDRESS_MEDIA ))
+		)
+	)
+	(:action SEND_SOCIAL_MEDIA_BYENG_BYENG
+		:parameters ()
+		:precondition
+		(and
+			( NO_SOCIAL_MEDIA )
+			( NEEDED_ADDRESS_MEDIA )
+			( SEARCHED_BYENG )
+		)
+		:effect
+		(and
+			(increase (total-cost) 5)
+			( SENT_SOCIAL_MEDIA_BYENG )
+			( NOT_NEEDED_ADDRESS_MEDIA )
+			( ADDRESSED_MEDIA )
+			(not ( NEEDED_ADDRESS_MEDIA ))
+			(not ( NO_SOCIAL_MEDIA ))
+		)
+	)
+	(:action SEND_SOCIAL_MEDIA_RURAL_BYENG
+		:parameters ()
+		:precondition
+		(and
+			( NO_SOCIAL_MEDIA )
+			( NEEDED_ADDRESS_MEDIA )
+			( SEARCHED_BYENG )
+		)
+		:effect
+		(and
+			(increase (total-cost) 5)
+			( SENT_SOCIAL_MEDIA_RURAL )
+			( NOT_NEEDED_ADDRESS_MEDIA )
+			( ADDRESSED_MEDIA )
+			(not ( NEEDED_ADDRESS_MEDIA ))
+			(not ( NO_SOCIAL_MEDIA ))
+		)
+	)
+	(:action SEND_SOCIAL_MEDIA_MARKETPLACE_BYENG
+		:parameters ()
+		:precondition
+		(and
+			( NO_SOCIAL_MEDIA )
+			( NEEDED_ADDRESS_MEDIA )
+			( SEARCHED_BYENG )
+		)
+		:effect
+		(and
+			(increase (total-cost) 5)
+			( SENT_SOCIAL_MEDIA_MARKETPLACE )
+			( NOT_NEEDED_ADDRESS_MEDIA )
+			( ADDRESSED_MEDIA )
+			(not ( NEEDED_ADDRESS_MEDIA ))
+			(not ( NO_SOCIAL_MEDIA ))
+		)
+	)
+	(:action SEND_SOCIAL_MEDIA_MILL_BYENG
+		:parameters ()
+		:precondition
+		(and
+			( NO_SOCIAL_MEDIA )
+			( NEEDED_ADDRESS_MEDIA )
+			( SEARCHED_BYENG )
+		)
+		:effect
+		(and
+			(increase (total-cost) 5)
+			( SENT_SOCIAL_MEDIA_MILL )
+			( NOT_NEEDED_ADDRESS_MEDIA )
+			( ADDRESSED_MEDIA )
+			(not ( NEEDED_ADDRESS_MEDIA ))
+			(not ( NO_SOCIAL_MEDIA ))
+		)
+	)
+	(:action SEND_SOCIAL_MEDIA_LAKE_BYENG
+		:parameters ()
+		:precondition
+		(and
+			( NO_SOCIAL_MEDIA )
+			( NEEDED_ADDRESS_MEDIA )
+			( SEARCHED_BYENG )
+		)
+		:effect
+		(and
+			(increase (total-cost) 5)
+			( SENT_SOCIAL_MEDIA_LAKE )
+			( NOT_NEEDED_ADDRESS_MEDIA )
+			( ADDRESSED_MEDIA )
+			(not ( NEEDED_ADDRESS_MEDIA ))
+			(not ( NO_SOCIAL_MEDIA ))
 		)
 	)
 	(:action SEARCH_CASUALTIES_FIRECHIEF_BYENG

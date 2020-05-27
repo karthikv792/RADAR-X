@@ -7,8 +7,8 @@
         </button>-->
         Your FOIL
     </div>
-    <div class="card-body">
-        <div class="row">
+        <div class="card-body">
+        <div class="row m-2">
         <div class='col-md-9'>
             <select class="form-control" id="actionToAdd">
             {% for act in actions %}
@@ -18,8 +18,40 @@
         </div>
         <button type="button" class="col-md-3 btn btn-primary addAction">Add</button>
         </div>
+
+        <br>
+        <div class="col-md-12 btn-group">
+        <!--<div class="col-md-3 m-2">
+            <button type="button" class="col-md-12 btn btn-light border-dark validateFoil"><img src="https://img.icons8.com/color/48/000000/approval--v1.png" height="35" alt="validate"><br>Validate</button>
+        </div>-->
+        <div class="col-md-3">
+                  <button type="button" class="col-md-12 btn btn-light border-dark  explainFoil" data-toggle="modal" data-target="#FoilExplanationsModal"><img src="https://img.icons8.com/color/48/000000/consultation.png" height="35"><br>Foil Explanation</button>
+        </div>
+            <div class="col-md-3">
+            <button type="button" class="col-md-12 btn btn-light border-dark openOptions"><img src="https://img.icons8.com/color/48/000000/search.png" height="35"><br>Nearest Plan</button>
+        </div>
+        <div class="col-md-3">
+              <button type="button" class="col-md-12 btn btn-light border-dark undoChange"><img src="https://img.icons8.com/color/48/000000/undo.png" height="35" alt="undo"><br>Undo</button>
+              <!--<button type="button" class="col-md-12 btn btn-secondary undoChange"><span style="font-size: x-large"><i class="fas fa-undo" alt="undo"></i></span><br>Undo</button>-->
+          </div>
+            {% if cpf > 0 %}
+        <div class="col-md-3">
+            <button type="button" class="col-md-12 btn btn-light border-dark acceptedNP"><img src="https://img.icons8.com/color/48/000000/checked-radio-button.png" height="35" alt="accept"><br>Accept Plan</button>
+        </div>
+       {% endif %}
+        </div>
+    </div>
+    <div class="col-md-12 btn-group mb-2">
+        <div class="offset-md-1 col-md-4">
+            <button type="button" class="col-md-12 btn btn-light border-dark getPreference" id="option1" data-toggle="modal" data-target="#PreferenceModal"><img src="https://img.icons8.com/color/48/000000/goal--v1.png" height="35"><br>Know Your Preference?</button>
+        </div>
+        <div class="col-md-4">
+            <button type="button" class="col-md-12 btn btn-light border-dark closestPlan" id="option2"><img src="https://img.icons8.com/color/48/000000/clover.png" height="35"><br>Feeling Lucky?</button>
+        </div>
     </div>
 </div>
+    <textarea id='speakText' style="display:none;">{{ script }}</textarea>
+
 <div class="grid-stack m-2" id="gs1"></div>
 </div>
 <div class='col m-2'>
@@ -34,10 +66,10 @@
 
         <div class="col-md-6 btn-group" role="group">
             <div class="col-md-6">
-                <button type="button" class="btn btn-secondary" id="startbtn"><span style="font-size: x-large"><i class="fas fa-microphone m-1"></i></span><br>Start</button>
+                <button type="button" class="col-md-12 btn btn-light border-dark" id="startbtn"><img src="https://img.icons8.com/color/48/000000/microphone.png" height="35"><br>Start</button>
             </div>
             <div class="col-md-6">
-                <button type="button" class="btn btn-secondary" id="stopbtn"><span style="font-size: x-large"><i class="fas fa-microphone-slash m-1"></i></span><br>Stop</button>
+                <button type="button" class="col-md-12 btn btn-light border-dark" id="stopbtn"><img src="https://img.icons8.com/color/48/000000/block-microphone.png" height="35"><br>Stop</button>
             </div>
         </div>
 
@@ -52,13 +84,83 @@
                 <div id="P_action"></div>
                 <div id="Q_action"></div>
             </div>
-
-            <button type="button" class="col-md-12 btn btn-secondary" id="ok"><span style="font-size: x-large"><i class="far fa-thumbs-up m-1"></i></span><br>OK</button>
+            <div class="col-md-4">
+                <button type="button" class="col-md-12 btn btn-light border-dark" id="ok"><img src="https://img.icons8.com/color/48/000000/thumb-up--v1.png" height="35"><br>OK</button>
+            </div>
         </div>
     </div>
+    <div class="card border-secondary m-2">
+        <div class="card-header text-white bg-primary">
+            Present Plan
+        </div>
+        <div class="card-body">
+            <ul class="list-group" id="PresentPlan">
+
+            </ul>
+
+        </div>
+    </div>
+
 </div>
 {% include 'footer.html' %}
+<div class="modal fade" id="FoilExplanationsModal" tabindex="-1" role="dialog" aria-labelledby="ResourcesModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ExplanationsModalLabel">Explanations Panel</h5>
+      </div>
+      <div class="modal-body">
+        This shows the explanations between your model of the domain and the updated actual model of the domain.
+        <br>
+        <div class="exploader"> <img src="{{ url_for('static',filename='images/page-loader.gif') }}"> </div>
+        <div id="generatedExplanations"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="updateModels btn btn-secondary">Update models</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="PreferenceModal" tabindex="-1" role="dialog" aria-labelledby="ResourcesModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="PreferencesModalLabel">Preferences Panel</h5>
+      </div>
+      <div class="modal-body">
+        This shows conflicting action sets from which you can choose according to your preference
+          <br>
+          <div class="exploader"> <img src="{{ url_for('static',filename='images/page-loader.gif') }}"> </div>
+                <div id="generatedPreferences"></div>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
 <script type="text/javascript">
+    responsiveVoice.speak(document.getElementById("speakText").textContent);
+    $.extend(
+{
+    redirectPost: function(location, args)
+    {
+        var form = $('<form></form>');
+        form.attr("method", "post");
+        form.attr("action", location);
+
+        $.each( args, function( key, value ) {
+            var field = $('<input></input>');
+
+            field.attr("type", "hidden");
+            field.attr("name", key);
+            field.attr("value", value);
+
+            form.append(field);
+        });
+        $(form).appendTo('body').submit();
+    }
+});
     $(function () {
         //SPEECH RECOGNITION -------------------
                 var audio_context;
@@ -73,9 +175,6 @@
       window.AudioContext = window.AudioContext || window.webkitAudioContext;
       navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
       window.URL = window.URL || window.webkitURL;
-
-
-
       audio_context = new AudioContext;
     } catch (e) {
       alert('No web audio support in this browser!');
@@ -83,6 +182,112 @@
     navigator.getUserMedia({audio: true},startUserMedia,function(e) {
       console.log('No live audio input: ' + e);
     });
+    $('#option1').hide();
+    $('#option2').hide();
+    $('.openOptions').click(function () {
+            $('#option1').show();
+            $('#option2').show();
+
+        }
+
+    );
+    $('.updateModels').click(function() {
+            $('.page_content').fadeOut();
+            $('.loader').fadeIn();
+            $('form').attr("method", "post");
+            $('form').attr("action", "updateModels");
+            $('form').appendTo('body').submit();
+         });
+    $('.validateFoil').click(function (){
+      res = getGridStackData();
+      $('.page_content').fadeOut();
+      $('.loader').fadeIn();
+      //$.redirectPost('validate', JSON.stringify({'plan': res}));
+      $.redirectPost('validateFoil', {'plan': JSON.stringify(res)});
+    });
+    $('.acceptedNP').click(function (){
+      res = getGridStackData();
+      $('.page_content').fadeOut();
+      $('.loader').fadeIn();
+      //$.redirectPost('validate', JSON.stringify({'plan': res}));
+      $.redirectPost('acceptClosestPlan', {'plan': JSON.stringify(res)});
+    });
+
+       $('.getPreference').click(function () {
+            make_call();
+       });
+       function make_call(pl='aaaa') {
+           res = getGridStackData();
+            $.getJSON($SCRIPT_ROOT + '/getPreference', {
+                'plan' : JSON.stringify(res),
+                'choice': JSON.stringify(pl)
+            }, function(data) {
+                console.log(data);
+                if (data[0]["complete"]==true){
+                    $('#PreferenceModal').modal('toggle');
+                    console.log("Yippie-ka-Yay-MF");
+                    $.redirectPost('closestPlan', {'plan': JSON.stringify(data[0]["dict"])});
+                }
+                else {
+                    e = '';
+                    for (var i in data[0]["dict"]) {
+                        val = data[0]["dict"][i];
+                        // console.log(i == 0)
+                        if (i == 0) {
+                            e = e + val['key'] + ' is not possible. Please choose any one from the below given options.<br>';
+                        } else {
+                            e = e + '<button type="button" class="btn btn-secondary m-3 choice" value="' + val['key'] + '">' + val['key'] + '</button><br>';
+                        }
+                        // console.log(e);
+                        // cElement = $('#pref'+i);
+                        // cElement.click(function(){
+                        //    console.log("HELLO"+i)
+                        // });
+
+                    }
+                    $('.exploader').fadeOut();
+                    $('#generatedPreferences').html(e);
+                    $('.choice').click(function () {
+                        txt1 = $(this).val()
+                        make_call(txt1)
+                    });
+                }
+
+            });
+       }
+        $('.closestPlan').click(function () {
+        res = getGridStackData();
+        $('.page_content').fadeOut();
+        $('.loader').fadeIn();
+        $.redirectPost('closestPlan', {'plan': JSON.stringify(res)});
+    });
+
+        $('.undoChange').click(function() {
+            res = getGridStackData();
+            $('.page_content').fadeOut();
+            $('.loader').fadeIn();
+            $.redirectPost('undoFoil', {'plan': JSON.stringify(res)});
+        });
+
+        $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+
+        $('.explainFoil').click(function() {
+            res = getGridStackData();
+            $.getJSON($SCRIPT_ROOT + '/getFoilExplanation', {
+                'plan' : JSON.stringify(res)
+            }, function(data) {
+                e = '<form>'
+                for (var i in data) {
+                    val = data[i];
+                    e = e + '<input type="checkbox" name="' + val + '-reject">' + val + '</input><br>';
+                    e = e + '<input type="hidden" name="' + val + '"></input>';
+                }
+                e = e + '</form>'
+                $('.exploader').fadeOut();
+                $('#generatedExplanations').html(e);
+            });
+        });
+
         $('#startbtn').click(function () {
          recorder.record();
        // recognition.start();
@@ -107,9 +312,9 @@
                 if (this.readyState === 4) {
                     foil_text = JSON.parse(e.target.responseText);
                     $('#transcript').text(foil_text.text1);
-                    $('#P_action').text(foil_text.why_action);
-                    $('#Q_action').text(foil_text.whynot_action);
-                    console.log("Server returned: ", foil_text.text1);
+                    //$('#P_action').text(foil_text.why_action);
+                    $('#Q_action').text("Your Action: \n"+foil_text.whynot_action);
+                    console.log("Server returned: ", foil_text);
                 }
             };
             var fd = new FormData();
@@ -118,38 +323,30 @@
             xhr.send(fd);
                         });
     };
+    //var foil_text = {"why_action": ["DEPLOY_BULLDOZERS_FIRECHIEF_ADMINFIRE_BYENG"], "whynot_action": ["DEPLOY_BULLDOZERS_FIRECHIEF_SCOTTSFIRE_BYENG"]}
     $('#ok').click(function () {
         if(foil_text.why_action.length == foil_text.whynot_action.length)
         {
             var i;
             for (i = 0; i < foil_text.why_action.length; i++) {
-                var index = serializedData.find(function (item,i){
-                    if(item.name==foil_text.why_action[i])
-                    {
-                        item.name==foil_text.whynot_action[i];
-                    }
-                    return (item.name==foil_text.why_action[i])
-                });
+                var temp1 = "("+foil_text.why_action[i]+" )";
+                var temp2 = "("+foil_text.whynot_action[i]+" )";
+                var index = serializedData.findIndex(e => e.name===temp1);
                 if (index!=-1)
                 {
-                    loadGrid();
-                    resizeGrid();
+                  serializedData[index].name = temp2;
                 }
-            }
-        }
-        else if(foil_text.whynot_action.length>foil_text.why_action.length){
-            var i;
-            for (i = 0; i < foil_text.why_action.length; i++) {
-                var index = serializedData.find(function (item,i){
-                    if(item.name==foil_text.why_action[i])
-                    {
-                        item.name==foil_text.whynot_action[i];
-                    }
-                    return (item.name==foil_text.why_action[i])
-                });
-            }
 
-        }
+                if (index==-1)
+                {
+                    serializedData.push({y:0, x:0, width:12, height: 1, name:temp2})
+                };
+            };
+            loadGrid();
+            resizeGrid();
+        };
+
+
         /*
         var xhr = new XMLHttpRequest();
         xhr.onload = function(e){
@@ -169,13 +366,13 @@
             xhr.send(fd);
          */
     });
-        //------------------------------SPEECH RECOGNITION
+        //------------------------------SPEECH RECOGNITION END
         $('.addAction').click(function() {
             var action = $('#actionToAdd').val();
             console.log(action);
             updateData(action);
         });
-                getGridStackData = function() {
+        getGridStackData = function() {
             var res = _.map( $('.grid-stack > .grid-stack-item:visible'), function(el) {
                 el = $(el)
                 var node = el.data('_gridstack_node');
@@ -188,7 +385,35 @@
                 };
             });
             return res;
-        }
+        };
+        // -------------------- PRESENT PLAN
+        prevPlanData = [
+            {% set count = 1 %}
+            {% for key, value in presPlan.items() %}
+                {y: {{ key }}, x: 0, width: 12, height: 1, name:'{{ value }}'},
+                {% set count = count + 1 %}
+            {% endfor %}
+        ];
+        presentPlan = function (){
+            var items1 = GridStackUI.Utils.sort(prevPlanData);
+            // console.log(items1);
+            _.each(items1, function (node,i) {
+                if (node.name.includes(';--')) {
+                    action_name1 = node.name.substr(0, node.name.indexOf(';'));
+                    $('#PresentPlan').append($('<li class="list-group-item list-group-item-primary">'+action_name1+'</li>'));
+                } else if (node.name.includes(';++')){
+                    action_name1 = node.name.substr(0, node.name.indexOf(';'));
+                    $('#PresentPlan').append($('<li class="list-group-item list-group-item-primary">'+action_name1+'</li>'));
+                }
+                else {
+                    $('#PresentPlan').append($('<li class="list-group-item list-group-item-primary">'+node.name+'</li>'));
+                }
+
+            });
+            console.log("DONE");
+
+        };
+        //--------------------------PRESENT PLAN END
         // thanks to http://stackoverflow.com/a/22885503
         var waitForFinalEvent=function(){var b={};return function(c,d,a){a||(a="I am a banana!");b[a]&&clearTimeout(b[a]);b[a]=setTimeout(c,d)}}();
         var fullDateString = new Date();
@@ -245,17 +470,35 @@
                     action_name = node.name.substr(0, node.name.indexOf(';'));
                     grid.addWidget($('<div><div class="grid-stack-item-content" id="myWidget'+ node.y + '" style="background-color:#fffde7;border-radius: 6px;border: 1px solid black;border-color:#fbc02d;padding-top:5px;"><div class="' + remove_icon + ' fa-remove' + node.y + '"  style="color:#fbc02d;cursor:pointer"></div><br><span>' + action_name + '</span></div>'),
                     node.x, node.y, node.width, node.height);
-                } else if  (node.name.includes(';')) {
+                } else if (node.name.includes(';++')){
+                    action_name = node.name.substr(0, node.name.indexOf(';'));
+                    grid.addWidget($('<div><div class="grid-stack-item-content" id="myWidget'+ node.y + '" style="background-color:#d6b2fa;border-radius: 6px;border: 1px solid black;border-color:#9933ff;padding-top:5px;"><div class="' + remove_icon + ' fa-remove' + node.y + '"  style="color:#9933ff;cursor:pointer"></div><br><span>' + action_name + '</span></div>'),
+                    node.x, node.y, node.width, node.height);
+                }
+                else if  (node.name.includes(';:')){
+                   action_name = node.name.substr(0, node.name.indexOf(';'));
+                    grid.addWidget($('<div><div class="grid-stack-item-content" id="myWidget'+ node.y + '" style="background-color:#f7eaa1;border-radius: 6px;border: 1px solid black;border-color:#fad920;padding-top:5px;"><div class="' + remove_icon + ' fa-remove' + node.y + '" style="color:#fad920;cursor:pointer"></div><br><span style="padding-bottom: 5px">' + action_name + '</span></div>'),
+                    node.x, node.y, node.width, node.height);
+                }
+                else if  (node.name.includes(';')) {
                     action_name = node.name.substr(0, node.name.indexOf(';'));
                     reason = node.name.substr(node.name.indexOf(';'), node.name.length);
                     grid.addWidget($('<div><div class="grid-stack-item-content" id="myWidget'+ node.y + '" style="background-color:#ffab91;border-radius: 6px;border: 1px solid black;border-color:#d84315;padding-top:5px;"><div class="' + remove_icon + ' fa-remove' + node.y + '" style="color:#d84315;cursor:pointer"></div>&nbsp;<div class="fas fa-exclamation-triangle" style="color:#ff4444;" href="#" data-toggle="tooltip" data-placement="right" title="' + reason + '"></div><br><span>' + action_name + '</span></div>'),
                     node.x, node.y, node.width, node.height);
-                } else {
+                }
+
+                else {
                     grid.addWidget($('<div><div class="grid-stack-item-content" id="myWidget'+ node.y + '" style="background-color:#b2dfdb;border-radius: 6px;border: 1px solid black;border-color:#00695c;padding-top:5px;"><div class="' + remove_icon + ' fa-remove' + node.y + '" style="color:#00695c;cursor:pointer"></div><br><span style="padding-bottom: 5px">' + node.name + '</span></div>'),
                     node.x, node.y, node.width, node.height);
                 }
                 $('.fa-remove' + node.y).click( remove_w = function(myElement){
                     grid.removeWidget($(this).parent().parent());
+                    for (var i in serializedData){
+                        if (node===serializedData[i]){
+                            serializedData.splice(i,1);
+                            // console.log("TRUE");
+                        }
+                    };
                 });
             });
             return false;
@@ -263,6 +506,9 @@
 
         loadGrid();
         resizeGrid();
+        presentPlan();
+
+
 
     });
 </script>
