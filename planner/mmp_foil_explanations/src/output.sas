@@ -4724,11 +4724,12 @@ begin_operator
 explain_obs_send_social_media_byeng_byeng_1 
 1
 240 0
-5
+6
 0 8 -1 0
 0 126 -1 0
-0 182 -1 1
+0 155 0 1
 0 185 -1 1
+0 188 -1 0
 0 241 -1 0
 5
 end_operator
@@ -5029,9 +5030,10 @@ begin_operator
 send_social_media_lake_byeng 
 1
 240 0
-3
+4
 0 8 -1 0
-0 182 -1 1
+0 155 0 1
+0 188 -1 0
 0 242 -1 0
 5
 end_operator
@@ -5039,9 +5041,10 @@ begin_operator
 send_social_media_marketplace_byeng 
 1
 240 0
-3
+4
 0 8 -1 0
-0 182 -1 1
+0 155 0 1
+0 188 -1 0
 0 243 -1 0
 5
 end_operator
@@ -5049,9 +5052,10 @@ begin_operator
 send_social_media_mill_byeng 
 1
 240 0
-3
+4
 0 8 -1 0
-0 182 -1 1
+0 155 0 1
+0 188 -1 0
 0 244 -1 0
 5
 end_operator
@@ -5059,9 +5063,10 @@ begin_operator
 send_social_media_rural_byeng 
 1
 240 0
-3
+4
 0 8 -1 0
-0 182 -1 1
+0 155 0 1
+0 188 -1 0
 0 245 -1 0
 5
 end_operator

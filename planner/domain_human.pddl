@@ -382,10 +382,13 @@
     :parameters(?from - pois ?at - pois)
     :precondition (and
                   (searched ?at)
+                  (needed_address_media)
                   )
     :effect       (and
                     (sent_social_media ?from)
                      (addressed_media)
+                     (not (needed_address_media))
+					(not_needed_address_media)
                     (increase (total-cost) (duration_sent_signal))
                    )
 )

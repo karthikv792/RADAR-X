@@ -39,16 +39,24 @@ def getPresentPlan(request):
     ]
     """
     seq = {}
+    pref = []
+    pref_flag = 0
     try:
         plan = json.loads(dict(request.form)['plan'])
     except:
         plan = json.loads(request.args['plan'])
-    for act in plan:
+    for index, act in enumerate(plan):
         print(act)
         # We assume that only one action occurs at a time
         # TODO: Update code if we want to allow options for
         # two simultaneous actions (choices)
-        seq[ act["y"] ] = act["name"]
+        try:
+            seq[ act["y"] ] = act["name"]
+        except TypeError:
+            pref_flag=1
+            pref.append(act)
+    if pref_flag:
+        return pref
     print ("\n======\n{0}\n======\n".format(seq))
     return seq
 
@@ -136,10 +144,25 @@ def validateFoil():
     return 'ab'
 
 @app.route("/closestPlan",methods=['GET','POST'])
-def closestPlan():
+def closestPlan(req=None):
     pres_plan = planner.getOrderedObservations()
-    planner.getClosestPlan(getPresentPlan(request))
+    if not req:
+        planner.getClosestPlan(getPresentPlan(request))
+    else:
+        planner.getClosestPlan(req)
     return foil(s=speech.getSpeechText('NEAREST_PLAN'),closestplanfound=1,pres_plan=pres_plan)
+@app.route("/getPreference",methods=['GET','POST'])
+def getPreference():
+    choice= request.args['choice'].strip('"').split(',')
+    actions = getPresentPlan(request)
+    # print(choice)
+    if choice[0] == 'aaaa':
+        e, completed = planner.getPreference(actions)
+    else:
+        e, completed = planner.getPreference(actions,pref=choice)
+    # print("COMPLETED",completed)
+    return jsonify([{"dict":e,"complete":completed}])
+    # return foil(s=speech.getSpeechText('NEAREST_PLAN'),closestplanfound=1,pres_plan=pres_plan)
 @app.route("/acceptClosestPlan",methods=['GET','POST'])
 def acceptClosestPlan():
     return index(s=speech.getSpeechText('ACCEPT_NEAREST_PLAN'))

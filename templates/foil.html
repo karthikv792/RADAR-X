@@ -7,7 +7,7 @@
         </button>-->
         Your FOIL
     </div>
-    <div class="card-body">
+        <div class="card-body">
         <div class="row m-2">
         <div class='col-md-9'>
             <select class="form-control" id="actionToAdd">
@@ -27,8 +27,8 @@
         <div class="col-md-3">
                   <button type="button" class="col-md-12 btn btn-light border-dark  explainFoil" data-toggle="modal" data-target="#FoilExplanationsModal"><img src="https://img.icons8.com/color/48/000000/consultation.png" height="35"><br>Foil Explanation</button>
         </div>
-        <div class="col-md-3">
-            <button type="button" class="col-md-12 btn btn-light border-dark closestPlan"><img src="https://img.icons8.com/color/48/000000/search.png" height="35"><br>Nearest Plan</button>
+            <div class="col-md-3">
+            <button type="button" class="col-md-12 btn btn-light border-dark openOptions"><img src="https://img.icons8.com/color/48/000000/search.png" height="35"><br>Nearest Plan</button>
         </div>
         <div class="col-md-3">
               <button type="button" class="col-md-12 btn btn-light border-dark undoChange"><img src="https://img.icons8.com/color/48/000000/undo.png" height="35" alt="undo"><br>Undo</button>
@@ -38,10 +38,16 @@
         <div class="col-md-3">
             <button type="button" class="col-md-12 btn btn-light border-dark acceptedNP"><img src="https://img.icons8.com/color/48/000000/checked-radio-button.png" height="35" alt="accept"><br>Accept Plan</button>
         </div>
-        {% endif %}
+       {% endif %}
         </div>
-
-
+    </div>
+    <div class="col-md-12 btn-group mb-2">
+        <div class="offset-md-1 col-md-4">
+            <button type="button" class="col-md-12 btn btn-light border-dark getPreference" id="option1" data-toggle="modal" data-target="#PreferenceModal"><img src="https://img.icons8.com/color/48/000000/goal--v1.png" height="35"><br>Know Your Preference?</button>
+        </div>
+        <div class="col-md-4">
+            <button type="button" class="col-md-12 btn btn-light border-dark closestPlan" id="option2"><img src="https://img.icons8.com/color/48/000000/clover.png" height="35"><br>Feeling Lucky?</button>
+        </div>
     </div>
 </div>
     <textarea id='speakText' style="display:none;">{{ script }}</textarea>
@@ -116,6 +122,23 @@
     </div>
   </div>
 </div>
+<div class="modal fade" id="PreferenceModal" tabindex="-1" role="dialog" aria-labelledby="ResourcesModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="PreferencesModalLabel">Preferences Panel</h5>
+      </div>
+      <div class="modal-body">
+        This shows conflicting action sets from which you can choose according to your preference
+          <br>
+          <div class="exploader"> <img src="{{ url_for('static',filename='images/page-loader.gif') }}"> </div>
+                <div id="generatedPreferences"></div>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
 <script type="text/javascript">
     responsiveVoice.speak(document.getElementById("speakText").textContent);
     $.extend(
@@ -159,7 +182,22 @@
     navigator.getUserMedia({audio: true},startUserMedia,function(e) {
       console.log('No live audio input: ' + e);
     });
+    $('#option1').hide();
+    $('#option2').hide();
+    $('.openOptions').click(function () {
+            $('#option1').show();
+            $('#option2').show();
 
+        }
+
+    );
+    $('.updateModels').click(function() {
+            $('.page_content').fadeOut();
+            $('.loader').fadeIn();
+            $('form').attr("method", "post");
+            $('form').attr("action", "updateModels");
+            $('form').appendTo('body').submit();
+         });
     $('.validateFoil').click(function (){
       res = getGridStackData();
       $('.page_content').fadeOut();
@@ -175,7 +213,49 @@
       $.redirectPost('acceptClosestPlan', {'plan': JSON.stringify(res)});
     });
 
-    $('.closestPlan').click(function () {
+       $('.getPreference').click(function () {
+            make_call();
+       });
+       function make_call(pl='aaaa') {
+           res = getGridStackData();
+            $.getJSON($SCRIPT_ROOT + '/getPreference', {
+                'plan' : JSON.stringify(res),
+                'choice': JSON.stringify(pl)
+            }, function(data) {
+                console.log(data);
+                if (data[0]["complete"]==true){
+                    $('#PreferenceModal').modal('toggle');
+                    console.log("Yippie-ka-Yay-MF");
+                    $.redirectPost('closestPlan', {'plan': JSON.stringify(data[0]["dict"])});
+                }
+                else {
+                    e = '';
+                    for (var i in data[0]["dict"]) {
+                        val = data[0]["dict"][i];
+                        // console.log(i == 0)
+                        if (i == 0) {
+                            e = e + val['key'] + ' is not possible. Please choose any one from the below given options.<br>';
+                        } else {
+                            e = e + '<button type="button" class="btn btn-secondary m-3 choice" value="' + val['key'] + '">' + val['key'] + '</button><br>';
+                        }
+                        // console.log(e);
+                        // cElement = $('#pref'+i);
+                        // cElement.click(function(){
+                        //    console.log("HELLO"+i)
+                        // });
+
+                    }
+                    $('.exploader').fadeOut();
+                    $('#generatedPreferences').html(e);
+                    $('.choice').click(function () {
+                        txt1 = $(this).val()
+                        make_call(txt1)
+                    });
+                }
+
+            });
+       }
+        $('.closestPlan').click(function () {
         res = getGridStackData();
         $('.page_content').fadeOut();
         $('.loader').fadeIn();
@@ -316,7 +396,7 @@
         ];
         presentPlan = function (){
             var items1 = GridStackUI.Utils.sort(prevPlanData);
-            console.log(items1);
+            // console.log(items1);
             _.each(items1, function (node,i) {
                 if (node.name.includes(';--')) {
                     action_name1 = node.name.substr(0, node.name.indexOf(';'));
@@ -395,6 +475,11 @@
                     grid.addWidget($('<div><div class="grid-stack-item-content" id="myWidget'+ node.y + '" style="background-color:#d6b2fa;border-radius: 6px;border: 1px solid black;border-color:#9933ff;padding-top:5px;"><div class="' + remove_icon + ' fa-remove' + node.y + '"  style="color:#9933ff;cursor:pointer"></div><br><span>' + action_name + '</span></div>'),
                     node.x, node.y, node.width, node.height);
                 }
+                else if  (node.name.includes(';:')){
+                   action_name = node.name.substr(0, node.name.indexOf(';'));
+                    grid.addWidget($('<div><div class="grid-stack-item-content" id="myWidget'+ node.y + '" style="background-color:#f7eaa1;border-radius: 6px;border: 1px solid black;border-color:#fad920;padding-top:5px;"><div class="' + remove_icon + ' fa-remove' + node.y + '" style="color:#fad920;cursor:pointer"></div><br><span style="padding-bottom: 5px">' + action_name + '</span></div>'),
+                    node.x, node.y, node.width, node.height);
+                }
                 else if  (node.name.includes(';')) {
                     action_name = node.name.substr(0, node.name.indexOf(';'));
                     reason = node.name.substr(node.name.indexOf(';'), node.name.length);
@@ -411,7 +496,7 @@
                     for (var i in serializedData){
                         if (node===serializedData[i]){
                             serializedData.splice(i,1);
-                            console.log("TRUE");
+                            // console.log("TRUE");
                         }
                     };
                 });

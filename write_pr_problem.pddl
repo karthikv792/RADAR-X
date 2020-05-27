@@ -69,7 +69,7 @@
     )
 
     (:goal
-        (and (addressed_media ) (extinguished_fire_byeng ) (send_social_media_byeng_byeng_met ) (address_media_firechief_met ))
+        (and (addressed_media ) (extinguished_fire_byeng ) (send_social_media_byeng_byeng_met_obs ))
     )
 
     

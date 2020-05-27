@@ -291,8 +291,7 @@
         (has_police_car_number_substation )
         (has_police_car_number_courtstation )
         (has_police_car_number_apachestation )
-        (send_social_media_byeng_byeng_met )
-        (address_media_firechief_met )
+        (send_social_media_byeng_byeng_met_obs )
     )
 
     (:functions
@@ -326,7 +325,7 @@
 
     (:action ADDRESS_MEDIA_FIRECHIEF
      :parameters ()
-     :precondition (and (no_social_media ) (and (needed_address_media ) (and (media_contacted_firechief ) (send_social_media_byeng_byeng_met ))))
+     :precondition (and (no_social_media ) (and (needed_address_media ) (media_contacted_firechief )))
      :effect (and
         (addressed_media )
         (not_needed_address_media )
@@ -3469,10 +3468,15 @@
 
     (:action SEND_SOCIAL_MEDIA_BYENG_BYENG_WITH_OBS
      :parameters ()
-     :precondition (and (sent_social_media_byeng ) (and (not_needed_address_media ) (addressed_media )))
+     :precondition (and (no_social_media ) (and (needed_address_media ) (searched_byeng )))
      :effect (and
-        (send_social_media_byeng_byeng_met )
-        (increase (total-cost ) 0))
+        (sent_social_media_byeng )
+        (not_needed_address_media )
+        (addressed_media )
+        (send_social_media_byeng_byeng_met_obs )
+        (not (needed_address_media ))
+        (not (no_social_media ))
+        (increase (total-cost ) 5))
     )
 
 
@@ -3480,26 +3484,8 @@
      :parameters ()
      :precondition (and )
      :effect (and
-        (send_social_media_byeng_byeng_met )
-        (increase (total-cost ) 20))
-    )
-
-
-    (:action ADDRESS_MEDIA_FIRECHIEF_WITH_OBS
-     :parameters ()
-     :precondition (and (addressed_media ) (and (not_needed_address_media ) (send_social_media_byeng_byeng_met )))
-     :effect (and
-        (address_media_firechief_met )
-        (increase (total-cost ) 0))
-    )
-
-
-    (:action ADDRESS_MEDIA_FIRECHIEF_WITHOUT_OBS
-     :parameters ()
-     :precondition (and )
-     :effect (and
-        (address_media_firechief_met )
-        (increase (total-cost ) 20))
+        (send_social_media_byeng_byeng_met_obs )
+        (increase (total-cost ) 7))
     )
 
 )

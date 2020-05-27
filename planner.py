@@ -7,6 +7,8 @@ from problemFileMaker import problemFileMaker
 from model_parser.parser_new import parse_model
 from model_parser.writer_new import ModelWriter
 from model_parser.constants import *
+from itertools import combinations
+import multiprocessing as mp
 
 class Planner():
     CALL_FAST_DOWNWARD = 'planner/FAST-DOWNWARD/fast-downward.py '
@@ -32,6 +34,7 @@ class Planner():
         self.obs = obs
         self.foil_obs = 'planner/foil_obs.dat'
         self.saveduiPlan = 'planner/saved_obs.dat'
+        self.pref_obs = 'planner/Preferences/pref_obs.dat'
 
         # Explanation files
         self.exc_file = 'planner/mmp/src/exp.dat'
@@ -52,6 +55,14 @@ class Planner():
         self.consts = []
         self.prob_objects = []
         self.user_suggested_actions = []
+        self.length = 0
+        self.subset_comp = {}
+        self.conflict_sets = []
+        self.max_set = ()
+        self.pref = []
+        self.max_sets = []
+        self.for_multiple_runs = False
+
 
     def plan(self):
         try:
@@ -95,7 +106,7 @@ class Planner():
         f.write(s)
         f.close()
 
-    def writeFoilObservations(self, actions, tillEndOfPresentPlan=False):
+    def writeFoilObservations(self, actions, file, tillEndOfPresentPlan=False):
         if tillEndOfPresentPlan:
             acts = deepcopy( actions )
             for i in range(len(acts.keys())-1, 0, -1):
@@ -120,7 +131,7 @@ class Planner():
             print(string)
             s += string + '\n'
 
-        f = open(self.foil_obs, 'w')
+        f = open(file, 'w')
         f.write(s)
         f.close()
 
@@ -286,7 +297,7 @@ class Planner():
                 f.close()
 
     def validateFoil(self,actions):
-        self.writeFoilObservations(actions)
+        self.writeFoilObservations(actions,self.foil_obs)
         if actions:
             # Save the present domain
             copyf(self.pr_domain, self.val_pr_domain)
@@ -456,16 +467,19 @@ class Planner():
     def getClosestPlan(self,actions,tillEndOfPresentPlan=False):
         # present_actions = self.getOrderedObservations()
         # p_actions = [(re.sub('[(){}<>]', '', i)).replace(' ', '') for i in list(present_actions.values())]
-        foil_actions = [(re.sub('[(){}<>]', '', actions[i].split('\n')[1])).replace(' ', '') for i in sorted(actions.keys())]
+        if type(actions)!=type(list()):
+            foil_actions = [(re.sub('[(){}<>]', '', actions[i].split('\n')[1])).replace(' ', '') for i in sorted(actions.keys())]
+        else:
+            foil_actions = actions
         self.user_suggested_actions = foil_actions
         # diff_actions = list(set(p_actions)-set(foil_actions))
         # print(diff_actions)
         try:
             self.soft_compile(foil_actions)
-        except:
-            print("[ERROR] While compiling actions into a planning problem ")
+        except Exception as detail:
+            print("[ERROR] While compiling actions into a planning problem ", detail)
         try:
-            cmd = self.CALL_FAST_DOWNWARD + 'write_pr_domain.pddl' + ' ' + 'write_pr_problem.pddl' + ' --search "astar(lmcut())"';
+            cmd = self.CALL_FAST_DOWNWARD + 'write_pr_domain.pddl' + ' ' + 'write_pr_problem.pddl' + ' --search "astar(lmcut())"'#+ ' > /dev/null 2>&1';
             os.system(cmd)
             print ('FAST-DOWNWARD called...')
         except:
@@ -473,65 +487,231 @@ class Planner():
         plan_actions = {}
         f = open(self.sas_plan, 'r')
         i = 0
-        acts = [x.strip('() \n') for x in actions.values()]
+        # acts = [x.strip('() \n') for x in actions.values()]
         for l in f:
-            action = (re.sub('[(){}<>]', '', l.upper().strip())).replace(' ', '')
-            print(action)
             if 'general cost' not in l:
-                if 'WITH_OBS' not in l.upper():
-                    if action not in self.user_suggested_actions:
-                        plan_actions[i] = l.upper().strip()
-                        i += 1
-                    else:
-                        print(action)
-                        plan_actions[i] = l.upper().strip() + ';++'
-                        i += 1
+                # action = (re.sub('[(){}<>]', '', l.upper().strip())).replace(' ', '')
+                if 'WITH_OBS' in l.upper():
+                    print(l.upper().strip('WITH_OBS'))
+                    plan_actions[i] = l.upper().strip().replace('_WITH_OBS','') + ';++'
+                    i+=1
+                elif 'WITHOUT_OBS' in l.upper():
+                    pass
+                    # plan_actions[i] = l.upper().strip() + ';:' #.replace('_WITHOUT_OBS','')
+                    # print(plan_actions[i])
+                    # i += 1
+                else:
+                    plan_actions[i] = l.upper().strip()
+                    i+=1
+
+
         f.close()
         self.writeObservations(plan_actions, tillEndOfPresentPlan)
 
+
+
+    def writePreferenceObservations(self, actions, tillEndOfPresentPlan=False):
+        if tillEndOfPresentPlan:
+            acts = deepcopy( actions )
+            for i in range(len(acts.keys())-1, 0, -1):
+                if ';--' not in acts[i]:
+                    break
+            actions = {}
+            for j in range(0,i+1):
+                actions[j] = acts[j]
+
+        # Write plan to file in sas_plan style
+        s = ''
+        for spl in actions:
+            string = spl.split('_')
+            act = string[0]
+            for i in string[1:]:
+                if (i.lower() not in self.prob_objects):
+                    act += '_' + i
+                else:
+                    act += ' ' + i
+            print(act)
+            s += act + '\n'
+
+        f = open(self.pref_obs, 'w')
+        f.write(s)
+        f.close()
+
+    def solve_or_not(self,current):
+        # lock.acquire()
+        self.writePreferenceObservations(current)
+
+        CALL_Pref_PR2 = 'planner/Preferences/PR2/pr2plan'
+        try:
+            cmd = CALL_Pref_PR2 + ' -d ' + self.domain + ' -i '+self.problem+' -o ' + self.pref_obs + '> /dev/null 2>&1'
+            # cmd = CALL_PR2 + ' -d ../../domain.pddl -i ../../mock_problem.pddl -o ' + self.partial_foil + '> /dev/null 2>&1'
+            os.system(cmd)
+        except:
+            raise Exception('[ERROR] Call to PR2 failed')
+        if not current:
+            try:
+                cmd = 'cat {0} | grep -v "EXPLAIN" > pr-problem.pddl.tmp && mv pr-problem.pddl.tmp {0}'.format(
+                    self.pr_problem)
+                os.system(cmd)
+                cmd = 'cat {0} | grep -v "EXPLAIN" > pr-domain.pddl.tmp && mv pr-domain.pddl.tmp {0}'.format(
+                    self.pr_domain)
+                os.system(cmd)
+            except:
+                raise Exception('[ERROR] Removing "EXPLAIN" from pr-domain and pr-problem files.')
+        # lock.release()
+        return self.get_plan(self.pr_domain, self.pr_problem)
+
+    def get_plan(self,domainFileName, problemFileName):
+        # print "command",__FD_PLAN_CMD__.format(domainFileName, problemFileName)
+        __FD_PLAN_CMD__ = "planner/Preferences/./get_plan.sh {} {} {}"
+        # print("command", __FD_PLAN_CMD__.format(domainFileName, problemFileName))
+        plan_outputs = []
+        for i in range(1,4):
+            output = os.popen(__FD_PLAN_CMD__.format(domainFileName, problemFileName,i)).read().strip()
+            # print(output)
+            # plan   = [item.strip().replace('_', ' ') for item in output.split('\n')] if output != '' else []
+            plan = [item.strip() for item in output.split('\n')] if output != '' else []
+            plan_outputs.append(plan)
+        print("VALUESSS",plan_outputs)
+        if any(len(i)!=0 for i in plan_outputs):
+            return True
+        else:
+            return False
+
+        # print "plan","\n".join(plan)
+
+    def __getstate__(self):
+        """ This is called before pickling. """
+        state = self.__dict__.copy()
+        del state['probMaker']
+        return state
+
+    def __setstate__(self, state):
+        """ This is called while unpickling. """
+        self.__dict__.update(state)
+
+    def par_init(self,l):
+        global lock
+        lock = l
+    def parallel_loo(self,subset, pref):
+        if pref != None:
+            if pref not in self.pref:
+                self.pref += pref
+                self.pref = list(set(self.pref))
+            # print(self.pref)
+            if not any(item in subset for item in self.pref):
+                print("ITEM NOT IN PREF", subset)
+                return None
+        if subset in self.conflict_sets:
+            print("ITEM IN CONF", subset)
+            return None
+        print("CHECK-1")
+        return [subset, self.solve_or_not(subset)]
+    def getPreference(self, actions, pref=None,tillEndOfPresentPlan=False):
+        foil_actions = [(re.sub('[(){}<>]', '', actions[i].split('\n')[1])).replace(' ', '') for i in sorted(actions.keys())]
+        if self.for_multiple_runs==True:
+            self.length = 0
+            self.subset_comp = {}
+            self.conflict_sets = []
+            self.max_set = ()
+            self.pref = []
+            self.max_sets=[]
+            self.for_multiple_runs = False
+        actions = foil_actions
+        while self.length <= len(actions):
+            # pool = mp.Pool(mp.cpu_count())
+            l = mp.Lock()
+            pool = mp.Pool(initializer=self.par_init, initargs=(l,))
+            subsets = combinations(actions, self.length)
+            results = [pool.apply(self.parallel_loo, args = (subset,pref)) for subset in subsets]
+            pool.close()
+            for item in results:
+                if item is None:
+                    continue
+                subset, solved = item[0], item[1]
+                print("----------------------SUBSET",subset)
+                if not solved:
+                    self.subset_comp[subset] = [False,len(subset)]
+                    self.conflict_sets.append(subset)
+                    self.conflict_sets = list(set(self.conflict_sets))
+                    print("not plan subset",subset)
+                    children = combinations(subset, len(subset) - 1)
+                    dict1 =  [{'key':list(subset),'value':False}]
+                    for k in children:
+                        if (k in self.subset_comp.keys()) and self.subset_comp[k][0]==True:
+                            dict1+= [{'key': list(k), 'value': self.subset_comp[k][0]}]
+                    print(self.conflict_sets)
+                    print(dict1)
+                    return dict1, False
+                else:
+                    self.subset_comp[subset] = [True, len(subset)]
+                    # if len(self.pref)==0:
+                    #     if len(self.max_set)<len(subset):
+                    #         self.max_set = subset
+                    #         self.max_sets = []
+                    #     else:
+                    #         self.max_sets.append(self.max_set)
+                    #         self.max_sets.append(subset)
+                    # else:
+                    #     if all(item in subset for item in self.pref):
+                    #         if len(self.max_set) < len(subset):
+                    #             self.max_set = subset
+                    #             self.max_sets = []
+                    #         else:
+                    #             self.max_sets.append(self.max_set)
+                    #             self.max_sets.append(subset)
+                    #     elif any(item in subset for item in self.pref):
+                    #         self.max_sets.append(self.max_set)
+                    #         self.max_sets.append(subset)
+
+            self.length += 1
+            print(self.length)
+        print("OP", pref)
+        self.for_multiple_runs = True
+        #run closestplan
+        return pref, True
+
+
+
+
+
+
+
     def soft_compile(self,actions):
-        pr_model = parse_model(self.pr_domain,self.pr_problem)
+        pr_model = parse_model(self.val_pr_domain,self.val_pr_problem)
         obs = {}
         obs[PARARMETERS] = []
         obs[POS_PREC] = []
         obs[ADDS] = []
         obs[DELS] = []
-        obs[FUNCTIONAL] = [[['total-cost', 'number'], [0, 'Integer']]]
+        obs[FUNCTIONAL] = [[['total-cost', 'number'], [7, 'Integer']]]
         obs[COND_ADDS] = []
         obs[COND_DELS] = []
-        without_obs = deepcopy(obs)
-        without_obs[FUNCTIONAL] = [[['total-cost', 'number'], [20, 'Integer']]]
         for i in range(len(actions)):
             action = actions[i]
             if action in list(pr_model[DOMAIN].keys()):
-                temp_obs = deepcopy(obs)
-                temp_without_obs = deepcopy(without_obs)
+                temp_obs = deepcopy(pr_model[DOMAIN][action])
+                temp_without_obs = deepcopy(obs)
+                # temp_without_obs[FUNCTIONAL][0][1][0] = temp_obs[FUNCTIONAL][0][1][0]
                 action_with_obs = action + '_WITH_OBS'
                 action_without_obs = action + '_WITHOUT_OBS'
-                predicate = [(action + '_MET').lower(), []]
+                predicate = [(action + '_MET_OBS').lower(), []]
                 pr_model[PREDICATES].append(predicate)
                 pr_model[INSTANCE][GOAL].append(predicate)
                 temp_obs[ADDS].append(predicate)
-                for j in pr_model[DOMAIN][action][ADDS]:
-                    temp_obs[POS_PREC].append(j)
                 temp_without_obs[ADDS].append(predicate)
                 if i != 0:
-                    prev_action = actions[i - 1] + '_WITH_OBS'
-                    for i in pr_model[DOMAIN][prev_action][ADDS]:
-                        if i not in temp_obs[POS_PREC]:
-                            temp_obs[POS_PREC].append(i)
-                        if i not in pr_model[DOMAIN][action][POS_PREC]:
-                            pr_model[DOMAIN][action][POS_PREC].append(i)
+                    prev_action = actions[i - 1]
+                    for i in pr_model[DOMAIN][prev_action + '_WITHOUT_OBS'][ADDS]:
+                        temp_obs[POS_PREC].append(i)
+                        temp_without_obs[POS_PREC].append(i)
                 pr_model[DOMAIN][action_with_obs] = temp_obs
                 pr_model[DOMAIN][action_without_obs] = temp_without_obs
-                print(temp_obs)
-                del temp_obs
-                del temp_without_obs
         pr_write = ModelWriter(pr_model)
         pr_write.write_files('write_pr_domain.pddl','write_pr_problem.pddl')
 
     def getFoilExplanations(self,actions):
-        self.writeFoilObservations(actions)
+        self.writeFoilObservations(actions,self.foil_obs)
         cmd = "cd planner/mmp_foil_explanations/src && ./Problem.py -m ../../../{0} -n ../../../{1} -d ../domain/radar_domain_template.pddl -f ../../mock_problem.pddl -pf ../../foil_obs.dat ".format(self.domain, self.human_domain)
         try:
             os.system(cmd)

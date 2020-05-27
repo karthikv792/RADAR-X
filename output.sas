@@ -4,7 +4,7 @@ end_version
 begin_metric
 1
 end_metric
-273
+274
 begin_variable
 var0
 -1
@@ -1691,228 +1691,235 @@ begin_variable
 var240
 -1
 2
+Atom send_social_media_byeng_byeng_met_obs()
+NegatedAtom send_social_media_byeng_byeng_met_obs()
+end_variable
+begin_variable
+var241
+-1
+2
 Atom sent_social_media_byeng()
 NegatedAtom sent_social_media_byeng()
 end_variable
 begin_variable
-var241
+var242
 -1
 2
 Atom sent_social_media_lake()
 NegatedAtom sent_social_media_lake()
 end_variable
 begin_variable
-var242
+var243
 -1
 2
 Atom sent_social_media_marketplace()
 NegatedAtom sent_social_media_marketplace()
 end_variable
 begin_variable
-var243
+var244
 -1
 2
 Atom sent_social_media_mill()
 NegatedAtom sent_social_media_mill()
 end_variable
 begin_variable
-var244
+var245
 -1
 2
 Atom traffic_diverted_byeng_byeng()
 NegatedAtom traffic_diverted_byeng_byeng()
 end_variable
 begin_variable
-var245
+var246
 -1
 2
 Atom traffic_diverted_byeng_lake()
 NegatedAtom traffic_diverted_byeng_lake()
 end_variable
 begin_variable
-var246
+var247
 -1
 2
 Atom traffic_diverted_byeng_marketplace()
 NegatedAtom traffic_diverted_byeng_marketplace()
 end_variable
 begin_variable
-var247
+var248
 -1
 2
 Atom traffic_diverted_byeng_mill()
 NegatedAtom traffic_diverted_byeng_mill()
 end_variable
 begin_variable
-var248
+var249
 -1
 2
 Atom traffic_diverted_byeng_rural()
 NegatedAtom traffic_diverted_byeng_rural()
 end_variable
 begin_variable
-var249
+var250
 -1
 2
 Atom traffic_diverted_lake_byeng()
 NegatedAtom traffic_diverted_lake_byeng()
 end_variable
 begin_variable
-var250
+var251
 -1
 2
 Atom traffic_diverted_lake_lake()
 NegatedAtom traffic_diverted_lake_lake()
 end_variable
 begin_variable
-var251
+var252
 -1
 2
 Atom traffic_diverted_lake_marketplace()
 NegatedAtom traffic_diverted_lake_marketplace()
 end_variable
 begin_variable
-var252
+var253
 -1
 2
 Atom traffic_diverted_lake_mill()
 NegatedAtom traffic_diverted_lake_mill()
 end_variable
 begin_variable
-var253
+var254
 -1
 2
 Atom traffic_diverted_lake_rural()
 NegatedAtom traffic_diverted_lake_rural()
 end_variable
 begin_variable
-var254
+var255
 -1
 2
 Atom traffic_diverted_marketplace_byeng()
 NegatedAtom traffic_diverted_marketplace_byeng()
 end_variable
 begin_variable
-var255
+var256
 -1
 2
 Atom traffic_diverted_marketplace_lake()
 NegatedAtom traffic_diverted_marketplace_lake()
 end_variable
 begin_variable
-var256
+var257
 -1
 2
 Atom traffic_diverted_marketplace_marketplace()
 NegatedAtom traffic_diverted_marketplace_marketplace()
 end_variable
 begin_variable
-var257
+var258
 -1
 2
 Atom traffic_diverted_marketplace_mill()
 NegatedAtom traffic_diverted_marketplace_mill()
 end_variable
 begin_variable
-var258
+var259
 -1
 2
 Atom traffic_diverted_marketplace_rural()
 NegatedAtom traffic_diverted_marketplace_rural()
 end_variable
 begin_variable
-var259
+var260
 -1
 2
 Atom traffic_diverted_mill_byeng()
 NegatedAtom traffic_diverted_mill_byeng()
 end_variable
 begin_variable
-var260
+var261
 -1
 2
 Atom traffic_diverted_mill_lake()
 NegatedAtom traffic_diverted_mill_lake()
 end_variable
 begin_variable
-var261
+var262
 -1
 2
 Atom traffic_diverted_mill_marketplace()
 NegatedAtom traffic_diverted_mill_marketplace()
 end_variable
 begin_variable
-var262
+var263
 -1
 2
 Atom traffic_diverted_mill_mill()
 NegatedAtom traffic_diverted_mill_mill()
 end_variable
 begin_variable
-var263
+var264
 -1
 2
 Atom traffic_diverted_mill_rural()
 NegatedAtom traffic_diverted_mill_rural()
 end_variable
 begin_variable
-var264
+var265
 -1
 2
 Atom traffic_diverted_rural_byeng()
 NegatedAtom traffic_diverted_rural_byeng()
 end_variable
 begin_variable
-var265
+var266
 -1
 2
 Atom traffic_diverted_rural_lake()
 NegatedAtom traffic_diverted_rural_lake()
 end_variable
 begin_variable
-var266
+var267
 -1
 2
 Atom traffic_diverted_rural_marketplace()
 NegatedAtom traffic_diverted_rural_marketplace()
 end_variable
 begin_variable
-var267
+var268
 -1
 2
 Atom traffic_diverted_rural_mill()
 NegatedAtom traffic_diverted_rural_mill()
 end_variable
 begin_variable
-var268
+var269
 -1
 2
 Atom traffic_diverted_rural_rural()
 NegatedAtom traffic_diverted_rural_rural()
 end_variable
 begin_variable
-var269
+var270
 -1
 2
 Atom updated_firechief()
 NegatedAtom updated_firechief()
 end_variable
 begin_variable
-var270
+var271
 -1
 2
 Atom updated_medichief()
 NegatedAtom updated_medichief()
 end_variable
 begin_variable
-var271
+var272
 -1
 2
 Atom updated_policechief()
 NegatedAtom updated_policechief()
 end_variable
 begin_variable
-var272
+var273
 -1
 2
 Atom updated_transportchief()
@@ -1957,11 +1964,6 @@ end_mutex_group
 begin_mutex_group
 2
 184 0
-240 0
-end_mutex_group
-begin_mutex_group
-2
-184 0
 241 0
 end_mutex_group
 begin_mutex_group
@@ -1973,6 +1975,11 @@ begin_mutex_group
 2
 184 0
 243 0
+end_mutex_group
+begin_mutex_group
+2
+184 0
+244 0
 end_mutex_group
 begin_mutex_group
 2
@@ -2253,13 +2260,15 @@ begin_state
 1
 1
 1
+1
 end_state
 begin_goal
-2
+3
 8 0
 124 0
+240 0
 end_goal
-298
+300
 begin_operator
 address_media_firechief 
 2
@@ -4203,7 +4212,7 @@ divert_traffic_transportchief_byeng_byeng
 3
 0 159 -1 1
 0 194 -1 0
-0 244 -1 0
+0 245 -1 0
 1
 end_operator
 begin_operator
@@ -4214,7 +4223,7 @@ divert_traffic_transportchief_byeng_lake
 3
 0 160 -1 1
 0 195 -1 0
-0 245 -1 0
+0 246 -1 0
 1
 end_operator
 begin_operator
@@ -4225,7 +4234,7 @@ divert_traffic_transportchief_byeng_marketplace
 3
 0 161 -1 1
 0 196 -1 0
-0 246 -1 0
+0 247 -1 0
 1
 end_operator
 begin_operator
@@ -4236,7 +4245,7 @@ divert_traffic_transportchief_byeng_mill
 3
 0 162 -1 1
 0 197 -1 0
-0 247 -1 0
+0 248 -1 0
 1
 end_operator
 begin_operator
@@ -4247,7 +4256,7 @@ divert_traffic_transportchief_byeng_rural
 3
 0 163 -1 1
 0 198 -1 0
-0 248 -1 0
+0 249 -1 0
 1
 end_operator
 begin_operator
@@ -4258,7 +4267,7 @@ divert_traffic_transportchief_lake_byeng
 3
 0 164 -1 1
 0 199 -1 0
-0 249 -1 0
+0 250 -1 0
 1
 end_operator
 begin_operator
@@ -4269,7 +4278,7 @@ divert_traffic_transportchief_lake_lake
 3
 0 165 -1 1
 0 200 -1 0
-0 250 -1 0
+0 251 -1 0
 1
 end_operator
 begin_operator
@@ -4280,7 +4289,7 @@ divert_traffic_transportchief_lake_marketplace
 3
 0 166 -1 1
 0 201 -1 0
-0 251 -1 0
+0 252 -1 0
 1
 end_operator
 begin_operator
@@ -4291,7 +4300,7 @@ divert_traffic_transportchief_lake_mill
 3
 0 167 -1 1
 0 202 -1 0
-0 252 -1 0
+0 253 -1 0
 1
 end_operator
 begin_operator
@@ -4302,7 +4311,7 @@ divert_traffic_transportchief_lake_rural
 3
 0 168 -1 1
 0 203 -1 0
-0 253 -1 0
+0 254 -1 0
 1
 end_operator
 begin_operator
@@ -4313,7 +4322,7 @@ divert_traffic_transportchief_marketplace_byeng
 3
 0 169 -1 1
 0 204 -1 0
-0 254 -1 0
+0 255 -1 0
 1
 end_operator
 begin_operator
@@ -4324,7 +4333,7 @@ divert_traffic_transportchief_marketplace_lake
 3
 0 170 -1 1
 0 205 -1 0
-0 255 -1 0
+0 256 -1 0
 1
 end_operator
 begin_operator
@@ -4335,7 +4344,7 @@ divert_traffic_transportchief_marketplace_marketplace
 3
 0 171 -1 1
 0 206 -1 0
-0 256 -1 0
+0 257 -1 0
 1
 end_operator
 begin_operator
@@ -4346,7 +4355,7 @@ divert_traffic_transportchief_marketplace_mill
 3
 0 172 -1 1
 0 207 -1 0
-0 257 -1 0
+0 258 -1 0
 1
 end_operator
 begin_operator
@@ -4357,7 +4366,7 @@ divert_traffic_transportchief_marketplace_rural
 3
 0 173 -1 1
 0 208 -1 0
-0 258 -1 0
+0 259 -1 0
 1
 end_operator
 begin_operator
@@ -4368,7 +4377,7 @@ divert_traffic_transportchief_mill_byeng
 3
 0 174 -1 1
 0 209 -1 0
-0 259 -1 0
+0 260 -1 0
 1
 end_operator
 begin_operator
@@ -4379,7 +4388,7 @@ divert_traffic_transportchief_mill_lake
 3
 0 175 -1 1
 0 210 -1 0
-0 260 -1 0
+0 261 -1 0
 1
 end_operator
 begin_operator
@@ -4390,7 +4399,7 @@ divert_traffic_transportchief_mill_marketplace
 3
 0 176 -1 1
 0 211 -1 0
-0 261 -1 0
+0 262 -1 0
 1
 end_operator
 begin_operator
@@ -4401,7 +4410,7 @@ divert_traffic_transportchief_mill_mill
 3
 0 177 -1 1
 0 212 -1 0
-0 262 -1 0
+0 263 -1 0
 1
 end_operator
 begin_operator
@@ -4412,7 +4421,7 @@ divert_traffic_transportchief_mill_rural
 3
 0 178 -1 1
 0 213 -1 0
-0 263 -1 0
+0 264 -1 0
 1
 end_operator
 begin_operator
@@ -4423,7 +4432,7 @@ divert_traffic_transportchief_rural_byeng
 3
 0 179 -1 1
 0 214 -1 0
-0 264 -1 0
+0 265 -1 0
 1
 end_operator
 begin_operator
@@ -4434,7 +4443,7 @@ divert_traffic_transportchief_rural_lake
 3
 0 180 -1 1
 0 215 -1 0
-0 265 -1 0
+0 266 -1 0
 1
 end_operator
 begin_operator
@@ -4445,7 +4454,7 @@ divert_traffic_transportchief_rural_marketplace
 3
 0 181 -1 1
 0 216 -1 0
-0 266 -1 0
+0 267 -1 0
 1
 end_operator
 begin_operator
@@ -4456,7 +4465,7 @@ divert_traffic_transportchief_rural_mill
 3
 0 182 -1 1
 0 217 -1 0
-0 267 -1 0
+0 268 -1 0
 1
 end_operator
 begin_operator
@@ -4467,7 +4476,7 @@ divert_traffic_transportchief_rural_rural
 3
 0 183 -1 1
 0 218 -1 0
-0 268 -1 0
+0 269 -1 0
 1
 end_operator
 begin_operator
@@ -5047,23 +5056,31 @@ send_social_media_byeng_byeng
 0 152 0 1
 0 184 0 2
 0 187 -1 0
-0 240 -1 0
-5
-end_operator
-begin_operator
-send_social_media_lake_byeng 
-1
-239 0
-5
-0 8 -1 0
-0 152 0 1
-0 184 0 2
-0 187 -1 0
 0 241 -1 0
 5
 end_operator
 begin_operator
-send_social_media_marketplace_byeng 
+send_social_media_byeng_byeng_with_obs 
+1
+239 0
+6
+0 8 -1 0
+0 152 0 1
+0 184 0 2
+0 187 -1 0
+0 240 -1 0
+0 241 -1 0
+5
+end_operator
+begin_operator
+send_social_media_byeng_byeng_without_obs 
+0
+1
+0 240 -1 0
+7
+end_operator
+begin_operator
+send_social_media_lake_byeng 
 1
 239 0
 5
@@ -5075,7 +5092,7 @@ send_social_media_marketplace_byeng
 5
 end_operator
 begin_operator
-send_social_media_mill_byeng 
+send_social_media_marketplace_byeng 
 1
 239 0
 5
@@ -5084,6 +5101,18 @@ send_social_media_mill_byeng
 0 184 0 2
 0 187 -1 0
 0 243 -1 0
+5
+end_operator
+begin_operator
+send_social_media_mill_byeng 
+1
+239 0
+5
+0 8 -1 0
+0 152 0 1
+0 184 0 2
+0 187 -1 0
+0 244 -1 0
 5
 end_operator
 begin_operator
@@ -5133,28 +5162,28 @@ begin_operator
 update_firechief 
 0
 1
-0 269 -1 0
+0 270 -1 0
 1
 end_operator
 begin_operator
 update_medichief 
 0
 1
-0 270 -1 0
+0 271 -1 0
 1
 end_operator
 begin_operator
 update_policechief 
 0
 1
-0 271 -1 0
+0 272 -1 0
 1
 end_operator
 begin_operator
 update_transportchief 
 0
 1
-0 272 -1 0
+0 273 -1 0
 1
 end_operator
 0

@@ -229,11 +229,13 @@
                     action_name = node.name.substr(0, node.name.indexOf(';'));
                     grid.addWidget($('<div><div class="grid-stack-item-content" id="myWidget'+ node.y + '" style="background-color:#fffde7;border-radius: 6px;border: 1px solid black;border-color:#fbc02d;padding-top:5px;"><div class="' + remove_icon + ' fa-remove' + node.y + '"  style="color:#fbc02d;cursor:pointer"></div><br><span>' + action_name + '</span></div>'),
                     node.x, node.y, node.width, node.height);
-                } else if  (node.name.includes(';++')){
+                }
+                else if  (node.name.includes(';++')){
                    action_name = node.name.substr(0, node.name.indexOf(';'));
                     grid.addWidget($('<div><div class="grid-stack-item-content" id="myWidget'+ node.y + '" style="background-color:#b2dfdb;border-radius: 6px;border: 1px solid black;border-color:#00695c;padding-top:5px;"><div class="' + remove_icon + ' fa-remove' + node.y + '" style="color:#00695c;cursor:pointer"></div><br><span style="padding-bottom: 5px">' + action_name + '</span></div>'),
                     node.x, node.y, node.width, node.height);
                 }
+
                 else if  (node.name.includes(';')) {
                     action_name = node.name.substr(0, node.name.indexOf(';'));
                     reason = node.name.substr(node.name.indexOf(';'), node.name.length);
