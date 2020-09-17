@@ -14,9 +14,12 @@
 
 (:init
 (fire_at byeng)
+(small_fire_at byeng)
 
 (=(total-cost) 0)
 
+(no_social_media)
+(no_engines_deployed)
 (not_needed_search_casualties lake )
 (not_needed_attend_casualties lake )
 (not_needed_diverted_traffic lake lake)
@@ -101,6 +104,7 @@
 (=(duration_extinguish_big_fire) 1)
 (=(duration_barricade) 1)
 (=(duration_search_casualties) 3)
+(=(duration_sent_signal) 5)
 (=(duration_address_media) 2)
 (=(duration_attend_casualties) 3)
 

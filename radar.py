@@ -20,7 +20,7 @@ def index(exp=0, s=speech.getSpeechText('INTRO'),gs='Extinguish Big Fire at BYEN
     a = planner.getActionNames()
     if planner.initial:
         planner.getInitialPlan()
-    g = ['Extinguish Big Fire At Byeng']#, 'Extinguish Small Fire At Byeng']
+    g = ['Extinguish Big Fire At Byeng', 'Extinguish Small Fire At Byeng']
     if not a:
         # o = planner.getExcuses()
         # s = speech.getSpeechText('INVALID_STATE')
@@ -101,15 +101,16 @@ def updateResources():
     return index(s=speech.getSpeechText('RESOURCE_UPDATED'))
 
 @app.route("/foil",methods=['GET','POST'])
-def foil(s=speech.getSpeechText('ADD_FOIL'),closestplanfound=0,pres_plan={}):
+def foil(s=speech.getSpeechText('ADD_FOIL'),closestplanfound=0,exp=0,pres_plan={}):
     acts = planner.getOrderedObservations()
+    print(acts)
     if not pres_plan:
         planner.savePlan()
         pre = acts
     else:
         pre = pres_plan
     a = planner.getActionNames()
-    return render_template('foil.html',plan=acts,presPlan = pre,actions=a,script=s,cpf = closestplanfound)
+    return render_template('foil.html',plan=acts,presPlan = pre,actions=a,script=s,cpf = closestplanfound,expl_panel=exp)
 
 @app.route("/foilrec",methods=['GET','POST'])
 def foilrec():
@@ -142,15 +143,24 @@ def foilrec():
 def validateFoil():
     planner.validateFoil(getPresentPlan(request))
     return 'ab'
+@app.route("/preferredPlan",methods=['GET','POST'])
+def preferredPlan():
+    choice = json.loads(dict(request.form)['conflict'])
+    if choice=='conflict':
+        exp=0
+    else:
+        exp=1
+    planner.getPreferredPlan(getPresentPlan(request))
+    pres_plan = 0
+    sp = speech.getSpeechText('ELICIT_PREFERENCE')
+    return foil(s=sp, closestplanfound=0,exp=exp, pres_plan=pres_plan)
 
 @app.route("/closestPlan",methods=['GET','POST'])
-def closestPlan(req=None):
-    pres_plan = planner.getOrderedObservations()
-    if not req:
-        planner.getClosestPlan(getPresentPlan(request))
-    else:
-        planner.getClosestPlan(req)
-    return foil(s=speech.getSpeechText('NEAREST_PLAN'),closestplanfound=1,pres_plan=pres_plan)
+def closestPlan():
+    planner.getClosestPlan(getPresentPlan(request))
+    pres_plan = planner.foil_actions_done
+    sp = speech.getSpeechText('NEAREST_PLAN')
+    return foil(s=sp,closestplanfound=1,pres_plan=pres_plan)
 @app.route("/getPreference",methods=['GET','POST'])
 def getPreference():
     choice= request.args['choice'].strip('"').split(',')
@@ -159,10 +169,16 @@ def getPreference():
     if choice[0] == 'aaaa':
         e, completed = planner.getPreference(actions)
     else:
-        e, completed = planner.getPreference(actions,pref=choice)
+        e, completed = planner.getPreference(actions,not_pref=choice)
     # print("COMPLETED",completed)
     return jsonify([{"dict":e,"complete":completed}])
     # return foil(s=speech.getSpeechText('NEAREST_PLAN'),closestplanfound=1,pres_plan=pres_plan)
+@app.route("/getPlausible",methods=['GET','POST'])
+def getPlausible():
+    actions = getPresentPlan(request)
+    e = planner.getPlausibleSets(actions)
+    return jsonify([{"dict":e}])
+
 @app.route("/acceptClosestPlan",methods=['GET','POST'])
 def acceptClosestPlan():
     return index(s=speech.getSpeechText('ACCEPT_NEAREST_PLAN'))

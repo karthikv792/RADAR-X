@@ -59,6 +59,7 @@
 			(has_bulldozers_number ?from - location)
 			(sent_social_media ?from - location)
 			(no_social_media)
+			(no_engines_deployed)
 )
 
 
@@ -147,6 +148,7 @@
 	:parameters	(?a - fire ?from - firestation ?to - pois) 
  	:precondition 	(and	
 					(has_big_engines_number ?from)
+					(no_engines_deployed)
 				)
  	:effect		(and	
  					(not (alerted ?from))
@@ -381,7 +383,6 @@
 (:action send_social_media
     :parameters(?from - pois ?at - pois)
     :precondition (and
-                  (searched ?at)
                   (needed_address_media)
                   )
     :effect       (and
@@ -423,7 +424,6 @@
 					(not_needed_attend_casualties ?at)
  					(needed_address_media)
 					(not (not_needed_address_media))
-					(not (no_social_media))
  					(increase (total-cost) (duration_attend_casualties))
  				)
 )

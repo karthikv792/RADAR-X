@@ -24,7 +24,7 @@ class problemFileMaker:
         pois = self.dbCaller.getCustomCursor('object_name', 'objects', 'type = 8')
         actors = self.dbCaller.getCustomCursor('object_name', 'objects', 'type in (1,2,3,4)')
         s = ""
-        s+='(no_social_media)\n'
+        s+='(no_social_media)\n(no_engines_deployed)\n'
         for i in pois:
             s += '(not_needed_search_casualties ' + i[0] + ' )\n'
             s += '(not_needed_attend_casualties ' + i[0] + ' )\n'
@@ -40,13 +40,14 @@ class problemFileMaker:
         initStateList = self.dbCaller.getTasks()
         self.notSmallFire = True
         for predicate in initStateList:
-            if (predicate[0] == "small_fire_at byeng"):
+            print(predicate[0])
+            if predicate[0] == "small_fire_at byeng":
                 if 'Small' in gs:
                     s += '(' + predicate[0] + ')\n'
                     self.notSmallFire = False
             else:
                 s += '(' + predicate[0] + ')\n'
-
+        s +='(small_fire_at byeng)\n'
         s += '\n(=(total-cost) 0)\n\n'
 
         s += self.addNotNeeded()

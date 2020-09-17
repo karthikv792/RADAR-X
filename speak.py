@@ -13,7 +13,9 @@ class Speak():
             'MODEL_UPDATED'         : 'Thank you for reviewing my explanations and providing valuable feedback.  I have updated both our models in accordance to your wishes',
             'ADD_FOIL'              : 'Have another idea for your plan? You can start by adding actions to your foil.',
             'NEAREST_PLAN'          : 'Here is a plan that is the closest to your foil. Hope this satisfies you.',
-            'ACCEPT_NEAREST_PLAN'   : 'Thank you for accepting the plan I gave. Now you are ALL FIRED UP!!'
+            'ACCEPT_NEAREST_PLAN'   : 'Thank you for accepting the plan I gave. Now you are ALL FIRED UP!!',
+            'ELICIT_PREFERENCE'  : 'Thank you for eliciting your preference. Here is the plan you preferred.'
+
         }
 
     def getSpeechText(self, s):

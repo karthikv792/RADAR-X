@@ -64,6 +64,7 @@
         (not_needed_diverted_traffic_lake_marketplace )
         (not_needed_diverted_traffic_lake_mill )
         (not_needed_diverted_traffic_lake_lake )
+        (no_engines_deployed )
         (no_social_media )
         (fire_at_byeng )
     )

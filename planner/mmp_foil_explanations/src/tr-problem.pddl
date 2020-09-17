@@ -14,10 +14,12 @@
 
 (:init
 (fire_at byeng)
+(small_fire_at byeng)
 
 (=(total-cost) 0)
 
 (no_social_media)
+(no_engines_deployed)
 (not_needed_search_casualties lake )
 (not_needed_attend_casualties lake )
 (not_needed_diverted_traffic lake lake)

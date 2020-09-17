@@ -38,7 +38,7 @@ class Problem:
                 self.plan = temp[:-1]
                 self.cost = int(temp[-1].split(' ')[3].strip())
             
-        ground(robotModelFile, problemFile)
+        1   `KLJ2WS1ground(robotModelFile, problemFile)
 
         self.groundedRobotPlanFile   = '../domain/cache_grounded_plan.dat'
 

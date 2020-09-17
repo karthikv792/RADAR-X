@@ -131,7 +131,7 @@ def get_plan(domainFileName, problemFileName):
     else:
         cost = 0
     #print "plan","\n".join(plan)
-    #print "cost",cost
+    # print "cost",cost
 
     return [plan, cost]
 

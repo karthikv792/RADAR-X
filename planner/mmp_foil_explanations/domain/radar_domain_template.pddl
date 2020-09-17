@@ -58,6 +58,7 @@
 			(has_bulldozers_number ?from - location)
 			(sent_social_media ?from - location)
 			(no_social_media)
+			(no_engines_deployed)
 
 
 )
