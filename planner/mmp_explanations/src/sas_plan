@@ -1,0 +1,6 @@
+(alert firechief adminfire)
+(deploy_small_engines firechief adminfire byeng)
+(contact_media firechief)
+(extinguish_small_fire firechief byeng)
+(address_media firechief)
+; cost = 7 (general cost)

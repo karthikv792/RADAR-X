@@ -1,0 +1,21 @@
+Merge branch 'master' of https://github.com/karthikv792/RADAR2.0
+
+# Conflicts:
+#	dbHandler.py
+#	execution.stats
+#	grounding.stats
+#	planner/mmp/domain/cache_grounded_plan.dat
+#	planner/mmp/domain/cache_plan.dat
+#	planner/mmp/src/tr-domain.pddl
+#	planner/mmp_explanations/domain/cache_grounded_plan.dat
+#	planner/mmp_explanations/domain/cache_plan.dat
+#	planner/mmp_explanations/src/Problem.py
+#	planner/mmp_explanations/src/output
+#	planner/mmp_explanations/src/output.sas
+#	planner/mmp_explanations/src/temp.pddl
+#	planner/mmp_explanations/src/tr-problem.pddl
+#	planner/saved_obs.dat
+#	templates/foil.html
+#	templates/goal.html
+#	templates/index.html
+#	templates/plan.html
