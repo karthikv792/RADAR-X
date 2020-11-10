@@ -64,12 +64,14 @@
         (not_needed_diverted_traffic_lake_marketplace )
         (not_needed_diverted_traffic_lake_mill )
         (not_needed_diverted_traffic_lake_lake )
+        (no_engines_deployed )
         (no_social_media )
+        (small_fire_at_byeng )
         (fire_at_byeng )
     )
 
     (:goal
-        (and (addressed_media ) (extinguished_fire_byeng ) (send_social_media_byeng_byeng_met_obs ))
+        (and (addressed_media ) (extinguished_fire_byeng ) (deploy_small_engines_firechief_adminfire_byeng_met_obs ) (deploy_big_engines_firechief_mesafire_byeng_met_obs ) (send_social_media_byeng_byeng_met_obs ) (address_media_firechief_met_obs ))
     )
 
     

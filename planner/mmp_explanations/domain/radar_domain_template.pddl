@@ -47,6 +47,7 @@
 	     		(not_needed_search_casualties ?at - location)
 	     		(not_needed_attend_casualties ?at - location)
 	     		(not_needed_address_media)
+	     		(sent_social_media ?from - location)
 			(has_police_car_number ?from - location)
 			(has_small_engines_number ?from - location)
 			(has_big_engines_number ?from - location)
@@ -56,6 +57,8 @@
 			(has_ambulances_number ?from - location)
 			(has_policemen_number ?from - location)
 			(has_bulldozers_number ?from - location)
+						(no_social_media)
+			(no_engines_deployed)
 )
 
 

@@ -57,6 +57,9 @@
 			(has_ambulances_number ?from - location)
 			(has_policemen_number ?from - location)
 			(has_bulldozers_number ?from - location)
+			(sent_social_media ?from - location)
+			(no_social_media)
+			(no_engines_deployed)
 )
 
 
@@ -83,6 +86,7 @@
 	(duration_extinguish_big_fire)
 	(duration_barricade)
 	(duration_search_casualties)
+	(duration_sent_signal)
 	(duration_attend_casualties)
 	(duration_address_media)
 	(total-cost)
@@ -144,6 +148,7 @@
 	:parameters	(?a - fire ?from - firestation ?to - pois) 
  	:precondition 	(and	
 					(has_big_engines_number ?from)
+					(no_engines_deployed)
 				)
  	:effect		(and	
  					(not (alerted ?from))
@@ -375,7 +380,19 @@
  					(increase (total-cost) (duration_barricade))
  				)
 )
-
+(:action send_social_media
+    :parameters(?from - pois ?at - pois)
+    :precondition (and
+                  (needed_address_media)
+                  )
+    :effect       (and
+                    (sent_social_media ?from)
+                     (addressed_media)
+                     (not (needed_address_media))
+					(not_needed_address_media)
+                    (increase (total-cost) (duration_sent_signal))
+                   )
+)
 (:action search_casualties
 	:parameters	(?a - fire ?at - pois) 
  	:precondition 	(and	
@@ -399,6 +416,7 @@
  	:precondition 	(and	
  					(needed_attend_casualties ?at)
  					(deployed_ambulances ?at)
+
 				)
  	:effect		(and	
  					(attended_casualties ?at)
@@ -415,6 +433,7 @@
  	:precondition 	(and	
  					(media_contacted ?a)
  					(needed_address_media)
+ 					(no_social_media)
 				)
  	:effect		(and	
  					(addressed_media)

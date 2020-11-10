@@ -1,5 +1,5 @@
 # RADAR-X = RADAR + EXPLANATIONS
-### An Interactive Interface Pairing Contrastive Explanations and Refined Plan Suggestions in Decision Support Systems
+### An Interactive Interface for Explanatory Dialogue in Decision Support Systems
 Extending [RADAR](http://www.public.asu.edu/~ssengu15/files/aaai-fss-radar.pdf) to support Explanatory Dialogue.
 
 This is the citation for the original RADAR paper

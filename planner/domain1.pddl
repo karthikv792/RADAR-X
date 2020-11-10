@@ -60,6 +60,7 @@
 			(has_bulldozers_number ?from - location)
 			(sent_social_media ?from - location)
 			(no_social_media)
+			(no_engines_deployed)
 )
 
 
@@ -135,6 +136,7 @@
  	:precondition 	(and
  					(alerted ?from)
 					(has_small_engines_number ?from)
+					(no_engines_deployed)
 				)
  	:effect		(and
  					(not (alerted ?from))
@@ -143,7 +145,9 @@
  					(needed_barricade ?to)
 					(not(not_needed_barricade ?to))
 					(not (has_small_engines_number ?from))
+					(not (no_engines_deployed))
  					(increase (total-cost) (duration_deploy_small_engines))
+
  				)
 )
 
@@ -152,6 +156,7 @@
  	:precondition 	(and
  					(alerted ?from)
 					(has_big_engines_number ?from)
+					(no_engines_deployed)
 				)
  	:effect		(and
  					(not (alerted ?from))
@@ -425,7 +430,6 @@
 (:action send_social_media
     :parameters(?from - pois ?at - pois)
     :precondition (and
-                  (searched ?at)
                   (needed_address_media)
                   )
     :effect       (and

@@ -28,13 +28,13 @@
                   <button type="button" class="col-md-12 btn btn-light border-dark  explainFoil" data-toggle="modal" data-target="#FoilExplanationsModal"><img src="https://img.icons8.com/color/48/000000/consultation.png" height="35"><br>Foil Explanation</button>
         </div>
             <div class="col-md-3">
-            <button type="button" class="col-md-12 btn btn-light border-dark openOptions"><img src="https://img.icons8.com/color/48/000000/search.png" height="35"><br>Nearest Plan</button>
+            <button type="button" class="col-md-12 btn btn-light border-dark openOptions"><img src="https://img.icons8.com/color/48/000000/search.png" height="35"><br>Foil Refinement</button>
         </div>
         <div class="col-md-3">
               <button type="button" class="col-md-12 btn btn-light border-dark undoChange"><img src="https://img.icons8.com/color/48/000000/undo.png" height="35" alt="undo"><br>Undo</button>
               <!--<button type="button" class="col-md-12 btn btn-secondary undoChange"><span style="font-size: x-large"><i class="fas fa-undo" alt="undo"></i></span><br>Undo</button>-->
           </div>
-            {% if cpf > 0 %}
+            {% if cpf > 0 or expl_panel>0%}
         <div class="col-md-3">
             <button type="button" class="col-md-12 btn btn-light border-dark acceptedNP"><img src="https://img.icons8.com/color/48/000000/checked-radio-button.png" height="35" alt="accept"><br>Accept Plan</button>
         </div>
@@ -42,11 +42,19 @@
         </div>
     </div>
     <div class="col-md-12 btn-group mb-2">
-        <div class="offset-md-1 col-md-4">
-            <button type="button" class="col-md-12 btn btn-light border-dark getPreference" id="option1" data-toggle="modal" data-target="#PreferenceModal"><img src="https://img.icons8.com/color/48/000000/goal--v1.png" height="35"><br>Know Your Preference?</button>
+        {% if expl_panel>0 %}
+        <div class="col-md-3">
+              <button type="button" class="col-md-12 btn btn-light border-dark explainPlan" data-toggle="modal" data-target="#ExplanationsModal"><img src="https://img.icons8.com/color/48/000000/consultation.png" height="35"><br>Explain this plan?</button>
         </div>
-        <div class="col-md-4">
-            <button type="button" class="col-md-12 btn btn-light border-dark closestPlan" id="option2"><img src="https://img.icons8.com/color/48/000000/clover.png" height="35"><br>Feeling Lucky?</button>
+        {% endif %}
+        <div class="col-md-3">
+            <button type="button" class="col-md-12 btn btn-light border-dark closestPlan" id="option2"><img src="https://img.icons8.com/color/48/000000/near-me--v1.png" height="35"><br>Nearest Plan</button>
+        </div>
+        <div class="col-md-3">
+            <button type="button" class="col-md-12 btn btn-light border-dark getPreference" id="option1" data-toggle="modal" data-target="#PreferenceModal"><img src="https://img.icons8.com/color/48/000000/opposite-opinion.png" height="35"><br>Conflict Sets</button>
+        </div>
+        <div class="col-md-3">
+            <button type="button" class="col-md-12 btn btn-light border-dark getPlausible" id="option3" data-toggle="modal" data-target="#PlausibleModal"><img src="https://img.icons8.com/color/48/000000/ingredients-list.png" height="35"><br>Plausible Sets</button>
         </div>
     </div>
 </div>
@@ -89,9 +97,10 @@
             </div>
         </div>
     </div>
+    {% if cpf!=1%}
     <div class="card border-secondary m-2">
         <div class="card-header text-white bg-primary">
-            Present Plan
+            Current Plan
         </div>
         <div class="card-body">
             <ul class="list-group" id="PresentPlan">
@@ -100,9 +109,41 @@
 
         </div>
     </div>
+    {% else %}
+        <div class="card border-secondary m-2">
+        <div class="card-header text-white bg-primary">
+            Specified Foil
+        </div>
+        <div class="card-body">
+            <ul class="list-group" id="PresentPlan1">
+
+            </ul>
+
+        </div>
+    </div>
+    {% endif %}
 
 </div>
 {% include 'footer.html' %}
+<div class="modal fade" id="ExplanationsModal" tabindex="-1" role="dialog" aria-labelledby="ResourcesModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ExplanationsModalLabel1">Explanations Panel</h5>
+      </div>
+      <div class="modal-body">
+        This shows the explanations between your model of the domain and the updated actual model of the domain.
+        <br>
+        <div class="exploader"> <img src="{{ url_for('static',filename='images/page-loader.gif') }}"> </div>
+        <div id="generatedExplanations1"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="updateModels btn btn-secondary">Update models</button>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="modal fade" id="FoilExplanationsModal" tabindex="-1" role="dialog" aria-labelledby="ResourcesModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -117,7 +158,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="updateModels btn btn-secondary">Update models</button>
+        <button type="button" class="updateModels btn btn-secondary" id="btnchange">Update models</button>
       </div>
     </div>
   </div>
@@ -129,10 +170,27 @@
         <h5 class="modal-title" id="PreferencesModalLabel">Preferences Panel</h5>
       </div>
       <div class="modal-body">
-        This shows conflicting action sets from which you can choose according to your preference
+        This shows conflicting action sets which are to be resolved according to your preference
           <br>
           <div class="exploader"> <img src="{{ url_for('static',filename='images/page-loader.gif') }}"> </div>
                 <div id="generatedPreferences"></div>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="PlausibleModal" tabindex="-1" role="dialog" aria-labelledby="ResourcesModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="PlausibleModalLabel">Plausible Sets Panel</h5>
+      </div>
+      <div class="modal-body">
+        This shows possible action sets from which you can choose according to your preference
+          <br>
+          <div class="exploader"> <img src="{{ url_for('static',filename='images/page-loader.gif') }}"> </div>
+                <div id="generatedPlausibleSets"></div>
       </div>
       <div class="modal-footer">
       </div>
@@ -184,20 +242,45 @@
     });
     $('#option1').hide();
     $('#option2').hide();
+    $('#option3').hide();
     $('.openOptions').click(function () {
             $('#option1').show();
             $('#option2').show();
+            $('#option3').show();
 
         }
 
     );
-    $('.updateModels').click(function() {
+    $('#btnchange').click(function() {
             $('.page_content').fadeOut();
             $('.loader').fadeIn();
+            if($(this).hasClass('viewPlan')){
+                   $("#btnchange").toggleClass("updateModels");
+                    $("#btnchange").toggleClass("viewPlan");
+                $.redirectPost('preferredPlan', {'plan': JSON.stringify(res),'conflict':JSON.stringify('exp')});
+            }
+            else if($(this).hasClass('updateModels')){
             $('form').attr("method", "post");
             $('form').attr("action", "updateModels");
             $('form').appendTo('body').submit();
+            }
          });
+    $('.explainPlan').click(function() {
+            res = getGridStackData();
+            $.getJSON($SCRIPT_ROOT + '/getPlanExplanation', {
+                'plan' : JSON.stringify(res)
+            }, function(data) {
+                e = '<form>'
+                for (var i in data) {
+                    val = data[i];
+                    e = e + '<input type="checkbox" name="' + val + '-reject">' + val + '</input><br>';
+                    e = e + '<input type="hidden" name="' + val + '"></input>';
+                }
+                e = e + '</form>'
+                $('.exploader').fadeOut();
+                $('#generatedExplanations1').html(e);
+            });
+        });
     $('.validateFoil').click(function (){
       res = getGridStackData();
       $('.page_content').fadeOut();
@@ -226,17 +309,24 @@
                 if (data[0]["complete"]==true){
                     $('#PreferenceModal').modal('toggle');
                     console.log("Yippie-ka-Yay-MF");
-                    $.redirectPost('closestPlan', {'plan': JSON.stringify(data[0]["dict"])});
+                    $('.page_content').fadeOut();
+                    $('.loader').fadeIn();
+                    $.redirectPost('preferredPlan', {'plan': JSON.stringify(data[0]["dict"]),'conflict':JSON.stringify('yes')});
                 }
                 else {
-                    e = '';
+                    e = 'The actions ';
                     for (var i in data[0]["dict"]) {
                         val = data[0]["dict"][i];
                         // console.log(i == 0)
+
                         if (i == 0) {
-                            e = e + val['key'] + ' is not possible. Please choose any one from the below given options.<br>';
+                            for(var j in val['key']){
+                                e=e+val['key'][j]+' ';
+                            }
+                            e = e + ' together are not possible. Please choose the action to be removed from the set.<br>';
                         } else {
-                            e = e + '<button type="button" class="btn btn-secondary m-3 choice" value="' + val['key'] + '">' + val['key'] + '</button><br>';
+                            e = e + '<button type="button" class="btn btn-secondary m-3 choice" value="' + val['key'] + '">'
+                                + val['key'] + '</button><br>';
                         }
                         // console.log(e);
                         // cElement = $('#pref'+i);
@@ -249,7 +339,9 @@
                     $('#generatedPreferences').html(e);
                     $('.choice').click(function () {
                         txt1 = $(this).val()
-                        make_call(txt1)
+                        $('#generatedPreferences').empty();
+                        $('.exploader').fadeIn();
+                        make_call(txt1);
                     });
                 }
 
@@ -260,6 +352,50 @@
         $('.page_content').fadeOut();
         $('.loader').fadeIn();
         $.redirectPost('closestPlan', {'plan': JSON.stringify(res)});
+    });
+       $('.getPlausible').click(function () {
+           res = getGridStackData();
+            $.getJSON($SCRIPT_ROOT + '/getPlausible', {
+                'plan' : JSON.stringify(res)
+            }, function(data) {
+                console.log(data);
+                    e = 'Please choose from the possible sets. <br>';
+                    for (var i in data[0]["dict"]) {
+                        val = data[0]["dict"][i];
+                        if (val["key"].length == 0){
+                            e = e + '<button type="button" class="btn btn-secondary m-3 choice" value="' + i + val['key'] + '"> None of the actions</button><br>';
+                        } else {
+                            e = e + '<button type="button" class="btn btn-secondary m-3 choice" value="' + i + val['key'] + '">'
+                            for (var each_action in val["key"]){
+                                e=e+val["key"][each_action]+'<br>'
+                            }
+
+                        // console.log(i == 0)
+                        e=e + '</button><br>';
+                    }
+                        // console.log(e);
+                        // cElement = $('#pref'+i);
+                        // cElement.click(function(){
+                        //    console.log("HELLO"+i)
+                        // });
+
+                    }
+                    $('.exploader').fadeOut();
+                    $('#generatedPlausibleSets').html(e);
+                    $('.choice').click(function () {
+                        txt1 = $(this).val();
+                        var ind = Number(txt1[0]);
+                        $('#PlausibleModal').modal('toggle');
+                    console.log("Yippie-ka-Yay-MF");
+                    $('.page_content').fadeOut();
+                    $('.loader').fadeIn();
+                    $.redirectPost('preferredPlan', {'plan': JSON.stringify(data[0]["dict"][ind]["key"]),'conflict':JSON.stringify('yes')});
+
+                    });
+
+
+            });
+
     });
 
         $('.undoChange').click(function() {
@@ -276,13 +412,30 @@
             $.getJSON($SCRIPT_ROOT + '/getFoilExplanation', {
                 'plan' : JSON.stringify(res)
             }, function(data) {
-                e = '<form>'
+                if (data[0]=="valid"){
+                    console.log(data);
+                    $("#btnchange").empty();$("#btnchange").html("View Plan");
+                    $("#btnchange").toggleClass("updateModels");
+                    $("#btnchange").toggleClass("viewPlan");
+                    e="The specified foil is a valid foil. The plan that utilizes this foil has a cost of <b>"+data[1]+"</b> as opposed to the cost of the suggested plan <b>"+data[2]+"</b>.<br> Would you still like to view the plan that utilizes that foil?";
+                }
+                else if(data[0]=="same_cost"){
+                $("#btnchange").empty();$("#btnchange").html("View Plan");
+                    $("#btnchange").toggleClass("updateModels");
+                    $("#btnchange").toggleClass("viewPlan");
+                    e="The problem is solvable. Would you like to view the optimal plan for this problem?";
+
+                }
+                else{
+                    e = '<form>'
                 for (var i in data) {
                     val = data[i];
                     e = e + '<input type="checkbox" name="' + val + '-reject">' + val + '</input><br>';
                     e = e + '<input type="hidden" name="' + val + '"></input>';
                 }
                 e = e + '</form>'
+                }
+
                 $('.exploader').fadeOut();
                 $('#generatedExplanations').html(e);
             });
@@ -342,6 +495,7 @@
                     serializedData.push({y:0, x:0, width:12, height: 1, name:temp2})
                 };
             };
+            $('#Q_action').empty();
             loadGrid();
             resizeGrid();
         };
@@ -397,11 +551,9 @@
         presentPlan = function (){
             var items1 = GridStackUI.Utils.sort(prevPlanData);
             // console.log(items1);
+            {% if cpf!=1 %}
             _.each(items1, function (node,i) {
-                if (node.name.includes(';--')) {
-                    action_name1 = node.name.substr(0, node.name.indexOf(';'));
-                    $('#PresentPlan').append($('<li class="list-group-item list-group-item-primary">'+action_name1+'</li>'));
-                } else if (node.name.includes(';++')){
+                if (node.name.includes(';')) {
                     action_name1 = node.name.substr(0, node.name.indexOf(';'));
                     $('#PresentPlan').append($('<li class="list-group-item list-group-item-primary">'+action_name1+'</li>'));
                 }
@@ -411,8 +563,59 @@
 
             });
             console.log("DONE");
+            {% else %}
+            _.each(items1, function (node,i) {
+                console.log(node.name);
+                if (node.name.includes(';--')) {
+                    action_name1 = node.name.substr(0, node.name.indexOf(';'));
+                    $('#PresentPlan1').append($('<li class="list-group-item list-group-item-action list-group-item-danger" value="' + action_name1 + '">' + action_name1 + '</li>'));
+                } else if (node.name.includes(';++')) {
+                    action_name1 = node.name.substr(0, node.name.indexOf(';'));
+                    $('#PresentPlan1').append($('<li class="list-group-item list-group-item-action list-group-item-success" value="' + action_name1 + '">' + action_name1 + '</li>'));
+                } else {
+                    $('#PresentPlan1').append($('<li class="list-group-item list-group-item-action list-group-item-primary" value="' + node.name + '">' + node.name + '</li>'));
+                }
+            });
+            {% endif %}
 
         };
+
+
+        $(document).on('click', '#PresentPlan1 .list-group-item-action', function(e) {
+                console.log("THIS IS",$(this).hasClass("list-group-item-danger"));
+                if ($(this).hasClass("list-group-item-danger")){
+                    var txtt = $(this).attr("value");
+                    console.log(txtt);
+                    updateData(txtt);
+                    $(this).toggleClass("list-group-item-danger");
+                    $(this).toggleClass("list-group-item-success");
+
+                }
+                else if($(this).hasClass("list-group-item-success")){
+                    var temp1 = $(this).attr("value");
+                    var index = serializedData.findIndex(e => e.name===temp1);
+                    console.log(serializedData);
+                    if(index!=-1){
+                        serializedData.splice(index,1);
+                    }
+                    else{
+                        var temp2 = temp1+';++';
+                        var index2 = serializedData.findIndex(e => e.name===temp2);
+                        if (index2!=-1){
+                            serializedData.splice(index2,1);
+
+                        }
+                    }
+                    loadGrid();
+                    resizeGrid();
+                    $(this).toggleClass("list-group-item-danger");
+                    $(this).toggleClass("list-group-item-success");
+
+
+                }
+        });
+
+
         //--------------------------PRESENT PLAN END
         // thanks to http://stackoverflow.com/a/22885503
         var waitForFinalEvent=function(){var b={};return function(c,d,a){a||(a="I am a banana!");b[a]&&clearTimeout(b[a]);b[a]=setTimeout(c,d)}}();

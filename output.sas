@@ -695,9 +695,10 @@ end_variable
 begin_variable
 var98
 -1
-2
+3
 Atom deployed_small_engines_rural()
-NegatedAtom deployed_small_engines_rural()
+Atom no_engines_deployed()
+<none of those>
 end_variable
 begin_variable
 var99
@@ -1691,36 +1692,36 @@ begin_variable
 var240
 -1
 2
-Atom send_social_media_byeng_byeng_met_obs()
-NegatedAtom send_social_media_byeng_byeng_met_obs()
-end_variable
-begin_variable
-var241
--1
-2
 Atom sent_social_media_byeng()
 NegatedAtom sent_social_media_byeng()
 end_variable
 begin_variable
-var242
+var241
 -1
 2
 Atom sent_social_media_lake()
 NegatedAtom sent_social_media_lake()
 end_variable
 begin_variable
-var243
+var242
 -1
 2
 Atom sent_social_media_marketplace()
 NegatedAtom sent_social_media_marketplace()
 end_variable
 begin_variable
-var244
+var243
 -1
 2
 Atom sent_social_media_mill()
 NegatedAtom sent_social_media_mill()
+end_variable
+begin_variable
+var244
+-1
+2
+Atom small_fire_at_byeng()
+NegatedAtom small_fire_at_byeng()
 end_variable
 begin_variable
 var245
@@ -1925,7 +1926,7 @@ var273
 Atom updated_transportchief()
 NegatedAtom updated_transportchief()
 end_variable
-12
+17
 begin_mutex_group
 2
 59 0
@@ -1953,6 +1954,31 @@ begin_mutex_group
 end_mutex_group
 begin_mutex_group
 2
+94 0
+98 1
+end_mutex_group
+begin_mutex_group
+2
+95 0
+98 1
+end_mutex_group
+begin_mutex_group
+2
+96 0
+98 1
+end_mutex_group
+begin_mutex_group
+2
+97 0
+98 1
+end_mutex_group
+begin_mutex_group
+2
+98 0
+98 1
+end_mutex_group
+begin_mutex_group
+2
 124 0
 125 0
 end_mutex_group
@@ -1960,6 +1986,11 @@ begin_mutex_group
 2
 125 0
 125 1
+end_mutex_group
+begin_mutex_group
+2
+184 0
+240 0
 end_mutex_group
 begin_mutex_group
 2
@@ -1975,11 +2006,6 @@ begin_mutex_group
 2
 184 0
 243 0
-end_mutex_group
-begin_mutex_group
-2
-184 0
-244 0
 end_mutex_group
 begin_mutex_group
 2
@@ -2231,7 +2257,7 @@ begin_state
 1
 1
 1
-1
+0
 1
 1
 1
@@ -2263,12 +2289,11 @@ begin_state
 1
 end_state
 begin_goal
-3
+2
 8 0
 124 0
-240 0
 end_goal
-300
+319
 begin_operator
 address_media_firechief 
 2
@@ -3287,7 +3312,8 @@ deploy_ambulances_policechief_lukes_rural
 end_operator
 begin_operator
 deploy_big_engines_firechief_mesafire_byeng 
-0
+1
+98 1
 6
 0 17 0 1
 0 59 -1 0
@@ -3299,7 +3325,8 @@ deploy_big_engines_firechief_mesafire_byeng
 end_operator
 begin_operator
 deploy_big_engines_firechief_mesafire_lake 
-0
+1
+98 1
 6
 0 17 0 1
 0 60 -1 0
@@ -3311,7 +3338,8 @@ deploy_big_engines_firechief_mesafire_lake
 end_operator
 begin_operator
 deploy_big_engines_firechief_mesafire_marketplace 
-0
+1
+98 1
 6
 0 17 0 1
 0 61 -1 0
@@ -3323,7 +3351,8 @@ deploy_big_engines_firechief_mesafire_marketplace
 end_operator
 begin_operator
 deploy_big_engines_firechief_mesafire_mill 
-0
+1
+98 1
 6
 0 17 0 1
 0 62 -1 0
@@ -3335,7 +3364,8 @@ deploy_big_engines_firechief_mesafire_mill
 end_operator
 begin_operator
 deploy_big_engines_firechief_mesafire_rural 
-0
+1
+98 1
 5
 0 17 0 1
 0 63 1 0
@@ -4087,10 +4117,11 @@ end_operator
 begin_operator
 deploy_small_engines_firechief_adminfire_byeng 
 0
-6
+7
 0 9 0 1
 0 69 -1 0
 0 94 -1 0
+0 98 1 2
 0 144 0 1
 0 154 -1 0
 0 189 -1 1
@@ -4099,10 +4130,11 @@ end_operator
 begin_operator
 deploy_small_engines_firechief_adminfire_lake 
 0
-6
+7
 0 9 0 1
 0 70 -1 0
 0 95 -1 0
+0 98 1 2
 0 144 0 1
 0 155 -1 0
 0 190 -1 1
@@ -4111,10 +4143,11 @@ end_operator
 begin_operator
 deploy_small_engines_firechief_adminfire_marketplace 
 0
-6
+7
 0 9 0 1
 0 71 -1 0
 0 96 -1 0
+0 98 1 2
 0 144 0 1
 0 156 -1 0
 0 191 -1 1
@@ -4123,10 +4156,11 @@ end_operator
 begin_operator
 deploy_small_engines_firechief_adminfire_mill 
 0
-6
+7
 0 9 0 1
 0 72 -1 0
 0 97 -1 0
+0 98 1 2
 0 144 0 1
 0 157 -1 0
 0 192 -1 1
@@ -4138,7 +4172,7 @@ deploy_small_engines_firechief_adminfire_rural
 6
 0 9 0 1
 0 73 -1 0
-0 98 -1 0
+0 98 1 0
 0 144 0 1
 0 158 -1 0
 0 193 -1 1
@@ -4147,10 +4181,11 @@ end_operator
 begin_operator
 deploy_small_engines_firechief_scottsfire_byeng 
 0
-6
+7
 0 21 0 1
 0 69 -1 0
 0 94 -1 0
+0 98 1 2
 0 145 0 1
 0 154 -1 0
 0 189 -1 1
@@ -4159,10 +4194,11 @@ end_operator
 begin_operator
 deploy_small_engines_firechief_scottsfire_lake 
 0
-6
+7
 0 21 0 1
 0 70 -1 0
 0 95 -1 0
+0 98 1 2
 0 145 0 1
 0 155 -1 0
 0 190 -1 1
@@ -4171,10 +4207,11 @@ end_operator
 begin_operator
 deploy_small_engines_firechief_scottsfire_marketplace 
 0
-6
+7
 0 21 0 1
 0 71 -1 0
 0 96 -1 0
+0 98 1 2
 0 145 0 1
 0 156 -1 0
 0 191 -1 1
@@ -4183,10 +4220,11 @@ end_operator
 begin_operator
 deploy_small_engines_firechief_scottsfire_mill 
 0
-6
+7
 0 21 0 1
 0 72 -1 0
 0 97 -1 0
+0 98 1 2
 0 145 0 1
 0 157 -1 0
 0 192 -1 1
@@ -4198,7 +4236,7 @@ deploy_small_engines_firechief_scottsfire_rural
 6
 0 21 0 1
 0 73 -1 0
-0 98 -1 0
+0 98 1 0
 0 145 0 1
 0 158 -1 0
 0 193 -1 1
@@ -4765,6 +4803,19 @@ extinguish_big_fire_firechief_byeng
 1
 end_operator
 begin_operator
+extinguish_small_fire_firechief_byeng 
+1
+69 0
+6
+0 124 -1 0
+0 125 0 1
+0 152 -1 0
+0 187 -1 1
+0 219 -1 1
+0 244 0 1
+1
+end_operator
+begin_operator
 issue_local_alert_firechief 
 1
 146 0
@@ -5049,40 +5100,117 @@ search_casualties_firechief_byeng
 end_operator
 begin_operator
 send_social_media_byeng_byeng 
-1
-239 0
-5
-0 8 -1 0
-0 152 0 1
-0 184 0 2
-0 187 -1 0
-0 241 -1 0
-5
-end_operator
-begin_operator
-send_social_media_byeng_byeng_with_obs 
-1
-239 0
-6
-0 8 -1 0
-0 152 0 1
-0 184 0 2
-0 187 -1 0
-0 240 -1 0
-0 241 -1 0
-5
-end_operator
-begin_operator
-send_social_media_byeng_byeng_without_obs 
 0
-1
+5
+0 8 -1 0
+0 152 0 1
+0 184 0 2
+0 187 -1 0
 0 240 -1 0
-7
+5
+end_operator
+begin_operator
+send_social_media_byeng_lake 
+0
+5
+0 8 -1 0
+0 152 0 1
+0 184 0 2
+0 187 -1 0
+0 240 -1 0
+5
+end_operator
+begin_operator
+send_social_media_byeng_marketplace 
+0
+5
+0 8 -1 0
+0 152 0 1
+0 184 0 2
+0 187 -1 0
+0 240 -1 0
+5
+end_operator
+begin_operator
+send_social_media_byeng_mill 
+0
+5
+0 8 -1 0
+0 152 0 1
+0 184 0 2
+0 187 -1 0
+0 240 -1 0
+5
+end_operator
+begin_operator
+send_social_media_byeng_rural 
+0
+5
+0 8 -1 0
+0 152 0 1
+0 184 0 2
+0 187 -1 0
+0 240 -1 0
+5
 end_operator
 begin_operator
 send_social_media_lake_byeng 
-1
-239 0
+0
+5
+0 8 -1 0
+0 152 0 1
+0 184 0 2
+0 187 -1 0
+0 241 -1 0
+5
+end_operator
+begin_operator
+send_social_media_lake_lake 
+0
+5
+0 8 -1 0
+0 152 0 1
+0 184 0 2
+0 187 -1 0
+0 241 -1 0
+5
+end_operator
+begin_operator
+send_social_media_lake_marketplace 
+0
+5
+0 8 -1 0
+0 152 0 1
+0 184 0 2
+0 187 -1 0
+0 241 -1 0
+5
+end_operator
+begin_operator
+send_social_media_lake_mill 
+0
+5
+0 8 -1 0
+0 152 0 1
+0 184 0 2
+0 187 -1 0
+0 241 -1 0
+5
+end_operator
+begin_operator
+send_social_media_lake_rural 
+0
+5
+0 8 -1 0
+0 152 0 1
+0 184 0 2
+0 187 -1 0
+0 241 -1 0
+5
+end_operator
+begin_operator
+send_social_media_marketplace_byeng 
+0
 5
 0 8 -1 0
 0 152 0 1
@@ -5092,9 +5220,52 @@ send_social_media_lake_byeng
 5
 end_operator
 begin_operator
-send_social_media_marketplace_byeng 
-1
-239 0
+send_social_media_marketplace_lake 
+0
+5
+0 8 -1 0
+0 152 0 1
+0 184 0 2
+0 187 -1 0
+0 242 -1 0
+5
+end_operator
+begin_operator
+send_social_media_marketplace_marketplace 
+0
+5
+0 8 -1 0
+0 152 0 1
+0 184 0 2
+0 187 -1 0
+0 242 -1 0
+5
+end_operator
+begin_operator
+send_social_media_marketplace_mill 
+0
+5
+0 8 -1 0
+0 152 0 1
+0 184 0 2
+0 187 -1 0
+0 242 -1 0
+5
+end_operator
+begin_operator
+send_social_media_marketplace_rural 
+0
+5
+0 8 -1 0
+0 152 0 1
+0 184 0 2
+0 187 -1 0
+0 242 -1 0
+5
+end_operator
+begin_operator
+send_social_media_mill_byeng 
+0
 5
 0 8 -1 0
 0 152 0 1
@@ -5104,21 +5275,92 @@ send_social_media_marketplace_byeng
 5
 end_operator
 begin_operator
-send_social_media_mill_byeng 
-1
-239 0
+send_social_media_mill_lake 
+0
 5
 0 8 -1 0
 0 152 0 1
 0 184 0 2
 0 187 -1 0
-0 244 -1 0
+0 243 -1 0
+5
+end_operator
+begin_operator
+send_social_media_mill_marketplace 
+0
+5
+0 8 -1 0
+0 152 0 1
+0 184 0 2
+0 187 -1 0
+0 243 -1 0
+5
+end_operator
+begin_operator
+send_social_media_mill_mill 
+0
+5
+0 8 -1 0
+0 152 0 1
+0 184 0 2
+0 187 -1 0
+0 243 -1 0
+5
+end_operator
+begin_operator
+send_social_media_mill_rural 
+0
+5
+0 8 -1 0
+0 152 0 1
+0 184 0 2
+0 187 -1 0
+0 243 -1 0
 5
 end_operator
 begin_operator
 send_social_media_rural_byeng 
-1
-239 0
+0
+4
+0 8 -1 0
+0 152 0 1
+0 184 0 1
+0 187 -1 0
+5
+end_operator
+begin_operator
+send_social_media_rural_lake 
+0
+4
+0 8 -1 0
+0 152 0 1
+0 184 0 1
+0 187 -1 0
+5
+end_operator
+begin_operator
+send_social_media_rural_marketplace 
+0
+4
+0 8 -1 0
+0 152 0 1
+0 184 0 1
+0 187 -1 0
+5
+end_operator
+begin_operator
+send_social_media_rural_mill 
+0
+4
+0 8 -1 0
+0 152 0 1
+0 184 0 1
+0 187 -1 0
+5
+end_operator
+begin_operator
+send_social_media_rural_rural 
+0
 4
 0 8 -1 0
 0 152 0 1

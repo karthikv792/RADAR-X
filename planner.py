@@ -62,6 +62,11 @@ class Planner():
         self.pref = []
         self.max_sets = []
         self.for_multiple_runs = False
+        self.not_pref = []
+        self.foil_actions_done = {}
+        self.m=1
+        self.plausible_sets = []
+        self.cost_of_current_plan = 0
 
 
     def plan(self):
@@ -119,16 +124,16 @@ class Planner():
         # Write plan to file in sas_plan style
         s = ''
         for k in sorted(actions):
-            print(actions[k].strip())
+            # print(actions[k].strip())
             spl = (re.sub('[(){}<>]', '', actions[k].strip())).replace(' ','').split('_')
-            print(spl)
+            # print(spl)
             string = spl[0]
             for i in spl[1:]:
                 if (i.lower() not in self.prob_objects):
                     string += '_' + i
                 else:
                     string += ' ' + i
-            print(string)
+            # print(string)
             s += string + '\n'
 
         f = open(file, 'w')
@@ -224,9 +229,16 @@ class Planner():
             if '(general cost)' not in l:
                     plan_actions[i] = l.upper().strip()
                     i += 1
+            else:
+                cost=re.findall(r'\b\d+\b', l)
+                self.cost_of_current_plan = int(cost[0])
+
         f.close()
         self.initial = False
         self.writeObservations(plan_actions, tillEndOfPresentPlan)
+        copyf(self.pr_domain, self.val_pr_domain)
+        copyf(self.pr_problem, self.val_pr_problem)
+
     def getSuggestedPlan(self, actions, tillEndOfPresentPlan=False):
         self.writeObservations(actions)
 
@@ -268,6 +280,9 @@ class Planner():
                 else:
                     plan_actions[i] = l.upper().strip() + ';--'
                     i += 1
+            else:
+                cost=re.findall(r'\b\d+\b', l)
+                self.cost_of_current_plan = int(cost[0])
         f.close()
         self.writeObservations(plan_actions, tillEndOfPresentPlan)
 
@@ -363,7 +378,7 @@ class Planner():
     def getActionNames(self):
         self.deletePrFiles()
         try:
-            cmd = self.CALL_PR2 + ' -d ' + self.domain + ' -i ' + self.problem +' -o ' + 'planner/blank_obs.dat'
+            cmd = self.CALL_PR2 + ' -d ' + self.domain + ' -i ' + self.problem +' -o ' + 'planner/blank_obs.dat' + '> /dev/null 2>&1'
             os.system(cmd)
         except:
             raise Exception('[ERROR] Call to PR2 failed!')
@@ -421,6 +436,15 @@ class Planner():
 
         return observations
 
+    def getFoilObservations(self):
+        observations = {}
+        f = open(self.obs)
+        count = 1
+        for l in f:
+            observations[ count ] = l.strip()
+            count += 1
+
+        return observations
     def definePlanningProblem(self, gs):
         '''
         Creates the problem.pddl file
@@ -463,6 +487,45 @@ class Planner():
         for i in self.parsed_model[CONSTANTS]:
             self.prob_objects.append(i[0])
 
+    def getPreferredPlan(self,actions,tillEndOfPresentPlan=False):
+        # present_actions = self.getOrderedObservations()
+        # p_actions = [(re.sub('[(){}<>]', '', i)).replace(' ', '') for i in list(present_actions.values())]
+        if type(actions)!=type(list()):
+            foil_actions = [(re.sub('[(){}<>]', '', actions[i].split('\n')[1])).replace(' ', '') for i in sorted(actions.keys())]
+        else:
+            foil_actions = actions
+        f, cost = self.solve_or_not(foil_actions,flag=2)
+        plan_actions = {}
+        if self.foil_actions_done:
+            self.foil_actions_done = {}
+        i = 0
+        j = 0
+        # acts = [x.strip('() \n') for x in actions.values()]
+        for l in f:
+            if 'general cost' not in l:
+                # action = (re.sub('[(){}<>]', '', l.upper().strip())).replace(' ', '')
+                print(l.upper().strip())
+                if 'EXPLAIN_OBS' in l.upper():
+                    actionn = l.upper().strip().replace('EXPLAIN_OBS_', '').replace('_1','')
+                    self.foil_actions_done[j] = actionn + ';++'
+                    plan_actions[i] = actionn + ';++'
+                    i += 1
+                    j += 1
+                elif 'WITHOUT_OBS' in l.upper():
+                    actionn = l.upper().strip().replace('_WITHOUT_OBS', '')
+                    print(actionn)
+                    self.foil_actions_done[j] = actionn + ';--'
+                    # plan_actions[i] = l.upper().strip() + ';:' #.replace('_WITHOUT_OBS','')
+                    # print(plan_actions[i])
+                    j += 1
+                else:
+                    plan_actions[i] = l.upper().strip()
+                    i += 1
+            else:
+                cost = re.findall(r'\b\d+\b', l)
+                self.cost_of_current_plan = int(cost[0])
+
+        self.writeObservations(plan_actions, tillEndOfPresentPlan)
 
     def getClosestPlan(self,actions,tillEndOfPresentPlan=False):
         # present_actions = self.getOrderedObservations()
@@ -479,35 +542,45 @@ class Planner():
         except Exception as detail:
             print("[ERROR] While compiling actions into a planning problem ", detail)
         try:
-            cmd = self.CALL_FAST_DOWNWARD + 'write_pr_domain.pddl' + ' ' + 'write_pr_problem.pddl' + ' --search "astar(lmcut())"'#+ ' > /dev/null 2>&1';
+            cmd = self.CALL_FAST_DOWNWARD + 'write_pr_domain.pddl' + ' ' + 'write_pr_problem.pddl' + ' --search "astar(lmcut())"'
             os.system(cmd)
             print ('FAST-DOWNWARD called...')
         except:
             raise Exception('[ERROR] Running FAST-DOWNWARD!')
-        plan_actions = {}
+
+
         f = open(self.sas_plan, 'r')
+        plan_actions = {}
+        if self.foil_actions_done:
+            self.foil_actions_done = {}
         i = 0
+        j=0
         # acts = [x.strip('() \n') for x in actions.values()]
         for l in f:
             if 'general cost' not in l:
                 # action = (re.sub('[(){}<>]', '', l.upper().strip())).replace(' ', '')
+                print(l.upper().strip())
                 if 'WITH_OBS' in l.upper():
-                    print(l.upper().strip('WITH_OBS'))
-                    plan_actions[i] = l.upper().strip().replace('_WITH_OBS','') + ';++'
+                    actionn = l.upper().strip().replace('_WITH_OBS','')
+                    self.foil_actions_done[j] = actionn + ';++'
+                    plan_actions[i] = actionn  + ';++'
                     i+=1
+                    j+=1
                 elif 'WITHOUT_OBS' in l.upper():
-                    pass
+                    actionn = l.upper().strip().replace('_WITHOUT_OBS', '')
+                    print(actionn)
+                    self.foil_actions_done[j] = actionn + ';--'
                     # plan_actions[i] = l.upper().strip() + ';:' #.replace('_WITHOUT_OBS','')
                     # print(plan_actions[i])
-                    # i += 1
+                    j += 1
                 else:
                     plan_actions[i] = l.upper().strip()
                     i+=1
-
-
+            else:
+                cost=re.findall(r'\b\d+\b', l)
+                self.cost_of_current_plan = int(cost[0])
         f.close()
         self.writeObservations(plan_actions, tillEndOfPresentPlan)
-
 
 
     def writePreferenceObservations(self, actions, tillEndOfPresentPlan=False):
@@ -519,7 +592,7 @@ class Planner():
             actions = {}
             for j in range(0,i+1):
                 actions[j] = acts[j]
-
+        print([i for i in actions])
         # Write plan to file in sas_plan style
         s = ''
         for spl in actions:
@@ -530,14 +603,13 @@ class Planner():
                     act += '_' + i
                 else:
                     act += ' ' + i
-            print(act)
             s += act + '\n'
 
         f = open(self.pref_obs, 'w')
         f.write(s)
         f.close()
 
-    def solve_or_not(self,current):
+    def solve_or_not(self,current,flag=0):
         # lock.acquire()
         self.writePreferenceObservations(current)
 
@@ -559,24 +631,50 @@ class Planner():
             except:
                 raise Exception('[ERROR] Removing "EXPLAIN" from pr-domain and pr-problem files.')
         # lock.release()
-        return self.get_plan(self.pr_domain, self.pr_problem)
+        return self.get_plan(self.pr_domain, self.pr_problem,flag)
 
-    def get_plan(self,domainFileName, problemFileName):
-        # print "command",__FD_PLAN_CMD__.format(domainFileName, problemFileName)
-        __FD_PLAN_CMD__ = "planner/Preferences/./get_plan.sh {} {} {}"
-        # print("command", __FD_PLAN_CMD__.format(domainFileName, problemFileName))
-        plan_outputs = []
-        for i in range(1,4):
-            output = os.popen(__FD_PLAN_CMD__.format(domainFileName, problemFileName,i)).read().strip()
-            # print(output)
+    def get_plan(self,domainFileName, problemFileName,flag=0):
+        if flag==0:
+            # print "command",__FD_PLAN_CMD__.format(domainFileName, problemFileName)
+            __FD_PLAN_CMD__ = "planner/Preferences/./get_plan.sh {} {} {}"
+            # print("command", __FD_PLAN_CMD__.format(domainFileName, problemFileName))
+            plan_outputs = []
+            output = os.popen(__FD_PLAN_CMD__.format(domainFileName, problemFileName,self.m)).read().strip()
+            print(output)
+            # plan   = [item.strip().replace('_', ' ') for item in output.split('\n')] if output != '' else []
+            if output!= '':
+                if 'Solution found.' in output:
+                    return True
+                plan = [item.strip() for item in output.split('\n')]
+            else:
+                plan = []
+            print(plan)
+            if len(plan)!=0:
+                return True
+            else:
+                return False
+        else:
+            __FD_PLAN_CMD__ = "planner/Preferences/./fd_plan.sh {} {}"
+            __FD_PLAN_COST_CMD__ = "planner/Preferences/./plan_cost.sh"
+            output = os.popen(__FD_PLAN_CMD__.format(domainFileName, problemFileName)).read().strip()
+
             # plan   = [item.strip().replace('_', ' ') for item in output.split('\n')] if output != '' else []
             plan = [item.strip() for item in output.split('\n')] if output != '' else []
-            plan_outputs.append(plan)
-        print("VALUESSS",plan_outputs)
-        if any(len(i)!=0 for i in plan_outputs):
-            return True
-        else:
-            return False
+            if flag==1:
+                if len(plan) > 0:
+                    return True
+                else:
+                    return False
+            elif flag==2:
+                if len(plan) > 0:
+                    output1 = os.popen(__FD_PLAN_COST_CMD__).read().strip()
+                    cost = int(output1)
+                else:
+                    cost = -1
+                return plan, cost
+
+
+
 
         # print "plan","\n".join(plan)
 
@@ -593,21 +691,19 @@ class Planner():
     def par_init(self,l):
         global lock
         lock = l
-    def parallel_loo(self,subset, pref):
-        if pref != None:
-            if pref not in self.pref:
-                self.pref += pref
-                self.pref = list(set(self.pref))
-            # print(self.pref)
-            if not any(item in subset for item in self.pref):
-                print("ITEM NOT IN PREF", subset)
-                return None
+    def parallel_loo(self,subset,pref):
+        if subset in self.subset_comp.keys():
+            return None
+        if any(sett in self.not_pref for sett in subset):
+            return None
         if subset in self.conflict_sets:
             print("ITEM IN CONF", subset)
             return None
-        print("CHECK-1")
+        if pref=='plausible':
+            if True in [all(s in i['key'] for s in subset) for i in self.plausible_sets]:
+                return None
         return [subset, self.solve_or_not(subset)]
-    def getPreference(self, actions, pref=None,tillEndOfPresentPlan=False):
+    def getPreference(self, actions, not_pref=None,tillEndOfPresentPlan=False):
         foil_actions = [(re.sub('[(){}<>]', '', actions[i].split('\n')[1])).replace(' ', '') for i in sorted(actions.keys())]
         if self.for_multiple_runs==True:
             self.length = 0
@@ -615,67 +711,79 @@ class Planner():
             self.conflict_sets = []
             self.max_set = ()
             self.pref = []
+            self.not_pref = []
             self.max_sets=[]
             self.for_multiple_runs = False
+            self.m=1
         actions = foil_actions
-        while self.length <= len(actions):
-            # pool = mp.Pool(mp.cpu_count())
-            l = mp.Lock()
-            pool = mp.Pool(initializer=self.par_init, initargs=(l,))
-            subsets = combinations(actions, self.length)
-            results = [pool.apply(self.parallel_loo, args = (subset,pref)) for subset in subsets]
-            pool.close()
-            for item in results:
-                if item is None:
-                    continue
-                subset, solved = item[0], item[1]
-                print("----------------------SUBSET",subset)
-                if not solved:
-                    self.subset_comp[subset] = [False,len(subset)]
-                    self.conflict_sets.append(subset)
-                    self.conflict_sets = list(set(self.conflict_sets))
-                    print("not plan subset",subset)
-                    children = combinations(subset, len(subset) - 1)
-                    dict1 =  [{'key':list(subset),'value':False}]
-                    for k in children:
-                        if (k in self.subset_comp.keys()) and self.subset_comp[k][0]==True:
-                            dict1+= [{'key': list(k), 'value': self.subset_comp[k][0]}]
-                    print(self.conflict_sets)
-                    print(dict1)
-                    return dict1, False
-                else:
-                    self.subset_comp[subset] = [True, len(subset)]
-                    # if len(self.pref)==0:
-                    #     if len(self.max_set)<len(subset):
-                    #         self.max_set = subset
-                    #         self.max_sets = []
-                    #     else:
-                    #         self.max_sets.append(self.max_set)
-                    #         self.max_sets.append(subset)
-                    # else:
-                    #     if all(item in subset for item in self.pref):
-                    #         if len(self.max_set) < len(subset):
-                    #             self.max_set = subset
-                    #             self.max_sets = []
-                    #         else:
-                    #             self.max_sets.append(self.max_set)
-                    #             self.max_sets.append(subset)
-                    #     elif any(item in subset for item in self.pref):
-                    #         self.max_sets.append(self.max_set)
-                    #         self.max_sets.append(subset)
+        if not_pref!=None:
+            if not_pref not in self.not_pref:
+                self.not_pref += not_pref
+                self.not_pref = list(set(self.not_pref))
+            for i in self.conflict_sets:
+                for j in i:
+                    if j!=not_pref[0] and j not in self.not_pref and j not in self.pref:
+                        self.pref.append(j)
+        while self.m<5:
+            while self.length <= len(actions):
+                # pool = mp.Pool(mp.cpu_count())
+                l = mp.Lock()
+                pool = mp.Pool(initializer=self.par_init, initargs=(l,))
+                subsets = combinations(actions, self.length)
+                results = [pool.apply(self.parallel_loo, args = (subset,not_pref)) for subset in subsets]
+                pool.close()
+                for item in results:
+                    if item is None:
+                        continue
+                    subset, solved = item[0], item[1]
+                    print("----------------------SUBSET",subset,solved)
+                    if not solved:
+                        self.subset_comp[subset] = [False,len(subset)]
+                        self.conflict_sets.append(subset)
+                        self.conflict_sets = list(set(self.conflict_sets))
+                        print("not plan subset",subset)
+                        children = combinations(subset,1)
+                        dict1 =  [{'key':list(subset),'value':False}]
+                        for k in children:
+                            if (k in self.subset_comp.keys()) and self.subset_comp[k][0]==True:
+                                dict1+= [{'key': list(k), 'value': self.subset_comp[k][0]}]
+                        print(self.conflict_sets)
+                        print(dict1)
+                        return dict1, False
+                    else:
+                        self.subset_comp[subset] = [True, len(subset)]
+                        # if len(self.pref)==0:
+                        #     if len(self.max_set)<len(subset):
+                        #         self.max_set = subset
+                        #         self.max_sets = []
+                        #     else:
+                        #         self.max_sets.append(self.max_set)
+                        #         self.max_sets.append(subset)
+                        # else:
+                        #     if all(item in subset for item in self.pref):
+                        #         if len(self.max_set) < len(subset):
+                        #             self.max_set = subset
+                        #             self.max_sets = []
+                        #         else:
+                        #             self.max_sets.append(self.max_set)
+                        #             self.max_sets.append(subset)
+                        #     elif any(item in subset for item in self.pref):
+                        #         self.max_sets.append(self.max_set)
+                        #         self.max_sets.append(subset)
 
-            self.length += 1
-            print(self.length)
-        print("OP", pref)
+                self.length += 1
+                print(self.length)
+            self.length=0
+            self.m+=1
+            if any(False in s for s in list(self.subset_comp.values())):
+                break
         self.for_multiple_runs = True
         #run closestplan
-        return pref, True
-
-
-
-
-
-
+        for act in self.not_pref:
+            actions.remove(act)
+        final_actions = actions
+        print("FINAL", final_actions)
+        return final_actions, True
 
     def soft_compile(self,actions):
         pr_model = parse_model(self.val_pr_domain,self.val_pr_problem)
@@ -684,7 +792,7 @@ class Planner():
         obs[POS_PREC] = []
         obs[ADDS] = []
         obs[DELS] = []
-        obs[FUNCTIONAL] = [[['total-cost', 'number'], [7, 'Integer']]]
+        obs[FUNCTIONAL] = [[['total-cost', 'number'], [9, 'Integer']]]
         obs[COND_ADDS] = []
         obs[COND_DELS] = []
         for i in range(len(actions)):
@@ -711,7 +819,26 @@ class Planner():
         pr_write.write_files('write_pr_domain.pddl','write_pr_problem.pddl')
 
     def getFoilExplanations(self,actions):
+        foil_actions = [(re.sub('[(){}<>]', '', actions[i].split('\n')[1])).replace(' ', '') for i in sorted(actions.keys())]
         self.writeFoilObservations(actions,self.foil_obs)
+        if self.for_multiple_runs==True:
+            self.for_multiple_runs = False
+            self.m=1
+        subsets = combinations(foil_actions, len(foil_actions))
+        results = [[subset,self.solve_or_not(subset,flag=0)] for subset in subsets]
+        print(results)
+        for result in results:
+            if result[1]:
+                f, cost = self.solve_or_not(result[0],flag=2)
+                print("COST",cost)
+                if cost!=-1:
+                    if cost!=self.cost_of_current_plan:
+                        return {0:"valid",1:cost,2:self.cost_of_current_plan}
+                    else:
+                        self.getInitialPlan()
+                        return {0:"same_cost",1:cost,2:self.cost_of_current_plan}
+                else:
+                    return self.getExplanations()
         cmd = "cd planner/mmp_foil_explanations/src && ./Problem.py -m ../../../{0} -n ../../../{1} -d ../domain/radar_domain_template.pddl -f ../../mock_problem.pddl -pf ../../foil_obs.dat ".format(self.domain, self.human_domain)
         try:
             os.system(cmd)
@@ -734,3 +861,44 @@ class Planner():
             i += 1
         print(reason)
         return reason
+
+    def getPlausibleSets(self, actions):
+        foil_actions = [(re.sub('[(){}<>]', '', actions[i].split('\n')[1])).replace(' ', '') for i in
+                        sorted(actions.keys())]
+        if self.for_multiple_runs==True:
+            self.plausible_sets = []
+            self.for_multiple_runs = False
+            self.m=1
+        m_solution = False
+        length = len(foil_actions)
+        while self.m < 5:
+
+            while length >= 0:
+                # pool = mp.Pool(mp.cpu_count())
+                l = mp.Lock()
+                pool = mp.Pool(initializer=self.par_init, initargs=(l,))
+                subsets = combinations(foil_actions, length)
+                results = [pool.apply(self.parallel_loo, args=(subset, 'plausible')) for subset in subsets]
+                pool.close()
+
+                for item in results:
+                    if item is None:
+                        continue
+                    subset, solved = item[0], item[1]
+                    print("----------------------SUBSET", subset, solved)
+                    if solved:
+                        re_solved = self.solve_or_not(subset, 1)
+                        if re_solved:
+                            self.plausible_sets += [{'key': list(subset)}]
+                    else:
+                        m_solution = True
+                length -= 1
+            length = 0
+            self.m += 1
+            if m_solution == True:
+                break
+            self.plausible_sets = []
+        self.for_multiple_runs = True
+        return self.plausible_sets
+
+
