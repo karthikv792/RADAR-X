@@ -2,6 +2,7 @@ import re
 from flask import Flask, render_template, request, jsonify
 import json
 from planner import Planner
+import time
 from speak import Speak
 from dbHandler import dbHandler
 from foil_parser import get_actions
@@ -165,6 +166,7 @@ def closestPlan():
     return foil(s=sp,closestplanfound=1,pres_plan=pres_plan)
 @app.route("/getPreference",methods=['GET','POST'])
 def getPreference():
+    start = time.time()
     choice= request.args['choice'].strip('"').split(',')
     actions = getPresentPlan(request)
     # print(choice)
@@ -173,12 +175,17 @@ def getPreference():
     else:
         e, completed = planner.getPreference(actions,not_pref=choice)
     # print("COMPLETED",completed)
+    end = time.time()
+    print("Time Taken, Conflict", end-start)
     return jsonify([{"dict":e,"complete":completed}])
     # return foil(s=speech.getSpeechText('NEAREST_PLAN'),closestplanfound=1,pres_plan=pres_plan)
 @app.route("/getPlausible",methods=['GET','POST'])
 def getPlausible():
+    start = time.time()
     actions = getPresentPlan(request)
     e = planner.getPlausibleSets(actions)
+    end = time.time()
+    print("Time Taken, Plausible", end - start)
     return jsonify([{"dict":e}])
 
 @app.route("/acceptClosestPlan",methods=['GET','POST'])

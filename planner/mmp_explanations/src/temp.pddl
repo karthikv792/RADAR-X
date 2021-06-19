@@ -96,10 +96,12 @@
 :parameters (?a - fire ?from - firestation ?to - pois)
 :precondition
 (and
+( no_engines_deployed )
 ( has_small_engines_number ?from )
 )
 :effect
 (and
+( needed_barricade ?to )
 ( deployed_small_engines ?to )
 ( deployed_engines ?to )
 ( increase (total-cost) (duration_deploy_small_engines) )
@@ -193,7 +195,6 @@
 ( increase (total-cost) (duration_sent_signal) )
 ( not_needed_address_media )
 (not ( needed_address_media ))
-(not ( no_social_media ))
 )
 )
 
@@ -315,8 +316,8 @@
 ( extinguished_fire ?at )
 ( needed_search_casualties ?at )
 ( increase (total-cost) (duration_extinguish_small_fire) )
-(not ( not_needed_search_casualties ?at ))
 (not ( small_fire_at ?at ))
+(not ( not_needed_search_casualties ?at ))
 (not ( not_needed_address_media ))
 (not ( fire_at ?at ))
 )
@@ -377,8 +378,8 @@
 (and
 ( deployed_rescuers ?at )
 ( deployed_bulldozers ?at )
-( deployed_helicopters ?at )
 ( extinguished_fire ?at )
+( deployed_helicopters ?at )
 )
 :effect
 (and

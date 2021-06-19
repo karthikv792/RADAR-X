@@ -14,7 +14,6 @@
 
 (:init
 (fire_at byeng)
-(small_fire_at byeng)
 
 (=(total-cost) 0)
 
