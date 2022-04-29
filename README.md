@@ -1,6 +1,15 @@
 # RADAR-X = RADAR + EXPLANATIONS
 ### An Interactive Interface for Explanatory Dialogue in Decision Support Systems
 Extending [RADAR](http://www.public.asu.edu/~ssengu15/files/aaai-fss-radar.pdf) to support Explanatory Dialogue.
+This is the citation for RADAR-X
+```
+@article{valmeekam2020radar,
+  title={RADAR-X: An interactive interface pairing contrastive explanations with revised plan suggestions},
+  author={Valmeekam, Karthik and Sreedharan, Sarath and Sengupta, Sailik and Kambhampati, Subbarao},
+  journal={arXiv preprint arXiv:2011.09644},
+  year={2020}
+}
+```
 
 This is the citation for the original RADAR paper
 ```
